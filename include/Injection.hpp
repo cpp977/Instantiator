@@ -10,7 +10,7 @@
 
 struct Injection
 {
-    typedef llvm::StringRef StringType;
+    typedef std::string StringType;
     StringType func_name = "";
     StringType class_name = "";
     std::string return_type = "";

@@ -9,7 +9,7 @@ std::string Injection::getInstantiation() const
     res << "\ntemplate ";
     res << return_type << " ";
     if(is_nontemplate_member) {
-        res << class_name.str();
+        res << class_name;
         if(class_Ttypes.size() > 0) {
             res << "<";
             for(std::size_t i = 0; i < class_Ttypes.size(); i++) {
@@ -22,7 +22,7 @@ std::string Injection::getInstantiation() const
         }
         res << "::";
     }
-    res << func_name.str();
+    res << func_name;
     if(func_Ttypes.size() > 0) {
         res << "<";
         for(std::size_t i = 0; i < func_Ttypes.size(); i++) {
@@ -52,14 +52,14 @@ std::ostream& operator<<(std::ostream& stream, const Injection& toDo)
     } else {
         stream << "Free ";
     }
-    stream << "function: " << toDo.func_name.str();
+    stream << "function: " << toDo.func_name;
     if(toDo.func_Ttypes.size() > 0) {
         stream << " (with template params: ";
         for(const auto& p : toDo.func_Ttypes) { stream << p << " "; }
         stream << ")";
     }
     if(toDo.is_nontemplate_member) {
-        stream << " of class " << toDo.class_name.str();
+        stream << " of class " << toDo.class_name;
         if(toDo.class_Ttypes.size() > 0) {
             stream << " (with template params: ";
             for(const auto& p : toDo.class_Ttypes) { stream << p << " "; }
