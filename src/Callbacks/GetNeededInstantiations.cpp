@@ -14,8 +14,8 @@ void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchR
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("templ_func_instantation")) {
         toDo.is_nontemplate_member = true;
         toDo.return_type = MFS->getReturnType().getCanonicalType().getAsString();
-        toDo.func_name = MFS->getName();
-        toDo.class_name = MFS->getParent()->getName();
+        toDo.func_name = MFS->getNameAsString();
+        toDo.class_name = MFS->getParent()->getNameAsString();
         if(const clang::ClassTemplateSpecializationDecl* CTS = llvm::dyn_cast<clang::ClassTemplateSpecializationDecl>(MFS->getParent())) {
             const clang::TemplateArgumentList& TAL = CTS->getTemplateArgs();
             toDo.class_Ttypes.resize(TAL.size());
@@ -39,7 +39,7 @@ void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchR
 
         if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
             if(TSI->getPointOfInstantiation().isValid()) {
-                toDo.func_name = FS->getName();
+                toDo.func_name = FS->getNameAsString();
                 toDo.return_type = FS->getReturnType().getCanonicalType().getAsString();
                 if(const clang::TemplateArgumentList* TAL = FS->getTemplateSpecializationArgs()) {
                     toDo.func_Ttypes.resize(TAL->size());

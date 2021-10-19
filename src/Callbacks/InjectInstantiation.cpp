@@ -22,7 +22,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             //           << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == MFS->getName()) or not(toDo.class_name == MFS->getParent()->getName()) or
+                if(not(toDo.func_name == MFS->getNameAsString()) or not(toDo.class_name == MFS->getParent()->getNameAsString()) or
                    not(toDo.params.size() == params.size()) or not(toDo.is_const == MFS->isConst())) {
                     it++;
                     continue;
@@ -72,7 +72,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             // instantation in the Rewriter.
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == MFS->getName()) or not(toDo.class_name == MFS->getParent()->getName()) or
+                if(not(toDo.func_name == MFS->getNameAsString()) or not(toDo.class_name == MFS->getParent()->getNameAsString()) or
                    not(toDo.params.size() == params.size()) or not(toDo.is_const == MFS->isConst())) {
                     it++;
                     continue;
@@ -115,7 +115,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             //           << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == FS->getName()) or not(toDo.params.size() == params.size())) {
+                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size())) {
                     it++;
                     continue;
                 }
@@ -157,7 +157,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
 
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == FS->getName()) or not(toDo.params.size() == params.size())) {
+                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size())) {
                     it++;
                     continue;
                 }
