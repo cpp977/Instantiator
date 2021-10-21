@@ -7,8 +7,8 @@ std::string Injection::getInstantiation() const
 {
     std::stringstream res;
     res << "\ntemplate ";
-    res << return_type << " ";
-    if(is_nontemplate_member) {
+    if(not is_constructor) { res << return_type << " "; }
+    if(is_member) {
         res << class_name;
         if(class_Ttypes.size() > 0) {
             res << "<";
@@ -36,18 +36,23 @@ std::string Injection::getInstantiation() const
     res << "(";
     for(std::size_t i = 0; i < params.size(); i++) {
         if(i + 1 < params.size()) {
-            res << params[i].getAsString() << ",";
+            res << params_name[i] << ",";
         } else {
-            res << params[i].getAsString();
+            res << params_name[i];
         }
     }
-    res << ");";
+    res << ")";
+    if(is_member) {
+        if(is_const) { res << " const"; }
+    }
+    res << ";";
     return res.str();
 }
 
 std::ostream& operator<<(std::ostream& stream, const Injection& toDo)
 {
-    if(toDo.is_nontemplate_member) {
+    if(toDo.is_member) {
+        if(toDo.is_const) { stream << "const "; }
         stream << "Member ";
     } else {
         stream << "Free ";
@@ -58,7 +63,7 @@ std::ostream& operator<<(std::ostream& stream, const Injection& toDo)
         for(const auto& p : toDo.func_Ttypes) { stream << p << " "; }
         stream << ")";
     }
-    if(toDo.is_nontemplate_member) {
+    if(toDo.is_member) {
         stream << " of class " << toDo.class_name;
         if(toDo.class_Ttypes.size() > 0) {
             stream << " (with template params: ";
@@ -67,6 +72,7 @@ std::ostream& operator<<(std::ostream& stream, const Injection& toDo)
         }
     }
     stream << " with params: ";
-    for(const auto& p : toDo.params) { stream << p.getCanonicalType().getAsString() << " "; }
+    for(const auto& p : toDo.params_name) { stream << p << " "; }
+    stream << "; with return type " << toDo.return_type;
     return stream;
 }

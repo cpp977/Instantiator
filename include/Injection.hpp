@@ -17,8 +17,10 @@ struct Injection
     std::vector<std::string> func_Ttypes;
     std::vector<std::string> class_Ttypes;
     std::vector<clang::QualType> params;
+    std::vector<std::string> params_name;
     bool is_const = false;
-    bool is_nontemplate_member = false;
+    bool is_member = false;
+    bool is_constructor = false;
     StringType guess_injection_place;
     std::string getInstantiation() const;
 };
