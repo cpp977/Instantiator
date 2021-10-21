@@ -12,18 +12,22 @@
 
 void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
+    clang::PrintingPolicy pp(Result.Context->getLangOpts());
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("func_definition")) {
         // std::cout << "Processing func " << MFS->getNameAsString() << std::endl;
         llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
         if(MFS->isTemplateInstantiation()) {
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
-            // std::cout << "Check if the instantiation is already present."
-            //           << std::endl;
+            // std::cout << "Check if the instantiation is already present." << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == MFS->getNameAsString()) or not(toDo.class_name == MFS->getParent()->getNameAsString()) or
-                   not(toDo.params.size() == params.size()) or not(toDo.is_const == MFS->isConst())) {
+                if(not(toDo.is_constructor) and not(toDo.func_name == MFS->getNameAsString())) {
+                    it++;
+                    continue;
+                }
+                if(not(toDo.class_name == MFS->getParent()->getNameAsString()) or not(toDo.params.size() == params.size()) or
+                   not(toDo.is_const == MFS->isConst())) {
                     it++;
                     continue;
                 }
@@ -33,7 +37,39 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     std::vector<bool> class_tparam_matches;
                     class_tparam_matches.resize(TAL.size());
                     for(std::size_t i = 0; i < TAL.size(); i++) {
-                        class_tparam_matches[i] = (toDo.class_Ttypes[i] == TAL.get(i).getAsType().getCanonicalType().getAsString());
+                        switch(TAL.get(i).getKind()) {
+                        case clang::TemplateArgument::ArgKind::Type: {
+                            class_tparam_matches[i] = (toDo.class_Ttypes[i] == TAL.get(i).getAsType().getCanonicalType().getAsString(pp));
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Integral: {
+                            llvm::SmallString<10> name;
+                            TAL.get(i).getAsIntegral().toString(name);
+                            class_tparam_matches[i] = (toDo.class_Ttypes[i] == name.str().str());
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Pack: {
+                            class_tparam_matches.resize(class_tparam_matches.size() + TAL.get(i).pack_size() - 1);
+                            for(auto pack_it = TAL.get(i).pack_begin(); pack_it != TAL.get(i).pack_end(); pack_it++) {
+                                switch(pack_it->getKind()) {
+                                case clang::TemplateArgument::ArgKind::Type: {
+                                    class_tparam_matches[i + std::distance(TAL.get(i).pack_begin(), pack_it)] =
+                                        (toDo.class_Ttypes[i + std::distance(TAL.get(i).pack_begin(), pack_it)] ==
+                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                    break;
+                                }
+                                case clang::TemplateArgument::ArgKind::Integral: {
+                                    llvm::SmallString<10> name;
+                                    pack_it->getAsIntegral().toString(name);
+                                    class_tparam_matches[i + std::distance(TAL.get(i).pack_begin(), pack_it)] =
+                                        (toDo.class_Ttypes[i + std::distance(TAL.get(i).pack_begin(), pack_it)] == name.str().str());
+                                    break;
+                                }
+                                }
+                            }
+                            break;
+                        }
+                        }
                     }
                     class_tparam_match =
                         TAL.size() == 0 ? true : std::all_of(class_tparam_matches.begin(), class_tparam_matches.end(), [](bool v) { return v; });
@@ -43,7 +79,39 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     std::vector<bool> func_tparam_matches;
                     func_tparam_matches.resize(TAL->size());
                     for(std::size_t i = 0; i < TAL->size(); i++) {
-                        func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString());
+                        switch(TAL->get(i).getKind()) {
+                        case clang::TemplateArgument::ArgKind::Type: {
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString(pp));
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Integral: {
+                            llvm::SmallString<10> name;
+                            TAL->get(i).getAsIntegral().toString(name);
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == name.str().str());
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Pack: {
+                            func_tparam_matches.resize(func_tparam_matches.size() + TAL->get(i).pack_size() - 1);
+                            for(auto pack_it = TAL->get(i).pack_begin(); pack_it != TAL->get(i).pack_end(); pack_it++) {
+                                switch(pack_it->getKind()) {
+                                case clang::TemplateArgument::ArgKind::Type: {
+                                    func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
+                                        (toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] ==
+                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                    break;
+                                }
+                                case clang::TemplateArgument::ArgKind::Integral: {
+                                    llvm::SmallString<10> name;
+                                    pack_it->getAsIntegral().toString(name);
+                                    func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
+                                        (toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] == name.str().str());
+                                    break;
+                                }
+                                }
+                            }
+                            break;
+                        }
+                        }
                     }
                     func_tparam_match =
                         TAL->size() == 0 ? true : std::all_of(func_tparam_matches.begin(), func_tparam_matches.end(), [](bool v) { return v; });
@@ -53,10 +121,13 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 std::vector<bool> params_matches(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
-                        ((*it)->getOriginalType().getCanonicalType().getAsString() ==
-                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString());
+                        ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
+                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
+                // std::cout << std::boolalpha << "FT=" << params_match << ", CTP=" << class_tparam_match << ", FTP=" << func_tparam_match <<
+                // std::endl;
+
                 if(params_match and class_tparam_match and func_tparam_match) {
                     // std::cout << "Erase from toDolist." << std::endl;
                     it = toDoList->erase(it);
@@ -70,10 +141,15 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
         } else {
             // search in toDoList if this instantation is needed. inject the
             // instantation in the Rewriter.
+            // std::cout << "Check for match." << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == MFS->getNameAsString()) or not(toDo.class_name == MFS->getParent()->getNameAsString()) or
-                   not(toDo.params.size() == params.size()) or not(toDo.is_const == MFS->isConst())) {
+                if(not(toDo.is_constructor) and not(toDo.func_name == MFS->getNameAsString())) {
+                    it++;
+                    continue;
+                }
+                if(not(toDo.class_name == MFS->getParent()->getNameAsString()) or not(toDo.params.size() == params.size()) or
+                   not(toDo.is_const == MFS->isConst())) {
                     it++;
                     continue;
                 }
@@ -82,15 +158,20 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     if(not(*(*it)->getOriginalType()).isDependentType()) { /*Parameter is not a dependent type
                                                                               -> check for exact matching.*/
                         params_match[std::distance(params.begin(), it)] =
-                            ((*it)->getOriginalType().getCanonicalType().getAsString() ==
-                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString());
+                            ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
+                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
                     } else { /*Parameter is a dependent type -> check for cvr and
                                 reference matching.*/
-                        params_match[std::distance(params.begin(), it)] =
-                            (((*it)->getOriginalType().getTypePtr()->isReferenceType() ==
-                              toDo.params[std::distance(params.begin(), it)].getTypePtr()->isReferenceType()) and
-                             ((*it)->getOriginalType().getNonReferenceType().getQualifiers() ==
-                              toDo.params[std::distance(params.begin(), it)].getNonReferenceType().getQualifiers()));
+                        if((*it)->getOriginalType().getTypePtr()->isRValueReferenceType()) { /*Forwarding reference -> dont
+                                                                                               check cvr.*/
+                            params_match[std::distance(params.begin(), it)] = true;
+                        } else { /*No Rvalue reference -> check cvr.*/
+                            params_match[std::distance(params.begin(), it)] =
+                                (((*it)->getOriginalType().getTypePtr()->isReferenceType() ==
+                                  toDo.params[std::distance(params.begin(), it)].getTypePtr()->isReferenceType()) and
+                                 ((*it)->getOriginalType().getNonReferenceType().getQualifiers() ==
+                                  toDo.params[std::distance(params.begin(), it)].getNonReferenceType().getQualifiers()));
+                        }
                     }
                 }
                 if(std::all_of(params_match.begin(), params_match.end(), [](bool v) { return v; })) {
@@ -124,7 +205,39 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     std::vector<bool> func_tparam_matches;
                     func_tparam_matches.resize(TAL->size());
                     for(std::size_t i = 0; i < TAL->size(); i++) {
-                        func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString());
+                        switch(TAL->get(i).getKind()) {
+                        case clang::TemplateArgument::ArgKind::Type: {
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString(pp));
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Integral: {
+                            llvm::SmallString<10> name;
+                            TAL->get(i).getAsIntegral().toString(name);
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == name.str().str());
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Pack: {
+                            func_tparam_matches.resize(func_tparam_matches.size() + TAL->get(i).pack_size() - 1);
+                            for(auto pack_it = TAL->get(i).pack_begin(); pack_it != TAL->get(i).pack_end(); pack_it++) {
+                                switch(pack_it->getKind()) {
+                                case clang::TemplateArgument::ArgKind::Type: {
+                                    func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
+                                        (toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] ==
+                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                    break;
+                                }
+                                case clang::TemplateArgument::ArgKind::Integral: {
+                                    llvm::SmallString<10> name;
+                                    pack_it->getAsIntegral().toString(name);
+                                    func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
+                                        (toDo.class_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] == name.str().str());
+                                    break;
+                                }
+                                }
+                            }
+                            break;
+                        }
+                        }
                     }
                     func_tparam_match =
                         TAL->size() == 0 ? true : std::all_of(func_tparam_matches.begin(), func_tparam_matches.end(), [](bool v) { return v; });
@@ -134,8 +247,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 std::vector<bool> params_matches(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
-                        ((*it)->getOriginalType().getCanonicalType().getAsString() ==
-                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString());
+                        ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
+                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
                 if(params_match and func_tparam_match) {
@@ -167,8 +280,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                                                               type
                                                                               -> check for exact matching.*/
                         params_match[std::distance(params.begin(), it)] =
-                            ((*it)->getOriginalType().getCanonicalType().getAsString() ==
-                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString());
+                            ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
+                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
                     } else { /*Parameter is a dependent type -> check for cvr and
                                 reference matching.*/
                         params_match[std::distance(params.begin(), it)] =
