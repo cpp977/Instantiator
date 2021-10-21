@@ -3,6 +3,8 @@
 #include <sstream>
 #include <unordered_set>
 
+#include "termcolor/termcolor.hpp"
+
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
@@ -24,9 +26,13 @@
 
 using namespace clang::ast_matchers;
 
-clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher =
-    functionDecl(isTemplateInstantiation(), unless(isDefinition()), unless(matchesName("std::")), unless(matchesName("__gnu_cxx::")))
-        .bind("templ_func_instantation");
+clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = functionDecl(isTemplateInstantiation(),
+                                                                                    unless(isDefinition()),
+                                                                                    unless(matchesName("std::")),
+                                                                                    unless(matchesName("__gnu_cxx::")),
+                                                                                    unless(matchesName("spdlog::")),
+                                                                                    unless(matchesName("fmt::")))
+                                                                           .bind("templ_func_instantation");
 
 clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = functionDecl(isDefinition()).bind("func_definition");
 
@@ -69,6 +75,7 @@ int main(int argc, const char** argv)
     [[maybe_unused]] int success = Tool.buildASTs(allASTs);
     std::map<std::string, std::size_t> file2AST;
     for(std::size_t i = 0; i < allASTs.size(); i++) { file2AST.insert(std::make_pair(main_and_injection_files[i], i)); }
+    std::cout << "Parsed ASTs done." << std::endl << std::endl;
 
     GetNeededInstantiations Getter;
 
@@ -85,26 +92,25 @@ int main(int argc, const char** argv)
         for(const auto& item : copyOf_work_list) {
             work_list.erase(item);
             Finder.matchAST(allASTs[file2AST[item]]->getASTContext());
-            std::cout << "*****************************************************************************************************************"
+            std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced the following ToDo-List:" << termcolor::reset
                       << std::endl;
-            std::cout << "Run on file " << item << " produced the following ToDo-List:" << std::endl;
-            std::cout << "*****************************************************************************************************************"
-                      << std::endl;
-            for(const auto& toDo : toDoList) { std::cout << toDo << std::endl; }
-            std::cout << std::endl;
+            bool color_change = true;
+            for(const auto& toDo : toDoList) {
+                if(color_change)
+                    std::cout << '\t' << termcolor::magenta << toDo << termcolor::reset << std::endl;
+                else
+                    std::cout << '\t' << termcolor::yellow << toDo << termcolor::reset << std::endl;
+                color_change = not color_change;
+            }
             for(const auto& file_for_search : main_and_injection_files) {
-                if(file_for_search == item) { continue; }
-                std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-                          << std::endl;
-                std::cout << "Search in AST of file " << file_for_search << "=="
-                          << allASTs[file2AST[file_for_search]]
-                                 ->getSourceManager()
-                                 .getFileEntryForID(allASTs[file2AST[file_for_search]]->getSourceManager().getMainFileID())
-                                 ->getName()
-                                 .str()
-                          << std::endl;
-                std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-                          << std::endl;
+                // if(file_for_search == item) { continue; }
+                std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
+                // << "=="
+                // << allASTs[file2AST[file_for_search]]
+                //        ->getSourceManager()
+                //        .getFileEntryForID(allASTs[file2AST[file_for_search]]->getSourceManager().getMainFileID())
+                //        ->getName()
+                //        .str()
                 clang::Rewriter rewriter(allASTs[file2AST[file_for_search]]->getSourceManager(), allASTs[file2AST[file_for_search]]->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
                 InjectInstantiation instantiator;
@@ -119,10 +125,11 @@ int main(int argc, const char** argv)
                     work_list.insert(file_for_search);
                     auto PCHContainerOps = std::make_shared<clang::PCHContainerOperations>();
                     bool AST_NOT_UPDATED = allASTs[file2AST[file_for_search]]->Reparse(PCHContainerOps);
-                    if(AST_NOT_UPDATED) { std::cerr << "Error while reparsinf the AST" << std::endl; }
+                    if(AST_NOT_UPDATED) { std::cerr << "Error while reparsing the AST" << std::endl; }
                 }
             }
         }
     }
-    std::cout << "#toDos that are left: " << toDoList.size() << std::endl;
+    std::cout << termcolor::bold << termcolor::red << "#toDos that are left: " << toDoList.size() << termcolor::reset << std::endl;
+    for(const auto& toDo : toDoList) { std::cout << '\t' << termcolor::underline << toDo << termcolor::reset << std::endl; }
 }
