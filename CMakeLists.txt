@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.13.4)
 project(Instantiator CXX)
 
+include(cmake/CPM.cmake)
+CPMAddPackage(
+  NAME termcolor
+  VERSION 2.0.0
+  GIT_REPOSITORY https://github.com/ikalnytskyi/termcolor
+  )
+
 find_package(LLVM REQUIRED CONFIG)
 
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
@@ -20,5 +27,6 @@ target_compile_definitions(Instantiator PRIVATE ${LLVM_DEFINITIONS_LIST})
 target_link_libraries(Instantiator PRIVATE
   LLVM
   clang-cpp
+  termcolor::termcolor
   )
 
