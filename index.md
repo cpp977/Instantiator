@@ -1,12 +1,9 @@
-## Welcome to GitHub Pages
+## Instantiator
 
-You can use the [editor on GitHub](https://github.com/cpp977/Instantiator/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+A clang based tool for generating explicit instantations of `c++` function templates and class template member functions. 
+### General strategy
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Two step process.
 
 ```markdown
 Syntax highlighted code block
