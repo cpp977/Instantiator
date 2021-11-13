@@ -1,8 +1,9 @@
+<!-- HTML header for doxygen 1.9.2-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Instantiator: Class Hierarchy</title>
@@ -17,6 +18,10 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -29,6 +34,23 @@
    </div>
   </td>
  </tr>
+   <!--BEGIN FULL_SIDEBAR-->
+   <tr><td colspan="2">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.svg"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td></tr>
+   <!--END FULL_SIDEBAR-->
  </tbody>
 </table>
 </div>
@@ -88,26 +110,31 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 <div class="textblock">
 <p><a href="hierarchy.html">Go to the textual class hierarchy</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
-<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aGetNeededInstantiations" alt=""/>
-<map name="aGetNeededInstantiations" id="aGetNeededInstantiations">
-<area shape="rect" title=" " alt="" coords="5,23,197,65"/>
-<area shape="rect" href="classGetNeededInstantiations.html" title=" " alt="" coords="245,5,412,32"/>
-<area shape="rect" href="classInjectInstantiation.html" title=" " alt="" coords="266,56,391,83"/>
-</map>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_0.svg" width="418" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </td></tr>
-<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aInjection" alt=""/>
-<map name="aInjection" id="aInjection">
-<area shape="rect" href="structInjection.html" title=" " alt="" coords="5,5,76,32"/>
-</map>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_1.svg" width="82" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 08:53:30 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Nov 13 2021 12:24:40 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
+<script type="text/javascript">
+$(function() {
+  toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
+  toggleButton.title = "Toggle Light/Dark Mode"
+  $(document).ready(function(){
+    document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+  })
+  $(window).resize(function(){
+    document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+  })
+})
+</script>
 </body>
 </html>
