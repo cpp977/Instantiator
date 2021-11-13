@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Instantiator: InjectInstantiation.hpp Source File</title>
+<title>Instantiator: include/Callbacks/InjectInstantiation.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -34,6 +34,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Instantiator
    </div>
+   <div id="projectbrief">Generate c++ template instantiations</div>
   </td>
  </tr>
    <!--BEGIN FULL_SIDEBAR-->
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
-  initMenu('',true,false,'search.html','Search');
+  initMenu('',true,false,'search.php','Search');
   $(document).ready(function() { init_search(); });
 });
 /* @license-end */</script>
@@ -134,30 +135,33 @@ $(document).ready(function(){initNavTree('InjectInstantiation_8hpp_source.html',
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html"><div class="ttname"><a href="classInjectInstantiation.html">InjectInstantiation</a></div><div class="ttdef"><b>Definition:</b> <a href="InjectInstantiation_8hpp_source.html#l00015">InjectInstantiation.hpp:16</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a6321e2edffd82f8a1789a03a79a2b43a"><div class="ttname"><a href="classInjectInstantiation.html#a6321e2edffd82f8a1789a03a79a2b43a">InjectInstantiation::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> <a href="InjectInstantiation_8cpp_source.html#l00013">InjectInstantiation.cpp:13</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a6bca19632e89c3ef6af45eec26028da3"><div class="ttname"><a href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">InjectInstantiation::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition:</b> <a href="InjectInstantiation_8hpp_source.html#l00019">InjectInstantiation.hpp:19</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a88350a93deb47e847541b5f243395ddb"><div class="ttname"><a href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">InjectInstantiation::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition:</b> <a href="InjectInstantiation_8hpp_source.html#l00018">InjectInstantiation.hpp:18</a></div></div>
-<div class="ttc" id="anamespaceclang_html"><div class="ttname"><a href="namespaceclang.html">clang</a></div><div class="ttdef"><b>Definition:</b> <a href="InjectInstantiation_8hpp_source.html#l00011">InjectInstantiation.hpp:11</a></div></div>
+<div class="ttc" id="aclassInjectInstantiation_html"><div class="ttname"><a href="classInjectInstantiation.html">InjectInstantiation</a></div><div class="ttdef"><b>Definition:</b> InjectInstantiation.hpp:16</div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a6321e2edffd82f8a1789a03a79a2b43a"><div class="ttname"><a href="classInjectInstantiation.html#a6321e2edffd82f8a1789a03a79a2b43a">InjectInstantiation::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> InjectInstantiation.cpp:13</div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a6bca19632e89c3ef6af45eec26028da3"><div class="ttname"><a href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">InjectInstantiation::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition:</b> InjectInstantiation.hpp:19</div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a88350a93deb47e847541b5f243395ddb"><div class="ttname"><a href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">InjectInstantiation::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition:</b> InjectInstantiation.hpp:18</div></div>
+<div class="ttc" id="anamespaceclang_html"><div class="ttname"><a href="namespaceclang.html">clang</a></div><div class="ttdef"><b>Definition:</b> InjectInstantiation.hpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<!-- HTML footer for doxygen 1.9.1-->
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_dc3b1763f616f33684c71eaff7522e72.html">Callbacks</a></li><li class="navelem"><a class="el" href="InjectInstantiation_8hpp.html">InjectInstantiation.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 13 2021 13:28:06 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Nov 13 2021 13:55:17 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 <script type="text/javascript">
-            // script for doxygen 1.9.1
-            $(function() {
-                $(document).ready(function(){
-                   toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
-                   toggleButton.title = "Toggle Light/Dark Mode"
-                   document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
-               })
-            })
+  // script for doxygen 1.9.2
+  $(function() {
+      toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
+      toggleButton.title = "Toggle Light/Dark Mode"
+      $(document).ready(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+      $(window).resize(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+  })
 </script>
 </body>
 </html>

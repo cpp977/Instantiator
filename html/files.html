@@ -34,6 +34,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Instantiator
    </div>
+   <div id="projectbrief">Generate c++ template instantiations</div>
   </td>
  </tr>
    <!--BEGIN FULL_SIDEBAR-->
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
-  initMenu('',true,false,'search.html','Search');
+  initMenu('',true,false,'search.php','Search');
   $(document).ready(function() { init_search(); });
 });
 /* @license-end */</script>
@@ -110,34 +111,41 @@ $(document).ready(function(){initNavTree('files.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock">Here is a list of all files with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="GetNeededInstantiations_8cpp_source.html"><span class="icondoc"></span></a><a class="el" href="GetNeededInstantiations_8cpp.html" target="_self">GetNeededInstantiations.cpp</a></td><td class="desc"></td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="GetNeededInstantiations_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="GetNeededInstantiations_8hpp.html" target="_self">GetNeededInstantiations.hpp</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="InjectInstantiation_8cpp_source.html"><span class="icondoc"></span></a><a class="el" href="InjectInstantiation_8cpp.html" target="_self">InjectInstantiation.cpp</a></td><td class="desc"></td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="InjectInstantiation_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="InjectInstantiation_8hpp.html" target="_self">InjectInstantiation.hpp</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="Injection_8cpp_source.html"><span class="icondoc"></span></a><a class="el" href="Injection_8cpp.html" target="_self">Injection.cpp</a></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="Injection_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="Injection_8hpp.html" target="_self">Injection.hpp</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="Instantiator_8cpp_source.html"><span class="icondoc"></span></a><a class="el" href="Instantiator_8cpp.html" target="_self">Instantiator.cpp</a></td><td class="desc"></td></tr>
+<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span><span onclick="javascript:toggleLevel(3);">3</span>]</div><table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span id="img_0_" class="iconfopen" onclick="toggleFolder('0_')">&#160;</span><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html" target="_self">include</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_0_0_" class="arrow" onclick="toggleFolder('0_0_')">&#9660;</span><span id="img_0_0_" class="iconfopen" onclick="toggleFolder('0_0_')">&#160;</span><a class="el" href="dir_dc3b1763f616f33684c71eaff7522e72.html" target="_self">Callbacks</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_0_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="GetNeededInstantiations_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="GetNeededInstantiations_8hpp.html" target="_self">GetNeededInstantiations.hpp</a></td><td class="desc"></td></tr>
+<tr id="row_0_0_1_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><a href="InjectInstantiation_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="InjectInstantiation_8hpp.html" target="_self">InjectInstantiation.hpp</a></td><td class="desc"></td></tr>
+<tr id="row_0_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><a href="Injection_8hpp_source.html"><span class="icondoc"></span></a><a class="el" href="Injection_8hpp.html" target="_self">Injection.hpp</a></td><td class="desc"></td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_1_" class="arrow" onclick="toggleFolder('1_')">&#9660;</span><span id="img_1_" class="iconfopen" onclick="toggleFolder('1_')">&#160;</span><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" target="_self">src</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_1_0_" class="arrow" onclick="toggleFolder('1_0_')">&#9660;</span><span id="img_1_0_" class="iconfopen" onclick="toggleFolder('1_0_')">&#160;</span><a class="el" href="dir_7b13917f847da1f7b289bf78886ebc77.html" target="_self">Callbacks</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_0_"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="GetNeededInstantiations_8cpp.html" target="_self">GetNeededInstantiations.cpp</a></td><td class="desc"></td></tr>
+<tr id="row_1_0_1_" class="even"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="InjectInstantiation_8cpp.html" target="_self">InjectInstantiation.cpp</a></td><td class="desc"></td></tr>
+<tr id="row_1_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Injection_8cpp.html" target="_self">Injection.cpp</a></td><td class="desc"></td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="Instantiator_8cpp.html" target="_self">Instantiator.cpp</a></td><td class="desc"></td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- HTML footer for doxygen 1.9.1-->
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 13:28:07 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Nov 13 2021 13:55:17 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 <script type="text/javascript">
-            // script for doxygen 1.9.1
-            $(function() {
-                $(document).ready(function(){
-                   toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
-                   toggleButton.title = "Toggle Light/Dark Mode"
-                   document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
-               })
-            })
+  // script for doxygen 1.9.2
+  $(function() {
+      toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
+      toggleButton.title = "Toggle Light/Dark Mode"
+      $(document).ready(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+      $(window).resize(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+  })
 </script>
 </body>
 </html>

@@ -34,6 +34,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Instantiator
    </div>
+   <div id="projectbrief">Generate c++ template instantiations</div>
   </td>
  </tr>
    <!--BEGIN FULL_SIDEBAR-->
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
-  initMenu('',true,false,'search.html','Search');
+  initMenu('',true,false,'search.php','Search');
   $(document).ready(function() { init_search(); });
 });
 /* @license-end */</script>
@@ -171,22 +172,25 @@ A yellow dashed arrow denotes a relation between a template instance and the tem
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<!-- HTML footer for doxygen 1.9.1-->
+<!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 13:28:06 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Nov 13 2021 13:55:17 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 <script type="text/javascript">
-            // script for doxygen 1.9.1
-            $(function() {
-                $(document).ready(function(){
-                   toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
-                   toggleButton.title = "Toggle Light/Dark Mode"
-                   document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
-               })
-            })
+  // script for doxygen 1.9.2
+  $(function() {
+      toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
+      toggleButton.title = "Toggle Light/Dark Mode"
+      $(document).ready(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+      $(window).resize(function(){
+          document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+      })
+  })
 </script>
 </body>
 </html>

@@ -1,14 +1,6 @@
 var files_dup =
 [
-    [ "GetNeededInstantiations.cpp", "GetNeededInstantiations_8cpp.html", null ],
-    [ "GetNeededInstantiations.hpp", "GetNeededInstantiations_8hpp.html", [
-      [ "GetNeededInstantiations", "classGetNeededInstantiations.html", "classGetNeededInstantiations" ]
-    ] ],
-    [ "InjectInstantiation.cpp", "InjectInstantiation_8cpp.html", null ],
-    [ "InjectInstantiation.hpp", "InjectInstantiation_8hpp.html", [
-      [ "InjectInstantiation", "classInjectInstantiation.html", "classInjectInstantiation" ]
-    ] ],
-    [ "Injection.cpp", "Injection_8cpp.html", "Injection_8cpp" ],
-    [ "Injection.hpp", "Injection_8hpp.html", "Injection_8hpp" ],
+    [ "include", "dir_d44c64559bbebec7f509842c48db8b23.html", "dir_d44c64559bbebec7f509842c48db8b23" ],
+    [ "src", "dir_68267d1309a1af8e8297ef4c3efbcdba.html", "dir_68267d1309a1af8e8297ef4c3efbcdba" ],
     [ "Instantiator.cpp", "Instantiator_8cpp.html", "Instantiator_8cpp" ]
 ];
