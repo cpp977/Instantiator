@@ -22,18 +22,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Doxygenize
-        # You may pin to the exact commit or the version.
-        # uses: langroodi/doxygenize@4186fba316b72a7d790b1fff255f6a1dabc1db31
-        uses: langroodi/doxygenize@v1.4
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
-          # Doxygen configuration file path
-          doxygenconf: ./Doxyfile # default is ./Doxyfile
-          # Generated HTML documents output folder
-          htmloutput: ./docs/ # default is ./docs/
-          # GitHub Pages branch name
-          ghpagesbranch: gh-pages # default is gh-pages
-          # GitHub Pages directory path
-          ghpagesdir: ./ # default is ./
+          fetch-depth: 0
+      - name: install Doxygen 1.9.2
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz libclang-cpp1-9 libclang1-9
+          wget https://www.doxygen.nl/files/doxygen-1.9.2.linux.bin.tar.gz
+          tar -xvzf doxygen-1.9.2.linux.bin.tar.gz
+          ln -s doxygen-1.9.2/bin/doxygen doxygen
+      - name: Generate Documentation
+        run: ./doxygen Doxyfile
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+        with:
+          dir: docs/html
+          branch: gh-pages
