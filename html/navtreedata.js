@@ -25,6 +25,10 @@
 var NAVTREE =
 [
   [ "Instantiator", "index.html", [
+    [ "What does it can do?", "index.html#autotoc_md1", null ],
+    [ "What does it (currently) not can do?", "index.html#autotoc_md2", null ],
+    [ "How does it work", "index.html#autotoc_md3", null ],
+    [ "Contributions", "index.html#autotoc_md4", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],

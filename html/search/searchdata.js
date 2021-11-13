@@ -3,10 +3,11 @@ var indexSectionsWithContent =
   0: "cfgimoprst",
   1: "gi",
   2: "c",
-  3: "gi",
+  3: "gir",
   4: "cgmor",
   5: "cfgiprt",
-  6: "s"
+  6: "s",
+  7: "i"
 };
 
 var indexSectionNames =
@@ -17,7 +18,8 @@ var indexSectionNames =
   3: "files",
   4: "functions",
   5: "variables",
-  6: "typedefs"
+  6: "typedefs",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -28,6 +30,7 @@ var indexSectionLabels =
   3: "Files",
   4: "Functions",
   5: "Variables",
-  6: "Typedefs"
+  6: "Typedefs",
+  7: "Pages"
 };
 

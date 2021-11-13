@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Instantiator: Main Page</title>
+<title>Instantiator: Instantiator</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,18 +104,47 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Instantiator Documentation</div>  </div>
+<div class="title">Instantiator </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a>clang based tool to automatically insert all needed explicit instantiations in implementation files for <code>c++</code> projects.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+What does it can do?</h1>
+<p>The tool allows you to implement your function and class templates in the same manner as normal function and classes. I.e. you can put the declarations in header files (<code>.hpp</code>) and the definitions in implementation files (<code>.cpp</code>). If you do this without using this tool the compiled object files of the provided implementations are empty because they do not exist any template instantiations. If you run </p><div class="fragment"><div class="line">Instantiator -p &lt;path/to/compile_command.json&gt; &lt;MAIN_CPPFILE&gt;</div>
+</div><!-- fragment --><p> all needed instantiations of your function and class templates will be placed automatically to the correct position. Then you can build your project without linking errors but with all the benefits of having separate translation units:</p><ul>
+<li>Parallel compilation</li>
+<li>Fast incremental rebuilds</li>
+</ul>
+<p>The tool only adds instantiations for things you use. That ensures that the <code>c++</code> template paradigm <em>you only get object code for things you really use</em> is respected. The compilation step involves exactly the same effort as if you had everything in the header files.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+What does it (currently) not can do?</h1>
+<ul>
+<li>It does not manage the <code>includes</code> for you. If it inserts a needed template instantiation with a type not known in that translation unit, you will get a compiler error.</li>
+<li>It builds the abstract syntax tree (AST) of all files listed in the <code>compile_commands.json</code>. This is often too much and slows down the process.</li>
+<li>It cannot clean up the explicit instantiations. (However this will be added soon, hopefully)</li>
+<li><code>Template template</code> parameters are not implemented.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+How does it work</h1>
+<p>See the <a href="https://cpp977.github.io/Instantiator/html/">documentation</a>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Contributions</h1>
+<p>Contributions and are very welcome! The following is only a part of things which needs to be done:</p><ul>
+<li><code>try catch</code> blocks to catch events when <code>clang</code> throws during the parsing step to generate the ASTs.</li>
+<li>Clean up the <code>cmake</code> file.</li>
+<li>Add an example <code>c++</code> project which can also be used for tests.</li>
+<li>Add the possibilty to clean all inserted instantiations. </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 12:38:49 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Nov 13 2021 12:46:22 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 <script type="text/javascript">
