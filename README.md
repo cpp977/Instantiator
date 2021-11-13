@@ -24,7 +24,7 @@ The compilation step involves exactly the same effort as if you had everything i
   - `Template template` parameters are not implemented.
   
 # How does it work
-See the [documentation](https://cpp977.github.io/Instantiator/).
+See the [documentation](https://cpp977.github.io/Instantiator/html/).
 
 # Contributions
 Contributions and are very welcome!
