@@ -26,7 +26,7 @@ The compilation step involves exactly the same effort as if you had everything i
 See the [documentation](https://cpp977.github.io/Instantiator/).
 
 # Contributions
-Contributions and are very welcome!
+Contributions are very welcome!
 The following is only a part of things which needs to be done:
   - Adapt llvm error handling (https://llvm.org/docs/ExceptionHandling.html).
   - Clean up the `cmake` file.
