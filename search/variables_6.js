@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['templateinstantiationmatcher_0',['TemplateInstantiationMatcher',['../Instantiator_8cpp.html#af7571484a0ab81a8a0194881c206ff19',1,'Instantiator.cpp']]],
-  ['todolist_1',['toDoList',['../classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093',1,'GetNeededInstantiations::toDoList()'],['../classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb',1,'InjectInstantiation::toDoList()']]]
+  ['return_5ftype_0',['return_type',['../structInjection.html#aa501b0028575ce606488107734cf692c',1,'Injection']]],
+  ['rewriter_1',['rewriter',['../classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e',1,'DeleteInstantiations::rewriter()'],['../classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3',1,'InjectInstantiation::rewriter()']]]
 ];

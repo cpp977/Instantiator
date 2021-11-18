@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getneededinstantiations_0',['GetNeededInstantiations',['../classGetNeededInstantiations.html',1,'']]]
+  ['deleteinstantiations_0',['DeleteInstantiations',['../classDeleteInstantiations.html',1,'']]]
 ];

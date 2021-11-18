@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Instantiator: File Members</title>
+<title>Instantiator: include/Callbacks/DeleteInstantiations.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +71,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('globals_vars.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('DeleteInstantiations_8hpp_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -89,18 +89,35 @@ $(document).ready(function(){initNavTree('globals_vars.html',''); initResizable(
 </iframe>
 </div>
 
+<div class="header">
+  <div class="headertitle"><div class="title">DeleteInstantiations.hpp</div></div>
+</div><!--header-->
 <div class="contents">
-&#160;<ul>
-<li>FunctionDefMatcher&#160;:&#160;<a class="el" href="Instantiator_8cpp.html#a7b7cdb2a173a45b01cbd5fabf41bb08e">Instantiator.cpp</a></li>
-<li>TemplateInstantiationMatcher&#160;:&#160;<a class="el" href="Instantiator_8cpp.html#af7571484a0ab81a8a0194881c206ff19">Instantiator.cpp</a></li>
-</ul>
-</div><!-- contents -->
+<a href="DeleteInstantiations_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DELETE_INSTANTIATIONS_H_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DELETE_INSTANTIATIONS_H_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchFinder.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;clang/Rewrite/Core/Rewriter.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classDeleteInstantiations.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classDeleteInstantiations.html">DeleteInstantiations</a> : <span class="keyword">public</span> clang::ast_matchers::MatchFinder::MatchCallback</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">   10</a></span>    clang::Rewriter* <a class="code hl_variable" href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">rewriter</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classDeleteInstantiations.html#a97c8e09bebb436501bc5c521d5be062f">run</a>(<span class="keyword">const</span> clang::ast_matchers::MatchFinder::MatchResult&amp; Result) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>};</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassDeleteInstantiations_html"><div class="ttname"><a href="classDeleteInstantiations.html">DeleteInstantiations</a></div><div class="ttdef"><b>Definition:</b> DeleteInstantiations.hpp:8</div></div>
+<div class="ttc" id="aclassDeleteInstantiations_html_a7689cb6f18585e780760bf80c0d8fc3e"><div class="ttname"><a href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">DeleteInstantiations::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition:</b> DeleteInstantiations.hpp:10</div></div>
+<div class="ttc" id="aclassDeleteInstantiations_html_a97c8e09bebb436501bc5c521d5be062f"><div class="ttname"><a href="classDeleteInstantiations.html#a97c8e09bebb436501bc5c521d5be062f">DeleteInstantiations::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> DeleteInstantiations.cpp:11</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Nov 13 2021 19:45:23 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_dc3b1763f616f33684c71eaff7522e72.html">Callbacks</a></li><li class="navelem"><a class="el" href="DeleteInstantiations_8hpp.html">DeleteInstantiations.hpp</a></li>
+    <li class="footer">Generated on Thu Nov 18 2021 09:19:32 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

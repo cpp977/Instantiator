@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('structInjection.html',''); initResizab
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structInjection-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Injection Struct Reference</div></div>
@@ -103,7 +104,7 @@ $(document).ready(function(){initNavTree('structInjection.html',''); initResizab
 <div class="dynheader">
 Collaboration diagram for Injection:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="structInjection__coll__graph.svg" width="182" height="276"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="structInjection__coll__graph.svg" width="207" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -117,10 +118,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a4faa27e69083c1334ee324240c0be2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a2a4faa27e69083c1334ee324240c0be2">getInstantiation</a> () const</td></tr>
 <tr class="separator:a2a4faa27e69083c1334ee324240c0be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:abd9e4a7c0346109bc9407df0fe2ed08b"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">createFromMFS</a> (const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:abd9e4a7c0346109bc9407df0fe2ed08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fec4fb389b87bf0ffc7af071cc8f9d5"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS</a> (const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:a1fec4fb389b87bf0ffc7af071cc8f9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a6173d575985f16333eeeed8faef2f88a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a6173d575985f16333eeeed8faef2f88a">func_name</a> = &quot;&quot;</td></tr>
 <tr class="separator:a6173d575985f16333eeeed8faef2f88a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4332cb0bc9a6abb251ce178af4905c0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a4332cb0bc9a6abb251ce178af4905c0b">nested_namespace</a> = &quot;&quot;</td></tr>
+<tr class="separator:a4332cb0bc9a6abb251ce178af4905c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd99e58f14f98a61f345bd98129458b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#abd99e58f14f98a61f345bd98129458b5">class_name</a> = &quot;&quot;</td></tr>
 <tr class="separator:abd99e58f14f98a61f345bd98129458b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa501b0028575ce606488107734cf692c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#aa501b0028575ce606488107734cf692c">return_type</a> = &quot;&quot;</td></tr>
@@ -129,10 +139,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a475150b470832b519c3992290430cc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b691e807d0004edc88722b7f7645c09"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a5b691e807d0004edc88722b7f7645c09">class_Ttypes</a></td></tr>
 <tr class="separator:a5b691e807d0004edc88722b7f7645c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21cd70e6ad41faad5544b2df8fd9f86d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; clang::QualType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a21cd70e6ad41faad5544b2df8fd9f86d">params</a></td></tr>
-<tr class="separator:a21cd70e6ad41faad5544b2df8fd9f86d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedd123b0c1d3be5789cfc72efcb613e0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#aedd123b0c1d3be5789cfc72efcb613e0">params_name</a></td></tr>
-<tr class="separator:aedd123b0c1d3be5789cfc72efcb613e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af49977234a145a55451d2c56fbc2b2fd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParam.html">Param</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a></td></tr>
+<tr class="separator:af49977234a145a55451d2c56fbc2b2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad53178c0a197c6ff14b5d3506133d163"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParam.html">Param</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#ad53178c0a197c6ff14b5d3506133d163">nonresolved_params</a></td></tr>
+<tr class="separator:ad53178c0a197c6ff14b5d3506133d163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac98187aeb311e39dd735e7bb40bfacfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#ac98187aeb311e39dd735e7bb40bfacfd">is_const</a> = false</td></tr>
 <tr class="separator:ac98187aeb311e39dd735e7bb40bfacfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0a2d1eea58ecc66ffb3b2dce4c56def"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#af0a2d1eea58ecc66ffb3b2dce4c56def">is_member</a> = false</td></tr>
@@ -158,6 +168,78 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1fec4fb389b87bf0ffc7af071cc8f9d5" name="a1fec4fb389b87bf0ffc7af071cc8f9d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fec4fb389b87bf0ffc7af071cc8f9d5">&#9670;&nbsp;</a></span>createFromFS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt; Injection::createFromFS </td>
+          <td>(</td>
+          <td class="paramtype">const clang::FunctionDecl *&#160;</td>
+          <td class="paramname"><em>FS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::PrintingPolicy&#160;</td>
+          <td class="paramname"><em>pp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abd9e4a7c0346109bc9407df0fe2ed08b" name="abd9e4a7c0346109bc9407df0fe2ed08b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd9e4a7c0346109bc9407df0fe2ed08b">&#9670;&nbsp;</a></span>createFromMFS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt; Injection::createFromMFS </td>
+          <td>(</td>
+          <td class="paramtype">const clang::CXXMethodDecl *&#160;</td>
+          <td class="paramname"><em>MFS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::PrintingPolicy&#160;</td>
+          <td class="paramname"><em>pp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2a4faa27e69083c1334ee324240c0be2" name="a2a4faa27e69083c1334ee324240c0be2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a4faa27e69083c1334ee324240c0be2">&#9670;&nbsp;</a></span>getInstantiation()</h2>
 
@@ -288,28 +370,42 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a21cd70e6ad41faad5544b2df8fd9f86d" name="a21cd70e6ad41faad5544b2df8fd9f86d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21cd70e6ad41faad5544b2df8fd9f86d">&#9670;&nbsp;</a></span>params</h2>
+<a id="a4332cb0bc9a6abb251ce178af4905c0b" name="a4332cb0bc9a6abb251ce178af4905c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4332cb0bc9a6abb251ce178af4905c0b">&#9670;&nbsp;</a></span>nested_namespace</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;clang::QualType&gt; Injection::params</td>
+          <td class="memname"><a class="el" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a> Injection::nested_namespace = &quot;&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aedd123b0c1d3be5789cfc72efcb613e0" name="aedd123b0c1d3be5789cfc72efcb613e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aedd123b0c1d3be5789cfc72efcb613e0">&#9670;&nbsp;</a></span>params_name</h2>
+<a id="ad53178c0a197c6ff14b5d3506133d163" name="ad53178c0a197c6ff14b5d3506133d163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad53178c0a197c6ff14b5d3506133d163">&#9670;&nbsp;</a></span>nonresolved_params</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::string&gt; Injection::params_name</td>
+          <td class="memname">std::vector&lt;<a class="el" href="structParam.html">Param</a>&gt; Injection::nonresolved_params</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af49977234a145a55451d2c56fbc2b2fd" name="af49977234a145a55451d2c56fbc2b2fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af49977234a145a55451d2c56fbc2b2fd">&#9670;&nbsp;</a></span>params</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structParam.html">Param</a>&gt; Injection::params</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -341,7 +437,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structInjection.html">Injection</a></li>
-    <li class="footer">Generated on Sat Nov 13 2021 19:45:23 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 18 2021 09:19:32 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

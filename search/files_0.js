@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getneededinstantiations_2ecpp_0',['GetNeededInstantiations.cpp',['../GetNeededInstantiations_8cpp.html',1,'']]],
-  ['getneededinstantiations_2ehpp_1',['GetNeededInstantiations.hpp',['../GetNeededInstantiations_8hpp.html',1,'']]]
+  ['deleteinstantiations_2ecpp_0',['DeleteInstantiations.cpp',['../DeleteInstantiations_8cpp.html',1,'']]],
+  ['deleteinstantiations_2ehpp_1',['DeleteInstantiations.hpp',['../DeleteInstantiations_8hpp.html',1,'']]]
 ];

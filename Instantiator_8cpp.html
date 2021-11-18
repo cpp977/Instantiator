@@ -91,14 +91,14 @@ $(document).ready(function(){initNavTree('Instantiator_8cpp.html',''); initResiz
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Instantiator.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;ranges&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;typeinfo&gt;</code><br />
 <code>#include &lt;unordered_set&gt;</code><br />
 <code>#include &quot;termcolor/termcolor.hpp&quot;</code><br />
 <code>#include &quot;clang/Frontend/FrontendActions.h&quot;</code><br />
@@ -111,34 +111,75 @@ $(document).ready(function(){initNavTree('Instantiator_8cpp.html',''); initResiz
 <code>#include &quot;clang/Rewrite/Core/Rewriter.h&quot;</code><br />
 <code>#include &quot;clang/Rewrite/Frontend/Rewriters.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="DeleteInstantiations_8hpp_source.html">Callbacks/DeleteInstantiations.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GetNeededInstantiations_8hpp_source.html">Callbacks/GetNeededInstantiations.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="InjectInstantiation_8hpp_source.html">Callbacks/InjectInstantiation.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Matcher_8hpp_source.html">Matcher/Matcher.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Instantiator.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="3067" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="3287" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6469140200cccc73cf3ac66846339d11"><td class="memItemLeft" align="right" valign="top">static llvm::cl::OptionCategory&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a6469140200cccc73cf3ac66846339d11">MyToolCategory</a> (&quot;Instantiator options&quot;)</td></tr>
-<tr class="separator:a6469140200cccc73cf3ac66846339d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a463095459ca7eff2f7315fc955830f04"><td class="memItemLeft" align="right" valign="top">static llvm::cl::OptionCategory&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a> (&quot;Instantiator options&quot;)</td></tr>
+<tr class="separator:a463095459ca7eff2f7315fc955830f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c2627e92e042d2f85323b64d2405829"><td class="memItemLeft" align="right" valign="top">static llvm::cl::opt&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a> (&quot;clean&quot;, llvm::cl::desc(&quot;Delete all explicit instantiations.&quot;), llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
+<tr class="separator:a3c2627e92e042d2f85323b64d2405829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576ab4b01c267f0bbcb68b36b57950c3"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a576ab4b01c267f0bbcb68b36b57950c3">IgnorePatterns</a> (&quot;i&quot;, llvm::cl::desc(&quot;List of namespaces which should be ignored.&quot;), llvm::cl::desc(&quot;&lt;pattern&gt;&quot;), llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
+<tr class="separator:a576ab4b01c267f0bbcb68b36b57950c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59161941fab072bbb83f502fefd9d734"><td class="memItemLeft" align="right" valign="top">static llvm::cl::extrahelp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">CommonHelp</a> (clang::tooling::CommonOptionsParser::HelpMessage)</td></tr>
 <tr class="separator:a59161941fab072bbb83f502fefd9d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d2de05dc1e7cb9136d733a97afee396"><td class="memItemLeft" align="right" valign="top">static llvm::cl::extrahelp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a6d2de05dc1e7cb9136d733a97afee396">MoreHelp</a> (&quot;\nMore help text...\n&quot;)</td></tr>
 <tr class="separator:a6d2de05dc1e7cb9136d733a97afee396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217dbf8b442f20279ea00b898af96f52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a> (int argc, const char **argv)</td></tr>
 <tr class="separator:a217dbf8b442f20279ea00b898af96f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af7571484a0ab81a8a0194881c206ff19"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#af7571484a0ab81a8a0194881c206ff19">TemplateInstantiationMatcher</a></td></tr>
-<tr class="separator:af7571484a0ab81a8a0194881c206ff19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b7cdb2a173a45b01cbd5fabf41bb08e"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a7b7cdb2a173a45b01cbd5fabf41bb08e">FunctionDefMatcher</a> = functionDecl(isDefinition()).bind(&quot;func_definition&quot;)</td></tr>
-<tr class="separator:a7b7cdb2a173a45b01cbd5fabf41bb08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a3c2627e92e042d2f85323b64d2405829" name="a3c2627e92e042d2f85323b64d2405829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c2627e92e042d2f85323b64d2405829">&#9670;&nbsp;</a></span>Clean()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::opt&lt; bool &gt; Clean </td>
+          <td>(</td>
+          <td class="paramtype">&quot;clean&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;Delete all explicit instantiations.&quot;)&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>)&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a59161941fab072bbb83f502fefd9d734" name="a59161941fab072bbb83f502fefd9d734"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a59161941fab072bbb83f502fefd9d734">&#9670;&nbsp;</a></span>CommonHelp()</h2>
 
@@ -152,6 +193,80 @@ Variables</h2></td></tr>
           <td class="memname">static llvm::cl::extrahelp CommonHelp </td>
           <td>(</td>
           <td class="paramtype">clang::tooling::CommonOptionsParser::HelpMessage&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a576ab4b01c267f0bbcb68b36b57950c3" name="a576ab4b01c267f0bbcb68b36b57950c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576ab4b01c267f0bbcb68b36b57950c3">&#9670;&nbsp;</a></span>IgnorePatterns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::list&lt; std::string &gt; IgnorePatterns </td>
+          <td>(</td>
+          <td class="paramtype">&quot;i&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be ignored.&quot;)&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;&lt;pattern&gt;&quot;)&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>)&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a463095459ca7eff2f7315fc955830f04" name="a463095459ca7eff2f7315fc955830f04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a463095459ca7eff2f7315fc955830f04">&#9670;&nbsp;</a></span>InstantiatorOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::OptionCategory InstantiatorOptions </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Instantiator options&quot;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -219,68 +334,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6469140200cccc73cf3ac66846339d11" name="a6469140200cccc73cf3ac66846339d11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6469140200cccc73cf3ac66846339d11">&#9670;&nbsp;</a></span>MyToolCategory()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static llvm::cl::OptionCategory MyToolCategory </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Instantiator options&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a7b7cdb2a173a45b01cbd5fabf41bb08e" name="a7b7cdb2a173a45b01cbd5fabf41bb08e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b7cdb2a173a45b01cbd5fabf41bb08e">&#9670;&nbsp;</a></span>FunctionDefMatcher</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = functionDecl(isDefinition()).bind(&quot;func_definition&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af7571484a0ab81a8a0194881c206ff19" name="af7571484a0ab81a8a0194881c206ff19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7571484a0ab81a8a0194881c206ff19">&#9670;&nbsp;</a></span>TemplateInstantiationMatcher</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= functionDecl(isTemplateInstantiation(),</div>
-<div class="line">                                                                                    unless(isDefinition()),</div>
-<div class="line">                                                                                    unless(matchesName(<span class="stringliteral">&quot;std::&quot;</span>)),</div>
-<div class="line">                                                                                    unless(matchesName(<span class="stringliteral">&quot;__gnu_cxx::&quot;</span>)),</div>
-<div class="line">                                                                                    unless(matchesName(<span class="stringliteral">&quot;spdlog::&quot;</span>)),</div>
-<div class="line">                                                                                    unless(matchesName(<span class="stringliteral">&quot;fmt::&quot;</span>)))</div>
-<div class="line">                                                                           .bind(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>)</div>
-</div><!-- fragment -->
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -288,7 +341,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Instantiator_8cpp.html">Instantiator.cpp</a></li>
-    <li class="footer">Generated on Sat Nov 13 2021 19:45:23 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 18 2021 09:19:32 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

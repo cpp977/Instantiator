@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Injection_8cpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp']]]
+  ['ignorepatterns_0',['IgnorePatterns',['../Instantiator_8cpp.html#a576ab4b01c267f0bbcb68b36b57950c3',1,'Instantiator.cpp']]],
+  ['instantiatoroptions_1',['InstantiatorOptions',['../Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04',1,'Instantiator.cpp']]]
 ];
