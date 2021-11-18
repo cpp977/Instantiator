@@ -874,6 +874,7 @@ WARN_LOGFILE           =
 
 INPUT                  = include \
                          README.md \
+                         doxy \
                          src \
                          Instantiator.cpp
 
@@ -905,7 +906,8 @@ INPUT_ENCODING         = UTF-8
 # *.vhdl, *.ucf, *.qsf and *.ice.
 
 FILE_PATTERNS          = *.hpp \
-                         *.cpp
+                         *.cpp \
+                         *.md
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1029,7 +1031,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = README.md
+USE_MDFILE_AS_MAINPAGE = doxy/main.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
