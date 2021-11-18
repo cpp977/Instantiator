@@ -20,16 +20,14 @@ The compilation step involves exactly the same effort as if you had everything i
 # What does it (currently) not can do?
   - It does not manage the `includes` for you. If it inserts a needed template instantiation with a type not known in that translation unit, you will get a compiler error.
   - It builds the abstract syntax tree (AST) of all files listed in the `compile_commands.json`. This is often too much and slows down the process.
-  - It cannot clean up the explicit instantiations. (However this will be added soon, hopefully)
   - `Template template` parameters are not implemented.
   
-# How does it work
+# How does it work?
 See the [documentation](https://cpp977.github.io/Instantiator/).
 
 # Contributions
 Contributions and are very welcome!
 The following is only a part of things which needs to be done:
-  - `try catch` blocks to catch events when `clang` throws during the parsing step to generate the ASTs.
+  - Adapt llvm error handling (https://llvm.org/docs/ExceptionHandling.html).
   - Clean up the `cmake` file.
   - Add an example `c++` project which can also be used for tests.
-  - Add the possibilty to clean all inserted instantiations.
