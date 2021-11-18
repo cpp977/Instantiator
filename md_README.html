@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Instantiator: src/Callbacks Directory Reference</title>
+<title>Instantiator: Instantiator</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -71,7 +71,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('dir_7b13917f847da1f7b289bf78886ebc77.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('md_README.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -89,33 +89,43 @@ $(document).ready(function(){initNavTree('dir_7b13917f847da1f7b289bf78886ebc77.h
 </iframe>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Callbacks Directory Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Instantiator </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Directory dependency graph for Callbacks:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="dir_7b13917f847da1f7b289bf78886ebc77_dep.svg" width="139" height="202"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="files" name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DeleteInstantiations_8cpp.html">DeleteInstantiations.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="GetNeededInstantiations_8cpp.html">GetNeededInstantiations.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="InjectInstantiation_8cpp.html">InjectInstantiation.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="textblock"><p >clang based tool to automatically insert all needed explicit instantiations in implementation files for <code>c++</code> projects.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+What does it can do?</h1>
+<p >The tool allows you to implement your function and class templates in the same manner as normal function and classes. I.e. you can put the declarations in header files (<code>.hpp</code>) and the definitions in implementation files (<code>.cpp</code>). If you do this without using this tool the compiled object files of the provided implementations are empty because they do not exist any template instantiations. If you run </p><div class="fragment"><div class="line">Instantiator -p &lt;path/to/compile_command.json&gt; &lt;MAIN_CPPFILE&gt;</div>
+</div><!-- fragment --><p> all needed instantiations of your function and class templates will be placed automatically to the correct position. Then you can build your project without linking errors but with all the benefits of having separate translation units:</p><ul>
+<li>Parallel compilation</li>
+<li>Fast incremental rebuilds</li>
+</ul>
+<p >The tool only adds instantiations for things you use. That ensures that the <code>c++</code> template paradigm <em>you only get object code for things you really use</em> is respected. The compilation step involves exactly the same effort as if you had everything in the header files.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+What does it (currently) not can do?</h1>
+<ul>
+<li>It does not manage the <code>includes</code> for you. If it inserts a needed template instantiation with a type not known in that translation unit, you will get a compiler error.</li>
+<li>It builds the abstract syntax tree (AST) of all files listed in the <code>compile_commands.json</code>. This is often too much and slows down the process.</li>
+<li><code>Template template</code> parameters are not implemented.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md7"></a>
+How does it work?</h1>
+<p >See the <a href="https://cpp977.github.io/Instantiator/">documentation</a>.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Contributions</h1>
+<p >Contributions are very welcome! The following is only a part of things which needs to be done:</p><ul>
+<li>Adapt llvm error handling (<a href="https://llvm.org/docs/ExceptionHandling.html">https://llvm.org/docs/ExceptionHandling.html</a>).</li>
+<li>Clean up the <code>cmake</code> file.</li>
+<li>Add an example <code>c++</code> project which can also be used for tests. </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b13917f847da1f7b289bf78886ebc77.html">Callbacks</a></li>
     <li class="footer">Generated on Thu Nov 18 2021 10:56:49 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>

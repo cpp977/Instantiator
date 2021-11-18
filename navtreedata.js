@@ -25,10 +25,15 @@
 var NAVTREE =
 [
   [ "Instantiator", "index.html", [
-    [ "What does it can do?", "index.html#autotoc_md1", null ],
-    [ "What does it (currently) not can do?", "index.html#autotoc_md2", null ],
-    [ "How does it work", "index.html#autotoc_md3", null ],
-    [ "Contributions", "index.html#autotoc_md4", null ],
+    [ "Motivation", "index.html#autotoc_md1", null ],
+    [ "The clang AST", "index.html#autotoc_md2", null ],
+    [ "Two step procedure", "index.html#autotoc_md3", null ],
+    [ "Instantiator", "md_README.html", [
+      [ "What does it can do?", "md_README.html#autotoc_md5", null ],
+      [ "What does it (currently) not can do?", "md_README.html#autotoc_md6", null ],
+      [ "How does it work?", "md_README.html#autotoc_md7", null ],
+      [ "Contributions", "md_README.html#autotoc_md8", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],

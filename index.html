@@ -93,34 +93,112 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Instantiator </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a>clang based tool to automatically insert all needed explicit instantiations in implementation files for <code>c++</code> projects.</p>
+<div class="textblock"><p ><a class="anchor" id="md_doxy_main"></a>clang based tool to automatically insert all needed explicit instantiations in implementation files for <code>c++</code> projects.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-What does it can do?</h1>
-<p >The tool allows you to implement your function and class templates in the same manner as normal function and classes. I.e. you can put the declarations in header files (<code>.hpp</code>) and the definitions in implementation files (<code>.cpp</code>). If you do this without using this tool the compiled object files of the provided implementations are empty because they do not exist any template instantiations. If you run </p><div class="fragment"><div class="line">Instantiator -p &lt;path/to/compile_command.json&gt; &lt;MAIN_CPPFILE&gt;</div>
-</div><!-- fragment --><p> all needed instantiations of your function and class templates will be placed automatically to the correct position. Then you can build your project without linking errors but with all the benefits of having separate translation units:</p><ul>
-<li>Parallel compilation</li>
-<li>Fast incremental rebuilds</li>
+Motivation</h1>
+<p >The source code organization for c++ projects consists of header files containing the declarations and source files containing the implementation. For example, a header file for a <code>class Point</code> could look as follows: </p><div class="fragment"><div class="line"><span class="comment">//Point.hpp</span></div>
+<div class="line"><span class="preprocessor">#ifndef POINT_HPP_</span></div>
+<div class="line"><span class="preprocessor">#define POINT_HPP_</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Point {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Point() {}</div>
+<div class="line">    </div>
+<div class="line">    Point(<span class="keyword">const</span> <span class="keywordtype">double</span> x_in, <span class="keyword">const</span> <span class="keywordtype">double</span> y_in);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">double</span> norm() <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keywordtype">void</span> shift(<span class="keyword">const</span> Point other);</div>
+<div class="line">    </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">double</span> x=0., y=0.;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> The corresponding source file would then be: </p><div class="fragment"><div class="line"><span class="comment">//Point.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Point.hpp&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"> </div>
+<div class="line">Point::Point(<span class="keyword">const</span> <span class="keywordtype">double</span> x_in, <span class="keyword">const</span> <span class="keywordtype">double</span> y_in) {</div>
+<div class="line">    x=x_in;</div>
+<div class="line">    y=y_in;</div>
+<div class="line">}</div>
+<div class="line">    </div>
+<div class="line"><span class="keywordtype">double</span> Point::norm()<span class="keyword"> const </span>{</div>
+<div class="line">    <span class="keywordflow">return</span> std::sqrt(x*x+y*y);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Point::shift(<span class="keyword">const</span> Point other) {</div>
+<div class="line">    x += other.x;</div>
+<div class="line">    y += other.y;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >This decomposition has several advantages:</p><ul>
+<li>The header file defines a clear interface which can be used to see the content of the class. The concrete implementation is hidden.</li>
+<li>The source file can be compiled <b>separately</b> into an object file.</li>
+<li>The header file needs less <code>include</code> directives.</li>
+<li>When the implementation needs to be changed, only the source file needs to recompiled and <b>not</b> other files which uses the class by including the header.</li>
 </ul>
-<p >The tool only adds instantiations for things you use. That ensures that the <code>c++</code> template paradigm <em>you only get object code for things you really use</em> is respected. The compilation step involves exactly the same effort as if you had everything in the header files.</p>
+<p >However, the <code>Point</code> class above is not generic as it has the fixed type <code>double</code> for the coordinates. This can be changed easily because generic programming is well supported by c++ using <code>templates</code>. The generic <code>Point</code> class header is (without the usage of <code>concepts</code>): </p><div class="fragment"><div class="line"><span class="comment">//Point.hpp</span></div>
+<div class="line"><span class="preprocessor">#ifndef POINT_HPP_</span></div>
+<div class="line"><span class="preprocessor">#define POINT_HPP_</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar&gt;</div>
+<div class="line"><span class="keyword">class </span>Point {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Point() {}</div>
+<div class="line">    </div>
+<div class="line">    Point(<span class="keyword">const</span> Scalar x_in, <span class="keyword">const</span> Scalar y_in);</div>
+<div class="line">    </div>
+<div class="line">    Scalar norm() <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keywordtype">void</span> shift(<span class="keyword">const</span> Point other);</div>
+<div class="line">    </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    Scalar x=0., y=0.;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> And the corresponding source file would be: </p><div class="fragment"><div class="line"><span class="comment">//Point.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Point.hpp&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar&gt;</div>
+<div class="line">Point&lt;Scalar&gt;::Point(<span class="keyword">const</span> Scalar x_in, <span class="keyword">const</span> Scalar y_in) {</div>
+<div class="line">    x=x_in;</div>
+<div class="line">    y=y_in;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar&gt;</div>
+<div class="line">Scalar Point&lt;Scalar&gt;::norm()<span class="keyword"> const </span>{</div>
+<div class="line">    <span class="keywordflow">return</span> std::sqrt(x*x+y*y);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Scalar&gt;</div>
+<div class="line"><span class="keywordtype">void</span> Point&lt;Scalar&gt;::shift(<span class="keyword">const</span> Point other) {</div>
+<div class="line">    x += other.x;</div>
+<div class="line">    y += other.y;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p> Now, it becomes a problem that the declaration and the definition are separated. When the source file <code>Point.cpp</code> is compiled to an object file, the compiler does not know a type for <code>Scalar</code>. It can not generate any object code. This is written in the c++ standard: </p><blockquote class="doxtable">
+<p >A class template by itself is not a type, or an object, or any other entity. No code is generated from a source file that contains only template definitions. In order for any code to appear, a template must be instantiated: the template arguments must be provided so that the compiler can generate an actual class (or function, from a function template). </p>
+</blockquote>
+<p>To resolve this issue, one can put the definition into the header file. This shifts the object/binary code generation to the compilation step where the header is included. Assuming that a concrete type for <code>Scalar</code> is given in this file, all the class methods of <code>Point</code> can be compiled. But with this solution, one loses the advantages from above. Another possibility is to insert one or several explicit instantiations into <code>Point.cpp</code> to give the compiler one or several concrete types for <code>Scalar</code>. Adding for example </p><div class="fragment"><div class="line"><span class="keyword">template</span> <span class="keyword">class </span>Point&lt;double&gt;;</div>
+</div><!-- fragment --><p> at the end of <code>Point.cpp</code> would cause object code for all members of <code>Point</code> for the type <code>double</code>. With this solution one can keep separate translation units but it has other drawbacks:</p><ul>
+<li>The <code>Point</code> class can not be used with any type but only with those where there is an explicit instantiation.</li>
+<li>The explicit class instantiation causes the compilation of <b>all</b> members. However if the class is implicitly instantiated, only code for the <b>used</b> members is generated. Implicit instantiation would occur if you put the definiton into the header and take the concrete types from the usage of the class.</li>
+<li>All the explicit instantiations needs to be inserted manually which causes extra maintenance work.</li>
+</ul>
+<p >Note, that the second point could be circumvented by not using explicit class instantiations but only explicitly instantiate certain members. For example </p><div class="fragment"><div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> Point&lt;double&gt;::shift(<span class="keyword">const</span> Point&lt;double&gt; other);</div>
+</div><!-- fragment --><p> Buth this approach is not maintainable for large class templates.</p>
+<p >This tool aims to provide a third solution, namely to inject the explicit member instantiations (or free function instantiations) automatically by using the information from a final main file. This means that the <code>Point</code> class is separated in header and source file but the source file is <b>not</b> compiled to library. A user of the <code>Point</code> class will include a cmake target to build the library for <code>Point</code> with the dependency <code>Point.cpp</code>. Then the main target can become the <code>Point</code> library as a dependency. With this setup, the tool can insert all needed explicit instantiations into <code>Point.cpp</code> by using the information from the main target. This is achieved by using the powerful <code>clang</code> library libtooling for analyzing clangs abstract syntax tree (AST).</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
-What does it (currently) not can do?</h1>
-<ul>
-<li>It does not manage the <code>includes</code> for you. If it inserts a needed template instantiation with a type not known in that translation unit, you will get a compiler error.</li>
-<li>It builds the abstract syntax tree (AST) of all files listed in the <code>compile_commands.json</code>. This is often too much and slows down the process.</li>
-<li>It cannot clean up the explicit instantiations. (However this will be added soon, hopefully)</li>
-<li><code>Template template</code> parameters are not implemented.</li>
-</ul>
+The clang AST</h1>
+<p >See the <a href="https://clang.llvm.org/docs/IntroductionToTheClangAST.html">clang ast introduction</a>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
-How does it work</h1>
-<p >See the <a href="https://cpp977.github.io/Instantiator/">documentation</a>.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
-Contributions</h1>
-<p >Contributions and are very welcome! The following is only a part of things which needs to be done:</p><ul>
-<li><code>try catch</code> blocks to catch events when <code>clang</code> throws during the parsing step to generate the ASTs.</li>
-<li>Clean up the <code>cmake</code> file.</li>
-<li>Add an example <code>c++</code> project which can also be used for tests.</li>
-<li>Add the possibilty to clean all inserted instantiations. </li>
-</ul>
+Two step procedure</h1>
+<p >The tool is scanning the AST twice.</p><ol type="1">
+<li>It is looking for needed instantations and build a todo List of <a class="el" href="structInjection.html">Injection</a> entries.</li>
+<li>It is searching where to place the explicit instantiations. </li>
+</ol>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -128,7 +206,7 @@ Contributions</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 18 2021 09:19:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Nov 18 2021 10:56:49 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
