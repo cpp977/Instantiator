@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ranges>
 #include <sstream>
+#include <typeinfo>
 #include <unordered_set>
 
 #include "termcolor/termcolor.hpp"
@@ -21,24 +22,22 @@
 
 #include "Injection.hpp"
 
+#include "Callbacks/DeleteInstantiations.hpp"
 #include "Callbacks/GetNeededInstantiations.hpp"
 #include "Callbacks/InjectInstantiation.hpp"
-
-using namespace clang::ast_matchers;
-
-clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = functionDecl(isTemplateInstantiation(),
-                                                                                    unless(isDefinition()),
-                                                                                    unless(matchesName("std::")),
-                                                                                    unless(matchesName("__gnu_cxx::")),
-                                                                                    unless(matchesName("spdlog::")),
-                                                                                    unless(matchesName("fmt::")))
-                                                                           .bind("templ_func_instantation");
-
-clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = functionDecl(isDefinition()).bind("func_definition");
-
+#include "Matcher/Matcher.hpp"
+//
+// Command line options
+//
 // Apply a custom category to all command-line options so that they are the
 // only ones displayed.
-static llvm::cl::OptionCategory MyToolCategory("Instantiator options");
+static llvm::cl::OptionCategory InstantiatorOptions("Instantiator options");
+
+static llvm::cl::opt<bool> Clean("clean", llvm::cl::desc("Delete all explicit instantiations."), llvm::cl::cat(InstantiatorOptions));
+static llvm::cl::list<std::string> IgnorePatterns("i",
+                                                  llvm::cl::desc("List of namespaces which should be ignored."),
+                                                  llvm::cl::desc("<pattern>"),
+                                                  llvm::cl::cat(InstantiatorOptions));
 
 // CommonOptionsParser declares HelpMessage with a description of the common
 // command-line options related to the compilation database and input files.
@@ -50,13 +49,27 @@ static llvm::cl::extrahelp MoreHelp("\nMore help text...\n");
 
 int main(int argc, const char** argv)
 {
-    auto ExpectedParser = clang::tooling::CommonOptionsParser::create(argc, argv, MyToolCategory, llvm::cl::OneOrMore);
+    auto ExpectedParser = clang::tooling::CommonOptionsParser::create(argc, argv, InstantiatorOptions, llvm::cl::OneOrMore);
     if(!ExpectedParser) {
         // Fail gracefully for unsupported options.
         llvm::errs() << ExpectedParser.takeError();
         return 1;
     }
     clang::tooling::CommonOptionsParser& OptionsParser = ExpectedParser.get();
+
+    if(IgnorePatterns.size() == 0) { IgnorePatterns.push_back("std"); }
+
+    clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName(IgnorePatterns[0] + "::");
+    std::cout << "type of nameMatcher: " << typeid(nameMatcher).name() << std::endl;
+    for(auto it = IgnorePatterns.begin() + 1; it != IgnorePatterns.end(); it++) {
+        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + "::"));
+    }
+
+    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplateInstantiations(nameMatcher);
+
+    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = Candidates(nameMatcher);
+
+    // clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind("func_definition");
 
     std::vector<std::string> main_and_injection_files = OptionsParser.getCompilations().getAllFiles();
 
@@ -77,6 +90,21 @@ int main(int argc, const char** argv)
     for(std::size_t i = 0; i < allASTs.size(); i++) { file2AST.insert(std::make_pair(main_and_injection_files[i], i)); }
     std::cout << "Parsed ASTs done." << std::endl << std::endl;
 
+    if(Clean) {
+        for(std::size_t i = 0; i < allASTs.size(); i++) {
+            std::cout << "Clean all explicit instantiations in " << allASTs[i]->getMainFileName().str() << "." << std::endl;
+            DeleteInstantiations Deleter;
+            clang::Rewriter rewriter(allASTs[i]->getSourceManager(), allASTs[i]->getLangOpts());
+            Deleter.rewriter = &rewriter;
+            clang::ast_matchers::MatchFinder Inst_Finder;
+            Inst_Finder.addMatcher(/*Matcher*/ ExplicitInstantiations(nameMatcher), /*Callback*/ &Deleter);
+            Inst_Finder.matchAST(allASTs[i]->getASTContext());
+            rewriter.overwriteChangedFiles();
+            std::cout << "Done." << std::endl;
+        }
+        return 0;
+    }
+
     GetNeededInstantiations Getter;
 
     Getter.toDoList = &toDoList;
@@ -94,32 +122,27 @@ int main(int argc, const char** argv)
             Finder.matchAST(allASTs[file2AST[item]]->getASTContext());
             std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced the following ToDo-List:" << termcolor::reset
                       << std::endl;
-            bool color_change = true;
-            for(const auto& toDo : toDoList) {
-                if(color_change)
-                    std::cout << '\t' << termcolor::magenta << toDo << termcolor::reset << std::endl;
-                else
-                    std::cout << '\t' << termcolor::yellow << toDo << termcolor::reset << std::endl;
-                color_change = not color_change;
-            }
+            for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
             for(const auto& file_for_search : main_and_injection_files) {
-                // if(file_for_search == item) { continue; }
                 std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
-                // << "=="
-                // << allASTs[file2AST[file_for_search]]
-                //        ->getSourceManager()
-                //        .getFileEntryForID(allASTs[file2AST[file_for_search]]->getSourceManager().getMainFileID())
-                //        ->getName()
-                //        .str()
                 clang::Rewriter rewriter(allASTs[file2AST[file_for_search]]->getSourceManager(), allASTs[file2AST[file_for_search]]->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
                 InjectInstantiation instantiator;
                 instantiator.toDoList = &toDoList;
                 instantiator.rewriter = &rewriter;
                 FuncFinder.addMatcher(/*Matcher*/ FunctionDefMatcher, /*Callback*/ &instantiator);
-                FuncFinder.matchAST(allASTs[file2AST[file_for_search]]->getASTContext());
-                std::cout << std::endl;
-                rewriter.overwriteChangedFiles();
+                try {
+                    FuncFinder.matchAST(allASTs[file2AST[file_for_search]]->getASTContext());
+                    std::cout << termcolor::green << "Called AST match function" << termcolor::reset << std::endl;
+                } catch(const std::exception& e) {
+                    std::cout << " a standard exception was caught during AST parsing, with message '" << e.what() << "'\n";
+                }
+                try {
+                    rewriter.overwriteChangedFiles();
+                    std::cout << termcolor::green << "Called rewriter" << termcolor::reset << std::endl;
+                } catch(...) {
+                    std::cout << " a exception was caught during rewrite step" << std::endl;
+                }
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
                 if(HAS_INJECTED_INTANTIATION) {
                     work_list.insert(file_for_search);
@@ -127,6 +150,7 @@ int main(int argc, const char** argv)
                     bool AST_NOT_UPDATED = allASTs[file2AST[file_for_search]]->Reparse(PCHContainerOps);
                     if(AST_NOT_UPDATED) { std::cerr << "Error while reparsing the AST" << std::endl; }
                 }
+                std::cout << std::endl;
             }
         }
     }

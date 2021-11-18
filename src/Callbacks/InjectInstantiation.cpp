@@ -1,3 +1,7 @@
+#include <iostream>
+
+#include "termcolor/termcolor.hpp"
+
 #include "Callbacks/InjectInstantiation.hpp"
 
 #include "llvm/ADT/APInt.h"
@@ -13,10 +17,15 @@
 void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
     clang::PrintingPolicy pp(Result.Context->getLangOpts());
+    //    pp.PrintInjectedClassNameWithArguments = 1;
+    //    pp.FullyQualifiedName = 1;
+    pp.PrintCanonicalTypes = 1;
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("func_definition")) {
         // std::cout << "Processing func " << MFS->getNameAsString() << std::endl;
+        // std::cout << std::boolalpha << "TI=" << MFS->isTemplateInstantiation()
+        //           << ", CTI=" << (MFS->getParent()->getMemberSpecializationInfo() != nullptr) << std::endl;
         llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
-        if(MFS->isTemplateInstantiation()) {
+        if(MFS->isTemplateInstantiation() or (MFS->getParent()->getMemberSpecializationInfo() != nullptr)) {
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
             // std::cout << "Check if the instantiation is already present." << std::endl;
@@ -26,8 +35,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     it++;
                     continue;
                 }
+                std::string nested_namespace;
+                llvm::raw_string_ostream OS(nested_namespace);
+                MFS->getParent()->printNestedNameSpecifier(OS, pp);
                 if(not(toDo.class_name == MFS->getParent()->getNameAsString()) or not(toDo.params.size() == params.size()) or
-                   not(toDo.is_const == MFS->isConst())) {
+                   not(toDo.is_const == MFS->isConst()) or not(toDo.nested_namespace == nested_namespace)) {
                     it++;
                     continue;
                 }
@@ -122,7 +134,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
                         ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
+                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp));
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
                 // std::cout << std::boolalpha << "FT=" << params_match << ", CTP=" << class_tparam_match << ", FTP=" << func_tparam_match <<
@@ -144,41 +156,36 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             // std::cout << "Check for match." << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.is_constructor) and not(toDo.func_name == MFS->getNameAsString())) {
-                    it++;
-                    continue;
+                const clang::CXXConstructorDecl* ConstructorCheck = llvm::dyn_cast<clang::CXXConstructorDecl>(MFS);
+                bool is_constructor = not(ConstructorCheck == nullptr);
+                if(toDo.is_constructor or is_constructor) {
+                    if(not(toDo.is_constructor and is_constructor)) {
+                        it++;
+                        continue;
+                    }
+                } else {
+                    if(not(toDo.func_name == MFS->getNameAsString())) {
+                        it++;
+                        continue;
+                    }
                 }
+                std::string nested_namespace;
+                llvm::raw_string_ostream OS(nested_namespace);
+                MFS->getParent()->printNestedNameSpecifier(OS, pp);
                 if(not(toDo.class_name == MFS->getParent()->getNameAsString()) or not(toDo.params.size() == params.size()) or
-                   not(toDo.is_const == MFS->isConst())) {
+                   not(toDo.is_const == MFS->isConst()) or not(toDo.nested_namespace == nested_namespace)) {
                     it++;
                     continue;
                 }
                 std::vector<bool> params_match(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
-                    if(not(*(*it)->getOriginalType()).isDependentType()) { /*Parameter is not a dependent type
-                                                                              -> check for exact matching.*/
-                        params_match[std::distance(params.begin(), it)] =
-                            ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
-                    } else { /*Parameter is a dependent type -> check for cvr and
-                                reference matching.*/
-                        if((*it)->getOriginalType().getTypePtr()->isRValueReferenceType()) { /*Forwarding reference -> dont
-                                                                                               check cvr.*/
-                            params_match[std::distance(params.begin(), it)] = true;
-                        } else { /*No Rvalue reference -> check cvr.*/
-                            params_match[std::distance(params.begin(), it)] =
-                                (((*it)->getOriginalType().getTypePtr()->isReferenceType() ==
-                                  toDo.params[std::distance(params.begin(), it)].getTypePtr()->isReferenceType()) and
-                                 ((*it)->getOriginalType().getNonReferenceType().getQualifiers() ==
-                                  toDo.params[std::distance(params.begin(), it)].getNonReferenceType().getQualifiers()));
-                        }
-                    }
+                    Param check = Param::createFromParmVarDecl(*it, pp, false);
+                    // std::cout << termcolor::bold << "Compare " << check << " and " << toDo.nonresolved_params[std::distance(params.begin(), it)]
+                    //           << termcolor::reset << std::endl;
+                    params_match[std::distance(params.begin(), it)] = check.compare(toDo.nonresolved_params[std::distance(params.begin(), it)]);
                 }
                 if(std::all_of(params_match.begin(), params_match.end(), [](bool v) { return v; })) {
-                    // std::cout
-                    //     << "Match!!! Call the rewriter and delete entry from
-                    //     toDoList."
-                    //     << std::endl;
+                    // std::cout << "Match!!! Call the rewriter and delete entry from toDoList." << std::endl;
                     rewriter->InsertText(MFS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
                     it = toDoList->erase(it);
                 } else {
@@ -196,7 +203,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             //           << std::endl;
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size())) {
+                std::string nested_namespace;
+                llvm::raw_string_ostream OS(nested_namespace);
+                FS->printNestedNameSpecifier(OS, pp);
+                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size()) or
+                   not(toDo.nested_namespace == nested_namespace)) {
                     it++;
                     continue;
                 }
@@ -248,7 +259,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
                         ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                         toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
+                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp));
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
                 if(params_match and func_tparam_match) {
@@ -270,32 +281,27 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
 
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size())) {
+                std::string nested_namespace;
+                llvm::raw_string_ostream OS(nested_namespace);
+                FS->printNestedNameSpecifier(OS, pp);
+                if(not(toDo.func_name == FS->getNameAsString()) or not(toDo.params.size() == params.size()) or
+                   not(toDo.nested_namespace == nested_namespace)) {
                     it++;
                     continue;
                 }
                 std::vector<bool> params_match(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
-                    if(not(*(*it)->getOriginalType()).isDependentType()) { /*Parameter is not a dependent
-                                                                              type
-                                                                              -> check for exact matching.*/
-                        params_match[std::distance(params.begin(), it)] =
-                            ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                             toDo.params[std::distance(params.begin(), it)].getCanonicalType().getAsString(pp));
-                    } else { /*Parameter is a dependent type -> check for cvr and
-                                reference matching.*/
-                        params_match[std::distance(params.begin(), it)] =
-                            (((*it)->getOriginalType().getTypePtr()->isReferenceType() ==
-                              toDo.params[std::distance(params.begin(), it)].getTypePtr()->isReferenceType()) and
-                             ((*it)->getOriginalType().getNonReferenceType().getQualifiers() ==
-                              toDo.params[std::distance(params.begin(), it)].getNonReferenceType().getQualifiers()));
-                    }
+                    Param check = Param::createFromParmVarDecl(*it, pp, false);
+                    std::cout << termcolor::bold << "Compare " << check << " and " << toDo.nonresolved_params[std::distance(params.begin(), it)]
+                              << termcolor::reset << std::endl;
+                    params_match[std::distance(params.begin(), it)] = check.compare(toDo.nonresolved_params[std::distance(params.begin(), it)]);
                 }
                 if(std::all_of(params_match.begin(), params_match.end(), [](bool v) { return v; })) {
                     // std::cout
                     //     << "Match!!! Call the rewriter and delete entry from
                     //     toDoList."
                     //     << std::endl;
+                    // std::cout << "Injection: " << it->getInstantiation() << std::endl;
                     rewriter->InsertText(FS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
                     it = toDoList->erase(it);
                 } else {
