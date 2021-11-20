@@ -126,16 +126,28 @@ For example
 Buth this approach is not maintainable for large class templates.
 
 This tool aims to provide a third solution, namely to inject the explicit member instantiations (or free function instantiations) automatically by using the information from a final main file.
-This means that the `Point` class is separated in header and source file but the source file is **not** compiled to library. 
+This means that the `Point` class is separated in header and source file but the source file is **not** compiled to a library. 
 A user of the `Point` class will include a cmake target to build the library for `Point` with the dependency `Point.cpp`.
 Then the main target can become the `Point` library as a dependency. 
 With this setup, the tool can insert all needed explicit instantiations into `Point.cpp` by using the information from the main target.
-This is achieved by using the powerful `clang` library libtooling for analyzing clangs abstract syntax tree (AST).
+This is achieved by using the powerful `clang` library *libtooling* for analyzing clangs abstract syntax tree (AST).
 
 # The clang AST
-See the [clang ast introduction](https://clang.llvm.org/docs/IntroductionToTheClangAST.html).
+To get familiar with the clang AST, see the [clang AST introduction](https://clang.llvm.org/docs/IntroductionToTheClangAST.html).
+The AST is a structured version of a c++ program. It contains nodes for the different statements and declarations in the code.
+Clang has two different base classes `Stmt` and `Decl` which do not have a common base.
+For the purpose of this tool, the `FunctionDecl` and `CXXMethodDecl` classes are most important which both derive from `Decl`.
+To filter specific nodes from the AST, clang provides [AST matchers](https://clang.llvm.org/docs/LibASTMatchersReference.html).
 
 # Two step procedure
 The tool is scanning the AST twice. 
 1. It is looking for needed instantations and build a todo List of Injection entries.
 2. It is searching where to place the explicit instantiations.
+
+## Find template instantiations with missing definiton ##
+When the definitons of function templates or class template member functions is separated into a different translation unit, 
+the AST contains nodes `FunctionDecl` or `CXXMethodDecl` which are template instantiations but which have **not** a definition.
+These nodes are exactly the ones, one needs to find.
+To achieve this, the tool uses the Matcher TemplateInstantiations().
+
+## Inject the instantations where the definitons are present ##
