@@ -100,6 +100,9 @@ $(document).ready(function(){initNavTree('structInjection.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
+<p>Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere.  
+ <a href="structInjection.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Injection:</div>
@@ -152,7 +155,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac9466026f2d97b3f411c3cd74503a134"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#ac9466026f2d97b3f411c3cd74503a134">guess_injection_place</a></td></tr>
 <tr class="separator:ac9466026f2d97b3f411c3cd74503a134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a4b7830c62e31304e24c218e304311ef2" name="a4b7830c62e31304e24c218e304311ef2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4b7830c62e31304e24c218e304311ef2">&#9670;&nbsp;</a></span>StringType</h2>
 
@@ -269,6 +274,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >For member functions, this is the name of the parent class. For free functions it is empty. E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;T1,T2&gt;(<span class="keyword">const</span> T1&amp; t1, <span class="keyword">const</span> T2&amp; t2)</div>
+</div><!-- fragment --><p> the class name would be <code>"Bar"</code>. </p>
 
 </div>
 </div>
@@ -283,6 +290,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The concrete types of the class template parameters (for class template member functions only). E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar&lt;double, int&gt;::Foo()</div>
+</div><!-- fragment --><p> it would be <code>{"double", "int"}</code> </p>
 
 </div>
 </div>
@@ -297,6 +306,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Name of the function without namespace and template parameters. For </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;T1,T2&gt;(<span class="keyword">const</span> T1&amp; t1, <span class="keyword">const</span> T2&amp; t2)</div>
+</div><!-- fragment --><p> the name would be <code>"Foo"</code>. </p>
 
 </div>
 </div>
@@ -311,6 +322,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The concrete types of the function template parameters. E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;double,int&gt;(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t1, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; t2)</div>
+</div><!-- fragment --><p> it would be <code>{"double", "int"}</code> </p>
 
 </div>
 </div>
@@ -381,6 +394,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Nested namespace of the function. For For </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> My::Nested::Namespace::Foo&lt;T1,T2&gt;(<span class="keyword">const</span> T1&amp; t1, <span class="keyword">const</span> T2&amp; t2)</div>
+</div><!-- fragment --><p> the nested namespace would be <code>"My::Nested::Namespace"</code>. </p>
 
 </div>
 </div>
@@ -395,6 +410,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >A vector of the function parameters where the parameters are not resolved with concrete types. If all of the parameter are nondependent on template parameters its the same as params. This information is needed to compare this <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> with possible candidates which provide the appropriate definition. </p>
 
 </div>
 </div>
@@ -409,6 +425,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >A vector of the function parameters where each parameter is fully resolved with the concrete types. This information is needed to create the explicit instantiation. </p>
 
 </div>
 </div>
@@ -423,6 +440,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The return type of the function. </p>
 
 </div>
 </div>
@@ -437,7 +455,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structInjection.html">Injection</a></li>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

@@ -189,16 +189,21 @@ Motivation</h1>
 </ul>
 <p >Note, that the second point could be circumvented by not using explicit class instantiations but only explicitly instantiate certain members. For example </p><div class="fragment"><div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> Point&lt;double&gt;::shift(<span class="keyword">const</span> Point&lt;double&gt; other);</div>
 </div><!-- fragment --><p> Buth this approach is not maintainable for large class templates.</p>
-<p >This tool aims to provide a third solution, namely to inject the explicit member instantiations (or free function instantiations) automatically by using the information from a final main file. This means that the <code>Point</code> class is separated in header and source file but the source file is <b>not</b> compiled to library. A user of the <code>Point</code> class will include a cmake target to build the library for <code>Point</code> with the dependency <code>Point.cpp</code>. Then the main target can become the <code>Point</code> library as a dependency. With this setup, the tool can insert all needed explicit instantiations into <code>Point.cpp</code> by using the information from the main target. This is achieved by using the powerful <code>clang</code> library libtooling for analyzing clangs abstract syntax tree (AST).</p>
+<p >This tool aims to provide a third solution, namely to inject the explicit member instantiations (or free function instantiations) automatically by using the information from a final main file. This means that the <code>Point</code> class is separated in header and source file but the source file is <b>not</b> compiled to a library. A user of the <code>Point</code> class will include a cmake target to build the library for <code>Point</code> with the dependency <code>Point.cpp</code>. Then the main target can become the <code>Point</code> library as a dependency. With this setup, the tool can insert all needed explicit instantiations into <code>Point.cpp</code> by using the information from the main target. This is achieved by using the powerful <code>clang</code> library <em>libtooling</em> for analyzing clangs abstract syntax tree (AST).</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 The clang AST</h1>
-<p >See the <a href="https://clang.llvm.org/docs/IntroductionToTheClangAST.html">clang ast introduction</a>.</p>
+<p >To get familiar with the clang AST, see the <a href="https://clang.llvm.org/docs/IntroductionToTheClangAST.html">clang AST introduction</a>. The AST is a structured version of a c++ program. It contains nodes for the different statements and declarations in the code. Clang has two different base classes <code>Stmt</code> and <code>Decl</code> which do not have a common base. For the purpose of this tool, the <code>FunctionDecl</code> and <code>CXXMethodDecl</code> classes are most important which both derive from <code>Decl</code>. To filter specific nodes from the AST, clang provides <a href="https://clang.llvm.org/docs/LibASTMatchersReference.html">AST matchers</a>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Two step procedure</h1>
 <p >The tool is scanning the AST twice.</p><ol type="1">
-<li>It is looking for needed instantations and build a todo List of <a class="el" href="structInjection.html">Injection</a> entries.</li>
-<li>It is searching where to place the explicit instantiations. </li>
+<li>It is looking for needed instantations and build a todo List of <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> entries.</li>
+<li>It is searching where to place the explicit instantiations.</li>
 </ol>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Find template instantiations with missing definiton</h2>
+<p >When the definitons of function templates or class template member functions is separated into a different translation unit, the AST contains nodes <code>FunctionDecl</code> or <code>CXXMethodDecl</code> which are template instantiations but which have <b>not</b> a definition. These nodes are exactly the ones, one needs to find. To achieve this, the tool uses the Matcher <a class="el" href="Matcher_8hpp.html#aa28b4103de757123e4884b53a21e8acd">TemplateInstantiations()</a>.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+Inject the instantations where the definitons are present</h2>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -206,7 +211,7 @@ Two step procedure</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

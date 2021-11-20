@@ -21,7 +21,7 @@
 <!-- Node0 -->
 <g id="node2" class="node">
 <title>Node0</title>
-<g id="a_node2"><a xlink:href="classDeleteInstantiations.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classDeleteInstantiations.html" target="_top" xlink:title="MatchCallback for template instantiation deletions.">
 <polygon fill="none" stroke="black" points="208,-76.5 208,-95.5 324,-95.5 324,-76.5 208,-76.5"/>
 <text text-anchor="middle" x="266" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">DeleteInstantiations</text>
 </a>
@@ -36,7 +36,7 @@
 <!-- Node4 -->
 <g id="node3" class="node">
 <title>Node4</title>
-<g id="a_node3"><a xlink:href="classGetNeededInstantiations.html" target="_top" xlink:title=" ">
+<g id="a_node3"><a xlink:href="classGetNeededInstantiations.html" target="_top" xlink:title="MatchCallback for template instantiation detections.">
 <polygon fill="none" stroke="black" points="197,-38.5 197,-57.5 335,-57.5 335,-38.5 197,-38.5"/>
 <text text-anchor="middle" x="266" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">GetNeededInstantiations</text>
 </a>
@@ -51,7 +51,7 @@
 <!-- Node5 -->
 <g id="node4" class="node">
 <title>Node5</title>
-<g id="a_node4"><a xlink:href="classInjectInstantiation.html" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="classInjectInstantiation.html" target="_top" xlink:title="MatchCallback for injection of explicit instantiations into the source files at appropriate places.">
 <polygon fill="none" stroke="black" points="213.5,-0.5 213.5,-19.5 318.5,-19.5 318.5,-0.5 213.5,-0.5"/>
 <text text-anchor="middle" x="266" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">InjectInstantiation</text>
 </a>

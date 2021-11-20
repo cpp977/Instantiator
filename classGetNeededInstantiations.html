@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classGetNeededInstantiations.html','')
 </div><!--header-->
 <div class="contents">
 
+<p>MatchCallback for template instantiation detections.  
+ <a href="classGetNeededInstantiations.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="GetNeededInstantiations_8hpp_source.html">Callbacks/GetNeededInstantiations.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GetNeededInstantiations:</div>
@@ -122,7 +125,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a4923b133878af583b2c9fb02f228e093"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structInjection.html">Injection</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a></td></tr>
 <tr class="separator:a4923b133878af583b2c9fb02f228e093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >MatchCallback for template instantiation detections. </p>
+<p >This callback is called for the Matcher <a class="el" href="Matcher_8hpp.html#aa28b4103de757123e4884b53a21e8acd">TemplateInstantiations()</a>. The Matcher returns a <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html">clang::FunctionDecl</a> or a <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a> which has <b>no</b> definition in this translation unit and which is a template instantiation. This callback checks whether these instantiations are valid and then load the relevant data as an <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae8c161feb8bef8736177ebbdc9853b11" name="ae8c161feb8bef8736177ebbdc9853b11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8c161feb8bef8736177ebbdc9853b11">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -161,6 +167,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >A pointer to an external vector of <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> which is filled during <a class="el" href="classGetNeededInstantiations.html" title="MatchCallback for template instantiation detections.">GetNeededInstantiations</a>. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Can this be a <code>std::list</code>? </dd></dl>
 
 </div>
 </div>
@@ -175,7 +182,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classGetNeededInstantiations.html">GetNeededInstantiations</a></li>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

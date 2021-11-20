@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classDeleteInstantiations.html',''); i
 </div><!--header-->
 <div class="contents">
 
+<p>MatchCallback for template instantiation deletions.  
+ <a href="classDeleteInstantiations.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="DeleteInstantiations_8hpp_source.html">Callbacks/DeleteInstantiations.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for DeleteInstantiations:</div>
@@ -122,7 +125,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7689cb6f18585e780760bf80c0d8fc3e"><td class="memItemLeft" align="right" valign="top">clang::Rewriter *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">rewriter</a></td></tr>
 <tr class="separator:a7689cb6f18585e780760bf80c0d8fc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >MatchCallback for template instantiation deletions. </p>
+<p >This callback is called for the Matcher <a class="el" href="Matcher_8hpp.html#afe8a13ed6c7ec5f760b02e0e7fa7b5aa">ExplicitInstantiations()</a>. It detects the point of instantiation in the source code and registers the deletion in the <a href="https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html">clang::Rewriter</a>. For example in this piece of code: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Foo&gt;</div>
+<div class="line"><span class="keywordtype">void</span> doSomething(Foo&amp; foo) {</div>
+<div class="line">    <span class="comment">//some code</span></div>
+<div class="line">}</div>
+<div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> doSomething(<span class="keywordtype">double</span>&amp;);</div>
+</div><!-- fragment --><p> the callback determines the line <code>template void doSomething(double&amp;);</code>. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>The callback uses <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionTemplateSpecializationInfo.html#a8455a2551d86b9bbdeb904858dcb458d">clang::FunctionTemplateSpecializationInfo::getPointOfInstantiation()</a> which gives the <a href="https://clang.llvm.org/doxygen/classclang_1_1SourceLocation.html">clang::SourceLocation</a> of the beginning of the explicit instantiation. In the example above that would be the column corresponding to the beginning of <code>doSomething</code>. How can one get the begin of the whole declaration and how can one get the end of the declaration? </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a97c8e09bebb436501bc5c521d5be062f" name="a97c8e09bebb436501bc5c521d5be062f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97c8e09bebb436501bc5c521d5be062f">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -161,6 +172,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Pointer to an external <a href="(https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html)">clang::Rewriter</a> object. </p>
 
 </div>
 </div>
@@ -175,7 +187,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDeleteInstantiations.html">DeleteInstantiations</a></li>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

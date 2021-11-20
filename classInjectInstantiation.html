@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('classInjectInstantiation.html',''); in
 </div><!--header-->
 <div class="contents">
 
+<p>MatchCallback for injection of explicit instantiations into the source files at appropriate places.  
+ <a href="classInjectInstantiation.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="InjectInstantiation_8hpp_source.html">Callbacks/InjectInstantiation.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for InjectInstantiation:</div>
@@ -124,7 +127,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6bca19632e89c3ef6af45eec26028da3"><td class="memItemLeft" align="right" valign="top">clang::Rewriter *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">rewriter</a></td></tr>
 <tr class="separator:a6bca19632e89c3ef6af45eec26028da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >MatchCallback for injection of explicit instantiations into the source files at appropriate places. </p>
+<p >This callback is called for the Matcher <a class="el" href="Matcher_8hpp.html#aad0c99a4b4a3861628444de5e4c8246d">Candidates()</a>. The Matcher returns a <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html">clang::FunctionDecl</a> or a <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a> which has a definition in this translation unit. This callback checks whether there is an <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> item in the toDoList which which fits the current match result. The following is compared for each match result:</p><ol type="1">
+<li>Return type</li>
+<li>Nested namespace qualifier</li>
+<li>Function name</li>
+<li>For <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a> <code>const</code> qualifier</li>
+<li>For <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a> parent class name</li>
+<li>Function parameters </li>
+</ol>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6321e2edffd82f8a1789a03a79a2b43a" name="a6321e2edffd82f8a1789a03a79a2b43a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6321e2edffd82f8a1789a03a79a2b43a">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -163,6 +176,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Pointer to an external <a href="(https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html)">clang::Rewriter</a> object. </p>
 
 </div>
 </div>
@@ -177,6 +191,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >A pointer to an external vector of <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> which is filled during <a class="el" href="classGetNeededInstantiations.html" title="MatchCallback for template instantiation detections.">GetNeededInstantiations</a>. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Can this be a <code>std::list</code>? </dd></dl>
 
 </div>
 </div>
@@ -191,7 +206,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classInjectInstantiation.html">InjectInstantiation</a></li>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

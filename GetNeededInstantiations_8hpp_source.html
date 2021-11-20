@@ -102,17 +102,17 @@ $(document).ready(function(){initNavTree('GetNeededInstantiations_8hpp_source.ht
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classGetNeededInstantiations.html">GetNeededInstantiations</a> : <span class="keyword">public</span> clang::ast_matchers::MatchFinder::MatchCallback</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">   13</a></span>    std::vector&lt;Injection&gt;* <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">run</a>(<span class="keyword">const</span> clang::ast_matchers::MatchFinder::MatchResult&amp; Result) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="classGetNeededInstantiations.html">GetNeededInstantiations</a> : <span class="keyword">public</span> clang::ast_matchers::MatchFinder::MatchCallback</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">   26</a></span>    std::vector&lt;Injection&gt;* <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">run</a>(<span class="keyword">const</span> clang::ast_matchers::MatchFinder::MatchResult&amp; Result) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
-<div class="ttc" id="aclassGetNeededInstantiations_html"><div class="ttname"><a href="classGetNeededInstantiations.html">GetNeededInstantiations</a></div><div class="ttdef"><b>Definition:</b> GetNeededInstantiations.hpp:11</div></div>
-<div class="ttc" id="aclassGetNeededInstantiations_html_a4923b133878af583b2c9fb02f228e093"><div class="ttname"><a href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">GetNeededInstantiations::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition:</b> GetNeededInstantiations.hpp:13</div></div>
+<div class="ttc" id="aclassGetNeededInstantiations_html"><div class="ttname"><a href="classGetNeededInstantiations.html">GetNeededInstantiations</a></div><div class="ttdoc">MatchCallback for template instantiation detections.</div><div class="ttdef"><b>Definition:</b> GetNeededInstantiations.hpp:20</div></div>
+<div class="ttc" id="aclassGetNeededInstantiations_html_a4923b133878af583b2c9fb02f228e093"><div class="ttname"><a href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">GetNeededInstantiations::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition:</b> GetNeededInstantiations.hpp:26</div></div>
 <div class="ttc" id="aclassGetNeededInstantiations_html_ae8c161feb8bef8736177ebbdc9853b11"><div class="ttname"><a href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">GetNeededInstantiations::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> GetNeededInstantiations.cpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('GetNeededInstantiations_8hpp_source.ht
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_dc3b1763f616f33684c71eaff7522e72.html">Callbacks</a></li><li class="navelem"><a class="el" href="GetNeededInstantiations_8hpp.html">GetNeededInstantiations.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 19 2021 22:21:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 12:21:31 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

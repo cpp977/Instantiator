@@ -3,11 +3,11 @@ var indexSectionsWithContent =
   0: "cdefgimnoprst",
   1: "dgip",
   2: "c",
-  3: "dgimpr",
+  3: "dgimp",
   4: "cegimort",
   5: "cfginprt",
   6: "s",
-  7: "i"
+  7: "it"
 };
 
 var indexSectionNames =
