@@ -133,6 +133,8 @@ Public Attributes</h2></td></tr>
 <div class="line">}</div>
 <div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> doSomething(<span class="keywordtype">double</span>&amp;);</div>
 </div><!-- fragment --><p> the callback determines the line <code>template void doSomething(double&amp;);</code>. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>The callback uses <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionTemplateSpecializationInfo.html#a8455a2551d86b9bbdeb904858dcb458d">clang::FunctionTemplateSpecializationInfo::getPointOfInstantiation()</a> which gives the <a href="https://clang.llvm.org/doxygen/classclang_1_1SourceLocation.html">clang::SourceLocation</a> of the beginning of the explicit instantiation. In the example above that would be the column corresponding to the beginning of <code>doSomething</code>. How can one get the begin of the whole declaration and how can one get the end of the declaration? </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8hpp_source.html#l00032">32</a> of file <a class="el" href="DeleteInstantiations_8hpp_source.html">DeleteInstantiations.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a97c8e09bebb436501bc5c521d5be062f" name="a97c8e09bebb436501bc5c521d5be062f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97c8e09bebb436501bc5c521d5be062f">&#9670;&nbsp;</a></span>run()</h2>
@@ -158,6 +160,8 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8cpp_source.html#l00011">11</a> of file <a class="el" href="DeleteInstantiations_8cpp_source.html">DeleteInstantiations.cpp</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -174,11 +178,13 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Pointer to an external <a href="(https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html)">clang::Rewriter</a> object. </p>
 
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8hpp_source.html#l00036">36</a> of file <a class="el" href="DeleteInstantiations_8hpp_source.html">DeleteInstantiations.hpp</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/Callbacks/<a class="el" href="DeleteInstantiations_8hpp_source.html">DeleteInstantiations.hpp</a></li>
-<li>src/Callbacks/<a class="el" href="DeleteInstantiations_8cpp.html">DeleteInstantiations.cpp</a></li>
+<li>src/Callbacks/<a class="el" href="DeleteInstantiations_8cpp_source.html">DeleteInstantiations.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -187,7 +193,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDeleteInstantiations.html">DeleteInstantiations</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:13:51 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 13:33:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
