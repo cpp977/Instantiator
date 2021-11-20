@@ -124,12 +124,12 @@ $(document).ready(function(){initNavTree('Injection_8hpp_source.html',''); initR
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structInjection.html#acf183787d621eeb2d55525eb22405ea5">   72</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structInjection.html#acf183787d621eeb2d55525eb22405ea5">is_constructor</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structInjection.html#ac9466026f2d97b3f411c3cd74503a134">   74</a></span>    <a class="code hl_typedef" href="structInjection.html#a4b7830c62e31304e24c218e304311ef2">StringType</a> <a class="code hl_variable" href="structInjection.html#ac9466026f2d97b3f411c3cd74503a134">guess_injection_place</a>;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    std::string <a class="code hl_function" href="structInjection.html#a2a4faa27e69083c1334ee324240c0be2">getInstantiation</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">static</span> std::optional&lt;Injection&gt; <a class="code hl_function" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">createFromMFS</a>(<span class="keyword">const</span> clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keyword">static</span> std::optional&lt;Injection&gt; <a class="code hl_function" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS</a>(<span class="keyword">const</span> clang::FunctionDecl* FS, clang::PrintingPolicy pp);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>};</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>std::ostream&amp; <a class="code hl_function" href="Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code hl_struct" href="structInjection.html">Injection</a>&amp; toDo);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">static</span> std::optional&lt;Injection&gt; <a class="code hl_function" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">createFromMFS</a>(<span class="keyword">const</span> clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">static</span> std::optional&lt;Injection&gt; <a class="code hl_function" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS</a>(<span class="keyword">const</span> clang::FunctionDecl* FS, clang::PrintingPolicy pp);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>};</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>std::ostream&amp; <a class="code hl_function" href="Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code hl_struct" href="structInjection.html">Injection</a>&amp; toDo);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aInjection_8hpp_html_a58a6fd5fcbfe67f2189350e165ae86ba"><div class="ttname"><a href="Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo)</div><div class="ttdef"><b>Definition:</b> Injection.cpp:275</div></div>
 <div class="ttc" id="aParam_8hpp_html"><div class="ttname"><a href="Param_8hpp.html">Param.hpp</a></div></div>
 <div class="ttc" id="astructInjection_html"><div class="ttname"><a href="structInjection.html">Injection</a></div><div class="ttdoc">Struct for the collection of all relevant data for a template instantiation which needs to be inserte...</div><div class="ttdef"><b>Definition:</b> Injection.hpp:20</div></div>
@@ -156,7 +156,7 @@ $(document).ready(function(){initNavTree('Injection_8hpp_source.html',''); initR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Injection_8hpp.html">Injection.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:09:58 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Sat Nov 20 2021 13:13:51 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
