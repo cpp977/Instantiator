@@ -79,15 +79,17 @@ struct Injection
     /**
      * Function to load all needed data from a [clang::CXXMethodDecl](https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html).
      * \return If \p MFS is appropriate the Injection otherwise an empty `std::optional`.
-     * \p MFS Pointer to a `clang::CXXMethodDecl`.
-     * \p pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     *
+     * \param MFS Pointer to a `clang::CXXMethodDecl`.
+     * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
      */
     static std::optional<Injection> createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);
     /**
      * Function to load all needed data from a [clang::FunctionDecl](https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html).
      * \return If \p FS is appropriate the Injection otherwise an empty `std::optional`.
-     * \p FS Pointer to a `clang::FunctionDecl`.
-     * \p pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     *
+     * \param FS Pointer to a `clang::FunctionDecl`.
+     * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
      */
     static std::optional<Injection> createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp);
 };
