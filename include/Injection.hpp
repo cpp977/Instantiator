@@ -61,14 +61,37 @@ struct Injection
      */
     std::vector<Param> nonresolved_params;
     // std::vector<std::string> params_name;
+    /**Whether this member function is const qualified.*/
     bool is_const = false;
+    /**Whether this is a member function of some class.*/
     bool is_member = false;
+    /**
+     * Whether this a class constructor.
+     * \note Names of class constructors are special in c++. We therefore don't need to compare it when we search for matches of constructors.
+     */
     bool is_constructor = false;
+    /**Unused so far. Intended for more efficiency in the lookup step.*/
     StringType guess_injection_place;
+    /**
+     * \return The string which needs to inserted to explicitly instantiate this function template or class template member function.
+     */
     std::string getInstantiation() const;
+    /**
+     * Function to load all needed data from a [clang::CXXMethodDecl](https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html).
+     * \return If \p MFS is appropriate the Injection otherwise an empty `std::optional`.
+     * \p MFS Pointer to a `clang::CXXMethodDecl`.
+     * \p pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     */
     static std::optional<Injection> createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);
+    /**
+     * Function to load all needed data from a [clang::FunctionDecl](https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html).
+     * \return If \p FS is appropriate the Injection otherwise an empty `std::optional`.
+     * \p FS Pointer to a `clang::FunctionDecl`.
+     * \p pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     */
     static std::optional<Injection> createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp);
 };
 
+/**Pretty print an Injection*/
 std::ostream& operator<<(std::ostream& stream, const Injection& toDo);
 #endif
