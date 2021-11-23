@@ -1,6 +1,6 @@
 var Matcher_8cpp =
 [
-    [ "Candidates", "Matcher_8cpp.html#aad0c99a4b4a3861628444de5e4c8246d", null ],
-    [ "ExplicitInstantiations", "Matcher_8cpp.html#afe8a13ed6c7ec5f760b02e0e7fa7b5aa", null ],
-    [ "TemplateInstantiations", "Matcher_8cpp.html#aa28b4103de757123e4884b53a21e8acd", null ]
+    [ "FuncWithDef", "Matcher_8cpp.html#a0675d325e9441bfbc74a310394541b73", null ],
+    [ "TemplInst", "Matcher_8cpp.html#a8bd04a66c6caaf8b05b43fb89939cdf4", null ],
+    [ "TemplInstWithoutDef", "Matcher_8cpp.html#a316e8ba34e4bf151366be6ba3191c006", null ]
 ];

@@ -95,6 +95,9 @@ $(document).ready(function(){initNavTree('Matcher_8hpp.html',''); initResizable(
   <div class="headertitle"><div class="title">Matcher.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a href="https://clang.llvm.org/docs/LibASTMatchersReference.html">AST matcher</a> expressions to filter the relevant nodes for template instantiations.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;clang/ASTMatchers/ASTMatchers.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Matcher.hpp:</div>
@@ -113,22 +116,26 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa28b4103de757123e4884b53a21e8acd"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#aa28b4103de757123e4884b53a21e8acd">TemplateInstantiations</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:aa28b4103de757123e4884b53a21e8acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad0c99a4b4a3861628444de5e4c8246d"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#aad0c99a4b4a3861628444de5e4c8246d">Candidates</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:aad0c99a4b4a3861628444de5e4c8246d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe8a13ed6c7ec5f760b02e0e7fa7b5aa"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#afe8a13ed6c7ec5f760b02e0e7fa7b5aa">ExplicitInstantiations</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:afe8a13ed6c7ec5f760b02e0e7fa7b5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa490284074dd793c672884a4cdce42a0"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#aa490284074dd793c672884a4cdce42a0">TemplInstWithoutDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
+<tr class="separator:aa490284074dd793c672884a4cdce42a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e305e4e823da5613163fcb2ec96a73"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#ac8e305e4e823da5613163fcb2ec96a73">FuncWithDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
+<tr class="separator:ac8e305e4e823da5613163fcb2ec96a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7352bbb3f846f2c2db222f66d9fd6997"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Matcher_8hpp.html#a7352bbb3f846f2c2db222f66d9fd6997">TemplInst</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
+<tr class="separator:a7352bbb3f846f2c2db222f66d9fd6997"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="aad0c99a4b4a3861628444de5e4c8246d" name="aad0c99a4b4a3861628444de5e4c8246d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad0c99a4b4a3861628444de5e4c8246d">&#9670;&nbsp;</a></span>Candidates()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p ><a href="https://clang.llvm.org/docs/LibASTMatchersReference.html">AST matcher</a> expressions to filter the relevant nodes for template instantiations. </p>
+
+<p class="definition">Definition in file <a class="el" href="Matcher_8hpp_source.html">Matcher.hpp</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ac8e305e4e823da5613163fcb2ec96a73" name="ac8e305e4e823da5613163fcb2ec96a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e305e4e823da5613163fcb2ec96a73">&#9670;&nbsp;</a></span>FuncWithDef()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">clang::ast_matchers::DeclarationMatcher Candidates </td>
+          <td class="memname">clang::ast_matchers::DeclarationMatcher FuncWithDef </td>
           <td>(</td>
           <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;&#160;</td>
           <td class="paramname"><em>excluded_names</em></td><td>)</td>
@@ -136,19 +143,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Matcher_8cpp_source.html#l00011">11</a> of file <a class="el" href="Matcher_8cpp_source.html">Matcher.cpp</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Matcher expression: <div class="fragment"><div class="line">    <span class="keywordflow">return</span> functionDecl(isDefinition(), unless(excluded_names)).bind(<span class="stringliteral">&quot;func_definition&quot;</span>);</div>
+</div><!-- fragment --></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">excluded_names</td><td>NameMatcher with namespace specifiers which should be ignored. E.g. <code>"std::"</code> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="afe8a13ed6c7ec5f760b02e0e7fa7b5aa" name="afe8a13ed6c7ec5f760b02e0e7fa7b5aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe8a13ed6c7ec5f760b02e0e7fa7b5aa">&#9670;&nbsp;</a></span>ExplicitInstantiations()</h2>
+<a id="a7352bbb3f846f2c2db222f66d9fd6997" name="a7352bbb3f846f2c2db222f66d9fd6997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7352bbb3f846f2c2db222f66d9fd6997">&#9670;&nbsp;</a></span>TemplInst()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">clang::ast_matchers::DeclarationMatcher ExplicitInstantiations </td>
+          <td class="memname">clang::ast_matchers::DeclarationMatcher TemplInst </td>
           <td>(</td>
           <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;&#160;</td>
           <td class="paramname"><em>excluded_names</em></td><td>)</td>
@@ -156,19 +169,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Matcher_8cpp_source.html#l00017">17</a> of file <a class="el" href="Matcher_8cpp_source.html">Matcher.cpp</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Matcher expression: <div class="fragment"><div class="line">    <span class="keywordflow">return</span> functionDecl(isTemplateInstantiation(), unless(excluded_names)).bind(<span class="stringliteral">&quot;explicit_instantiation&quot;</span>);</div>
+</div><!-- fragment --></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">excluded_names</td><td>NameMatcher with namespace specifiers which should be ignored. E.g. <code>"std::"</code> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="aa28b4103de757123e4884b53a21e8acd" name="aa28b4103de757123e4884b53a21e8acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28b4103de757123e4884b53a21e8acd">&#9670;&nbsp;</a></span>TemplateInstantiations()</h2>
+<a id="aa490284074dd793c672884a4cdce42a0" name="aa490284074dd793c672884a4cdce42a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa490284074dd793c672884a4cdce42a0">&#9670;&nbsp;</a></span>TemplInstWithoutDef()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">clang::ast_matchers::DeclarationMatcher TemplateInstantiations </td>
+          <td class="memname">clang::ast_matchers::DeclarationMatcher TemplInstWithoutDef </td>
           <td>(</td>
           <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;&#160;</td>
           <td class="paramname"><em>excluded_names</em></td><td>)</td>
@@ -176,8 +195,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Matcher_8cpp_source.html#l00003">3</a> of file <a class="el" href="Matcher_8cpp_source.html">Matcher.cpp</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Matcher expression: <div class="fragment"><div class="line">    <span class="keywordflow">return</span> functionDecl(isTemplateInstantiation(), unless(isDefinition()), unless(excluded_names)).bind(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>);</div>
+</div><!-- fragment --></dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">excluded_names</td><td>NameMatcher with namespace specifiers which should be ignored. E.g. <code>"std::"</code> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -188,7 +213,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2e7bc315ac635c331cd07eec05ee834f.html">Matcher</a></li><li class="navelem"><a class="el" href="Matcher_8hpp.html">Matcher.hpp</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:33:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Nov 23 2021 13:57:27 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

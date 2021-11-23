@@ -1,5 +1,5 @@
 <map id="include/Matcher/Matcher.hpp" name="include/Matcher/Matcher.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="49,5,260,32"/>
+<area shape="rect" id="node1" title="AST matcher expressions to filter the relevant nodes for template instantiations." alt="" coords="49,5,260,32"/>
 <area shape="rect" id="node2" href="$Instantiator_8cpp.html" title=" " alt="" coords="5,80,128,107"/>
 <area shape="rect" id="node3" href="$Matcher_8cpp.html" title=" " alt="" coords="152,80,333,107"/>
 </map>

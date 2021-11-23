@@ -127,7 +127,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >MatchCallback for template instantiation deletions. </p>
-<p >This callback is called for the Matcher <a class="el" href="Matcher_8hpp.html#afe8a13ed6c7ec5f760b02e0e7fa7b5aa">ExplicitInstantiations()</a>. It detects the point of instantiation in the source code and registers the deletion in the <a href="https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html">clang::Rewriter</a>. For example in this piece of code: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Foo&gt;</div>
+<p >This callback is called for the Matcher <a class="el" href="Matcher_8hpp.html#a7352bbb3f846f2c2db222f66d9fd6997">TemplInst()</a>. It detects the point of instantiation in the source code and registers the deletion in the <a href="https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html">clang::Rewriter</a>. For example in this piece of code: </p><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Foo&gt;</div>
 <div class="line"><span class="keywordtype">void</span> doSomething(Foo&amp; foo) {</div>
 <div class="line">    <span class="comment">//some code</span></div>
 <div class="line">}</div>
@@ -193,7 +193,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDeleteInstantiations.html">DeleteInstantiations</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:33:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Nov 23 2021 13:57:27 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

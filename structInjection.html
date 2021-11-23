@@ -158,7 +158,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00019">19</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00018">18</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a4b7830c62e31304e24c218e304311ef2" name="a4b7830c62e31304e24c218e304311ef2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4b7830c62e31304e24c218e304311ef2">&#9670;&nbsp;</a></span>StringType</h2>
@@ -172,7 +172,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00021">21</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00020">20</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -264,6 +264,7 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Remove duplicate code by using code from <code><a class="el" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS()</a></code>. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00082">82</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
 
@@ -304,7 +305,7 @@ Public Attributes</h2></td></tr>
 <p >For member functions, this is the name of the parent class. For free functions it is empty. E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;T1,T2&gt;(<span class="keyword">const</span> T1&amp; t1, <span class="keyword">const</span> T2&amp; t2)</div>
 </div><!-- fragment --><p> the class name would be <code>"Bar"</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00037">37</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00038">38</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +323,7 @@ Public Attributes</h2></td></tr>
 <p >The concrete types of the class template parameters (for class template member functions only). E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar&lt;double, int&gt;::Foo()</div>
 </div><!-- fragment --><p> it would be <code>{"double", "int"}</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00051">51</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00055">55</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +341,7 @@ Public Attributes</h2></td></tr>
 <p >Name of the function without namespace and template parameters. For </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;T1,T2&gt;(<span class="keyword">const</span> T1&amp; t1, <span class="keyword">const</span> T2&amp; t2)</div>
 </div><!-- fragment --><p> the name would be <code>"Foo"</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00026">26</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00025">25</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -358,7 +359,7 @@ Public Attributes</h2></td></tr>
 <p >The concrete types of the function template parameters. E.g. </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> Bar::Foo&lt;double,int&gt;(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; t1, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; t2)</div>
 </div><!-- fragment --><p> it would be <code>{"double", "int"}</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00046">46</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00049">49</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -375,7 +376,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Unused so far. Intended for more efficiency in the lookup step. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00074">74</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00084">84</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -392,7 +393,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this member function is const qualified. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00065">65</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00072">72</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +410,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this a class constructor. </p><dl class="section note"><dt>Note</dt><dd>Names of class constructors are special in c++. We therefore don't need to compare it when we search for matches of constructors. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00072">72</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00081">81</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +427,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this is a member function of some class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00067">67</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00075">75</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -461,7 +462,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >A vector of the function parameters where the parameters are not resolved with concrete types. If all of the parameter are nondependent on template parameters its the same as params. This information is needed to compare this <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> with possible candidates which provide the appropriate definition. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00062">62</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00068">68</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -478,7 +479,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >A vector of the function parameters where each parameter is fully resolved with the concrete types. This information is needed to create the explicit instantiation. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00056">56</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00061">61</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -495,7 +496,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >The return type of the function. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00041">41</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00043">43</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -510,7 +511,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structInjection.html">Injection</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:33:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Nov 23 2021 13:57:27 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

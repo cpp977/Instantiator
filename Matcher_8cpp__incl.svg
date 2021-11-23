@@ -20,7 +20,7 @@
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="Matcher_8hpp.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="Matcher_8hpp.html" target="_top" xlink:title="AST matcher expressions to filter the relevant nodes for template instantiations.">
 <polygon fill="none" stroke="black" points="33,-56.5 33,-75.5 152,-75.5 152,-56.5 33,-56.5"/>
 <text text-anchor="middle" x="92.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">Matcher/Matcher.hpp</text>
 </a>

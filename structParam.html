@@ -99,6 +99,9 @@ $(document).ready(function(){initNavTree('structParam.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
+<p>Struct for the collection of all relevant data for a function parameter.  
+ <a href="structParam.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Param_8hpp_source.html">Param.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Param:</div>
@@ -145,8 +148,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a24673d5172b305cfb01289554629476d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00011">11</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<div class="textblock"><p >Struct for the collection of all relevant data for a function parameter. </p>
+
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00014">14</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2d31b0440e164ef89b677dcee15eebf6" name="a2d31b0440e164ef89b677dcee15eebf6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d31b0440e164ef89b677dcee15eebf6">&#9670;&nbsp;</a></span>compare()</h2>
@@ -163,6 +167,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Compares if two parameters are the same. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>How to correctly compare dependent names? </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Param_8cpp_source.html#l00059">59</a> of file <a class="el" href="Param_8cpp_source.html">Param.cpp</a>.</p>
 
@@ -183,6 +188,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Compares the <code>const</code>, <code>volatile</code> and <code>restrict</code> qualifier of the parameter type. </p>
 
 <p class="definition">Definition at line <a class="el" href="Param_8cpp_source.html#l00054">54</a> of file <a class="el" href="Param_8cpp_source.html">Param.cpp</a>.</p>
 
@@ -227,6 +233,15 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Load the parameter from a <a href="https://clang.llvm.org/doxygen/classclang_1_1ParmVarDecl.html">clang::ParmVarDecl</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parm</td><td>Pointer to the <code>clang::ParmVarDecl</code> </td></tr>
+    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created. </td></tr>
+    <tr><td class="paramname">PrintCanonicalTypes</td><td>Whether to get a <code>string</code> for the canonical type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Remove parameter <code>PrintCanonicalTypes</code>. Information is in <code>clang::PrintingPolicy</code>. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Param_8cpp_source.html#l00008">8</a> of file <a class="el" href="Param_8cpp_source.html">Param.cpp</a>.</p>
 
@@ -245,7 +260,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00018">18</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00022">22</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -261,7 +276,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00021">21</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00025">25</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -277,7 +292,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00016">16</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00020">20</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -293,7 +308,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00014">14</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00018">18</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -309,7 +324,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00017">17</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00021">21</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -325,7 +340,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00020">20</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00024">24</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +356,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00015">15</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00019">19</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -357,7 +372,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00023">23</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00027">27</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,7 +388,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00019">19</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00023">23</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -388,8 +403,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Name of the function </p>
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00013">13</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00017">17</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +421,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00022">22</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Param_8hpp_source.html#l00026">26</a> of file <a class="el" href="Param_8hpp_source.html">Param.hpp</a>.</p>
 
 </div>
 </div>
@@ -420,7 +436,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structParam.html">Param</a></li>
-    <li class="footer">Generated on Sat Nov 20 2021 13:33:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Tue Nov 23 2021 13:57:27 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
