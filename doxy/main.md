@@ -139,18 +139,38 @@ Clang has two different base classes `Stmt` and `Decl` which do not have a commo
 For the purpose of this tool, the `FunctionDecl` and `CXXMethodDecl` classes are most important which both derive from `Decl`.
 To filter specific nodes from the AST, clang provides [AST matchers](https://clang.llvm.org/docs/LibASTMatchersReference.html).
 
-# Two step procedure
-In order to inject the needed instantiations, the tool is doing a two step procedure.
-The first step is the [*lookup*](#find-template-instantiations-with-missing-definiton) step in which the AST of a translation unit is scanned for template instantiations for which **no** definition is present.
+# General procedure
+In order to inject the needed instantiations, the tool is iterating an inner two step procedure.
+The iteration is necessary because an explcit instantiation in a source file can lead to new instantiations in other source files.
+This is because if an explicit instantiation is inserted, new code become visible, namely the code of the definiton of the function which was instantiated.
+The tool starts with the *main* translation unit, i.e. the source file in which the `main()` function is present.
+This source file is added to the `working_list`.
+Then the tool is processing the working list and does for each file in the working list an inner two step procedure.
+The first step is the *lookup* step in which the AST of a translation unit is scanned for template instantiations for which **no** definition is present.
 The result of the *lookup* step is stored as a `toDoList`.
-In the second step, the [*insertion*](#find-template-instantiations-with-missing-definiton) step, all other translation units are scanned if they do provide the missing definiton of an item in the `toDoList`.
+In the second step, the *insertion* step, all other translation units are scanned if they do provide the missing definiton of an item in the `toDoList`.
 If so, the corresponding explicit instantiation is inserted in the source file of this translation unit and the item is removed from the `toDoList`.
+Each time, an explicit instantiation is inserted, the corresponding source file is added to the `working_list`.
+The tool stops if the `working_list` is empty. 
+Remaining elements in the `toDoList` might cause linking errors unless the object code for these functions is added by linking an already compiled library with the respective definiton.
 
-## Find template instantiations with missing definiton ##
-When the definitons of function template or class template member functions is separated into a different translation unit, 
-the AST contains nodes `FunctionDecl` or `CXXMethodDecl` which are template instantiations but which have **no** definition.
+## Lookup step -- find template instantiations with missing definiton ##
+The *lookup* step is performed for a given source file (.cpp file). During this step, the AST of the corresponding source file is processed.
+When the definiton of function templates or class template member functions is separated into a different translation unit, 
+the AST may contain nodes `FunctionDecl` or `CXXMethodDecl` which are template instantiations but which have **no** definition within this AST.
 The AST matcher which matches these nodes is TemplInstWithoutDef():
 \snippet src/Matcher/Matcher.cpp TemplInstWithoutDef
-This matcher also excludes a list of custom namespaces `excluded_names` from the search.
+This matcher also excludes a list of custom namespaces `excluded_names` from the search which can be passed to the tool via the commandline.
 For each match, all relevant data is loaded into an `Injection` by using the factory functions `Injection::createFromFS()` and `Injection::createFromMFS()`.
-## Inject the instantations where the definitons are present ##
+## Insertion step -- inject the instantations where the definitons are present ##
+The *insertion* step is performed for all other source files of the build except the source file which was scanned in the *lookup* step.
+Therefore, this step involves an outerloop over the source files.
+For each source file, the corresponding AST is analysed with the AST matcher FuncWithDef():
+\snippet src/Matcher/Matcher.cpp FuncWithDef
+This matcher takes again a list of custom namespaces `excluded_names` which will be ignored from the search.
+This matcher returns any `FunctionDecl` or `CXXMethodDecl` that contains a definiton.
+For each match, the tool checks whether the present function is a template and does match any of the functions from the `toDoList`.
+Remember, that the `toDoList` has functions for which a definiton was *missing*, so the tool basically search if the definition is present in any other source file.
+If an item of the `toDoList` does match, the tool inserts the corresponding explicit instantiation.
+If on the other hand, the present function is a template specialization and matches an item of the `toDoList`, 
+this item will be directly deleted, since the necessary instantiation is already present.
