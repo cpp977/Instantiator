@@ -27,9 +27,9 @@ var NAVTREE =
   [ "Instantiator", "index.html", [
     [ "Motivation", "index.html#autotoc_md1", null ],
     [ "The clang AST", "index.html#autotoc_md2", null ],
-    [ "Two step procedure", "index.html#autotoc_md3", [
-      [ "Find template instantiations with missing definiton", "index.html#autotoc_md4", null ],
-      [ "Inject the instantations where the definitons are present", "index.html#autotoc_md5", null ]
+    [ "General procedure", "index.html#autotoc_md3", [
+      [ "Lookup step – find template instantiations with missing definiton", "index.html#autotoc_md4", null ],
+      [ "Insertion step – inject the instantations where the definitons are present", "index.html#autotoc_md5", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
