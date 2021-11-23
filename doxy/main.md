@@ -140,14 +140,17 @@ For the purpose of this tool, the `FunctionDecl` and `CXXMethodDecl` classes are
 To filter specific nodes from the AST, clang provides [AST matchers](https://clang.llvm.org/docs/LibASTMatchersReference.html).
 
 # Two step procedure
-The tool is scanning the AST twice. 
-1. It is looking for needed instantations and build a todo List of Injection entries.
-2. It is searching where to place the explicit instantiations.
+In order to inject the needed instantiations, the tool is doing a two step procedure.
+The first step is the [*lookup*](#find-template-instantiations-with-missing-definiton) step in which the AST of a translation unit is scanned for template instantiations for which **no** definition is present.
+The result of the *lookup* step is stored as a `toDoList`.
+In the second step, the [*insertion*](#find-template-instantiations-with-missing-definiton) step, all other translation units are scanned if they do provide the missing definiton of an item in the `toDoList`.
+If so, the corresponding explicit instantiation is inserted in the source file of this translation unit and the item is removed from the `toDoList`.
 
 ## Find template instantiations with missing definiton ##
-When the definitons of function templates or class template member functions is separated into a different translation unit, 
-the AST contains nodes `FunctionDecl` or `CXXMethodDecl` which are template instantiations but which have **not** a definition.
-These nodes are exactly the ones, one needs to find.
-To achieve this, the tool uses the Matcher TemplateInstantiations().
-
+When the definitons of function template or class template member functions is separated into a different translation unit, 
+the AST contains nodes `FunctionDecl` or `CXXMethodDecl` which are template instantiations but which have **no** definition.
+The AST matcher which matches these nodes is TemplInstWithoutDef():
+\snippet src/Matcher/Matcher.cpp TemplInstWithoutDef
+This matcher also excludes a list of custom namespaces `excluded_names` from the search.
+For each match, all relevant data is loaded into an `Injection` by using the factory functions `Injection::createFromFS()` and `Injection::createFromMFS()`.
 ## Inject the instantations where the definitons are present ##

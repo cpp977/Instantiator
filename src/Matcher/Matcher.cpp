@@ -1,21 +1,24 @@
 #include "Matcher/Matcher.hpp"
 
-clang::ast_matchers::DeclarationMatcher TemplateInstantiations(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names)
+using namespace clang::ast_matchers;
+
+DeclarationMatcher TemplInstWithoutDef(const internal::Matcher<clang::NamedDecl>& excluded_names)
 {
-    return clang::ast_matchers::functionDecl(clang::ast_matchers::isTemplateInstantiation(),
-                                             clang::ast_matchers::unless(clang::ast_matchers::isDefinition()),
-                                             clang::ast_matchers::unless(excluded_names))
-        .bind("templ_func_instantation");
+    //! [TemplInstWithoutDef]
+    return functionDecl(isTemplateInstantiation(), unless(isDefinition()), unless(excluded_names)).bind("templ_func_instantation");
+    //! [TemplInstWithoutDef]
 }
 
-clang::ast_matchers::DeclarationMatcher Candidates(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names)
+DeclarationMatcher FuncWithDef(const internal::Matcher<clang::NamedDecl>& excluded_names)
 {
-    return clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(excluded_names))
-        .bind("func_definition");
+    //! [FuncWithDef]
+    return functionDecl(isDefinition(), unless(excluded_names)).bind("func_definition");
+    //! [FuncWithDef]
 }
 
-clang::ast_matchers::DeclarationMatcher ExplicitInstantiations(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names)
+DeclarationMatcher TemplInst(const internal::Matcher<clang::NamedDecl>& excluded_names)
 {
-    return clang::ast_matchers::functionDecl(clang::ast_matchers::isTemplateInstantiation(), clang::ast_matchers::unless(excluded_names))
-        .bind("explicit_instantiation");
+    //! [TemplInst]
+    return functionDecl(isTemplateInstantiation(), unless(excluded_names)).bind("explicit_instantiation");
+    //! [TemplInst]
 }

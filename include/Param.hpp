@@ -8,8 +8,12 @@
 #include "clang/AST/DependenceFlags.h"
 #include "clang/AST/PrettyPrinter.h"
 
+/**
+ * \brief Struct for the collection of all relevant data for a function parameter.
+ */
 struct Param
 {
+    /**Name of the function*/
     std::string name = "";
     bool is_lvalue_reference = false;
     bool is_rvalue_reference = false;
@@ -23,10 +27,28 @@ struct Param
     bool is_template_param = false;
     // bool is_templateparmvartype = false;
     // clang::TypeDependenceScope::TypeDependence dependence = clang::TypeDependenceScope::TypeDependence::None;
+
+    /**
+     * Load the parameter from a [clang::ParmVarDecl](https://clang.llvm.org/doxygen/classclang_1_1ParmVarDecl.html).
+     * \param parm Pointer to the `clang::ParmVarDecl`
+     * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     * \param PrintCanonicalTypes Whether to get a `string` for the canonical type.
+     * \todo Remove parameter \p PrintCanonicalTypes. Information is in `clang::PrintingPolicy`.
+     */
     static Param createFromParmVarDecl(const clang::ParmVarDecl* parm, clang::PrintingPolicy pp, bool PrintCanonicalTypes = true);
+
+    /**
+     * Compares the `const`, `volatile` and `restrict` qualifier of the parameter type.
+     */
     bool compare_cvr(const Param& other) const;
+
+    /**
+     * Compares if two parameters are the same.
+     * \todo How to correctly compare dependent names?
+     */
     bool compare(const Param& other) const;
 };
 
+/**Pretty print a \p Param*/
 std::ostream& operator<<(std::ostream& stream, const Param& p);
 #endif

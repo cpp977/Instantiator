@@ -65,9 +65,9 @@ int main(int argc, const char** argv)
         nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + "::"));
     }
 
-    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplateInstantiations(nameMatcher);
+    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplInstWithoutDef(nameMatcher);
 
-    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = Candidates(nameMatcher);
+    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = FuncWithDef(nameMatcher);
 
     // clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind("func_definition");
 
@@ -97,7 +97,7 @@ int main(int argc, const char** argv)
             clang::Rewriter rewriter(allASTs[i]->getSourceManager(), allASTs[i]->getLangOpts());
             Deleter.rewriter = &rewriter;
             clang::ast_matchers::MatchFinder Inst_Finder;
-            Inst_Finder.addMatcher(/*Matcher*/ ExplicitInstantiations(nameMatcher), /*Callback*/ &Deleter);
+            Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
             Inst_Finder.matchAST(allASTs[i]->getASTContext());
             rewriter.overwriteChangedFiles();
             std::cout << "Done." << std::endl;

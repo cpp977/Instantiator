@@ -11,7 +11,7 @@ class Rewriter;
 /**
  * \brief MatchCallback for template instantiation deletions.
  *
- * This callback is called for the Matcher ExplicitInstantiations().
+ * This callback is called for the Matcher TemplInst().
  * It detects the point of instantiation in the source code and registers the deletion in the
  * [clang::Rewriter](https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html). For example in this piece of code:
  * \code{.cpp}

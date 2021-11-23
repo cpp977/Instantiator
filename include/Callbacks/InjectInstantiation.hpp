@@ -15,7 +15,7 @@ class Rewriter;
 /**
  * \brief MatchCallback for injection of explicit instantiations into the source files at appropriate places.
  *
- * This callback is called for the Matcher Candidates().
+ * This callback is called for the Matcher FuncWithDef().
  * The Matcher returns a [clang::FunctionDecl](https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html) or a
  * [clang::CXXMethodDecl](https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html) which has a definition in this translation unit.
  * This callback checks whether there is an Injection item in the toDoList which which fits the current match result.
