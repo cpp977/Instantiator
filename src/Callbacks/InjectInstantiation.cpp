@@ -24,6 +24,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
         // std::cout << "Processing func " << MFS->getNameAsString() << std::endl;
         // std::cout << std::boolalpha << "TI=" << MFS->isTemplateInstantiation()
         //           << ", CTI=" << (MFS->getParent()->getMemberSpecializationInfo() != nullptr) << std::endl;
+
         llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
         if(MFS->isTemplateInstantiation() or (MFS->getParent()->getMemberSpecializationInfo() != nullptr)) {
             // search in toDoList if this instantation is needed. if yes -> delete
@@ -51,7 +52,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     for(std::size_t i = 0; i < TAL.size(); i++) {
                         switch(TAL.get(i).getKind()) {
                         case clang::TemplateArgument::ArgKind::Type: {
-                            class_tparam_matches[i] = (toDo.class_Ttypes[i] == TAL.get(i).getAsType().getCanonicalType().getAsString(pp));
+                            class_tparam_matches[i] = (toDo.class_Ttypes[i] == TAL.get(i).getAsType().getAsString(pp)); //.getCanonicalType()
                             break;
                         }
                         case clang::TemplateArgument::ArgKind::Integral: {
@@ -67,7 +68,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                 case clang::TemplateArgument::ArgKind::Type: {
                                     class_tparam_matches[i + std::distance(TAL.get(i).pack_begin(), pack_it)] =
                                         (toDo.class_Ttypes[i + std::distance(TAL.get(i).pack_begin(), pack_it)] ==
-                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                         pack_it->getAsType().getAsString(pp)); //.getCanonicalType()
                                     break;
                                 }
                                 case clang::TemplateArgument::ArgKind::Integral: {
@@ -85,6 +86,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     }
                     class_tparam_match =
                         TAL.size() == 0 ? true : std::all_of(class_tparam_matches.begin(), class_tparam_matches.end(), [](bool v) { return v; });
+                } else {
+                    class_tparam_match = true;
                 }
                 bool func_tparam_match = false;
                 if(const clang::TemplateArgumentList* TAL = MFS->getTemplateSpecializationArgs()) {
@@ -93,7 +96,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     for(std::size_t i = 0; i < TAL->size(); i++) {
                         switch(TAL->get(i).getKind()) {
                         case clang::TemplateArgument::ArgKind::Type: {
-                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString(pp));
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getAsString(pp)); //.getCanonicalType()
                             break;
                         }
                         case clang::TemplateArgument::ArgKind::Integral: {
@@ -109,7 +112,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                 case clang::TemplateArgument::ArgKind::Type: {
                                     func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
                                         (toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] ==
-                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                         pack_it->getAsType().getAsString(pp)); //.getCanonicalType()
                                     break;
                                 }
                                 case clang::TemplateArgument::ArgKind::Integral: {
@@ -133,15 +136,19 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 std::vector<bool> params_matches(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
-                        ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp));
+                        ((*it)->getOriginalType().getAsString(pp) ==
+                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp)); .getCanonicalType()
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
                 // std::cout << std::boolalpha << "FT=" << params_match << ", CTP=" << class_tparam_match << ", FTP=" << func_tparam_match <<
                 // std::endl;
 
                 if(params_match and class_tparam_match and func_tparam_match) {
-                    // std::cout << "Erase from toDolist." << std::endl;
+                    auto reason = Injection::createFromMFS(MFS, pp);
+                    std::cout << "Erasing element from toDolist: " << std::endl
+                              << toDo << std::endl
+                              << "because of:" << std::endl
+                              << reason.value() << std::endl;
                     it = toDoList->erase(it);
                 } else {
                     // std::cout << std::boolalpha << "FT=" << params_match
@@ -179,7 +186,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 }
                 std::vector<bool> params_match(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
-                    Param check = Param::createFromParmVarDecl(*it, pp, false);
+                    Param check = Param::createFromParmVarDecl(*it, pp);
                     // std::cout << termcolor::bold << "Compare " << check << " and " << toDo.nonresolved_params[std::distance(params.begin(), it)]
                     //           << termcolor::reset << std::endl;
                     params_match[std::distance(params.begin(), it)] = check.compare(toDo.nonresolved_params[std::distance(params.begin(), it)]);
@@ -218,7 +225,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     for(std::size_t i = 0; i < TAL->size(); i++) {
                         switch(TAL->get(i).getKind()) {
                         case clang::TemplateArgument::ArgKind::Type: {
-                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getCanonicalType().getAsString(pp));
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == TAL->get(i).getAsType().getAsString(pp)); //.getCanonicalType()
                             break;
                         }
                         case clang::TemplateArgument::ArgKind::Integral: {
@@ -234,7 +241,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                 case clang::TemplateArgument::ArgKind::Type: {
                                     func_tparam_matches[i + std::distance(TAL->get(i).pack_begin(), pack_it)] =
                                         (toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] ==
-                                         pack_it->getAsType().getCanonicalType().getAsString(pp));
+                                         pack_it->getAsType().getAsString(pp)); //.getCanonicalType()
                                     break;
                                 }
                                 case clang::TemplateArgument::ArgKind::Integral: {
@@ -258,8 +265,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 std::vector<bool> params_matches(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
                     params_matches[std::distance(params.begin(), it)] =
-                        ((*it)->getOriginalType().getCanonicalType().getAsString(pp) ==
-                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp));
+                        ((*it)->getOriginalType().getAsString(pp) ==
+                         toDo.params[std::distance(params.begin(), it)].name); // getCanonicalType().getAsString(pp)); .getCanonicalType()
                 }
                 bool params_match = params.size() == 0 ? true : std::all_of(params_matches.begin(), params_matches.end(), [](bool v) { return v; });
                 if(params_match and func_tparam_match) {
@@ -291,9 +298,9 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 }
                 std::vector<bool> params_match(params.size());
                 for(auto it = params.begin(); it != params.end(); it++) {
-                    Param check = Param::createFromParmVarDecl(*it, pp, false);
-                    std::cout << termcolor::bold << "Compare " << check << " and " << toDo.nonresolved_params[std::distance(params.begin(), it)]
-                              << termcolor::reset << std::endl;
+                    Param check = Param::createFromParmVarDecl(*it, pp);
+                    // std::cout << termcolor::bold << "Compare " << check << " and " << toDo.nonresolved_params[std::distance(params.begin(), it)]
+                    //           << termcolor::reset << std::endl;
                     params_match[std::distance(params.begin(), it)] = check.compare(toDo.nonresolved_params[std::distance(params.begin(), it)]);
                 }
                 if(std::all_of(params_match.begin(), params_match.end(), [](bool v) { return v; })) {

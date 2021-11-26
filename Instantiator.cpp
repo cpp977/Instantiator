@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ranges>
 #include <sstream>
-#include <typeinfo>
 #include <unordered_set>
 
 #include "termcolor/termcolor.hpp"
@@ -60,7 +59,6 @@ int main(int argc, const char** argv)
     if(IgnorePatterns.size() == 0) { IgnorePatterns.push_back("std"); }
 
     clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName(IgnorePatterns[0] + "::");
-    std::cout << "type of nameMatcher: " << typeid(nameMatcher).name() << std::endl;
     for(auto it = IgnorePatterns.begin() + 1; it != IgnorePatterns.end(); it++) {
         nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + "::"));
     }
@@ -112,13 +110,13 @@ int main(int argc, const char** argv)
     Finder.addMatcher(/*Matcher*/ TemplateInstantiationMatcher, /*Callback*/ &Getter);
 
     // match in current main file.
-    std::unordered_set<std::string> work_list;
-    work_list.insert(main_and_injection_files[0]);
+    std::unordered_set<std::string> workList;
+    workList.insert(main_and_injection_files[0]);
 
-    while(work_list.size() > 0) {
-        auto copyOf_work_list = work_list;
-        for(const auto& item : copyOf_work_list) {
-            work_list.erase(item);
+    while(workList.size() > 0) {
+        auto copyOf_workList = workList;
+        for(const auto& item : copyOf_workList) {
+            workList.erase(item);
             Finder.matchAST(allASTs[file2AST[item]]->getASTContext());
             std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced the following ToDo-List:" << termcolor::reset
                       << std::endl;
@@ -145,7 +143,7 @@ int main(int argc, const char** argv)
                 }
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
                 if(HAS_INJECTED_INTANTIATION) {
-                    work_list.insert(file_for_search);
+                    workList.insert(file_for_search);
                     auto PCHContainerOps = std::make_shared<clang::PCHContainerOperations>();
                     bool AST_NOT_UPDATED = allASTs[file2AST[file_for_search]]->Reparse(PCHContainerOps);
                     if(AST_NOT_UPDATED) { std::cerr << "Error while reparsing the AST" << std::endl; }

@@ -33,9 +33,8 @@ struct Param
      * \param parm Pointer to the `clang::ParmVarDecl`
      * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
      * \param PrintCanonicalTypes Whether to get a `string` for the canonical type.
-     * \todo Remove parameter \p PrintCanonicalTypes. Information is in `clang::PrintingPolicy`.
      */
-    static Param createFromParmVarDecl(const clang::ParmVarDecl* parm, clang::PrintingPolicy pp, bool PrintCanonicalTypes = true);
+    static Param createFromParmVarDecl(const clang::ParmVarDecl* parm, clang::PrintingPolicy pp);
 
     /**
      * Compares the `const`, `volatile` and `restrict` qualifier of the parameter type.

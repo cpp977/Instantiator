@@ -1,19 +1,16 @@
 #include "Param.hpp"
 
+#include <regex>
+
 #include "termcolor/termcolor.hpp"
 
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 
-Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::PrintingPolicy pp, const bool PrintCanonicalTypes)
+Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::PrintingPolicy pp)
 {
     Param out;
-    clang::PrintingPolicy copy_pp = pp;
-    if(PrintCanonicalTypes)
-        copy_pp.PrintCanonicalTypes = 1;
-    else
-        copy_pp.PrintCanonicalTypes = 0;
-    out.name = parm->getOriginalType().getAsString(copy_pp); //.getCanonicalType()
+    out.name = parm->getOriginalType().getAsString(pp); //.getCanonicalType()
 
     out.is_lvalue_reference = parm->getOriginalType().getTypePtr()->isLValueReferenceType();
     out.is_rvalue_reference = parm->getOriginalType().getTypePtr()->isRValueReferenceType();
@@ -29,7 +26,7 @@ Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::
                parm->getOriginalType().getCanonicalType().getNonReferenceType().getTypePtr()->getAs<const clang::TemplateSpecializationType>()) {
             // std::cout << "TST is non null." << std::endl;
             llvm::raw_string_ostream OS(out.template_name);
-            TST->getTemplateName().print(OS, copy_pp); // clang::TemplateName::Qualified::AsWritten
+            TST->getTemplateName().print(OS, pp); // clang::TemplateName::Qualified::AsWritten
             OS.str();
         }
         out.is_template_param = parm->getOriginalType().getNonReferenceType().getTypePtr()->isTemplateTypeParmType();
@@ -41,7 +38,7 @@ Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::
         if(const clang::TemplateSpecializationType* TST =
                parm->getOriginalType().getCanonicalType().getTypePtr()->getAs<const clang::TemplateSpecializationType>()) {
             llvm::raw_string_ostream OS(out.template_name);
-            TST->getTemplateName().print(OS, copy_pp); // clang::TemplateName::Qualified::AsWritten
+            TST->getTemplateName().print(OS, pp); // clang::TemplateName::Qualified::AsWritten
             OS.str();
         }
         out.is_template_param = parm->getOriginalType().getTypePtr()->isTemplateTypeParmType();
@@ -61,7 +58,10 @@ bool Param::compare(const Param& other) const
     // if(auto it1 = name.find("type-parameter"), it2 = other.name.find("type-parameter"); it1 != std::string::npos and it2 != std::string::npos) {
     //     return true;
     // }
-    return name == other.name;
+    std::regex r("type-parameter-[0-9]+-[0-9]+");
+    auto name_corrected = std::regex_replace(name, r, "type-parameter-X-Y");
+    auto other_name_corrected = std::regex_replace(other.name, r, "type-parameter-X-Y");
+    return name_corrected == other_name_corrected;
     if(is_template_param or other.is_template_param) {
         if(is_forwarding_reference or other.is_forwarding_reference) { return true; }
         return compare_cvr(other);

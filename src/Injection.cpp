@@ -66,7 +66,7 @@ std::optional<Injection> Injection::createFromFS(const clang::FunctionDecl* FS, 
             llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TSI->getTemplate()->getTemplatedDecl()->parameters();
             toDo.nonresolved_params.resize(nonresolved_params.size());
             for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp, false);
+                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
             }
             std::optional<Injection> out;
             out = toDo;
@@ -156,7 +156,7 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                 llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TMFS->parameters();
                 toDo.nonresolved_params.resize(nonresolved_params.size());
                 for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                    toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp, false);
+                    toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
                 }
             }
 
@@ -212,7 +212,7 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
             llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TSI->getTemplate()->getTemplatedDecl()->parameters();
             toDo.nonresolved_params.resize(nonresolved_params.size());
             for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp, false);
+                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
             }
             toDo.is_const = MFS->isConst();
             std::optional<Injection> out;
