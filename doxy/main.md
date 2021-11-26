@@ -144,14 +144,14 @@ In order to inject the needed instantiations, the tool is iterating an inner two
 The iteration is necessary because an explcit instantiation in a source file can lead to new instantiations in other source files.
 This is because if an explicit instantiation is inserted, new code become visible, namely the code of the definiton of the function which was instantiated.
 The tool starts with the *main* translation unit, i.e. the source file in which the `main()` function is present.
-This source file is added to the `working_list`.
+This source file is added to the `workList`.
 Then the tool is processing the working list and does for each file in the working list an inner two step procedure.
 The first step is the *lookup* step in which the AST of a translation unit is scanned for template instantiations for which **no** definition is present.
 The result of the *lookup* step is stored as a `toDoList`.
 In the second step, the *insertion* step, all other translation units are scanned if they do provide the missing definiton of an item in the `toDoList`.
 If so, the corresponding explicit instantiation is inserted in the source file of this translation unit and the item is removed from the `toDoList`.
-Each time, an explicit instantiation is inserted, the corresponding source file is added to the `working_list`.
-The tool stops if the `working_list` is empty. 
+Each time, an explicit instantiation is inserted, the corresponding source file is added to the `workList`.
+The tool stops if the `workList` is empty. 
 Remaining elements in the `toDoList` might cause linking errors unless the object code for these functions is added by linking an already compiled library with the respective definiton.
 
 ## Lookup step -- find template instantiations with missing definiton ##
