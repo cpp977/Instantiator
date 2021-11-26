@@ -93,38 +93,37 @@ $(document).ready(function(){initNavTree('GetNeededInstantiations_8cpp_source.ht
   <div class="headertitle"><div class="title">GetNeededInstantiations.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="GetNeededInstantiations_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="GetNeededInstantiations_8hpp.html">Callbacks/GetNeededInstantiations.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;llvm/ADT/APInt.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;llvm/ADT/SmallString.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;clang/AST/Decl.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;clang/AST/DeclCXX.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;clang/AST/DeclTemplate.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">GetNeededInstantiations::run</a>(<span class="keyword">const</span> clang::ast_matchers::MatchFinder::MatchResult&amp; Result)</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    clang::PrintingPolicy pp(Result.Context-&gt;getLangOpts());</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">//    pp.PrintInjectedClassNameWithArguments = 1;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    pp.PrintCanonicalTypes = 1;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::optional&lt;Injection&gt; toDo;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span>(<span class="keyword">const</span> clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs&lt;clang::CXXMethodDecl&gt;(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>)) {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        toDo = <a class="code hl_function" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">Injection::createFromMFS</a>(MFS, pp);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">if</span>(toDo) <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>-&gt;push_back(toDo.value());</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<span class="keyword">const</span> clang::FunctionDecl* FS = Result.Nodes.getNodeAs&lt;clang::FunctionDecl&gt;(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>)) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        toDo = <a class="code hl_function" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">Injection::createFromFS</a>(FS, pp);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">if</span>(toDo) <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>-&gt;push_back(toDo.value());</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<a href="GetNeededInstantiations_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="GetNeededInstantiations_8hpp.html">Callbacks/GetNeededInstantiations.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;llvm/ADT/APInt.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;llvm/ADT/SmallString.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;clang/AST/Decl.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;clang/AST/DeclCXX.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;clang/AST/DeclTemplate.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">GetNeededInstantiations::run</a>(<span class="keyword">const</span> clang::ast_matchers::MatchFinder::MatchResult&amp; Result)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    clang::PrintingPolicy pp(Result.Context-&gt;getLangOpts());</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">//    pp.PrintInjectedClassNameWithArguments = 1;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    pp.PrintCanonicalTypes = 1;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::optional&lt;Injection&gt; toDo;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span>(<span class="keyword">const</span> clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs&lt;clang::CXXMethodDecl&gt;(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>)) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        toDo = <a class="code hl_function" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">Injection::createFromMFS</a>(MFS, pp);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span>(toDo) <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>-&gt;push_back(toDo.value());</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<span class="keyword">const</span> clang::FunctionDecl* FS = Result.Nodes.getNodeAs&lt;clang::FunctionDecl&gt;(<span class="stringliteral">&quot;templ_func_instantation&quot;</span>)) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        toDo = <a class="code hl_function" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">Injection::createFromFS</a>(FS, pp);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">if</span>(toDo) <a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a>-&gt;push_back(toDo.value());</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
 <div class="ttc" id="aGetNeededInstantiations_8hpp_html"><div class="ttname"><a href="GetNeededInstantiations_8hpp.html">GetNeededInstantiations.hpp</a></div></div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
 <div class="ttc" id="aclassGetNeededInstantiations_html_a4923b133878af583b2c9fb02f228e093"><div class="ttname"><a href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">GetNeededInstantiations::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition:</b> <a href="GetNeededInstantiations_8hpp_source.html#l00026">GetNeededInstantiations.hpp:26</a></div></div>
-<div class="ttc" id="aclassGetNeededInstantiations_html_ae8c161feb8bef8736177ebbdc9853b11"><div class="ttname"><a href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">GetNeededInstantiations::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> <a href="GetNeededInstantiations_8cpp_source.html#l00015">GetNeededInstantiations.cpp:15</a></div></div>
+<div class="ttc" id="aclassGetNeededInstantiations_html_ae8c161feb8bef8736177ebbdc9853b11"><div class="ttname"><a href="classGetNeededInstantiations.html#ae8c161feb8bef8736177ebbdc9853b11">GetNeededInstantiations::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition:</b> <a href="GetNeededInstantiations_8cpp_source.html#l00014">GetNeededInstantiations.cpp:14</a></div></div>
 <div class="ttc" id="astructInjection_html_a1fec4fb389b87bf0ffc7af071cc8f9d5"><div class="ttname"><a href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">Injection::createFromFS</a></div><div class="ttdeci">static std::optional&lt; Injection &gt; createFromFS(const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition:</b> <a href="Injection_8cpp_source.html#l00012">Injection.cpp:12</a></div></div>
 <div class="ttc" id="astructInjection_html_abd9e4a7c0346109bc9407df0fe2ed08b"><div class="ttname"><a href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">Injection::createFromMFS</a></div><div class="ttdeci">static std::optional&lt; Injection &gt; createFromMFS(const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition:</b> <a href="Injection_8cpp_source.html#l00082">Injection.cpp:82</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -134,7 +133,7 @@ $(document).ready(function(){initNavTree('GetNeededInstantiations_8cpp_source.ht
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b13917f847da1f7b289bf78886ebc77.html">Callbacks</a></li><li class="navelem"><a class="el" href="GetNeededInstantiations_8cpp.html">GetNeededInstantiations.cpp</a></li>
-    <li class="footer">Generated on Fri Nov 26 2021 13:38:35 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Fri Nov 26 2021 14:12:48 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
