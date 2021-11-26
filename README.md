@@ -31,3 +31,9 @@ The following is only a part of things which needs to be done:
   - Adapt llvm error handling (https://llvm.org/docs/ExceptionHandling.html).
   - Clean up the `cmake` file.
   - Add an example `c++` project which can also be used for tests.
+
+# Acknowledgments
+The tool is heavily based on clang and its [libtooling](https://clang.llvm.org/docs/LibTooling.html) library which is of course acknowledged.
+Beside that, the tool uses some small c++ utility libraries which are also acknowledged:
+  -# [termcolor](https://github.com/ikalnytskyi/termcolor) -- for colored logging output
+  -# [doxygen layout](https://github.com/jothepro/doxygen-awesome-css) -- for pretty online documentation
