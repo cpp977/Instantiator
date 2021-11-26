@@ -32,7 +32,6 @@ struct Param
      * Load the parameter from a [clang::ParmVarDecl](https://clang.llvm.org/doxygen/classclang_1_1ParmVarDecl.html).
      * \param parm Pointer to the `clang::ParmVarDecl`
      * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
-     * \param PrintCanonicalTypes Whether to get a `string` for the canonical type.
      */
     static Param createFromParmVarDecl(const clang::ParmVarDecl* parm, clang::PrintingPolicy pp);
 
