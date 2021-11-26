@@ -42,5 +42,5 @@ The following is only a part of things which needs to be done:
 # Acknowledgments
 The tool is heavily based on clang and its [libtooling](https://clang.llvm.org/docs/LibTooling.html) library which is of course acknowledged.
 Beside that, the tool uses some small c++ utility libraries which are also acknowledged:
-  1. [termcolor](https://github.com/ikalnytskyi/termcolor) -- for colored logging output
-  2. [doxygen layout](https://github.com/jothepro/doxygen-awesome-css) -- for pretty online documentation
+  1. [termcolor](https://github.com/ikalnytskyi/termcolor) — for colored logging output
+  2. [doxygen layout](https://github.com/jothepro/doxygen-awesome-css) — for pretty online documentation
