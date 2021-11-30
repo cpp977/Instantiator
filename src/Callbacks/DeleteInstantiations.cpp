@@ -23,7 +23,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("explicit_instantiation")) {
         if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
             auto template_kind = MSI->getTemplateSpecializationKind();
-            if(template_kind == clang::TSK_ExplicitInstantiationDeclaration or template_kind == clang::TSK_ExplicitInstantiationDefinition) {
+            if(template_kind == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = MSI->getPointOfInstantiation();
                 if(loc.isValid()) {
                     // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(sm) << " (" << sm.getSpellingLineNumber(loc)
@@ -34,8 +34,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
                 }
             }
         } else if(const clang::FunctionTemplateSpecializationInfo* TSI = MFS->getTemplateSpecializationInfo()) {
-            if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDeclaration or
-               TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
+            if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = TSI->getPointOfInstantiation();
                 if(loc.isValid()) {
                     // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
@@ -48,8 +47,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
         }
     } else if(const clang::FunctionDecl* FS = Result.Nodes.getNodeAs<clang::FunctionDecl>("explicit_instantiation")) {
         if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
-            if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDeclaration or
-               TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
+            if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = TSI->getPointOfInstantiation();
                 if(loc.isValid()) {
                     // std::cout << "Delete " << FS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
