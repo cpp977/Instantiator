@@ -150,11 +150,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 // std::endl;
 
                 if(params_match and class_tparam_match and func_tparam_match) {
-                    auto reason = Injection::createFromMFS(MFS, pp);
-                    std::cout << "Erasing element from toDolist: " << std::endl
-                              << toDo << std::endl
-                              << "because of:" << std::endl
-                              << reason.value() << std::endl;
+                    // auto reason = Injection::createFromMFS(MFS, pp);
+                    // std::cout << "Erasing element from toDolist: " << std::endl
+                    //           << toDo << std::endl
+                    //           << "because of:" << std::endl
+                    //           << reason.value() << std::endl;
                     it = toDoList->erase(it);
                 } else {
                     // std::cout << std::boolalpha << "FT=" << params_match
