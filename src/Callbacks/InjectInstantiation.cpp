@@ -27,6 +27,12 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
 
         llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
         if(MFS->isTemplateInstantiation() or (MFS->getParent()->getMemberSpecializationInfo() != nullptr)) {
+            if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
+                if(MSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }
+            } else if(const clang::FunctionTemplateSpecializationInfo* TSI = MFS->getTemplateSpecializationInfo()) {
+                if(TSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }
+            }
+
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
             // std::cout << "Check if the instantiation is already present." << std::endl;
@@ -204,6 +210,9 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
         // std::cout << "Processing func " << FS->getNameAsString() << std::endl;
         llvm::ArrayRef<clang::ParmVarDecl*> params = FS->parameters();
         if(FS->isTemplateInstantiation()) {
+            if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
+                if(TSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }
+            }
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
             // std::cout << "Check if the instantiation is already present."
