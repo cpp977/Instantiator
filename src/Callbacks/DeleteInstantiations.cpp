@@ -18,7 +18,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
     clang::Rewriter::RewriteOptions opts;
     opts.IncludeInsertsAtBeginOfRange = true;
     opts.IncludeInsertsAtEndOfRange = true;
-    opts.RemoveLineIfEmpty = true;
+    opts.RemoveLineIfEmpty = false;
 
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("explicit_instantiation")) {
         if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
@@ -29,7 +29,9 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
                     // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(sm) << " (" << sm.getSpellingLineNumber(loc)
                     //           << ")" << std::endl;
                     auto begin_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1);
-                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1000);
+                    // auto end_loc = clang::Lexer::getLocForEndOfToken(loc, 0, sm, Result.Context->getLangOpts());
+                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 2000);
+                    // auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc) + 1, 1).getLocWithOffset(-1);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);
                 }
             }
@@ -40,7 +42,8 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
                     // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
                     // std::endl;
                     auto begin_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1);
-                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1000);
+                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 2000);
+                    // auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc) + 1, 1).getLocWithOffset(-1);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);
                 }
             }
@@ -53,7 +56,8 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
                     // std::cout << "Delete " << FS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
                     // std::endl;
                     auto begin_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1);
-                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 1000);
+                    auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc), 2000);
+                    // auto end_loc = sm.translateLineCol(sm.getMainFileID(), sm.getSpellingLineNumber(loc) + 1, 1).getLocWithOffset(-1);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);
                 }
             }
