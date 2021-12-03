@@ -22,12 +22,13 @@ The compilation step involves exactly the same effort as if you had everything i
   - It builds the abstract syntax tree (AST) of all files listed in the `compile_commands.json`. This is often too much and slows down the process.
   - `Template template` parameters are not implemented.
 
-# Known bugs
-  - Some items are removed from the `toDoList` because the instantiation is present in the AST. 
-    Despite of that a linker error is thrown because the function definition of the removed item is not present.
-    Unfortunately, there is no minimal working example. It only appears in a real world project.
-  - The cleanup of explicit instantiations can mess up the files. Be sure to backup everything before running the cleanup.
-    This is probably related to the todo in `DeleteInstantiations`.
+# Known issues
+  - The cleanup of explicit instantiations can mess up the files if the explicit instantiations spread over more than one line. 
+    Be sure to backup everything before running the cleanup.
+
+# Roadmap for version 1.0.0
+  - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
+  - ASTs are only build for the dependency tree and not for all files in the compile_commands.json
   
 # How does it work?
 See the [documentation](https://cpp977.github.io/Instantiator/).
