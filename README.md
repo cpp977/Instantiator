@@ -29,6 +29,7 @@ The compilation step involves exactly the same effort as if you had everything i
 # Roadmap for version 1.0.0
   - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
   - ASTs are only build for the dependency tree and not for all files in the compile_commands.json
+  - Example c++ project which serves also as a test case.
   
 # How does it work?
 See the [documentation](https://cpp977.github.io/Instantiator/).
