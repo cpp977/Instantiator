@@ -5,6 +5,10 @@
 
 #include "termcolor/termcolor.hpp"
 
+#include "indicators/progress_bar.hpp"
+#include "indicators/cursor_control.hpp"
+#include "indicators/indeterminate_progress_bar.hpp"
+
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
@@ -19,11 +23,11 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Rewrite/Frontend/Rewriters.h"
 
-#include "Injection.hpp"
-
+#include "Actions/ASTBuilderAction.hpp"
 #include "Callbacks/DeleteInstantiations.hpp"
 #include "Callbacks/GetNeededInstantiations.hpp"
 #include "Callbacks/InjectInstantiation.hpp"
+#include "Injection.hpp"
 #include "Matcher/Matcher.hpp"
 //
 // Command line options
@@ -71,26 +75,69 @@ int main(int argc, const char** argv)
 
     std::vector<std::string> main_and_injection_files = OptionsParser.getCompilations().getAllFiles();
 
-    std::cout << "source file from command line: " << OptionsParser.getSourcePathList()[0] << std::endl;
+    // std::cout << "source file from command line: " << OptionsParser.getSourcePathList()[0] << std::endl;
     for(auto it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {
         if(it->find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }
     }
-    std::cout << "source files from json" << std::endl;
-    for(const auto& source : main_and_injection_files) { std::cout << '\t' << "-- " << source << std::endl; }
+    // std::cout << "source files from json" << std::endl;
+    // for(const auto& source : main_and_injection_files) { std::cout << '\t' << "-- " << source << std::endl; }
     llvm::ArrayRef<std::string> sources(main_and_injection_files.data(), main_and_injection_files.size());
 
     clang::tooling::ClangTool Tool(OptionsParser.getCompilations(), sources);
 
     std::vector<std::unique_ptr<clang::ASTUnit>> allASTs;
-    std::vector<Injection> toDoList;
-    [[maybe_unused]] int success = Tool.buildASTs(allASTs);
+    // Hide cursor
+    indicators::show_console_cursor(false);
+
+    indicators::ProgressBar parsing_bar{
+        indicators::option::BarWidth{50},
+        indicators::option::Start{"["},
+        indicators::option::Fill{"■"},
+        indicators::option::Lead{"■"},
+        indicators::option::Remainder{"-"},
+        indicators::option::End{" ]"},
+        indicators::option::PrefixText{"Parsing files: "},
+        indicators::option::ForegroundColor{indicators::Color::cyan},
+        indicators::option::ShowPercentage{true},
+        indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
+        indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
+    };
+    ASTBuilderAction ast_build_action(allASTs, parsing_bar);
+    indicators::show_console_cursor(true);
+    
+    int success = Tool.run(&ast_build_action);
+    if(success == 1) {
+        std::cerr << termcolor::red << termcolor::bold << "Error:" << termcolor::reset << " while parsing the ASTs." << std::endl;
+        exit(1);
+    } else if(success == 2) {
+        std::cerr << termcolor::red << termcolor::bold << "Error:" << termcolor::reset << " because of missing compile_commands." << std::endl;
+        exit(1);
+    } // else {
+    //     std::cout << "Parsed ASTs done." << std::endl << std::endl;
+    // }
     std::map<std::string, std::size_t> file2AST;
     for(std::size_t i = 0; i < allASTs.size(); i++) { file2AST.insert(std::make_pair(main_and_injection_files[i], i)); }
-    std::cout << "Parsed ASTs done." << std::endl << std::endl;
+
+    std::vector<Injection> toDoList;
 
     if(Clean) {
+        indicators::ProgressBar deletion_bar{
+            indicators::option::BarWidth{50},
+            indicators::option::Start{"["},
+            indicators::option::Fill{"■"},
+            indicators::option::Lead{"■"},
+            indicators::option::Remainder{"-"},
+            indicators::option::End{" ]"},
+            indicators::option::PrefixText{"Deleting instantiations: "},
+            indicators::option::ForegroundColor{indicators::Color::red},
+            indicators::option::ShowPercentage{true},
+            indicators::option::MaxProgress{static_cast<int>(allASTs.size())},
+            indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
+        };
+        indicators::show_console_cursor(false);
         for(std::size_t i = 0; i < allASTs.size(); i++) {
-            std::cout << "Clean all explicit instantiations in " << allASTs[i]->getMainFileName().str() << "." << std::endl;
+            deletion_bar.set_option(indicators::option::PostfixText{"Processing: "+allASTs[i]->getMainFileName().str()});
+            // std::cout << "Clean all explicit instantiations in " << allASTs[i]->getMainFileName().str() << "." << std::endl;
             DeleteInstantiations Deleter;
             clang::Rewriter rewriter(allASTs[i]->getSourceManager(), allASTs[i]->getLangOpts());
             Deleter.rewriter = &rewriter;
@@ -98,8 +145,10 @@ int main(int argc, const char** argv)
             Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
             Inst_Finder.matchAST(allASTs[i]->getASTContext());
             rewriter.overwriteChangedFiles();
-            std::cout << "Done." << std::endl;
+            deletion_bar.tick();
+            // std::cout << "Done." << std::endl;
         }
+        indicators::show_console_cursor(true);
         return 0;
     }
 
@@ -113,43 +162,71 @@ int main(int argc, const char** argv)
     std::unordered_set<std::string> workList;
     workList.insert(main_and_injection_files[0]);
 
+    // indicators::IndeterminateProgressBar outer_bar{
+    //     indicators::option::BarWidth{40},
+    //     indicators::option::Start{"["},
+    //     indicators::option::Fill{"·"},
+    //     indicators::option::Lead{"<==>"},
+    //     indicators::option::End{"]"},
+    //     indicators::option::PrefixText{"Main loop"},
+    //     indicators::option::ForegroundColor{indicators::Color::yellow},
+    //     indicators::option::FontStyles{
+    //         std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
+    // };
+
     while(workList.size() > 0) {
         auto copyOf_workList = workList;
         for(const auto& item : copyOf_workList) {
+            // outer_bar.set_option(indicators::option::PostfixText{"Scanning: "+item});
             workList.erase(item);
             Finder.matchAST(allASTs[file2AST[item]]->getASTContext());
-            std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced the following ToDo-List:" << termcolor::reset
+            std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset
                       << std::endl;
-            for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
+            // for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
+            
+            indicators::ProgressBar inner_bar{
+                indicators::option::BarWidth{50},
+                indicators::option::Start{"["},
+                indicators::option::Fill{"■"},
+                indicators::option::Lead{"■"},
+                indicators::option::Remainder{"-"},
+                indicators::option::End{" ]"},
+                indicators::option::PrefixText{"Checking for places to inject: "},
+                indicators::option::ForegroundColor{indicators::Color::green},
+                indicators::option::ShowPercentage{true},
+                indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
+                indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
+            };
+            indicators::show_console_cursor(false);
+
             for(const auto& file_for_search : main_and_injection_files) {
-                std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
+                inner_bar.set_option(indicators::option::PostfixText{"Processing: "+file_for_search});  
+                // std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
                 clang::Rewriter rewriter(allASTs[file2AST[file_for_search]]->getSourceManager(), allASTs[file2AST[file_for_search]]->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
                 InjectInstantiation instantiator;
                 instantiator.toDoList = &toDoList;
                 instantiator.rewriter = &rewriter;
                 FuncFinder.addMatcher(/*Matcher*/ FunctionDefMatcher, /*Callback*/ &instantiator);
-                try {
-                    FuncFinder.matchAST(allASTs[file2AST[file_for_search]]->getASTContext());
-                    std::cout << termcolor::green << "Called AST match function" << termcolor::reset << std::endl;
-                } catch(const std::exception& e) {
-                    std::cout << " a standard exception was caught during AST parsing, with message '" << e.what() << "'\n";
-                }
-                try {
-                    rewriter.overwriteChangedFiles();
-                    std::cout << termcolor::green << "Called rewriter" << termcolor::reset << std::endl;
-                } catch(...) {
-                    std::cout << " a exception was caught during rewrite step" << std::endl;
-                }
+                FuncFinder.matchAST(allASTs[file2AST[file_for_search]]->getASTContext());
+                // std::cout << termcolor::green << "Called AST match function" << termcolor::reset << std::endl;
+                rewriter.overwriteChangedFiles();
+                // std::cout << termcolor::green << "Called rewriter" << termcolor::reset << std::endl;
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
                 if(HAS_INJECTED_INTANTIATION) {
                     workList.insert(file_for_search);
                     auto PCHContainerOps = std::make_shared<clang::PCHContainerOperations>();
                     bool AST_NOT_UPDATED = allASTs[file2AST[file_for_search]]->Reparse(PCHContainerOps);
-                    if(AST_NOT_UPDATED) { std::cerr << "Error while reparsing the AST" << std::endl; }
+                    if(AST_NOT_UPDATED or allASTs[file2AST[file_for_search]]->getDiagnostics().hasUncompilableErrorOccurred()) {
+                        std::cerr << termcolor::red << termcolor::bold << "Error:" << termcolor::reset << " while reparsing the AST." << std::endl;
+                        exit(1);
+                    }
                 }
-                std::cout << std::endl;
+                inner_bar.tick();
+                // std::cout << std::endl;
             }
+            indicators::show_console_cursor(true);
+            // outer_bar.tick();
         }
     }
     std::cout << termcolor::bold << termcolor::red << "#toDos that are left: " << toDoList.size() << termcolor::reset << std::endl;
