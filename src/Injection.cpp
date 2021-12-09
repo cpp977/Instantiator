@@ -8,6 +8,7 @@
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
+#include "clang/AST/TemplateName.h"
 
 std::optional<Injection> Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
 {
@@ -52,6 +53,13 @@ std::optional<Injection> Injection::createFromFS(const clang::FunctionDecl* FS, 
                             }
                             }
                         }
+                        break;
+                    }
+                    case clang::TemplateArgument::ArgKind::Template: {
+                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                        // TAL->get(i).getAsTemplate().print(OS, pp, false);
+                        OS.str();
                         break;
                     }
                     }
@@ -107,6 +115,12 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                 toDo.class_Ttypes[i] = name.str().str();
                 break;
             }
+            case clang::TemplateArgument::ArgKind::Template: {
+                llvm::raw_string_ostream OS(toDo.class_Ttypes[i]);
+                TAL.get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                OS.str();
+                break;
+            }
             }
         }
     }
@@ -142,6 +156,12 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                             }
                             }
                         }
+                        break;
+                    }
+                    case clang::TemplateArgument::ArgKind::Template: {
+                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                        OS.str();
                         break;
                     }
                     }
@@ -198,6 +218,12 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                             }
                             }
                         }
+                        break;
+                    }
+                    case clang::TemplateArgument::ArgKind::Template: {
+                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                        OS.str();
                         break;
                     }
                     }

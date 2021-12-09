@@ -10,6 +10,7 @@
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
+#include "clang/AST/TemplateName.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 
 #include "Injection.hpp"
@@ -17,9 +18,13 @@
 void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
     clang::PrintingPolicy pp(Result.Context->getLangOpts());
-    //    pp.PrintInjectedClassNameWithArguments = 1;
-    //    pp.FullyQualifiedName = 1;
-    pp.PrintCanonicalTypes = 1;
+    pp.PrintInjectedClassNameWithArguments = true;
+    pp.PrintCanonicalTypes = true;
+    pp.SuppressDefaultTemplateArgs = true;
+    pp.FullyQualifiedName = true;
+    pp.SuppressScope = false;
+    // pp.UsePreferredNames = true;
+
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("func_definition")) {
         // std::cout << "Processing func " << MFS->getNameAsString() << std::endl;
         // std::cout << std::boolalpha << "TI=" << MFS->isTemplateInstantiation()
@@ -88,6 +93,14 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                             }
                             break;
                         }
+                        case clang::TemplateArgument::ArgKind::Template: {
+                            std::string name;
+                            llvm::raw_string_ostream OS(name);
+                            TAL.get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                            OS.str();
+                            class_tparam_matches[i] = (toDo.class_Ttypes[i] == name); //.getCanonicalType()
+                            break;
+                        }
                         }
                     }
                     class_tparam_match =
@@ -130,6 +143,14 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                 }
                                 }
                             }
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Template: {
+                            std::string name;
+                            llvm::raw_string_ostream OS(name);
+                            TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                            OS.str();
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == name); //.getCanonicalType()
                             break;
                         }
                         }
@@ -262,6 +283,14 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                                 }
                                 }
                             }
+                            break;
+                        }
+                        case clang::TemplateArgument::ArgKind::Template: {
+                            std::string name;
+                            llvm::raw_string_ostream OS(name);
+                            TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                            OS.str();
+                            func_tparam_matches[i] = (toDo.func_Ttypes[i] == name); //.getCanonicalType()
                             break;
                         }
                         }
