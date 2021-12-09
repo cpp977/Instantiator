@@ -14,8 +14,13 @@
 void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
     clang::PrintingPolicy pp(Result.Context->getLangOpts());
-    //    pp.PrintInjectedClassNameWithArguments = 1;
-    pp.PrintCanonicalTypes = 1;
+    pp.PrintInjectedClassNameWithArguments = true;
+    pp.PrintCanonicalTypes = true;
+    pp.SuppressDefaultTemplateArgs = true;
+    pp.FullyQualifiedName = true;
+    pp.SuppressScope = false;
+    // pp.UsePreferredNames = true;
+
     std::optional<Injection> toDo;
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("templ_func_instantation")) {
         toDo = Injection::createFromMFS(MFS, pp);

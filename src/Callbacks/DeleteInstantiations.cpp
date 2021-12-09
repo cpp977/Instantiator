@@ -11,7 +11,11 @@
 void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
     clang::PrintingPolicy pp(Result.Context->getLangOpts());
-    pp.PrintCanonicalTypes = 1;
+    pp.PrintInjectedClassNameWithArguments = true;
+    pp.PrintCanonicalTypes = true;
+    pp.SuppressDefaultTemplateArgs = true;
+    pp.FullyQualifiedName = true;
+    pp.SuppressScope = false;
 
     clang::SourceManager& sm = Result.Context->getSourceManager();
 
