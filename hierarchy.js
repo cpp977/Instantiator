@@ -6,5 +6,8 @@ var hierarchy =
       [ "GetNeededInstantiations", "classGetNeededInstantiations.html", null ],
       [ "InjectInstantiation", "classInjectInstantiation.html", null ]
     ] ],
-    [ "Param", "structParam.html", null ]
+    [ "Param", "structParam.html", null ],
+    [ "clang::tooling::ToolAction", null, [
+      [ "ASTBuilderAction", "classASTBuilderAction.html", null ]
+    ] ]
 ];

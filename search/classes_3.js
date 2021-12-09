@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['param_0',['Param',['../structParam.html',1,'']]]
+  ['injectinstantiation_0',['InjectInstantiation',['../classInjectInstantiation.html',1,'']]],
+  ['injection_1',['Injection',['../structInjection.html',1,'']]]
 ];

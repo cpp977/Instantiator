@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8hpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp'],['../Injection_8cpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8cpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp']]]
+  ['name_0',['name',['../structParam.html#a872b203e1ebdf4e182bc77546e743afc',1,'Param']]],
+  ['nested_5fnamespace_1',['nested_namespace',['../structInjection.html#a4332cb0bc9a6abb251ce178af4905c0b',1,'Injection']]],
+  ['nonresolved_5fparams_2',['nonresolved_params',['../structInjection.html#ad53178c0a197c6ff14b5d3506133d163',1,'Injection']]]
 ];

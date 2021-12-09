@@ -58,7 +58,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"DeleteInstantiations_8cpp.html"
+"ASTBuilderAction_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

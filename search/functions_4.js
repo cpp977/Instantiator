@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52',1,'Instantiator.cpp']]],
-  ['morehelp_1',['MoreHelp',['../Instantiator_8cpp.html#a6d2de05dc1e7cb9136d733a97afee396',1,'Instantiator.cpp']]]
+  ['ignorepatterns_0',['IgnorePatterns',['../Instantiator_8cpp.html#a576ab4b01c267f0bbcb68b36b57950c3',1,'Instantiator.cpp']]],
+  ['instantiatoroptions_1',['InstantiatorOptions',['../Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04',1,'Instantiator.cpp']]]
 ];

@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "ASTBuilderAction", "classASTBuilderAction.html", "classASTBuilderAction" ],
     [ "DeleteInstantiations", "classDeleteInstantiations.html", "classDeleteInstantiations" ],
     [ "GetNeededInstantiations", "classGetNeededInstantiations.html", "classGetNeededInstantiations" ],
     [ "InjectInstantiation", "classInjectInstantiation.html", "classInjectInstantiation" ],
