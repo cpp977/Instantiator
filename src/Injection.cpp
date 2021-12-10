@@ -57,8 +57,11 @@ std::optional<Injection> Injection::createFromFS(const clang::FunctionDecl* FS, 
                     }
                     case clang::TemplateArgument::ArgKind::Template: {
                         llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                         TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
-                        // TAL->get(i).getAsTemplate().print(OS, pp, false);
+#else
+                        TAL->get(i).getAsTemplate().print(OS, pp, false);
+#endif
                         OS.str();
                         break;
                     }
@@ -117,7 +120,11 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
             }
             case clang::TemplateArgument::ArgKind::Template: {
                 llvm::raw_string_ostream OS(toDo.class_Ttypes[i]);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                 TAL.get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                TAL.get(i).getAsTemplate().print(OS, pp, false);
+#endif
                 OS.str();
                 break;
             }
@@ -160,7 +167,11 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                     }
                     case clang::TemplateArgument::ArgKind::Template: {
                         llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                         TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                        TAL->get(i).getAsTemplate().print(OS, pp, false);
+#endif
                         OS.str();
                         break;
                     }
@@ -222,7 +233,11 @@ std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MF
                     }
                     case clang::TemplateArgument::ArgKind::Template: {
                         llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                         TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                        TAL->get(i).getAsTemplate().print(OS, pp, false);
+#endif
                         OS.str();
                         break;
                     }

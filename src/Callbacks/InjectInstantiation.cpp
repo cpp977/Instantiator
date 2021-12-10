@@ -96,7 +96,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                         case clang::TemplateArgument::ArgKind::Template: {
                             std::string name;
                             llvm::raw_string_ostream OS(name);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                             TAL.get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                            TAL.get(i).getAsTemplate().print(OS, pp, false);
+#endif
                             OS.str();
                             class_tparam_matches[i] = (toDo.class_Ttypes[i] == name); //.getCanonicalType()
                             break;
@@ -148,7 +152,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                         case clang::TemplateArgument::ArgKind::Template: {
                             std::string name;
                             llvm::raw_string_ostream OS(name);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                             TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                            TAL->get(i).getAsTemplate().print(OS, pp, false);
+#endif
                             OS.str();
                             func_tparam_matches[i] = (toDo.func_Ttypes[i] == name); //.getCanonicalType()
                             break;
@@ -288,7 +296,11 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                         case clang::TemplateArgument::ArgKind::Template: {
                             std::string name;
                             llvm::raw_string_ostream OS(name);
+#if INSTANTIATOR_LLVM_MAJOR > 13
                             TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+#else
+                            TAL->get(i).getAsTemplate().print(OS, pp, false);
+#endif
                             OS.str();
                             func_tparam_matches[i] = (toDo.func_Ttypes[i] == name); //.getCanonicalType()
                             break;
