@@ -5,9 +5,9 @@
 
 #include "termcolor/termcolor.hpp"
 
-#include "indicators/progress_bar.hpp"
 #include "indicators/cursor_control.hpp"
 #include "indicators/indeterminate_progress_bar.hpp"
+#include "indicators/progress_bar.hpp"
 
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Tooling/CommonOptionsParser.h"
@@ -23,7 +23,7 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Rewrite/Frontend/Rewriters.h"
 
-#include "Actions/ASTBuilderAction.hpp"
+#include "Actions/AllASTBuilderAction.hpp"
 #include "Callbacks/DeleteInstantiations.hpp"
 #include "Callbacks/GetNeededInstantiations.hpp"
 #include "Callbacks/InjectInstantiation.hpp"
@@ -89,22 +89,20 @@ int main(int argc, const char** argv)
     // Hide cursor
     indicators::show_console_cursor(false);
 
-    indicators::ProgressBar parsing_bar{
-        indicators::option::BarWidth{50},
-        indicators::option::Start{"["},
-        indicators::option::Fill{"■"},
-        indicators::option::Lead{"■"},
-        indicators::option::Remainder{"-"},
-        indicators::option::End{" ]"},
-        indicators::option::PrefixText{"Parsing files: "},
-        indicators::option::ForegroundColor{indicators::Color::cyan},
-        indicators::option::ShowPercentage{true},
-        indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
-        indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
-    };
+    indicators::ProgressBar parsing_bar{indicators::option::BarWidth{50},
+                                        indicators::option::Start{"["},
+                                        indicators::option::Fill{"■"},
+                                        indicators::option::Lead{"■"},
+                                        indicators::option::Remainder{"-"},
+                                        indicators::option::End{" ]"},
+                                        indicators::option::PrefixText{"Parsing files: "},
+                                        indicators::option::ForegroundColor{indicators::Color::cyan},
+                                        indicators::option::ShowPercentage{true},
+                                        indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
+                                        indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
     ASTBuilderAction ast_build_action(allASTs, parsing_bar);
     indicators::show_console_cursor(true);
-    
+
     int success = Tool.run(&ast_build_action);
     if(success == 1) {
         std::cerr << termcolor::red << termcolor::bold << "Error:" << termcolor::reset << " while parsing the ASTs." << std::endl;
@@ -121,22 +119,20 @@ int main(int argc, const char** argv)
     std::vector<Injection> toDoList;
 
     if(Clean) {
-        indicators::ProgressBar deletion_bar{
-            indicators::option::BarWidth{50},
-            indicators::option::Start{"["},
-            indicators::option::Fill{"■"},
-            indicators::option::Lead{"■"},
-            indicators::option::Remainder{"-"},
-            indicators::option::End{" ]"},
-            indicators::option::PrefixText{"Deleting instantiations: "},
-            indicators::option::ForegroundColor{indicators::Color::red},
-            indicators::option::ShowPercentage{true},
-            indicators::option::MaxProgress{static_cast<int>(allASTs.size())},
-            indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
-        };
+        indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},
+                                             indicators::option::Start{"["},
+                                             indicators::option::Fill{"■"},
+                                             indicators::option::Lead{"■"},
+                                             indicators::option::Remainder{"-"},
+                                             indicators::option::End{" ]"},
+                                             indicators::option::PrefixText{"Deleting instantiations: "},
+                                             indicators::option::ForegroundColor{indicators::Color::red},
+                                             indicators::option::ShowPercentage{true},
+                                             indicators::option::MaxProgress{static_cast<int>(allASTs.size())},
+                                             indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
         indicators::show_console_cursor(false);
         for(std::size_t i = 0; i < allASTs.size(); i++) {
-            deletion_bar.set_option(indicators::option::PostfixText{"Processing: "+allASTs[i]->getMainFileName().str()});
+            deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + allASTs[i]->getMainFileName().str()});
             // std::cout << "Clean all explicit instantiations in " << allASTs[i]->getMainFileName().str() << "." << std::endl;
             DeleteInstantiations Deleter;
             clang::Rewriter rewriter(allASTs[i]->getSourceManager(), allASTs[i]->getLangOpts());
@@ -180,27 +176,25 @@ int main(int argc, const char** argv)
             // outer_bar.set_option(indicators::option::PostfixText{"Scanning: "+item});
             workList.erase(item);
             Finder.matchAST(allASTs[file2AST[item]]->getASTContext());
-            std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset
-                      << std::endl;
+            std::cout << termcolor::bold << termcolor::blue << "Run on file " << item << " produced " << toDoList.size() << " ToDos"
+                      << termcolor::reset << std::endl;
             // for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
-            
-            indicators::ProgressBar inner_bar{
-                indicators::option::BarWidth{50},
-                indicators::option::Start{"["},
-                indicators::option::Fill{"■"},
-                indicators::option::Lead{"■"},
-                indicators::option::Remainder{"-"},
-                indicators::option::End{" ]"},
-                indicators::option::PrefixText{"Checking for places to inject: "},
-                indicators::option::ForegroundColor{indicators::Color::green},
-                indicators::option::ShowPercentage{true},
-                indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
-                indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
-            };
+
+            indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},
+                                              indicators::option::Start{"["},
+                                              indicators::option::Fill{"■"},
+                                              indicators::option::Lead{"■"},
+                                              indicators::option::Remainder{"-"},
+                                              indicators::option::End{" ]"},
+                                              indicators::option::PrefixText{"Checking for places to inject: "},
+                                              indicators::option::ForegroundColor{indicators::Color::green},
+                                              indicators::option::ShowPercentage{true},
+                                              indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
+                                              indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
             indicators::show_console_cursor(false);
 
             for(const auto& file_for_search : main_and_injection_files) {
-                inner_bar.set_option(indicators::option::PostfixText{"Processing: "+file_for_search});  
+                inner_bar.set_option(indicators::option::PostfixText{"Processing: " + file_for_search});
                 // std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
                 clang::Rewriter rewriter(allASTs[file2AST[file_for_search]]->getSourceManager(), allASTs[file2AST[file_for_search]]->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
