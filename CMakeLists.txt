@@ -35,7 +35,8 @@ add_executable(Instantiator Instantiator.cpp
   src/Callbacks/InjectInstantiation.cpp
   src/Callbacks/GetNeededInstantiations.cpp
   src/Callbacks/DeleteInstantiations.cpp
-  src/Matcher/Matcher.cpp)
+  src/Matcher/Matcher.cpp
+  src/Actions/ASTBuilderAction.cpp)
 
 message(STATUS ${CMAKE_SOURCE_DIR})
 target_include_directories(Instantiator PRIVATE ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
