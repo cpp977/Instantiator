@@ -100,7 +100,7 @@ int main(int argc, const char** argv)
                                         indicators::option::ShowPercentage{true},
                                         indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
                                         indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
-    ASTBuilderAction ast_build_action(allASTs, parsing_bar);
+    AllASTBuilderAction ast_build_action(allASTs, parsing_bar);
     indicators::show_console_cursor(true);
 
     int success = Tool.run(&ast_build_action);
