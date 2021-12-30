@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['func_5fname_0',['func_name',['../structInjection.html#a6173d575985f16333eeeed8faef2f88a',1,'Injection']]],
-  ['func_5fttypes_1',['func_Ttypes',['../structInjection.html#a475150b470832b519c3992290430cc25',1,'Injection']]]
+  ['db_0',['db',['../classASTBuilderAction.html#a15f0af3ef041bea0e43d44deba3ff89f',1,'ASTBuilderAction']]],
+  ['dependencies_1',['dependencies',['../classDependencyAction.html#aa958a958c54061c0212f7378b4d89b60',1,'DependencyAction']]]
 ];

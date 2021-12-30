@@ -33,7 +33,11 @@ var NAVTREE =
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ]
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ]
+      ] ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -58,7 +62,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"ASTBuilderAction_8hpp.html"
+"ASTBuilderAction_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

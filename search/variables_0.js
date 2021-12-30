@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['asts_0',['ASTs',['../classASTBuilderAction.html#ae5c30a5ecc4b6a0fc4429b7248bb9627',1,'ASTBuilderAction']]]
+  ['ast_0',['AST',['../classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f',1,'ASTBuilderAction']]],
+  ['asts_1',['ASTs',['../classAllASTBuilderAction.html#a366040faf917c38222ec277617c1800c',1,'AllASTBuilderAction']]]
 ];

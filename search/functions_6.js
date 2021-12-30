@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8hpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp'],['../Injection_8cpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8cpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp']]]
+  ['ignorepatterns_0',['IgnorePatterns',['../Instantiator_8cpp.html#a576ab4b01c267f0bbcb68b36b57950c3',1,'Instantiator.cpp']]],
+  ['instantiatoroptions_1',['InstantiatorOptions',['../Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04',1,'Instantiator.cpp']]],
+  ['is_5fcached_2',['is_cached',['../namespaceinternal.html#ab081356ec892df627703a8998a648da8',1,'internal']]]
 ];

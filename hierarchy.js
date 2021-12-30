@@ -1,5 +1,8 @@
 var hierarchy =
 [
+    [ "clang::DependencyCollector", null, [
+      [ "myDependencyCollector", "classmyDependencyCollector.html", null ]
+    ] ],
     [ "Injection", "structInjection.html", null ],
     [ "clang::ast_matchers::MatchFinder::MatchCallback", null, [
       [ "DeleteInstantiations", "classDeleteInstantiations.html", null ],
@@ -7,7 +10,11 @@ var hierarchy =
       [ "InjectInstantiation", "classInjectInstantiation.html", null ]
     ] ],
     [ "Param", "structParam.html", null ],
+    [ "clang::PreprocessOnlyAction", null, [
+      [ "DependencyAction", "classDependencyAction.html", null ]
+    ] ],
     [ "clang::tooling::ToolAction", null, [
-      [ "ASTBuilderAction", "classASTBuilderAction.html", null ]
+      [ "ASTBuilderAction", "classASTBuilderAction.html", null ],
+      [ "AllASTBuilderAction", "classAllASTBuilderAction.html", null ]
     ] ]
 ];

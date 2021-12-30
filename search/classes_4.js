@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['param_0',['Param',['../structParam.html',1,'']]]
+  ['mydependencycollector_0',['myDependencyCollector',['../classmyDependencyCollector.html',1,'']]]
 ];
