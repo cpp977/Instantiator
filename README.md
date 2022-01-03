@@ -19,16 +19,26 @@ The compilation step involves exactly the same effort as if you had everything i
 
 # What does it (currently) not can do?
   - It does not manage the `includes` for you. If it inserts a needed template instantiation with a type not known in that translation unit, you will get a compiler error.
-  - It builds the abstract syntax tree (AST) of all files listed in the `compile_commands.json`. This is often too much and slows down the process.
-  - `Template template` parameters are not implemented.
 
+# How to build?
+```
+git clone https://github.com/cpp977/Instantiator
+mkdir build && cd build
+cmake .. 
+make && [sudo] make install
+```
+For a successful build you need a c++-17 compiler and LLVM/clang libraries.
+Because of recent bufix in clang (https://reviews.llvm.org/D108794) the most recent version (14.0.0git) of LLVM/clang is needed for full functionality.
+With an older version of LLVM/clang you might run into troubles with the correct formatting of `template template` parameters.
+To control which version of LLVM is used, you can set the cmake variable `LLVM_ROOT` to the root of the llvm installation.
+To control which version of clang is used, you can set the cmake variable `Clang_DIR` to the root of the directory where the file ClangConfig.cmake is located.
+  
 # Known issues
   - The cleanup of explicit instantiations can mess up the files if the explicit instantiations spread over more than one line. 
     Be sure to backup everything before running the cleanup.
 
 # Roadmap for version 1.0.0
   - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
-  - ASTs are only build for the dependency tree and not for all files in the compile_commands.json
   - Example c++ project which serves also as a test case.
   
 # How does it work?
