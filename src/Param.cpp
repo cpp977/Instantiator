@@ -74,9 +74,21 @@ bool Param::compare(const Param& other) const
 std::ostream& operator<<(std::ostream& stream, const Param& p)
 {
     stream << termcolor::bold << "•" << termcolor::reset;
-    stream << ((p.is_const) ? termcolor::green : termcolor::red) << "const " << termcolor::reset;
-    stream << ((p.is_volatile) ? termcolor::green : termcolor::red) << "volatile " << termcolor::reset;
-    stream << ((p.is_restrict) ? termcolor::green : termcolor::red) << "restrict " << termcolor::reset;
+    if(p.is_const) {
+        stream << termcolor::green << "const " << termcolor::reset;
+    } else {
+        stream << termcolor::red << "const " << termcolor::reset;
+    }
+    if(p.is_volatile) {
+        stream << termcolor::green << "volatile " << termcolor::reset;
+    } else {
+        stream << termcolor::red << "volatile " << termcolor::reset;
+    }
+    if(p.is_restrict) {
+        stream << termcolor::green << "restrict " << termcolor::reset;
+    } else {
+        stream << termcolor::red << "restrict " << termcolor::reset;
+    }
     stream << termcolor::bold << p.name << termcolor::reset;
     if(p.is_dependent) { stream << ", dependent"; }
     if(p.is_template_param) { stream << termcolor::on_red << ", template" << termcolor::reset; }
