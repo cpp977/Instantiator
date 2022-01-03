@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13.4)
-project(Instantiator VERSION 0.2.1 LANGUAGES CXX)
+project(Instantiator VERSION 0.3.0 LANGUAGES CXX)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 
