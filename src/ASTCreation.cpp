@@ -4,7 +4,7 @@
 #include <memory>
 #include <regex>
 
-#include "clang/Tooling/Tooling.h"
+#include "ASTCreation.hpp"
 
 #include "Actions/ASTBuilderAction.hpp"
 #include "Actions/DependencyAction.hpp"
