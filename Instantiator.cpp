@@ -40,10 +40,11 @@
 static llvm::cl::OptionCategory InstantiatorOptions("Instantiator options");
 
 static llvm::cl::opt<bool> Clean("clean", llvm::cl::desc("Delete all explicit instantiations."), llvm::cl::cat(InstantiatorOptions));
-static llvm::cl::list<std::string> IgnorePatterns("i",
-                                                  llvm::cl::desc("List of namespaces which should be ignored."),
-                                                  llvm::cl::desc("<pattern>"),
-                                                  llvm::cl::cat(InstantiatorOptions));
+static llvm::cl::list<std::string>
+    IgnorePatterns("ignore",
+                   llvm::cl::desc("List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls."),
+                   llvm::cl::value_desc("namespace"),
+                   llvm::cl::cat(InstantiatorOptions));
 
 // CommonOptionsParser declares HelpMessage with a description of the common
 // command-line options related to the compilation database and input files.
