@@ -4,6 +4,5 @@ var searchData=
   ['main_2emd_1',['main.md',['../main_8md.html',1,'']]],
   ['matcher_2ecpp_2',['Matcher.cpp',['../Matcher_8cpp.html',1,'']]],
   ['matcher_2ehpp_3',['Matcher.hpp',['../Matcher_8hpp.html',1,'']]],
-  ['morehelp_4',['MoreHelp',['../Instantiator_8cpp.html#a6d2de05dc1e7cb9136d733a97afee396',1,'Instantiator.cpp']]],
-  ['mydependencycollector_5',['myDependencyCollector',['../classmyDependencyCollector.html',1,'']]]
+  ['mydependencycollector_4',['myDependencyCollector',['../classmyDependencyCollector.html',1,'']]]
 ];

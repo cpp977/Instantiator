@@ -123,7 +123,7 @@ $(document).ready(function(){initNavTree('Instantiator_8cpp.html',''); initResiz
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Instantiator.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="4846" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="4496" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -135,12 +135,12 @@ Functions</h2></td></tr>
 <tr class="separator:a463095459ca7eff2f7315fc955830f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c2627e92e042d2f85323b64d2405829"><td class="memItemLeft" align="right" valign="top">static llvm::cl::opt&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a> (&quot;clean&quot;, llvm::cl::desc(&quot;Delete all explicit instantiations.&quot;), llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
 <tr class="separator:a3c2627e92e042d2f85323b64d2405829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a576ab4b01c267f0bbcb68b36b57950c3"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a576ab4b01c267f0bbcb68b36b57950c3">IgnorePatterns</a> (&quot;i&quot;, llvm::cl::desc(&quot;List of namespaces which should be ignored.&quot;), llvm::cl::desc(&quot;&lt;pattern&gt;&quot;), llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
-<tr class="separator:a576ab4b01c267f0bbcb68b36b57950c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ea5006fa1ab522ba020250d72e6a38"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a> (&quot;ignore&quot;, llvm::cl::desc(&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;), llvm::cl::value_desc(&quot;namespace&quot;), llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
+<tr class="separator:a52ea5006fa1ab522ba020250d72e6a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59cec56489db6cf41ede7a2e67c8f64c"><td class="memItemLeft" align="right" valign="top">static llvm::cl::alias&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c">IgnorePatternsA</a> (&quot;i&quot;, llvm::cl::desc(&quot;Alias for --ignore&quot;), llvm::cl::aliasopt(<a class="el" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>))</td></tr>
+<tr class="separator:a59cec56489db6cf41ede7a2e67c8f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59161941fab072bbb83f502fefd9d734"><td class="memItemLeft" align="right" valign="top">static llvm::cl::extrahelp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">CommonHelp</a> (clang::tooling::CommonOptionsParser::HelpMessage)</td></tr>
 <tr class="separator:a59161941fab072bbb83f502fefd9d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d2de05dc1e7cb9136d733a97afee396"><td class="memItemLeft" align="right" valign="top">static llvm::cl::extrahelp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a6d2de05dc1e7cb9136d733a97afee396">MoreHelp</a> (&quot;\nMore help text...\n&quot;)</td></tr>
-<tr class="separator:a6d2de05dc1e7cb9136d733a97afee396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217dbf8b442f20279ea00b898af96f52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a> (int argc, const char **argv)</td></tr>
 <tr class="separator:a217dbf8b442f20279ea00b898af96f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -213,8 +213,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a576ab4b01c267f0bbcb68b36b57950c3" name="a576ab4b01c267f0bbcb68b36b57950c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a576ab4b01c267f0bbcb68b36b57950c3">&#9670;&nbsp;</a></span>IgnorePatterns()</h2>
+<a id="a52ea5006fa1ab522ba020250d72e6a38" name="a52ea5006fa1ab522ba020250d72e6a38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ea5006fa1ab522ba020250d72e6a38">&#9670;&nbsp;</a></span>IgnorePatterns()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,25 +225,67 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static llvm::cl::list&lt; std::string &gt; IgnorePatterns </td>
           <td>(</td>
-          <td class="paramtype">&quot;i&quot;&#160;</td>
+          <td class="paramtype">&quot;ignore&quot;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be ignored.&quot;)&#160;</td>
+          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;)&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">llvm::cl::desc(&quot;&lt;pattern&gt;&quot;)&#160;</td>
+          <td class="paramtype">llvm::cl::value_desc(&quot;namespace&quot;)&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">llvm::cl::cat(<a class="el" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>)&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59cec56489db6cf41ede7a2e67c8f64c" name="a59cec56489db6cf41ede7a2e67c8f64c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59cec56489db6cf41ede7a2e67c8f64c">&#9670;&nbsp;</a></span>IgnorePatternsA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::alias IgnorePatternsA </td>
+          <td>(</td>
+          <td class="paramtype">&quot;i&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;Alias for --ignore&quot;)&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::aliasopt(<a class="el" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>)&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -313,33 +355,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Instantiator_8cpp_source.html#l00056">56</a> of file <a class="el" href="Instantiator_8cpp_source.html">Instantiator.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a6d2de05dc1e7cb9136d733a97afee396" name="a6d2de05dc1e7cb9136d733a97afee396"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d2de05dc1e7cb9136d733a97afee396">&#9670;&nbsp;</a></span>MoreHelp()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static llvm::cl::extrahelp MoreHelp </td>
-          <td>(</td>
-          <td class="paramtype">&quot;\nMore help text...\n&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="Instantiator_8cpp_source.html#l00058">58</a> of file <a class="el" href="Instantiator_8cpp_source.html">Instantiator.cpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +366,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Instantiator_8cpp.html">Instantiator.cpp</a></li>
-    <li class="footer">Generated on Thu Dec 30 2021 14:16:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Mon Jan 3 2022 15:46:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">
