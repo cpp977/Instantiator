@@ -51,7 +51,7 @@ static llvm::cl::list<std::string> IgnorePatterns("i",
 static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpMessage);
 
 // A help message for this specific tool can be added afterwards.
-static llvm::cl::extrahelp MoreHelp("\nMore help text...\n");
+// static llvm::cl::extrahelp MoreHelp("\nMore help text...\n");
 
 int main(int argc, const char** argv)
 {
