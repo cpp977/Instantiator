@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.13.4)
 project(Instantiator VERSION 0.2.1 LANGUAGES CXX)
 
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
+
 include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME termcolor
-  VERSION 2.0.0
-  GIT_REPOSITORY https://github.com/ikalnytskyi/termcolor
+  GIT_TAG master
+  # GIT_REPOSITORY https://github.com/ikalnytskyi/termcolor
+  GIT_REPOSITORY https://github.com/cpp977/termcolor
   )
 
 CPMAddPackage(
@@ -41,6 +44,8 @@ add_executable(Instantiator Instantiator.cpp
   src/Actions/DependencyAction.cpp
   src/ASTCreation.cpp)
 
+# set_target_properties(Instantiator PROPERTIES SUFFIX ${LLVM_VERSION_MAJOR})
+
 message(STATUS ${CMAKE_SOURCE_DIR})
 target_include_directories(Instantiator PRIVATE ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 separate_arguments(LLVM_DEFINITIONS_LIST NATIVE_COMMAND ${LLVM_DEFINITIONS})
@@ -69,3 +74,5 @@ else()
   target_link_libraries(Instantiator PRIVATE ${llvm_libs})
 endif()
 
+include(GNUInstallDirs)
+install(TARGETS Instantiator)
