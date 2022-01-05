@@ -21,9 +21,7 @@ class DiagnosticConsumer;
 /**
  * \brief Action to compute all ASTs
  *
- * This action is currently running at startup to compute the AST of all files in compile_commands.json.
- * \todo
- * Better to only compute the AST of files only when they are requested.
+ * This action is currently not used as it is loading all ASTs from the compilation database.
  */
 class AllASTBuilderAction : public clang::tooling::ToolAction
 {
