@@ -21,12 +21,26 @@ void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchR
     pp.SuppressScope = false;
     // pp.UsePreferredNames = true;
 
-    std::optional<Injection> toDo;
+    Injection toDo;
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("templ_func_instantation")) {
-        toDo = Injection::createFromMFS(MFS, pp);
-        if(toDo) toDoList->push_back(toDo.value());
+        if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
+            if(MSI->getPointOfInstantiation().isValid()) {
+                toDo = Injection::createFromMFS(MFS, pp);
+                toDoList->push_back(toDo);
+            }
+        } else if(const clang::FunctionTemplateSpecializationInfo* TSI = MFS->getTemplateSpecializationInfo()) {
+            if(TSI->getPointOfInstantiation().isValid()) {
+                toDo = Injection::createFromMFS(MFS, pp);
+                toDoList->push_back(toDo);
+            }
+        }
     } else if(const clang::FunctionDecl* FS = Result.Nodes.getNodeAs<clang::FunctionDecl>("templ_func_instantation")) {
-        toDo = Injection::createFromFS(FS, pp);
-        if(toDo) toDoList->push_back(toDo.value());
+        if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
+            if(TSI->getPointOfInstantiation().isValid()) {
+                // std::cout << termcolor::green << "Created with success." << termcolor::reset << std::endl;
+                toDo = Injection::createFromFS(FS, pp);
+                toDoList->push_back(toDo);
+            }
+        }
     }
 }

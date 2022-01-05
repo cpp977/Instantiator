@@ -90,22 +90,38 @@ struct Injection
 
     /**
      * Function to load all needed data from a [clang::CXXMethodDecl](https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html).
-     * \return If \p MFS is appropriate the Injection otherwise an empty `std::optional`.
+     * \return Data bundled into an Injection instance.
      *
      * \param MFS Pointer to a `clang::CXXMethodDecl`.
      * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
-     * \todo Remove duplicate code by using code from `createFromFS()`.
+     *
+     * Calls createFromFS() and loads the following member function information:
+     *  - Sets is_member to true.
+     *  - Determine whether it is a contructor -> is_constructor
+     *  - Determines whether this is a const qualified member function -> is_const
+     *  - Resets the nested namespace qualifier to the nested namespace of the parent class -> nested_namespace
+     *  - Class name of parent class -> class_name
+     *  - Template arguments of the class -> class_Ttypes
+     *  - nonresolved function parameters in the case that this function is not a function template -> nonresolved_params
      */
-    static std::optional<Injection> createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);
+    static Injection createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp);
 
     /**
      * Function to load all needed data from a [clang::FunctionDecl](https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html).
-     * \return If \p FS is appropriate the Injection otherwise an empty `std::optional`.
+     * \return Data bundled into an Injection instance.
      *
      * \param FS Pointer to a `clang::FunctionDecl`.
      * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
+     *
+     * The following data is parsed:
+     *  - Function name -> func_name
+     *  - Nested namespace in which the function is defined -> nested_namespace
+     *  - Function return type -> return_type
+     *  - Function template arguments -> func_Ttypes
+     *  - Function parameters with fully resolved types -> params
+     *  - Function parameters with nonresolved types -> nonresolved_params
      */
-    static std::optional<Injection> createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp);
+    static Injection createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp);
 };
 
 /**Pretty print an \p Injection*/

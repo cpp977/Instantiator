@@ -10,261 +10,51 @@
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 
-std::optional<Injection> Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
+#include "Parsing.hpp"
+
+Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
 {
     // std::cout << "Create Injection from member function " << FS->getNameAsString() << std::endl;
     Injection toDo;
     toDo.is_member = false;
     toDo.is_constructor = false;
+    toDo.func_name = FS->getNameAsString();
+    toDo.return_type = FS->getReturnType().getAsString(pp);
+    llvm::raw_string_ostream OS(toDo.nested_namespace);
+    FS->printNestedNameSpecifier(OS, pp);
+    OS.str();
+    toDo.func_Ttypes = internal::parseTemplateArgs(FS->getTemplateSpecializationArgs(), pp);
+    toDo.params = internal::parseFunctionArgs(FS->parameters(), pp);
     if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
-        if(TSI->getPointOfInstantiation().isValid()) {
-            toDo.func_name = FS->getNameAsString();
-            llvm::raw_string_ostream OS(toDo.nested_namespace);
-            FS->printNestedNameSpecifier(OS, pp);
-            OS.str();
-            toDo.return_type = FS->getReturnType().getAsString(pp);
-            if(const clang::TemplateArgumentList* TAL = FS->getTemplateSpecializationArgs()) {
-                toDo.func_Ttypes.resize(TAL->size());
-                for(std::size_t i = 0; i < TAL->size(); i++) {
-                    switch(TAL->get(i).getKind()) {
-                    case clang::TemplateArgument::ArgKind::Type: {
-                        toDo.func_Ttypes[i] = TAL->get(i).getAsType().getAsString(pp);
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Integral: {
-                        llvm::SmallString<10> name;
-                        TAL->get(i).getAsIntegral().toString(name);
-                        toDo.func_Ttypes[i] = name.str().str();
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Pack: {
-                        toDo.func_Ttypes.resize(toDo.func_Ttypes.size() + TAL->get(i).pack_size() - 1);
-                        for(auto pack_it = TAL->get(i).pack_begin(); pack_it != TAL->get(i).pack_end(); pack_it++) {
-                            switch(pack_it->getKind()) {
-                            case clang::TemplateArgument::ArgKind::Type: {
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = pack_it->getAsType().getAsString(pp);
-                                break;
-                            }
-                            case clang::TemplateArgument::ArgKind::Integral: {
-                                llvm::SmallString<10> name;
-                                pack_it->getAsIntegral().toString(name);
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = name.str().str();
-                                break;
-                            }
-                            }
-                        }
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Template: {
-                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
-#if INSTANTIATOR_LLVM_MAJOR > 13
-                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
-#else
-                        TAL->get(i).getAsTemplate().print(OS, pp, false);
-#endif
-                        OS.str();
-                        break;
-                    }
-                    }
-                }
-            }
-
-            llvm::ArrayRef<clang::ParmVarDecl*> params = FS->parameters();
-            toDo.params.resize(params.size());
-            for(auto it = params.begin(); it != params.end(); it++) {
-                toDo.params[std::distance(params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-            }
-            llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TSI->getTemplate()->getTemplatedDecl()->parameters();
-            toDo.nonresolved_params.resize(nonresolved_params.size());
-            for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-            }
-            std::optional<Injection> out;
-            out = toDo;
-            // std::cout << termcolor::green << "Created with success." << termcolor::reset << std::endl;
-            return out;
-        }
+        toDo.nonresolved_params = internal::parseFunctionArgs(TSI->getTemplate()->getTemplatedDecl()->parameters(), pp);
     }
-    std::optional<Injection> out;
-    // std::cout << termcolor::red << "Not created." << termcolor::reset << std::endl;
-    return out;
+    return toDo;
 }
 
-std::optional<Injection> Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp)
+Injection Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp)
 {
     // std::cout << "Create Injection from member function " << MFS->getNameAsString() << std::endl;
-    Injection toDo;
+    Injection toDo = createFromFS(MFS, pp);
     toDo.is_member = true;
     const clang::CXXConstructorDecl* ConstructorCheck = llvm::dyn_cast<clang::CXXConstructorDecl>(MFS);
     toDo.is_constructor = not(ConstructorCheck == nullptr);
-    toDo.return_type = MFS->getReturnType().getAsString(pp);
-    toDo.func_name = MFS->getNameAsString();
+    toDo.is_const = MFS->isConst();
+    toDo.nested_namespace = "";
     llvm::raw_string_ostream OS(toDo.nested_namespace);
     MFS->getParent()->printNestedNameSpecifier(OS, pp);
     OS.str();
+
     toDo.class_name = MFS->getParent()->getNameAsString();
     if(const clang::ClassTemplateSpecializationDecl* CTS = llvm::dyn_cast<clang::ClassTemplateSpecializationDecl>(MFS->getParent())) {
-        const clang::TemplateArgumentList& TAL = CTS->getTemplateArgs();
-        toDo.class_Ttypes.resize(TAL.size());
-        for(std::size_t i = 0; i < TAL.size(); i++) {
-            switch(TAL.get(i).getKind()) {
-            case clang::TemplateArgument::ArgKind::Type: {
-                toDo.class_Ttypes[i] = TAL.get(i).getAsType().getAsString(pp);
-                break;
-            }
-            case clang::TemplateArgument::ArgKind::Integral: {
-                llvm::SmallString<10> name;
-                TAL.get(i).getAsIntegral().toString(name);
-                toDo.class_Ttypes[i] = name.str().str();
-                break;
-            }
-            case clang::TemplateArgument::ArgKind::Template: {
-                llvm::raw_string_ostream OS(toDo.class_Ttypes[i]);
-#if INSTANTIATOR_LLVM_MAJOR > 13
-                TAL.get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
-#else
-                TAL.get(i).getAsTemplate().print(OS, pp, false);
-#endif
-                OS.str();
-                break;
-            }
-            }
-        }
+        toDo.class_Ttypes = internal::parseTemplateArgs(&CTS->getTemplateArgs(), pp);
     }
+
     if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
-        if(MSI->getPointOfInstantiation().isValid()) {
-            if(const clang::TemplateArgumentList* TAL = MFS->getTemplateSpecializationArgs()) {
-                toDo.func_Ttypes.resize(TAL->size());
-                for(std::size_t i = 0; i < TAL->size(); i++) {
-                    switch(TAL->get(i).getKind()) {
-                    case clang::TemplateArgument::ArgKind::Type: {
-                        toDo.func_Ttypes[i] = TAL->get(i).getAsType().getAsString(pp);
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Integral: {
-                        llvm::SmallString<10> name;
-                        TAL->get(i).getAsIntegral().toString(name);
-                        toDo.func_Ttypes[i] = name.str().str();
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Pack: {
-                        toDo.func_Ttypes.resize(toDo.func_Ttypes.size() + TAL->get(i).pack_size() - 1);
-                        for(auto pack_it = TAL->get(i).pack_begin(); pack_it != TAL->get(i).pack_end(); pack_it++) {
-                            switch(pack_it->getKind()) {
-                            case clang::TemplateArgument::ArgKind::Type: {
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = pack_it->getAsType().getAsString(pp);
-                                break;
-                            }
-                            case clang::TemplateArgument::ArgKind::Integral: {
-                                llvm::SmallString<10> name;
-                                pack_it->getAsIntegral().toString(name);
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = name.str().str();
-                                break;
-                            }
-                            }
-                        }
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Template: {
-                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
-#if INSTANTIATOR_LLVM_MAJOR > 13
-                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
-#else
-                        TAL->get(i).getAsTemplate().print(OS, pp, false);
-#endif
-                        OS.str();
-                        break;
-                    }
-                    }
-                }
-            }
-            llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
-            toDo.params.resize(params.size());
-            for(auto it = params.begin(); it != params.end(); it++) {
-                toDo.params[std::distance(params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-            }
-            if(const clang::CXXMethodDecl* TMFS = llvm::dyn_cast<const clang::CXXMethodDecl>(MSI->getInstantiatedFrom())) {
-                llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TMFS->parameters();
-                toDo.nonresolved_params.resize(nonresolved_params.size());
-                for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                    toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-                }
-            }
-
-            toDo.is_const = MFS->isConst();
-            std::optional<Injection> out;
-            out = toDo;
-            // std::cout << termcolor::green << "Created with success." << termcolor::reset << std::endl;
-            return out;
-        }
-    } else if(const clang::FunctionTemplateSpecializationInfo* TSI = MFS->getTemplateSpecializationInfo()) {
-        if(TSI->getPointOfInstantiation().isValid()) {
-            if(const clang::TemplateArgumentList* TAL = MFS->getTemplateSpecializationArgs()) {
-                toDo.func_Ttypes.resize(TAL->size());
-                for(std::size_t i = 0; i < TAL->size(); i++) {
-                    switch(TAL->get(i).getKind()) {
-                    case clang::TemplateArgument::ArgKind::Type: {
-                        toDo.func_Ttypes[i] = TAL->get(i).getAsType().getAsString(pp);
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Integral: {
-                        llvm::SmallString<10> name;
-                        TAL->get(i).getAsIntegral().toString(name);
-                        toDo.func_Ttypes[i] = name.str().str();
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Pack: {
-                        toDo.func_Ttypes.resize(toDo.func_Ttypes.size() + TAL->get(i).pack_size() - 1);
-                        for(auto pack_it = TAL->get(i).pack_begin(); pack_it != TAL->get(i).pack_end(); pack_it++) {
-                            switch(pack_it->getKind()) {
-                            case clang::TemplateArgument::ArgKind::Type: {
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = pack_it->getAsType().getAsString(pp);
-                                break;
-                            }
-                            case clang::TemplateArgument::ArgKind::Integral: {
-                                llvm::SmallString<10> name;
-                                pack_it->getAsIntegral().toString(name);
-                                toDo.func_Ttypes[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = name.str().str();
-                                break;
-                            }
-                            }
-                        }
-                        break;
-                    }
-                    case clang::TemplateArgument::ArgKind::Template: {
-                        llvm::raw_string_ostream OS(toDo.func_Ttypes[i]);
-#if INSTANTIATOR_LLVM_MAJOR > 13
-                        TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
-#else
-                        TAL->get(i).getAsTemplate().print(OS, pp, false);
-#endif
-                        OS.str();
-                        break;
-                    }
-                    }
-                }
-            }
-            llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
-            toDo.params.resize(params.size());
-            for(auto it = params.begin(); it != params.end(); it++) {
-                toDo.params[std::distance(params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-            }
-
-            llvm::ArrayRef<clang::ParmVarDecl*> nonresolved_params = TSI->getTemplate()->getTemplatedDecl()->parameters();
-            toDo.nonresolved_params.resize(nonresolved_params.size());
-            for(auto it = nonresolved_params.begin(); it != nonresolved_params.end(); it++) {
-                toDo.nonresolved_params[std::distance(nonresolved_params.begin(), it)] = Param::createFromParmVarDecl(*it, pp);
-            }
-            toDo.is_const = MFS->isConst();
-            std::optional<Injection> out;
-            out = toDo;
-            // std::cout << termcolor::green << "Created with success." << termcolor::reset << std::endl;
-            return out;
+        if(const clang::CXXMethodDecl* TMFS = llvm::dyn_cast<const clang::CXXMethodDecl>(MSI->getInstantiatedFrom())) {
+            toDo.nonresolved_params = internal::parseFunctionArgs(TMFS->parameters(), pp);
         }
     }
-    std::optional<Injection> out;
-    // std::cout << termcolor::red << "Not created." << termcolor::reset << std::endl;
-    return out;
+    return toDo;
 }
 
 std::string Injection::getInstantiation() const
