@@ -13,6 +13,7 @@ var hierarchy =
     [ "clang::PreprocessOnlyAction", null, [
       [ "DependencyAction", "classDependencyAction.html", null ]
     ] ],
+    [ "Template", "structTemplate.html", null ],
     [ "clang::tooling::ToolAction", null, [
       [ "ASTBuilderAction", "classASTBuilderAction.html", null ],
       [ "AllASTBuilderAction", "classAllASTBuilderAction.html", null ]

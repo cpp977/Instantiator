@@ -100,8 +100,14 @@ $(document).ready(function(){initNavTree('namespaceinternal.html',''); initResiz
 Functions</h2></td></tr>
 <tr class="memitem:ab081356ec892df627703a8998a648da8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinternal.html#ab081356ec892df627703a8998a648da8">is_cached</a> (const clang::tooling::CompilationDatabase &amp;db, std::string filename)</td></tr>
 <tr class="separator:ab081356ec892df627703a8998a648da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd2969c330ae28eaa76995319c2f8ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinternal.html#a6dd2969c330ae28eaa76995319c2f8ea">parseTemplateArgs</a> (const clang::TemplateArgumentList *TAL, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:a6dd2969c330ae28eaa76995319c2f8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add043c12c860c56ab7a5f4245d97dbe6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParam.html">Param</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinternal.html#add043c12c860c56ab7a5f4245d97dbe6">parseFunctionArgs</a> (std::vector&lt; clang::ParmVarDecl * &gt; Args, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:add043c12c860c56ab7a5f4245d97dbe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Namespace for internal functions. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ab081356ec892df627703a8998a648da8" name="ab081356ec892df627703a8998a648da8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab081356ec892df627703a8998a648da8">&#9670;&nbsp;</a></span>is_cached()</h2>
 
@@ -127,8 +133,93 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Helper function to detect whether the AST for <code>filename</code> is cached on disk. </p><dl class="section return"><dt>Returns</dt><dd><code>true</code> if the AST is cached, <code>false</code> if not.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>: <a href="https://clang.llvm.org/doxygen/classclang_1_1tooling_1_1CompilationDatabase.html">clang::tooling::CompilationDatabase</a> to be able to invoke the compiler for getting the dependencies. </td></tr>
+    <tr><td class="paramname">filename</td><td>: Name of the source file </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="ASTCreation_8cpp_source.html#l00021">21</a> of file <a class="el" href="ASTCreation_8cpp_source.html">ASTCreation.cpp</a>.</p>
+
+</div>
+</div>
+<a id="add043c12c860c56ab7a5f4245d97dbe6" name="add043c12c860c56ab7a5f4245d97dbe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add043c12c860c56ab7a5f4245d97dbe6">&#9670;&nbsp;</a></span>parseFunctionArgs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structParam.html">Param</a> &gt; internal::parseFunctionArgs </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; clang::ParmVarDecl * &gt;&#160;</td>
+          <td class="paramname"><em>Args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::PrintingPolicy&#160;</td>
+          <td class="paramname"><em>pp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Helper function to load function parameters. </p><dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;<a class="el" href="structParam.html" title="Struct for the collection of all relevant data for a function parameter.">Param</a>&gt;</code> with an instance of <a class="el" href="structParam.html" title="Struct for the collection of all relevant data for a function parameter.">Param</a> for each parameter.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Args</td><td>Array of <a href="https://clang.llvm.org/doxygen/classclang_1_1ParmVarDecl.html">clang::ParmVarDecl</a>. </td></tr>
+    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Parsing_8cpp_source.html#l00058">58</a> of file <a class="el" href="Parsing_8cpp_source.html">Parsing.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6dd2969c330ae28eaa76995319c2f8ea" name="a6dd2969c330ae28eaa76995319c2f8ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd2969c330ae28eaa76995319c2f8ea">&#9670;&nbsp;</a></span>parseTemplateArgs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; internal::parseTemplateArgs </td>
+          <td>(</td>
+          <td class="paramtype">const clang::TemplateArgumentList *&#160;</td>
+          <td class="paramname"><em>TAL</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::PrintingPolicy&#160;</td>
+          <td class="paramname"><em>pp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Helper function to load template arguments. </p><dl class="section return"><dt>Returns</dt><dd><code>std::vector&lt;std::string&gt;</code> with the names of all types of template arguments. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TAL</td><td>Pointer to a <a href="https://clang.llvm.org/doxygen/classclang_1_1TemplateArgumentList.html">clang::TemplateArgumentList</a>. </td></tr>
+    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="structTemplate.html" title="Struct for the collection of all relevant data for a template function which can provide a definition...">Template</a> arguments can have different kinds (types, integral values, packs, template template). The function returns the type names for typed template parameters and the values for integral parameters. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parsing_8cpp_source.html#l00007">7</a> of file <a class="el" href="Parsing_8cpp_source.html">Parsing.cpp</a>.</p>
 
 </div>
 </div>
@@ -139,7 +230,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceinternal.html">internal</a></li>
-    <li class="footer">Generated on Mon Jan 3 2022 15:46:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Jan 6 2022 16:01:06 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

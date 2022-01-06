@@ -1,4 +1,4 @@
 <map id="DependencyAction" name="DependencyAction">
-<area shape="rect" id="node1" title=" " alt="" coords="37,80,181,107"/>
+<area shape="rect" id="node1" title="Action to compute the (header) dependencies of a source file." alt="" coords="37,80,181,107"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,5,212,32"/>
 </map>

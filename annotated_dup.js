@@ -8,5 +8,6 @@ var annotated_dup =
     [ "InjectInstantiation", "classInjectInstantiation.html", "classInjectInstantiation" ],
     [ "Injection", "structInjection.html", "structInjection" ],
     [ "myDependencyCollector", "classmyDependencyCollector.html", "classmyDependencyCollector" ],
-    [ "Param", "structParam.html", "structParam" ]
+    [ "Param", "structParam.html", "structParam" ],
+    [ "Template", "structTemplate.html", "structTemplate" ]
 ];

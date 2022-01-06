@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 296.00 66.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 62)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node11 -->
+<!-- Node12 -->
 <g id="node1" class="node">
-<title>Node11</title>
+<title>Node12</title>
 <g id="a_node1"><a xlink:title=" ">
 <polygon fill="none" stroke="#bfbfbf" points="0,-19.5 0,-38.5 139,-38.5 139,-19.5 0,-19.5"/>
 <text text-anchor="middle" x="69.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">clang::tooling::ToolAction</text>
@@ -26,24 +26,24 @@
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node0 -->
+<!-- Node12&#45;&gt;Node0 -->
 <g id="edge1" class="edge">
-<title>Node11&#45;&gt;Node0</title>
+<title>Node12&#45;&gt;Node0</title>
 <path fill="none" stroke="midnightblue" d="M149.43,-38.37C160.05,-39.63 170.69,-40.9 180.62,-42.08"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="149.63,-34.87 139.28,-37.17 148.8,-41.82 149.63,-34.87"/>
 </g>
-<!-- Node13 -->
+<!-- Node14 -->
 <g id="node3" class="node">
-<title>Node13</title>
+<title>Node14</title>
 <g id="a_node3"><a xlink:href="classAllASTBuilderAction.html" target="_top" xlink:title="Action to compute all ASTs.">
 <polygon fill="none" stroke="black" points="175,-0.5 175,-19.5 288,-19.5 288,-0.5 175,-0.5"/>
 <text text-anchor="middle" x="231.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">AllASTBuilderAction</text>
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node13 -->
+<!-- Node12&#45;&gt;Node14 -->
 <g id="edge2" class="edge">
-<title>Node11&#45;&gt;Node13</title>
+<title>Node12&#45;&gt;Node14</title>
 <path fill="none" stroke="midnightblue" d="M149.34,-19.64C157.94,-18.62 166.56,-17.59 174.79,-16.62"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="148.8,-16.18 139.28,-20.83 149.63,-23.13 148.8,-16.18"/>
 </g>

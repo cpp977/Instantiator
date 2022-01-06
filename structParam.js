@@ -3,6 +3,7 @@ var structParam =
     [ "compare", "structParam.html#a2d31b0440e164ef89b677dcee15eebf6", null ],
     [ "compare_cvr", "structParam.html#a98ccfbcb7ec90e8b8d17871df90336a7", null ],
     [ "createFromParmVarDecl", "structParam.html#aea6fc0c0047dba35dd1f56cf3f687209", null ],
+    [ "operator==", "structParam.html#a15f555dff9decc0f00432259d95acc9b", null ],
     [ "is_const", "structParam.html#a485f75a874e806bcc3c99e20354186ae", null ],
     [ "is_dependent", "structParam.html#a019dd05a256c8ed6c5bf99c7377838dd", null ],
     [ "is_forwarding_reference", "structParam.html#af8e07add138f1a5b7d3097386d0146d7", null ],

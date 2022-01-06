@@ -120,13 +120,15 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a4faa27e69083c1334ee324240c0be2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a2a4faa27e69083c1334ee324240c0be2">getInstantiation</a> () const</td></tr>
 <tr class="separator:a2a4faa27e69083c1334ee324240c0be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28840645014f686af288095dc29c7bd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a28840645014f686af288095dc29c7bd3">match</a> (const <a class="el" href="structInjection.html">Injection</a> &amp;other) const</td></tr>
+<tr class="separator:a28840645014f686af288095dc29c7bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:abd9e4a7c0346109bc9407df0fe2ed08b"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b">createFromMFS</a> (const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</td></tr>
-<tr class="separator:abd9e4a7c0346109bc9407df0fe2ed08b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fec4fb389b87bf0ffc7af071cc8f9d5"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS</a> (const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</td></tr>
-<tr class="separator:a1fec4fb389b87bf0ffc7af071cc8f9d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba36f8d1f3d7524de69c736d2c82f3f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structInjection.html">Injection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a5ba36f8d1f3d7524de69c736d2c82f3f">createFromMFS</a> (const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:a5ba36f8d1f3d7524de69c736d2c82f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e85cb6e2fadf5441c7f03f6bb48245"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structInjection.html">Injection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInjection.html#a26e85cb6e2fadf5441c7f03f6bb48245">createFromFS</a> (const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</td></tr>
+<tr class="separator:a26e85cb6e2fadf5441c7f03f6bb48245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -177,8 +179,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1fec4fb389b87bf0ffc7af071cc8f9d5" name="a1fec4fb389b87bf0ffc7af071cc8f9d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fec4fb389b87bf0ffc7af071cc8f9d5">&#9670;&nbsp;</a></span>createFromFS()</h2>
+<a id="a26e85cb6e2fadf5441c7f03f6bb48245" name="a26e85cb6e2fadf5441c7f03f6bb48245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e85cb6e2fadf5441c7f03f6bb48245">&#9670;&nbsp;</a></span>createFromFS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +189,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt; Injection::createFromFS </td>
+          <td class="memname"><a class="el" href="structInjection.html">Injection</a> Injection::createFromFS </td>
           <td>(</td>
           <td class="paramtype">const clang::FunctionDecl *&#160;</td>
           <td class="paramname"><em>FS</em>, </td>
@@ -210,21 +212,29 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Function to load all needed data from a <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html">clang::FunctionDecl</a>. </p><dl class="section return"><dt>Returns</dt><dd>If <code>FS</code> is appropriate the <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> otherwise an empty <code>std::optional</code>.</dd></dl>
+<p >Function to load all needed data from a <a href="https://clang.llvm.org/doxygen/classclang_1_1FunctionDecl.html">clang::FunctionDecl</a>. </p><dl class="section return"><dt>Returns</dt><dd>Data bundled into an <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> instance.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">FS</td><td>Pointer to a <code>clang::FunctionDecl</code>. </td></tr>
-    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created. </td></tr>
+    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created.</td></tr>
   </table>
   </dd>
 </dl>
+<p>The following data is parsed:</p><ul>
+<li>Function name -&gt; func_name</li>
+<li>Nested namespace in which the function is defined -&gt; nested_namespace</li>
+<li>Function return type -&gt; return_type</li>
+<li>Function template arguments -&gt; func_Ttypes</li>
+<li>Function parameters with fully resolved types -&gt; params</li>
+<li>Function parameters with nonresolved types -&gt; nonresolved_params </li>
+</ul>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00013">13</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00029">29</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
 
 </div>
 </div>
-<a id="abd9e4a7c0346109bc9407df0fe2ed08b" name="abd9e4a7c0346109bc9407df0fe2ed08b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd9e4a7c0346109bc9407df0fe2ed08b">&#9670;&nbsp;</a></span>createFromMFS()</h2>
+<a id="a5ba36f8d1f3d7524de69c736d2c82f3f" name="a5ba36f8d1f3d7524de69c736d2c82f3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba36f8d1f3d7524de69c736d2c82f3f">&#9670;&nbsp;</a></span>createFromMFS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +243,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="structInjection.html">Injection</a> &gt; Injection::createFromMFS </td>
+          <td class="memname"><a class="el" href="structInjection.html">Injection</a> Injection::createFromMFS </td>
           <td>(</td>
           <td class="paramtype">const clang::CXXMethodDecl *&#160;</td>
           <td class="paramname"><em>MFS</em>, </td>
@@ -256,17 +266,25 @@ Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Function to load all needed data from a <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a>. </p><dl class="section return"><dt>Returns</dt><dd>If <code>MFS</code> is appropriate the <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> otherwise an empty <code>std::optional</code>.</dd></dl>
+<p >Function to load all needed data from a <a href="https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html">clang::CXXMethodDecl</a>. </p><dl class="section return"><dt>Returns</dt><dd>Data bundled into an <a class="el" href="structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte...">Injection</a> instance.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">MFS</td><td>Pointer to a <code>clang::CXXMethodDecl</code>. </td></tr>
-    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created. </td></tr>
+    <tr><td class="paramname">pp</td><td><a href="https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html">clang::PrintingPolicy</a> which controls how strings are created.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Remove duplicate code by using code from <code><a class="el" href="structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5">createFromFS()</a></code>. </dd></dl>
+<p>Calls <a class="el" href="structInjection.html#a26e85cb6e2fadf5441c7f03f6bb48245">createFromFS()</a> and loads the following member function information:</p><ul>
+<li>Sets is_member to true.</li>
+<li>Determine whether it is a contructor -&gt; is_constructor</li>
+<li>Determines whether this is a const qualified member function -&gt; is_const</li>
+<li>Resets the nested namespace qualifier to the nested namespace of the parent class -&gt; nested_namespace</li>
+<li>Class name of parent class -&gt; class_name</li>
+<li><a class="el" href="structTemplate.html" title="Struct for the collection of all relevant data for a template function which can provide a definition...">Template</a> arguments of the class -&gt; class_Ttypes</li>
+<li>nonresolved function parameters in the case that this function is not a function template -&gt; nonresolved_params </li>
+</ul>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00093">93</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00051">51</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -286,7 +304,36 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The string which needs to inserted to explicitly instantiate this function template or class template member function. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00270">270</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00078">78</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a28840645014f686af288095dc29c7bd3" name="a28840645014f686af288095dc29c7bd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28840645014f686af288095dc29c7bd3">&#9670;&nbsp;</a></span>match()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Injection::match </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structInjection.html">Injection</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Checks whether <code>other</code> does exactly match <code>this</code> entry. I.e.:</p><ul>
+<li>function name</li>
+<li>resolved funtion parameters</li>
+<li>namespace</li>
+<li>function template arguments</li>
+<li>class template arguments</li>
+<li>const qualifier</li>
+<li>constructor bit </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="Injection_8cpp_source.html#l00015">15</a> of file <a class="el" href="Injection_8cpp_source.html">Injection.cpp</a>.</p>
 
 </div>
 </div>
@@ -376,7 +423,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Unused so far. Intended for more efficiency in the lookup step. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00084">84</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00083">83</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -393,7 +440,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this member function is const qualified. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00072">72</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00071">71</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -410,7 +457,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this a class constructor. </p><dl class="section note"><dt>Note</dt><dd>Names of class constructors are special in c++. We therefore don't need to compare it when we search for matches of constructors. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00081">81</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00080">80</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -427,7 +474,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Whether this is a member function of some class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00075">75</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Injection_8hpp_source.html#l00074">74</a> of file <a class="el" href="Injection_8hpp_source.html">Injection.hpp</a>.</p>
 
 </div>
 </div>
@@ -511,7 +558,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structInjection.html">Injection</a></li>
-    <li class="footer">Generated on Mon Jan 3 2022 15:46:39 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+    <li class="footer">Generated on Thu Jan 6 2022 16:01:06 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
 <script type="text/javascript">

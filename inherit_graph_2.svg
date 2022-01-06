@@ -20,7 +20,7 @@
 <!-- Node0 -->
 <g id="node2" class="node">
 <title>Node0</title>
-<g id="a_node2"><a xlink:href="classDependencyAction.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classDependencyAction.html" target="_top" xlink:title="Action to compute the (header) dependencies of a source file.">
 <polygon fill="none" stroke="black" points="191,-0.5 191,-19.5 299,-19.5 299,-0.5 191,-0.5"/>
 <text text-anchor="middle" x="245" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">DependencyAction</text>
 </a>

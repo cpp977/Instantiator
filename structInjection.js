@@ -1,9 +1,10 @@
 var structInjection =
 [
     [ "StringType", "structInjection.html#a4b7830c62e31304e24c218e304311ef2", null ],
-    [ "createFromFS", "structInjection.html#a1fec4fb389b87bf0ffc7af071cc8f9d5", null ],
-    [ "createFromMFS", "structInjection.html#abd9e4a7c0346109bc9407df0fe2ed08b", null ],
+    [ "createFromFS", "structInjection.html#a26e85cb6e2fadf5441c7f03f6bb48245", null ],
+    [ "createFromMFS", "structInjection.html#a5ba36f8d1f3d7524de69c736d2c82f3f", null ],
     [ "getInstantiation", "structInjection.html#a2a4faa27e69083c1334ee324240c0be2", null ],
+    [ "match", "structInjection.html#a28840645014f686af288095dc29c7bd3", null ],
     [ "class_name", "structInjection.html#abd99e58f14f98a61f345bd98129458b5", null ],
     [ "class_Ttypes", "structInjection.html#a5b691e807d0004edc88722b7f7645c09", null ],
     [ "func_name", "structInjection.html#a6173d575985f16333eeeed8faef2f88a", null ],
