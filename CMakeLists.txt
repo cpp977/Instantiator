@@ -43,7 +43,8 @@ add_executable(Instantiator Instantiator.cpp
   src/Actions/ASTBuilderAction.cpp
   src/Actions/DependencyAction.cpp
   src/ASTCreation.cpp
-  src/Parsing.cpp)
+  src/Parsing.cpp
+  src/Template.cpp)
 
 # set_target_properties(Instantiator PROPERTIES SUFFIX ${LLVM_VERSION_MAJOR})
 
