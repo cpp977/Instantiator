@@ -66,7 +66,6 @@ struct Injection
      * This information is needed to compare this Injection with possible candidates which provide the appropriate definition.
      */
     std::vector<Param> nonresolved_params;
-    // std::vector<std::string> params_name;
 
     /**Whether this member function is const qualified.*/
     bool is_const = false;
@@ -87,6 +86,18 @@ struct Injection
      * \return The string which needs to inserted to explicitly instantiate this function template or class template member function.
      */
     std::string getInstantiation() const;
+
+    /**
+     * Checks whether \p other does exactly match `this` entry. I.e.:
+     *  - function name
+     *  - resolved funtion parameters
+     *  - namespace
+     *  - function template arguments
+     *  - class template arguments
+     *  - const qualifier
+     *  - constructor bit
+     */
+    bool match(const Injection& other) const;
 
     /**
      * Function to load all needed data from a [clang::CXXMethodDecl](https://clang.llvm.org/doxygen/classclang_1_1CXXMethodDecl.html).
