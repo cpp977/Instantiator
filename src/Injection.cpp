@@ -12,6 +12,20 @@
 
 #include "Parsing.hpp"
 
+bool Injection::match(const Injection& other) const
+{
+    if(is_constructor != other.is_constructor) { return false; }
+    if(not(is_constructor) and func_name != other.func_name) { return false; }
+    if(nested_namespace != other.nested_namespace) { return false; }
+    if(params.size() != other.params.size()) { return false; }
+    if(class_name != other.class_name) { return false; }
+    if(is_const != other.is_const) { return false; }
+    if(func_Ttypes != other.func_Ttypes) { return false; }
+    if(class_Ttypes != other.class_Ttypes) { return false; }
+    if(params != other.params) { return false; }
+    return true;
+}
+
 Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
 {
     // std::cout << "Create Injection from member function " << FS->getNameAsString() << std::endl;
@@ -24,9 +38,12 @@ Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::Printing
     FS->printNestedNameSpecifier(OS, pp);
     OS.str();
     toDo.func_Ttypes = internal::parseTemplateArgs(FS->getTemplateSpecializationArgs(), pp);
-    toDo.params = internal::parseFunctionArgs(FS->parameters(), pp);
+    std::vector<clang::ParmVarDecl*> parms(FS->parameters().begin(), FS->parameters().end());
+    toDo.params = internal::parseFunctionArgs(parms, pp);
     if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
-        toDo.nonresolved_params = internal::parseFunctionArgs(TSI->getTemplate()->getTemplatedDecl()->parameters(), pp);
+        std::vector<clang::ParmVarDecl*> nonresolved_parms(TSI->getTemplate()->getTemplatedDecl()->parameters().begin(),
+                                                           TSI->getTemplate()->getTemplatedDecl()->parameters().end());
+        toDo.nonresolved_params = internal::parseFunctionArgs(nonresolved_parms, pp);
     }
     return toDo;
 }
@@ -51,7 +68,8 @@ Injection Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::Print
 
     if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
         if(const clang::CXXMethodDecl* TMFS = llvm::dyn_cast<const clang::CXXMethodDecl>(MSI->getInstantiatedFrom())) {
-            toDo.nonresolved_params = internal::parseFunctionArgs(TMFS->parameters(), pp);
+            std::vector<clang::ParmVarDecl*> nonresolved_parms(TMFS->parameters().begin(), TMFS->parameters().end());
+            toDo.nonresolved_params = internal::parseFunctionArgs(nonresolved_parms, pp);
         }
     }
     return toDo;
