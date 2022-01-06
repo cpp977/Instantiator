@@ -42,7 +42,6 @@ struct Param
 
     /**
      * Compares if two parameters are the same.
-     * \todo How to correctly compare dependent names?
      */
     bool compare(const Param& other) const;
 
