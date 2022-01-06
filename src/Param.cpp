@@ -10,6 +10,29 @@
 Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::PrintingPolicy pp)
 {
     Param out;
+    // std::cout << parm->getNameAsString() << std::endl;
+    // clang::QualType qt = parm->getOriginalType().getNonReferenceType();
+    // const clang::Type* t = qt.getTypePtrOrNull();
+    // std::cout << "nullptr: " << std::boolalpha << (t == nullptr) << std::endl;
+    // // if(auto TST = t->getAs<const clang::TemplateSpecializationType>()) {
+    // //     std::cout << "TST" << std::endl;
+    // // } else {
+    // //     std::cout << "non TST" << std::endl;
+    // // }
+    // if(auto* TST = llvm::dyn_cast<clang::TemplateSpecializationType>(parm->getOriginalType().getTypePtrOrNull())) {
+    //     out.name = "buggy";
+    //     std::cout << "Warning TST" << std::endl;
+    //     clang::TemplateDecl* TD = TST->getTemplateName().getAsTemplateDecl();
+
+    //     clang::IdentifierInfo* II = TD->getIdentifier();
+    //     std::string local;
+    //     llvm::raw_string_ostream OS(local);
+    //     OS << II->getName();
+    //     OS.str();
+    //     std::cout << "local=" << local << std::endl;
+    // } else {
+    //     std::cout << "non TST" << std::endl;
+    // }
     out.name = parm->getOriginalType().getAsString(pp); //.getCanonicalType()
 
     out.is_lvalue_reference = parm->getOriginalType().getTypePtr()->isLValueReferenceType();
@@ -55,20 +78,10 @@ bool Param::compare_cvr(const Param& other) const
 
 bool Param::compare(const Param& other) const
 {
-    // if(auto it1 = name.find("type-parameter"), it2 = other.name.find("type-parameter"); it1 != std::string::npos and it2 != std::string::npos) {
-    //     return true;
-    // }
     std::regex r("type-parameter-[0-9]+-[0-9]+");
     auto name_corrected = std::regex_replace(name, r, "type-parameter-X-Y");
     auto other_name_corrected = std::regex_replace(other.name, r, "type-parameter-X-Y");
     return name_corrected == other_name_corrected;
-    if(is_template_param or other.is_template_param) {
-        if(is_forwarding_reference or other.is_forwarding_reference) { return true; }
-        return compare_cvr(other);
-    } else {
-        if(template_name != "" and other.template_name != "") { return compare_cvr(other) and template_name == other.template_name; }
-        return compare_cvr(other) and name == other.name;
-    }
 }
 
 std::ostream& operator<<(std::ostream& stream, const Param& p)
