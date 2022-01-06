@@ -45,6 +45,8 @@ struct Param
      * \todo How to correctly compare dependent names?
      */
     bool compare(const Param& other) const;
+
+    inline bool operator==(const Param& other) const { return this->compare(other); }
 };
 
 /**Pretty print a \p Param*/
