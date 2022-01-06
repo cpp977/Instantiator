@@ -55,7 +55,7 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
     return out;
 }
 
-std::vector<Param> parseFunctionArgs(llvm::ArrayRef<clang::ParmVarDecl*> Args, clang::PrintingPolicy pp)
+std::vector<Param> parseFunctionArgs(std::vector<clang::ParmVarDecl*> Args, clang::PrintingPolicy pp)
 {
     std::vector<Param> out;
     out.resize(Args.size());
