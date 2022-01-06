@@ -1,6 +1,9 @@
 #ifndef PARSING_H_
 #define PARSING_H_
 
+#include <string>
+#include <vector>
+
 #include "clang/AST/PrettyPrinter.h"
 
 #include "Param.hpp"
@@ -36,7 +39,7 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
  * \param Args Array of [clang::ParmVarDecl](https://clang.llvm.org/doxygen/classclang_1_1ParmVarDecl.html).
  * \param pp [clang::PrintingPolicy](https://clang.llvm.org/doxygen/structclang_1_1PrintingPolicy.html) which controls how strings are created.
  */
-std::vector<Param> parseFunctionArgs(llvm::ArrayRef<clang::ParmVarDecl*> Args, clang::PrintingPolicy pp);
+std::vector<Param> parseFunctionArgs(std::vector<clang::ParmVarDecl*> Args, clang::PrintingPolicy pp);
 } // namespace internal
 
 #endif
