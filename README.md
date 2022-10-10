@@ -28,7 +28,7 @@ cmake ..
 make && [sudo] make install
 ```
 For a successful build you need a c++-17 compiler and LLVM/clang libraries.
-Because of recent bufix in clang (https://reviews.llvm.org/D108794) the most recent version (14.0.0git) of LLVM/clang is needed for full functionality.
+Because of recent bufix in clang (https://reviews.llvm.org/D108794) version 14 of LLVM/clang is needed for full functionality.
 With an older version of LLVM/clang you might run into troubles with the correct formatting of `template template` parameters.
 To control which version of LLVM is used, you can set the cmake variable `LLVM_ROOT` to the root of the llvm installation.
 To control which version of clang is used, you can set the cmake variable `Clang_DIR` to the root of the directory where the file ClangConfig.cmake is located.
