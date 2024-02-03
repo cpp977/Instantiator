@@ -1,5 +1,15 @@
 <map id="Injection" name="Injection">
-<area shape="rect" id="node1" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte..." alt="" coords="35,259,114,285"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,96,118,123"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,5,144,47"/>
+<area shape="rect" id="Node000001" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte..." alt="" coords="141,465,219,491"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="207,95,294,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,127,150,145,101,170,56,204,37,225,21,248,11,270,8,290,12,310,21,333,49,377,87,414,126,443,159,463,156,467,123,447,83,418,45,381,16,336,7,311,3,290,6,269,17,245,33,222,52,200,98,166,148,140,194,122"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="157,278,344,303"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="253,134,253,278,248,278,248,134"/>
+<area shape="rect" id="Node000006" href="$structParam.html" title="Struct for the collection of all relevant data for a function parameter." alt="" coords="335,197,398,223"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="295,124,323,142,347,170,363,196,359,199,343,173,320,146,292,128"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="181,5,320,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="253,59,253,94,248,94,248,59"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="228,314,210,335,195,360,186,388,182,417,182,465,176,465,176,417,181,387,190,358,205,332,225,311"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="293,361,456,386"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="342,395,204,467,201,463,340,390"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="371,236,377,360,372,361,365,237"/>
 </map>

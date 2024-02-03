@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../Injection_8hpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8hpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp'],['../Template_8hpp.html#afd1d507e9e2001fd4f5b94e740deb3ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Template &amp;toDo):&#160;Template.cpp'],['../Injection_8cpp.html#a58a6fd5fcbfe67f2189350e165ae86ba',1,'operator&lt;&lt;(std::ostream &amp;stream, const Injection &amp;toDo):&#160;Injection.cpp'],['../Param_8cpp.html#a88603e4c989fb0f5ac701dea8e41af3e',1,'operator&lt;&lt;(std::ostream &amp;stream, const Param &amp;p):&#160;Param.cpp'],['../Template_8cpp.html#a2c8bfea99d33b72a79eb868777940459',1,'operator&lt;&lt;(std::ostream &amp;stream, const Template &amp;candidate):&#160;Template.cpp']]],
-  ['operator_3d_3d_1',['operator==',['../structParam.html#a15f555dff9decc0f00432259d95acc9b',1,'Param']]]
+  ['name_0',['name',['../structParam.html#a872b203e1ebdf4e182bc77546e743afc',1,'Param']]],
+  ['ndash_20find_20template_20instantiations_20with_20missing_20definiton_1',['Lookup step &amp;ndash; find template instantiations with missing definiton',['../index.html#autotoc_md4',1,'']]],
+  ['ndash_20inject_20the_20instantations_20where_20the_20definitons_20are_20present_2',['Insertion step &amp;ndash; inject the instantations where the definitons are present',['../index.html#autotoc_md5',1,'']]],
+  ['needsystemdependencies_3',['needSystemDependencies',['../classmyDependencyCollector.html#a435792381214e0ed56583dc66f86e33b',1,'myDependencyCollector']]],
+  ['nested_5fnamespace_4',['nested_namespace',['../structInjection.html#a4332cb0bc9a6abb251ce178af4905c0b',1,'Injection::nested_namespace'],['../structTemplate.html#a3443ea0ef761c6763fe55de65e181548',1,'Template::nested_namespace']]],
+  ['nonresolved_5fparams_5',['nonresolved_params',['../structInjection.html#ad53178c0a197c6ff14b5d3506133d163',1,'Injection']]]
 ];

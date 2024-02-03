@@ -106,7 +106,7 @@ var NAVTREEINDEX0 =
 "classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb":[5,0,5,2],
 "classes.html":[5,1],
 "classmyDependencyCollector.html":[5,0,7],
-"classmyDependencyCollector.html#a0abcd12b14265119478c9b068861457e":[5,0,7,0],
+"classmyDependencyCollector.html#a435792381214e0ed56583dc66f86e33b":[5,0,7,0],
 "classmyDependencyCollector.html#a94215f27d5cbaa33041239a0eb0be836":[5,0,7,1],
 "dir_0852b6145d5475d7a8e4df489fe46e4c.html":[6,0,0],
 "dir_0f2339d204149e590ec376b2c2ae3818.html":[6,0,2,0],

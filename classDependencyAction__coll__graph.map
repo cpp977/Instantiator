@@ -1,4 +1,17 @@
 <map id="DependencyAction" name="DependencyAction">
-<area shape="rect" id="node1" title="Action to compute the (header) dependencies of a source file." alt="" coords="37,80,181,107"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,212,32"/>
+<area shape="rect" id="Node000001" title="Action to compute the (header) dependencies of a source file." alt="" coords="933,63,1077,88"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="569,5,776,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="775,30,910,53,947,60,946,65,909,58,774,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="555,55,791,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="804,73,933,73,933,78,804,78"/>
+<area shape="rect" id="Node000004" href="$classmyDependencyCollector.html" title="This class sets the options for the collection of dependencies." alt="" coords="259,63,441,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="455,73,554,73,554,78,455,78"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,63,209,88"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="223,73,258,73,258,78,223,78"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="579,120,766,145"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="774,115,909,93,946,85,947,91,910,98,775,121"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="307,120,393,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="407,130,579,130,579,135,407,135"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="38,113,177,153"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="190,130,306,130,306,135,190,135"/>
 </map>

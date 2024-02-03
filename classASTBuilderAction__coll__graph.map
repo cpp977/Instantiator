@@ -1,6 +1,11 @@
 <map id="ASTBuilderAction" name="ASTBuilderAction">
-<area shape="rect" id="node1" title="Action to compute a single AST of file filename." alt="" coords="81,185,216,212"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,96,191,123"/>
-<area shape="rect" id="node3" title=" " alt="" coords="215,96,301,123"/>
-<area shape="rect" id="node4" title=" " alt="" coords="189,5,327,47"/>
+<area shape="rect" id="Node000001" title="Action to compute a single AST of file filename." alt="" coords="232,197,367,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,191,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,131,276,195,273,200,134,135"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="215,95,384,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="302,149,302,197,297,197,297,149"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="408,102,495,127"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="422,137,320,199,317,195,420,132"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="382,5,521,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="454,59,454,102,449,102,449,59"/>
 </map>

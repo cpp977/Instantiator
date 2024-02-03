@@ -1,4 +1,21 @@
 <map id="InjectInstantiation" name="InjectInstantiation">
-<area shape="rect" id="node1" title="MatchCallback for injection of explicit instantiations into the source files at appropriate places." alt="" coords="43,95,183,121"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,220,47"/>
+<area shape="rect" id="Node000001" title="MatchCallback for injection of explicit instantiations into the source files at appropriate places." alt="" coords="64,656,204,681"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,553,220,593"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,606,134,655,129,656,117,607"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="244,561,421,586"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="297,594,160,658,157,653,295,589"/>
+<area shape="rect" id="Node000004" href="$structInjection.html" title="Struct for the collection of all relevant data for a template instantiation which needs to be inserte..." alt="" coords="293,465,372,491"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="335,504,335,561,330,561,330,504"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="360,95,447,120"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="348,127,303,145,254,170,209,204,189,225,174,248,163,270,161,290,164,310,174,333,202,377,239,414,278,443,311,463,309,467,275,447,236,418,198,381,169,336,159,311,155,290,158,269,169,245,185,222,205,200,251,166,300,140,346,122"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="310,278,497,303"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="406,134,406,278,401,278,401,134"/>
+<area shape="rect" id="Node000009" href="$structParam.html" title="Struct for the collection of all relevant data for a function parameter." alt="" coords="488,197,551,223"/>
+<area shape="poly" id="edge10_Node000009_Node000005" title=" " alt="" coords="448,124,476,142,500,170,516,196,511,199,496,173,472,146,445,128"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="334,5,473,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="406,59,406,94,401,94,401,59"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="381,314,362,335,347,360,338,388,334,417,334,465,329,465,329,417,333,387,342,358,358,332,377,311"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="446,361,609,386"/>
+<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="495,395,356,467,354,463,492,390"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="523,236,529,360,524,361,518,237"/>
 </map>

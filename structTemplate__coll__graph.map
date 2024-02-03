@@ -1,5 +1,12 @@
 <map id="Template" name="Template">
-<area shape="rect" id="node1" title="Struct for the collection of all relevant data for a template function which can provide a definition..." alt="" coords="33,215,116,241"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,96,118,123"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,5,144,47"/>
+<area shape="rect" id="Node000001" title="Struct for the collection of all relevant data for a template function which can provide a definition..." alt="" coords="33,403,116,428"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,95,118,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,134,55,204,51,247,52,290,62,354,74,402,69,403,57,355,47,291,46,247,50,203,65,132"/>
+<area shape="rect" id="Node000005" href="$structParam.html" title="Struct for the collection of all relevant data for a function parameter." alt="" coords="135,197,198,223"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="97,129,158,196,154,199,93,132"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,144,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,59,77,94,72,94,72,59"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="109,315,272,340"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="166,350,92,405,89,400,163,346"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="180,235,184,246,191,283,193,314,188,315,185,284,179,247,175,236"/>
 </map>

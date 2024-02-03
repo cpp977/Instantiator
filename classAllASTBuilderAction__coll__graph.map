@@ -1,4 +1,9 @@
 <map id="AllASTBuilderAction" name="AllASTBuilderAction">
-<area shape="rect" id="node1" title="Action to compute all ASTs." alt="" coords="23,80,173,107"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,191,32"/>
+<area shape="rect" id="Node000001" title="Action to compute all ASTs." alt="" coords="44,211,195,236"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,115,191,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,153,119,210,114,211,101,154"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="215,108,402,148"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,156,144,213,142,208,257,152"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="224,5,393,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="311,59,311,108,306,108,306,59"/>
 </map>

@@ -1,4 +1,5 @@
 <map id="ASTBuilderAction" name="ASTBuilderAction">
-<area shape="rect" id="node1" title="Action to compute a single AST of file filename." alt="" coords="31,80,165,107"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,5,191,32"/>
+<area shape="rect" id="Node000001" title="Action to compute a single AST of file filename." alt="" coords="31,79,165,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,191,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,44,101,79,95,79,95,44"/>
 </map>
