@@ -14,7 +14,7 @@ class myDependencyCollector : public clang::DependencyCollector
 {
 public:
     bool sawDependency(llvm::StringRef Filename, bool FromModule, bool IsSystem, bool IsModuleFile, bool IsMissing) override;
-    bool needSystemDependencies();
+    bool needSystemDependencies() override;
 };
 
 /**
