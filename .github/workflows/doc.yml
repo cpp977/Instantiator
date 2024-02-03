@@ -30,7 +30,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz libclang-cpp11 libclang1-11
-          wget https://www.doxygen.nl/files/doxygen-1.9.2.linux.bin.tar.gz
+          wget https://github.com/doxygen/doxygen/releases/download/Release_1_9_2/doxygen-1.9.2.linux.bin.tar.gz
           tar -xvzf doxygen-1.9.2.linux.bin.tar.gz
           ln -s doxygen-1.9.2/bin/doxygen doxygen
       - name: Generate Documentation
