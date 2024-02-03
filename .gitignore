@@ -33,3 +33,8 @@
 
 # Doc
 docs/
+
+# clang-format
+.clang-format
+
+compile_commands.json
