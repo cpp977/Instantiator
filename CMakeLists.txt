@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.13.4)
 project(Instantiator VERSION 0.3.0 LANGUAGES CXX)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/CPM.cmake)
 CPMAddPackage(
