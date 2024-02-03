@@ -26,13 +26,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: install Doxygen 1.9.2
+      - name: install Doxygen 1.9.8
         run: |
           sudo apt-get update
           sudo apt-get install -y graphviz libclang-cpp11 libclang1-11
           wget https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.linux.bin.tar.gz
-          tar -xvzf doxygen-1.9.2.linux.bin.tar.gz
-          ln -s doxygen-1.9.2/bin/doxygen doxygen
+          tar -xvzf doxygen-1.9.8.linux.bin.tar.gz
+          ln -s doxygen-1.9.8/bin/doxygen doxygen
       - name: Generate Documentation
         run: ./doxygen Doxyfile
       - name: Deploy
