@@ -35,6 +35,9 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
                         out[i + std::distance(TAL->get(i).pack_begin(), pack_it)] = name.str().str();
                         break;
                     }
+                    default: {
+                        break;
+                    }
                     }
                 }
                 break;
@@ -47,6 +50,9 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
                 TAL->get(i).getAsTemplate().print(OS, pp, false);
 #endif
                 OS.str();
+                break;
+            }
+            default: {
                 break;
             }
             }
