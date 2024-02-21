@@ -48,6 +48,7 @@ add_executable(Instantiator Instantiator.cpp
   src/Template.cpp)
 
 # set_target_properties(Instantiator PROPERTIES SUFFIX ${LLVM_VERSION_MAJOR})
+target_compile_options(Instantiator -Wno-return-stack-address)
 
 message(STATUS ${CMAKE_SOURCE_DIR})
 target_include_directories(Instantiator PRIVATE ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
