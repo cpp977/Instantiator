@@ -121,7 +121,7 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>                                     std::shared_ptr&lt;clang::PCHContainerOperations&gt; PCHContainerOps,</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>                                     clang::DiagnosticConsumer* DiagConsumer)</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> is_cached_on_disk = <a class="code hl_function" href="namespaceinternal.html#ab081356ec892df627703a8998a648da8">internal::is_cached</a>(<a class="code hl_variable" href="classASTBuilderAction.html#a15f0af3ef041bea0e43d44deba3ff89f">db</a>, <a class="code hl_variable" href="classASTBuilderAction.html#aaaf793a185b3ad1a2febd588a0712fad">filename</a>);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> is_cached_on_disk = <span class="keyword">false</span>; <span class="comment">// internal::is_cached(db, filename);</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="comment">// std::cout &lt;&lt; &quot;Processing &quot; &lt;&lt; filename &lt;&lt; std::endl;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">// std::cout &lt;&lt; std::boolalpha &lt;&lt; &quot;cached=&quot; &lt;&lt; is_cached_on_disk &lt;&lt; std::endl;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::filesystem::path p(<a class="code hl_variable" href="classASTBuilderAction.html#aaaf793a185b3ad1a2febd588a0712fad">filename</a>);</div>
@@ -150,11 +150,9 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 </div>
 <div class="ttc" id="aASTBuilderAction_8hpp_html"><div class="ttname"><a href="ASTBuilderAction_8hpp.html">ASTBuilderAction.hpp</a></div></div>
 <div class="ttc" id="aASTCreation_8hpp_html"><div class="ttname"><a href="ASTCreation_8hpp.html">ASTCreation.hpp</a></div></div>
-<div class="ttc" id="aclassASTBuilderAction_html_a15f0af3ef041bea0e43d44deba3ff89f"><div class="ttname"><a href="classASTBuilderAction.html#a15f0af3ef041bea0e43d44deba3ff89f">ASTBuilderAction::db</a></div><div class="ttdeci">const clang::tooling::CompilationDatabase &amp; db</div><div class="ttdef"><b>Definition</b> <a href="ASTBuilderAction_8hpp_source.html#l00029">ASTBuilderAction.hpp:29</a></div></div>
 <div class="ttc" id="aclassASTBuilderAction_html_aaaf793a185b3ad1a2febd588a0712fad"><div class="ttname"><a href="classASTBuilderAction.html#aaaf793a185b3ad1a2febd588a0712fad">ASTBuilderAction::filename</a></div><div class="ttdeci">std::string filename</div><div class="ttdef"><b>Definition</b> <a href="ASTBuilderAction_8hpp_source.html#l00030">ASTBuilderAction.hpp:30</a></div></div>
 <div class="ttc" id="aclassASTBuilderAction_html_aab05402f683c34c46dbef8d3a183886f"><div class="ttname"><a href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">ASTBuilderAction::AST</a></div><div class="ttdeci">std::unique_ptr&lt; clang::ASTUnit &gt; &amp; AST</div><div class="ttdef"><b>Definition</b> <a href="ASTBuilderAction_8hpp_source.html#l00028">ASTBuilderAction.hpp:28</a></div></div>
 <div class="ttc" id="aclassASTBuilderAction_html_afa74cfc4a7ef513bdc83185ca7f56543"><div class="ttname"><a href="classASTBuilderAction.html#afa74cfc4a7ef513bdc83185ca7f56543">ASTBuilderAction::runInvocation</a></div><div class="ttdeci">bool runInvocation(std::shared_ptr&lt; clang::CompilerInvocation &gt; Invocation, clang::FileManager *Files, std::shared_ptr&lt; clang::PCHContainerOperations &gt; PCHContainerOps, clang::DiagnosticConsumer *DiagConsumer) override</div><div class="ttdef"><b>Definition</b> <a href="#l00010">ASTBuilderAction.cpp:10</a></div></div>
-<div class="ttc" id="anamespaceinternal_html_ab081356ec892df627703a8998a648da8"><div class="ttname"><a href="namespaceinternal.html#ab081356ec892df627703a8998a648da8">internal::is_cached</a></div><div class="ttdeci">bool is_cached(const clang::tooling::CompilationDatabase &amp;db, std::string filename)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00021">ASTCreation.cpp:21</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -162,7 +160,7 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0f2339d204149e590ec376b2c2ae3818.html">Actions</a></li><li class="navelem"><a class="el" href="ASTBuilderAction_8cpp.html">ASTBuilderAction.cpp</a></li>
-    <li class="footer">Generated on Tue Feb 20 2024 08:58:21 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Feb 21 2024 17:33:02 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
