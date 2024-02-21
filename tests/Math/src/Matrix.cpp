@@ -17,8 +17,6 @@ const Scalar& Matrix<Scalar, Rows, Cols>::operator()(std::size_t row, std::size_
     return m_data[index(row, col)];
 }
 
-
-
 template <typename Scalar, std::size_t Rows, std::size_t Cols>
 Scalar& Matrix<Scalar, Rows, Cols>::operator()(std::size_t row, std::size_t col)
 {
@@ -30,7 +28,5 @@ void Matrix<Scalar, Rows, Cols>::setIdentity()
 {
     for(auto i = 0ul; i < Rows; ++i) { m_data[index(i, i)] = 1.; }
 }
-
-
 
 } // namespace Math

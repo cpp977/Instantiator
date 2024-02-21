@@ -30,8 +30,6 @@ typename MatrixTraits<Derived>::Scalar MatrixBase<Derived>::trace() const
     return out;
 }
 
-
-
 template <typename Derived>
 template <typename ReturnScalar>
 const CoeffUnaryOp<Derived, ReturnScalar> MatrixBase<Derived>::unaryExpr(const std::function<ReturnScalar(Scalar)>& coeff_func) const
@@ -50,7 +48,6 @@ const CoeffUnaryOp<Derived, typename MatrixTraits<Derived>::Scalar> MatrixBase<D
 {
     return unaryExpr<Scalar>([](Scalar s) { return s * s; });
 }
-
 
 template <typename Derived>
 const CoeffUnaryOp<Derived, typename MatrixTraits<Derived>::Scalar> MatrixBase<Derived>::inv() const

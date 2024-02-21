@@ -12,5 +12,4 @@ const ReturnScalar& CoeffUnaryOp<XprType, ReturnScalar>::operator()(std::size_t 
     return m_func(m_refexpr(row, col));
 }
 
-
 } // namespace Math
