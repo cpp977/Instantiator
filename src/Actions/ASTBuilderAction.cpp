@@ -12,7 +12,7 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
                                      std::shared_ptr<clang::PCHContainerOperations> PCHContainerOps,
                                      clang::DiagnosticConsumer* DiagConsumer)
 {
-    bool is_cached_on_disk = internal::is_cached(db, filename);
+    bool is_cached_on_disk = false; // internal::is_cached(db, filename);
     // std::cout << "Processing " << filename << std::endl;
     // std::cout << std::boolalpha << "cached=" << is_cached_on_disk << std::endl;
     std::filesystem::path p(filename);
