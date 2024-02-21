@@ -38,3 +38,7 @@ docs/
 .clang-format
 
 compile_commands.json
+
+.cache
+
+*.ast
