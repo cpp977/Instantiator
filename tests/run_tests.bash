@@ -34,9 +34,9 @@ teardown_file() {
 }
 
 @test "Reformat the codebase with clang-format." {
-    find "${SCRIPT_DIR}" -iname "*.hpp" -print0 -o -iname "*.cpp" | xargs clang-format -i
+    find "${SCRIPT_DIR}" -iname "*.hpp" -o -iname "*.cpp" -print0 | xargs -0 clang-format -i
 }
 
 @test "Run git diff to check that the original version of code is restored." {
-    git --no-pager -C "${SCRIPT_DIR}/.." diff --quiet "${SCRIPT_DIR}/Math"
+    git --no-pager -C "${SCRIPT_DIR}/.." diff "${SCRIPT_DIR}/Math"
 }
