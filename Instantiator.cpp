@@ -127,30 +127,31 @@ int main(int argc, const char** argv)
 
     // match in current main file.
     std::unordered_set<std::string> workList;
-    workList.insert(main_and_injection_files[0]);
-
-    // indicators::IndeterminateProgressBar outer_bar{
-    //     indicators::option::BarWidth{40},
-    //     indicators::option::Start{"["},
-    //     indicators::option::Fill{"·"},
-    //     indicators::option::Lead{"<==>"},
-    //     indicators::option::End{"]"},
-    //     indicators::option::PrefixText{"Main loop"},
-    //     indicators::option::ForegroundColor{indicators::Color::yellow},
-    //     indicators::option::FontStyles{
-    //         std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
-    // };
+    // workList.insert(main_and_injection_files[0]);
+    workList.insert(OptionsParser.getSourcePathList()[0]);
+    indicators::IndeterminateProgressBar outer_bar{
+        indicators::option::BarWidth{40},
+        indicators::option::Start{"["},
+        indicators::option::Fill{"·"},
+        indicators::option::Lead{"<==>"},
+        indicators::option::End{"]"},
+        indicators::option::PrefixText{"Main loop"},
+        indicators::option::ForegroundColor{indicators::Color::yellow},
+        indicators::option::FontStyles{
+            std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
+    };
 
     while(workList.size() > 0) {
         auto copyOf_workList = workList;
         for(const auto& item : copyOf_workList) {
-            // outer_bar.set_option(indicators::option::PostfixText{"Scanning: "+item});
+            // std::cout << "Processing file " << item << std::endl;
+            outer_bar.set_option(indicators::option::PostfixText{"Scanning: "+item});
             workList.erase(item);
             std::unique_ptr<clang::ASTUnit> source_AST;
             int success = parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item);
-
+            // std::cout << "Got AST" << std::endl;
             Finder.matchAST(source_AST->getASTContext());
-            std::cout << termcolor::bold << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset << std::endl;
+            // std::cout << termcolor::bold << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset << std::endl;
             // for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
 
             indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},
@@ -190,6 +191,7 @@ int main(int argc, const char** argv)
                 rewriter.overwriteChangedFiles();
                 // std::cout << termcolor::green << "Called rewriter" << termcolor::reset << std::endl;
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
+                // std::cout << "HAS_INJECTED=" << std::boolalpha << HAS_INJECTED_INTANTIATION << std::endl;
                 if(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }
                 inner_bar.tick();
                 // std::cout << std::endl;
