@@ -14,10 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
           
-    - run: clang++-${{ matrix.clang_version }} --version
-
-    - run: cmake --version
-
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
     - run: sudo apt-get install llvm-${{ matrix.clang_version }}
@@ -31,6 +27,10 @@ jobs:
       uses: mig4/setup-bats@v1
       with:
         bats-version: 1.10.0
+
+    - run: clang++-${{ matrix.clang_version }} --version
+    - run: cmake --version
+    - run: bats --version
 
     - name: Create Build Environment
       run: cmake -E make_directory ${{runner.workspace}}/build
