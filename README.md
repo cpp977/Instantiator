@@ -1,3 +1,5 @@
+[![Tests](https://github.com/cpp977/Instantiator/workflows/Tests/badge.svg)](https://github.com/cpp977/Instantiator/actions)
+
 # Instantiator
 clang based tool to automatically insert all needed explicit instantiations in implementation files for `c++` projects.
 
@@ -39,7 +41,6 @@ To control which version of clang is used, you can set the cmake variable `Clang
 
 # Roadmap for version 1.0.0
   - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
-  - Example c++ project which serves also as a test case.
   
 # How does it work?
 See the [documentation](https://cpp977.github.io/Instantiator/).
