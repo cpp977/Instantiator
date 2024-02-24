@@ -40,7 +40,7 @@ setup() {
 }
 
 @test "Reformat the codebase with clang-format." {
-    run bash -c "find "${SCRIPT_DIR}" -iname "*.hpp" -o -iname "*.cpp" -print0 | xargs -0 clang-format -i"
+    run bash -c "find \"${SCRIPT_DIR}\" -iname \"*.hpp\" -o -iname \"*.cpp\" -print0 | xargs -0 clang-format -i"
     assert_success
 }
 
