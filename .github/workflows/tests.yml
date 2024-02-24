@@ -35,7 +35,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++-${{ matrix.clang_version }}
-      run: cmake $GITHUB_WORKSPACE
+      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=/usr/lib/llvm-${{ matrix.clang_version }}/cmake
 
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build
