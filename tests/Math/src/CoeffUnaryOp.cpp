@@ -7,7 +7,7 @@
 namespace Math {
 
 template <typename XprType, typename ReturnScalar>
-const ReturnScalar& CoeffUnaryOp<XprType, ReturnScalar>::operator()(std::size_t row, std::size_t col) const
+ReturnScalar CoeffUnaryOp<XprType, ReturnScalar>::operator()(std::size_t row, std::size_t col) const
 {
     return m_func(m_refexpr(row, col));
 }

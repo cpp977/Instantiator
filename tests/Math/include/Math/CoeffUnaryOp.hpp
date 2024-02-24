@@ -34,7 +34,7 @@ public:
     constexpr auto rows() const { return Rows; }
     constexpr auto cols() const { return Cols; }
 
-    const Scalar& operator()(std::size_t row, std::size_t col) const;
+    Scalar operator()(std::size_t row, std::size_t col) const;
 
 protected:
     const XprType& m_refexpr;
