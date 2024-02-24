@@ -28,7 +28,7 @@ jobs:
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
     - run: ls -lh /usr/lib/llvm-14/lib
     - run: ls -lh /usr/lib/llvm-14/lib/cmake
-    - run: ls -lh /usr/lib/llvm-14/lib/clang
+    - run: ls -lh /usr/lib/llvm-14/lib/cmake/clang
     - run: ls -lh /usr/lib/llvm-14/bin
     - run: ls -lh /usr/share
     - run: ls -lh /usr/share/llvm-14
