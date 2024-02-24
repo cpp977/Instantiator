@@ -14,37 +14,32 @@ teardown_file() {
     rm -rf "${SCRIPT_DIR}/build"
 }
 
-setup() {
-    bats_load_library "bats-support/load.bash"
-    bats_load_library "bats-assert/load.bash"
-}
-
 @test "Configure the test project with CMake." {
     run cmake -S "${SCRIPT_DIR}/Calculator/" -B "${SCRIPT_DIR}/build"
-    assert_success
+    [ "$status" -eq 0 ]
 }
 
 @test "Run Instantiator to generate template instantantions." {
     run Instantiator -p "${SCRIPT_DIR}/build/compile_commands.json" "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
-    assert_success
+    [ "$status" -eq 0 ]
 }
 
 @test "Build the executable." {
     run cmake --build "${SCRIPT_DIR}/build"
-    assert_success
+    [ "$status" -eq 0 ]
 }
 
 @test "Run Instantiator to remove template instantantions." {
     run Instantiator -p "${SCRIPT_DIR}/build/compile_commands.json" --clean "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
-    assert_success
+    [ "$status" -eq 0 ]
 }
 
 @test "Reformat the codebase with clang-format." {
     run bash -c "find \"${SCRIPT_DIR}\" -iname \"*.hpp\" -o -iname \"*.cpp\" -print0 | xargs -0 clang-format -i"
-    assert_success
+    [ "$status" -eq 0 ]
 }
 
 @test "Run git diff to check that the original version of code is restored." {
     run git --no-pager -C "${SCRIPT_DIR}/.." diff --quiet "${SCRIPT_DIR}/Math"
-    assert_success
+    [ "$status" -eq 0 ]
 }
