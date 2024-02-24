@@ -25,7 +25,8 @@ jobs:
     - run: sudo apt-get install llvm-${{ matrix.clang_version }}-runtime
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
-      
+    - run: cat /usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang/ClangConfig.cmake
+
     - name: Setup BATS
       uses: mig4/setup-bats@v1
       with:
