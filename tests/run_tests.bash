@@ -15,8 +15,8 @@ teardown_file() {
 }
 
 setup() {
-    load '/usr/lib/bats/bats-support/load.bash'
-    load '/usr/lib/bats/bats-assert/load.bash'
+    bats_load_library "bats-support/load.bash"
+    bats_load_library "bats-assert/load.bash"
 }
 
 @test "Configure the test project with CMake." {
