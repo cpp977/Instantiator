@@ -20,13 +20,13 @@ jobs:
 
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    - run: sudo apt-get install llvm-${{ matrix.clang-version }}
-    - run: sudo apt-get install llvm-${{ matrix.clang-version }}-dev
-    - run: sudo apt-get install llvm-${{ matrix.clang-version }}-runtime
+    - run: sudo apt-get install llvm-${{ matrix.clang_version }}
+    - run: sudo apt-get install llvm-${{ matrix.clang_version }}-dev
+    - run: sudo apt-get install llvm-${{ matrix.clang_version }}-runtime
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
-    - run: dpkg -L libclang-cpp${{ matrix.clang-version }}
-    - run: dpkg -L libclang-cpp${{ matrix.clang-version }}-dev
+    - run: dpkg -L libclang-cpp${{ matrix.clang_version }}
+    - run: dpkg -L libclang-cpp${{ matrix.clang_version }}-dev
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
