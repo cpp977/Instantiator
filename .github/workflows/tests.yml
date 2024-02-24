@@ -26,10 +26,6 @@ jobs:
     - run: sudo apt-get install libclang-${{ matrix.clang_version }}-dev
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
-    - run: ls -lh /usr/lib
-    - run: ls -lh /usr/lib/clang
-    - run: ls -lh /usr/lib/clang/14/
-    - run: ls -lh /usr/lib/clang/14/include
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
@@ -44,6 +40,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++-${{ matrix.clang_version }}
+        CXX_FLAGS: /usr/lib/llvm-${{ matrix.clang_version }}/lib/clang/${{ matrix.clang_version }}.0.0/include
       run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=/usr/lib/llvm-${{ matrix.clang_version }}/cmake -DClang_DIR=/usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang
 
     - name: Build Instantiator
