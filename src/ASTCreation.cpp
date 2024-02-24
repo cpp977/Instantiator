@@ -34,21 +34,24 @@ bool is_cached(const clang::tooling::CompilationDatabase& db, std::string filena
 
     clang::tooling::ClangTool Tool(db, filename);
     std::vector<std::string> deps;
-    auto dep_action = std::make_unique<DependencyAction>();
-    dep_action->dependencies = &deps;
     class SingleFrontendActionFactory : public clang::tooling::FrontendActionFactory
     {
-        std::unique_ptr<DependencyAction> Action;
+        std::vector<std::string>* deps;
 
     public:
-        SingleFrontendActionFactory(std::unique_ptr<DependencyAction> Action)
-            : Action(std::move(Action))
+        SingleFrontendActionFactory(std::vector<std::string>* deps)
+            : deps(deps)
         {}
 
-        std::unique_ptr<clang::FrontendAction> create() override { return std::move(Action); }
+        std::unique_ptr<clang::FrontendAction> create() override
+        {
+            auto dep_action = std::make_unique<DependencyAction>();
+            dep_action->dependencies = deps;
+            return std::move(dep_action);
+        }
     };
 
-    auto wrapper = std::make_unique<SingleFrontendActionFactory>(std::move(dep_action));
+    auto wrapper = std::make_unique<SingleFrontendActionFactory>(&deps);
     [[maybe_unused]] int result = Tool.run(wrapper.get());
 
     if(not std::filesystem::exists(p.replace_extension("ast"))) { return false; }
