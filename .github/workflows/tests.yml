@@ -43,6 +43,10 @@ jobs:
         CXX_FLAGS: /usr/lib/llvm-${{ matrix.clang_version }}/lib/clang/${{ matrix.clang_version }}.0.0/include
       run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=/usr/lib/llvm-${{ matrix.clang_version }}/cmake -DClang_DIR=/usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang
 
+    - name: Patch termcolor
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: sed -i 's/#include <iostream>/#include <iostream>\n#include <cstdint>/g' _deps/termcolor-src/include/termcolor/termcolor.hpp
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build
       shell: bash
