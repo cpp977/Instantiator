@@ -35,7 +35,7 @@ teardown_file() {
 }
 
 @test "Reformat the codebase with clang-format." {
-    run bash -c "find \"${SCRIPT_DIR}\" -iname \"*.hpp\" -o -iname \"*.cpp\" -print0 | xargs -0 clang-format -i"
+    run bash -c "find \"${SCRIPT_DIR}\" -iname \"*.hpp\" -o -iname \"*.cpp\" -print0 | xargs -0 clang-format -i --style=\"${SCRIPT_DIR}/Math/.clang-format\""
     [ "$status" -eq 0 ]
 }
 
