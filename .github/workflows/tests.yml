@@ -61,4 +61,4 @@ jobs:
     - name: Test
       working-directory: ${{runner.workspace}}
       shell: bash
-      run: bats -r .
+      run: bats -r -T .
