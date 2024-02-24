@@ -26,6 +26,10 @@ jobs:
     - run: sudo apt-get install libclang-${{ matrix.clang_version }}-dev
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
     - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
+    - run: ls -lh /usr/lib
+    - run: ls -lh /usr/lib/clang
+    - run: ls -lh /usr/lib/clang/14/
+    - run: ls -lh /usr/lib/clang/14/include
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
