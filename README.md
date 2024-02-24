@@ -1,4 +1,4 @@
-[![Tests](https://github.com/cpp977/Instantiator/workflows/Tests/badge.svg)](https://github.com/cpp977/Instantiator/actions)
+[![Tests](https://github.com/cpp977/Instantiator/workflows/tests.yml/badge.svg)](https://github.com/cpp977/Instantiator/actions)
 
 # Instantiator
 clang based tool to automatically insert all needed explicit instantiations in implementation files for `c++` projects.
