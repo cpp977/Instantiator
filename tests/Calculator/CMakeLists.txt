@@ -21,13 +21,3 @@ add_subdirectory("../Math" "./MathBuild")
 target_link_libraries(${PROJECT_NAME} Math)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
-
-file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.hpp)
-message(INFO ": srcs=${ALL_SOURCE_FILE}")
-add_custom_target(
-        clangformat
-        COMMAND /usr/bin/clang-format
-        -style=file
-        -i
-        ${ALL_SOURCE_FILES}
-)
