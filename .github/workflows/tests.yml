@@ -1,0 +1,44 @@
+name: Builds
+
+on:
+  push:
+      
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [clang++]
+    steps:
+    - uses: actions/checkout@v3
+          
+    - run: ${{ matrix.compiler }} --version
+        
+    - name: Setup BATS
+      uses: mig4/setup-bats@v1
+      with:
+        bats-version: 1.10.0
+
+    - uses: lukka/get-cmake@latest
+
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{runner.workspace}}/build
+      
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      env:
+        CXX: ${{ matrix.compiler }}
+      run: cmake $GITHUB_WORKSPACE
+
+    - name: Build Instantiator
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE -- -j2
+      run: cmake --build . --target install --config $BUILD_TYPE -- -j2
+      
+    - name: Test
+      working-directory: ${{runner.workspace}}/build
+      run: bats -r .
