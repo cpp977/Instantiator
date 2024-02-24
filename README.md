@@ -1,5 +1,3 @@
-[![Tests](https://github.com/cpp977/Instantiator/workflows/tests.yml/badge.svg)](https://github.com/cpp977/Instantiator/actions)
-
 ![TESTS](https://github.com/cpp977/Instantiator/actions/workflows/tests.yml/badge.svg)
 
 # Instantiator
