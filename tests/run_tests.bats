@@ -40,7 +40,7 @@ teardown_file() {
 }
 
 @test "Run git diff to check that the original version of code is restored." {
-    echo git --no-pager -C "${SCRIPT_DIR}/.." diff "${SCRIPT_DIR}/Math" >&3
+    git --no-pager -C "${SCRIPT_DIR}/.." diff "${SCRIPT_DIR}/Math" >&3
     run git --no-pager -C "${SCRIPT_DIR}/.." diff --quiet "${SCRIPT_DIR}/Math"
     [ "$status" -eq 0 ]
 }
