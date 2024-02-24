@@ -10,14 +10,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [clang++]
+        clang_version: [14]
     steps:
     - uses: actions/checkout@v3
           
-    - run: ${{ matrix.compiler }} --version
+    - run: clang++-${{ matrix.clang_version }} --version
 
     - run: cmake --version
-      
+
+    - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
+    - run: sudo apt-get update
+    - run: sudo apt-get install llvm-${{ matrix.clang-version }}
+
     - name: Setup BATS
       uses: mig4/setup-bats@v1
       with:
@@ -30,7 +34,7 @@ jobs:
       shell: bash
       working-directory: ${{runner.workspace}}/build
       env:
-        CXX: ${{ matrix.compiler }}
+        CXX: clang++-${{ matrix.clang_version }}
       run: cmake $GITHUB_WORKSPACE
 
     - name: Build Instantiator
@@ -41,7 +45,7 @@ jobs:
     - name: Install Instantiator
       working-directory: ${{runner.workspace}}/build
       shell: bash
-      run: cmake --build . --target install --config $BUILD_TYPE -- -j2
+      run: sudo cmake --build . --target install --config $BUILD_TYPE -- -j2
       
     - name: Test
       working-directory: ${{runner.workspace}}/build
