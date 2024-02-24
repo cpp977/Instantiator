@@ -29,6 +29,8 @@ jobs:
         bats-version: 1.10.0
 
     - run: clang++-${{ matrix.clang_version }} --version
+    - run: clang-format --version
+    - run: clang-format --help
     - run: cmake --version
     - run: bats --version
 
