@@ -37,8 +37,13 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE -- -j2
+
+    - name: Install Instantiator
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
       run: cmake --build . --target install --config $BUILD_TYPE -- -j2
       
     - name: Test
       working-directory: ${{runner.workspace}}/build
+      shell: bash
       run: bats -r .
