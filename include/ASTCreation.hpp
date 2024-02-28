@@ -2,8 +2,12 @@
 #define AST_CREATION_H_
 
 #include "clang/Tooling/Tooling.h"
+#include <filesystem>
 
-int parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST, const clang::tooling::CompilationDatabase& db, const std::string filename);
+int parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
+                   const clang::tooling::CompilationDatabase& db,
+                   const std::filesystem::path& filename,
+                   const std::filesystem::path& tmpdir);
 
 namespace internal {
 /**
@@ -14,7 +18,7 @@ namespace internal {
  *             invoke the compiler for getting the dependencies.
  * \param filename : Name of the source file
  */
-bool is_cached(const clang::tooling::CompilationDatabase& db, std::string filename);
+bool is_cached(const clang::tooling::CompilationDatabase& db, const std::filesystem::path& filename, const std::filesystem::path& tmpdir);
 } // namespace internal
 
 #endif

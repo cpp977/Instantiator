@@ -32,7 +32,6 @@ class InjectInstantiation : public clang::ast_matchers::MatchFinder::MatchCallba
 public:
     /**
      * A pointer to an external vector of Injection which is filled during GetNeededInstantiations.
-     * \todo Can this be a `std::list`?
      */
     std::vector<Injection>* toDoList;
     /**Pointer to an external [clang::Rewriter]((https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html)) object.*/

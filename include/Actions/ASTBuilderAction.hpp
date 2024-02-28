@@ -1,5 +1,6 @@
 #ifndef ASTBUILDER_ACTION_HPP_
 #define ASTBUILDER_ACTION_HPP_
+#include <filesystem>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -27,13 +28,18 @@ class ASTBuilderAction : public clang::tooling::ToolAction
 {
     std::unique_ptr<clang::ASTUnit>& AST;
     const clang::tooling::CompilationDatabase& db;
-    std::string filename;
+    std::filesystem::path file;
+    std::filesystem::path tmpdir;
 
 public:
-    ASTBuilderAction(std::unique_ptr<clang::ASTUnit>& AST, const clang::tooling::CompilationDatabase& db, const std::string filename)
+    ASTBuilderAction(std::unique_ptr<clang::ASTUnit>& AST,
+                     const clang::tooling::CompilationDatabase& db,
+                     const std::filesystem::path& filename,
+                     const std::filesystem::path& tmpdir)
         : AST(AST)
         , db(db)
-        , filename(filename)
+        , file(filename)
+        , tmpdir(tmpdir)
     {}
 
     bool runInvocation(std::shared_ptr<clang::CompilerInvocation> Invocation,

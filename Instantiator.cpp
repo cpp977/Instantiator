@@ -2,6 +2,7 @@
 #include <iostream>
 #include <ranges>
 #include <sstream>
+#include <system_error>
 #include <unordered_set>
 
 #include "termcolor/termcolor.hpp"
@@ -78,15 +79,23 @@ int main(int argc, const char** argv)
 
     // clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind("func_definition");
 
-    std::vector<std::string> main_and_injection_files = OptionsParser.getCompilations().getAllFiles();
+    std::error_code tmp_create_error;
+    auto tmpdir = std::filesystem::temp_directory_path(tmp_create_error);
+    if(tmp_create_error) {
+        std::cerr << "Error (" << tmp_create_error.value() << ") while getting temporary directory:\n" << tmp_create_error.message() << std::endl;
+        return 1;
+    }
+
+    std::vector<std::filesystem::path> main_and_injection_files;
+    for(const auto& file : OptionsParser.getCompilations().getAllFiles()) { main_and_injection_files.push_back(std::filesystem::path(file)); }
 
     // std::cout << "source file from command line: " << OptionsParser.getSourcePathList()[0] << std::endl;
-    for(auto it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {
-        if(it->find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }
-    }
+    // for(auto it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {
+    //     if(it->find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }
+    // }
     // std::cout << "source files from json" << std::endl;
     // for(const auto& source : main_and_injection_files) { std::cout << '\t' << "-- " << source << std::endl; }
-    llvm::ArrayRef<std::string> sources(main_and_injection_files.data(), main_and_injection_files.size());
+    llvm::ArrayRef<std::filesystem::path> sources(main_and_injection_files.data(), main_and_injection_files.size());
 
     if(Clean) {
         indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},
@@ -102,9 +111,9 @@ int main(int argc, const char** argv)
                                              indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
         indicators::show_console_cursor(false);
         for(std::size_t i = 0; i < sources.size(); i++) {
-            deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i]});
+            deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
             std::unique_ptr<clang::ASTUnit> AST;
-            int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i]);
+            int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
             clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
             DeleteInstantiations Deleter;
             Deleter.rewriter = &rewriter;
@@ -129,26 +138,23 @@ int main(int argc, const char** argv)
     std::unordered_set<std::string> workList;
     // workList.insert(main_and_injection_files[0]);
     workList.insert(OptionsParser.getSourcePathList()[0]);
-    indicators::IndeterminateProgressBar outer_bar{
-        indicators::option::BarWidth{40},
-        indicators::option::Start{"["},
-        indicators::option::Fill{"·"},
-        indicators::option::Lead{"<==>"},
-        indicators::option::End{"]"},
-        indicators::option::PrefixText{"Main loop"},
-        indicators::option::ForegroundColor{indicators::Color::yellow},
-        indicators::option::FontStyles{
-            std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}
-    };
+    indicators::IndeterminateProgressBar outer_bar{indicators::option::BarWidth{40},
+                                                   indicators::option::Start{"["},
+                                                   indicators::option::Fill{"·"},
+                                                   indicators::option::Lead{"<==>"},
+                                                   indicators::option::End{"]"},
+                                                   indicators::option::PrefixText{"Main loop"},
+                                                   indicators::option::ForegroundColor{indicators::Color::yellow},
+                                                   indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
 
     while(workList.size() > 0) {
         auto copyOf_workList = workList;
         for(const auto& item : copyOf_workList) {
             // std::cout << "Processing file " << item << std::endl;
-            outer_bar.set_option(indicators::option::PostfixText{"Scanning: "+item});
+            outer_bar.set_option(indicators::option::PostfixText{"Scanning: " + item});
             workList.erase(item);
             std::unique_ptr<clang::ASTUnit> source_AST;
-            int success = parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item);
+            int success = parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item, tmpdir);
             // std::cout << "Got AST" << std::endl;
             Finder.matchAST(source_AST->getASTContext());
             // std::cout << termcolor::bold << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset << std::endl;
@@ -177,8 +183,8 @@ int main(int argc, const char** argv)
                     break;
                 }
                 std::unique_ptr<clang::ASTUnit> target_AST;
-                int success = parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search);
-                inner_bar.set_option(indicators::option::PostfixText{"Processing: " + file_for_search});
+                int success = parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);
+                inner_bar.set_option(indicators::option::PostfixText{"Processing: " + file_for_search.string()});
                 // std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
                 clang::Rewriter rewriter(target_AST->getSourceManager(), target_AST->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;

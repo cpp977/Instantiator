@@ -12,16 +12,15 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
                                      std::shared_ptr<clang::PCHContainerOperations> PCHContainerOps,
                                      clang::DiagnosticConsumer* DiagConsumer)
 {
-  bool is_cached_on_disk = internal::is_cached(db, filename);
+  bool is_cached_on_disk = internal::is_cached(db, file, tmpdir);
     // std::cout << "Processing " << filename << std::endl;
     // std::cout << std::boolalpha << "cached=" << is_cached_on_disk << std::endl;
-    std::filesystem::path p(filename);
     if(is_cached_on_disk) {
         clang::CompilerInstance CI;
         CI.setInvocation(Invocation);
         CI.createDiagnostics(DiagConsumer, /*ShouldOwnClient=*/false);
         clang::DiagnosticsEngine* DiagEngine = &CI.getDiagnostics();
-        AST = clang::ASTUnit::LoadFromASTFile(p.replace_extension("ast").string(),
+        AST = clang::ASTUnit::LoadFromASTFile((tmpdir / file.filename().replace_extension("ast")).string(),
                                               CI.getPCHContainerReader(),
                                               clang::ASTUnit::WhatToLoad::LoadEverything,
                                               llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(DiagEngine),
@@ -33,7 +32,7 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
                                                                                                     DiagConsumer,
                                                                                                     /*ShouldOwnClient=*/false),
                                                          Files);
-        AST->Save(p.replace_extension("ast").string());
+        AST->Save((tmpdir / file.filename().replace_extension("ast")).string());
     }
     if(!AST or AST->getDiagnostics().hasUncompilableErrorOccurred()) return false;
     return true;
