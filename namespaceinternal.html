@@ -106,8 +106,8 @@ $(function(){initNavTree('namespaceinternal.html',''); initResizable(); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab081356ec892df627703a8998a648da8" id="r_ab081356ec892df627703a8998a648da8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab081356ec892df627703a8998a648da8">is_cached</a> (const clang::tooling::CompilationDatabase &amp;db, std::string filename)</td></tr>
-<tr class="separator:ab081356ec892df627703a8998a648da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4f9be6a7d53a04f4d28361bb4998c6" id="r_adc4f9be6a7d53a04f4d28361bb4998c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc4f9be6a7d53a04f4d28361bb4998c6">is_cached</a> (const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</td></tr>
+<tr class="separator:adc4f9be6a7d53a04f4d28361bb4998c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dd2969c330ae28eaa76995319c2f8ea" id="r_a6dd2969c330ae28eaa76995319c2f8ea"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dd2969c330ae28eaa76995319c2f8ea">parseTemplateArgs</a> (const clang::TemplateArgumentList *TAL, clang::PrintingPolicy pp)</td></tr>
 <tr class="separator:a6dd2969c330ae28eaa76995319c2f8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add043c12c860c56ab7a5f4245d97dbe6" id="r_add043c12c860c56ab7a5f4245d97dbe6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structParam.html">Param</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add043c12c860c56ab7a5f4245d97dbe6">parseFunctionArgs</a> (std::vector&lt; clang::ParmVarDecl * &gt; Args, clang::PrintingPolicy pp)</td></tr>
@@ -116,8 +116,8 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Namespace for internal functions. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ab081356ec892df627703a8998a648da8" name="ab081356ec892df627703a8998a648da8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab081356ec892df627703a8998a648da8">&#9670;&#160;</a></span>is_cached()</h2>
+<a id="adc4f9be6a7d53a04f4d28361bb4998c6" name="adc4f9be6a7d53a04f4d28361bb4998c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc4f9be6a7d53a04f4d28361bb4998c6">&#9670;&#160;</a></span>is_cached()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +130,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>tmpdir</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -143,7 +148,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ASTCreation_8cpp_source.html#l00021">21</a> of file <a class="el" href="ASTCreation_8cpp_source.html">ASTCreation.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTCreation_8cpp_source.html#l00024">24</a> of file <a class="el" href="ASTCreation_8cpp_source.html">ASTCreation.cpp</a>.</p>
 
 </div>
 </div>
@@ -217,7 +222,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceinternal.html">internal</a></li>
-    <li class="footer">Generated on Sat Feb 24 2024 23:00:35 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

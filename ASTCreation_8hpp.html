@@ -105,10 +105,11 @@ $(function(){initNavTree('ASTCreation_8hpp.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;clang/Tooling/Tooling.h&quot;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ASTCreation.hpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ASTCreation_8hpp__incl.svg" width="191" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ASTCreation_8hpp__incl.svg" width="296" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -125,14 +126,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a30eaf21aa749b0e6f017ced369ac2e2a" id="r_a30eaf21aa749b0e6f017ced369ac2e2a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30eaf21aa749b0e6f017ced369ac2e2a">parseOrLoadAST</a> (std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::string filename)</td></tr>
-<tr class="separator:a30eaf21aa749b0e6f017ced369ac2e2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab081356ec892df627703a8998a648da8" id="r_ab081356ec892df627703a8998a648da8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinternal.html#ab081356ec892df627703a8998a648da8">internal::is_cached</a> (const clang::tooling::CompilationDatabase &amp;db, std::string filename)</td></tr>
-<tr class="separator:ab081356ec892df627703a8998a648da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3456b56ee8acb76270a30f78e01a3f36" id="r_a3456b56ee8acb76270a30f78e01a3f36"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a> (std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</td></tr>
+<tr class="separator:a3456b56ee8acb76270a30f78e01a3f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc4f9be6a7d53a04f4d28361bb4998c6" id="r_adc4f9be6a7d53a04f4d28361bb4998c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">internal::is_cached</a> (const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</td></tr>
+<tr class="separator:adc4f9be6a7d53a04f4d28361bb4998c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a30eaf21aa749b0e6f017ced369ac2e2a" name="a30eaf21aa749b0e6f017ced369ac2e2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30eaf21aa749b0e6f017ced369ac2e2a">&#9670;&#160;</a></span>parseOrLoadAST()</h2>
+<a id="a3456b56ee8acb76270a30f78e01a3f36" name="a3456b56ee8acb76270a30f78e01a3f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3456b56ee8acb76270a30f78e01a3f36">&#9670;&#160;</a></span>parseOrLoadAST()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +151,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>tmpdir</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -166,7 +172,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="ASTCreation_8hpp.html">ASTCreation.hpp</a></li>
-    <li class="footer">Generated on Sat Feb 24 2024 23:00:35 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

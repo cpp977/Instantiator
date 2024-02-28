@@ -110,217 +110,223 @@ $(function(){initNavTree('Instantiator_8cpp_source.html',''); initResizable(); }
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;termcolor/termcolor.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;indicators/cursor_control.hpp&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;indicators/indeterminate_progress_bar.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;indicators/progress_bar.hpp&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;clang/Frontend/FrontendActions.h&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;clang/Tooling/CommonOptionsParser.h&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;clang/Tooling/Tooling.h&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Declares llvm::cl::extrahelp.</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;llvm/Support/CommandLine.h&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;clang/AST/ASTImporter.h&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchFinder.h&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchers.h&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;clang/Rewrite/Core/Rewriter.h&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;clang/Rewrite/Frontend/Rewriters.h&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="ASTCreation_8hpp.html">ASTCreation.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="AllASTBuilderAction_8hpp.html">Actions/AllASTBuilderAction.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="DeleteInstantiations_8hpp.html">Callbacks/DeleteInstantiations.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="GetNeededInstantiations_8hpp.html">Callbacks/GetNeededInstantiations.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="InjectInstantiation_8hpp.html">Callbacks/InjectInstantiation.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="Matcher_8hpp.html">Matcher/Matcher.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">//</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// Command line options</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">//</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// Apply a custom category to all command-line options so that they are the</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// only ones displayed.</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">   40</a></span><span class="keyword">static</span> llvm::cl::OptionCategory <a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>(<span class="stringliteral">&quot;Instantiator options&quot;</span>);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">   42</a></span><span class="keyword">static</span> llvm::cl::opt&lt;bool&gt; <a class="code hl_function" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a>(<span class="stringliteral">&quot;clean&quot;</span>, llvm::cl::desc(<span class="stringliteral">&quot;Delete all explicit instantiations.&quot;</span>), llvm::cl::cat(<a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>));</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">static</span> llvm::cl::list&lt;std::string&gt;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">   44</a></span>    <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>(<span class="stringliteral">&quot;ignore&quot;</span>,</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                   llvm::cl::desc(<span class="stringliteral">&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;</span>),</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                   llvm::cl::value_desc(<span class="stringliteral">&quot;namespace&quot;</span>),</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                   llvm::cl::cat(<a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>));</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c">   48</a></span><span class="keyword">static</span> llvm::cl::alias <a class="code hl_function" href="Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c">IgnorePatternsA</a>(<span class="stringliteral">&quot;i&quot;</span>, llvm::cl::desc(<span class="stringliteral">&quot;Alias for --ignore&quot;</span>), llvm::cl::aliasopt(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>));</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">// CommonOptionsParser declares HelpMessage with a description of the common</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// command-line options related to the compilation database and input files.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// It&#39;s nice to have this help message in all tools.</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">   53</a></span><span class="keyword">static</span> llvm::cl::extrahelp <a class="code hl_function" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">CommonHelp</a>(clang::tooling::CommonOptionsParser::HelpMessage);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">// A help message for this specific tool can be added afterwards.</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// static llvm::cl::extrahelp MoreHelp(&quot;\nMore help text...\n&quot;);</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">   58</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a>(<span class="keywordtype">int</span> argc, <span class="keyword">const</span> <span class="keywordtype">char</span>** argv)</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>{</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keyword">auto</span> ExpectedParser = clang::tooling::CommonOptionsParser::create(argc, argv, <a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>, llvm::cl::OneOrMore);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span>(!ExpectedParser) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="comment">// Fail gracefully for unsupported options.</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        llvm::errs() &lt;&lt; ExpectedParser.takeError();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    clang::tooling::CommonOptionsParser&amp; OptionsParser = ExpectedParser.get();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span>(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.size() == 0) { <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.push_back(<span class="stringliteral">&quot;std&quot;</span>); }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    clang::ast_matchers::internal::Matcher&lt;clang::NamedDecl&gt; nameMatcher = clang::ast_matchers::matchesName(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>[0] + <span class="stringliteral">&quot;::&quot;</span>);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.begin() + 1; it != <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.end(); it++) {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + <span class="stringliteral">&quot;::&quot;</span>));</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = <a class="code hl_function" href="Matcher_8hpp.html#aa490284074dd793c672884a4cdce42a0">TemplInstWithoutDef</a>(nameMatcher);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = <a class="code hl_function" href="Matcher_8hpp.html#ac8e305e4e823da5613163fcb2ec96a73">FuncWithDef</a>(nameMatcher);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind(&quot;func_definition&quot;);</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::vector&lt;std::string&gt; main_and_injection_files = OptionsParser.getCompilations().getAllFiles();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="comment">// std::cout &lt;&lt; &quot;source file from command line: &quot; &lt;&lt; OptionsParser.getSourcePathList()[0] &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">if</span>(it-&gt;find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="comment">// std::cout &lt;&lt; &quot;source files from json&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="comment">// for(const auto&amp; source : main_and_injection_files) { std::cout &lt;&lt; &#39;\t&#39; &lt;&lt; &quot;-- &quot; &lt;&lt; source &lt;&lt; std::endl; }</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    llvm::ArrayRef&lt;std::string&gt; sources(main_and_injection_files.data(), main_and_injection_files.size());</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">if</span>(<a class="code hl_function" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a>) {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                                             indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                                             indicators::option::Fill{<span class="stringliteral">&quot;■&quot;</span>},</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                                             indicators::option::Lead{<span class="stringliteral">&quot;■&quot;</span>},</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                                             indicators::option::Remainder{<span class="stringliteral">&quot;-&quot;</span>},</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                                             indicators::option::End{<span class="stringliteral">&quot; ]&quot;</span>},</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                                             indicators::option::PrefixText{<span class="stringliteral">&quot;Deleting instantiations: &quot;</span>},</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                                             indicators::option::ForegroundColor{indicators::Color::red},</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                                             indicators::option::ShowPercentage{<span class="keyword">true</span>},</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                                             indicators::option::MaxProgress{<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(sources.size())},</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                                             indicators::option::FontStyles{std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}};</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        indicators::show_console_cursor(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; sources.size(); i++) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            deletion_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Processing: &quot;</span> + sources[i]});</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            std::unique_ptr&lt;clang::ASTUnit&gt; AST;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a30eaf21aa749b0e6f017ced369ac2e2a">parseOrLoadAST</a>(AST, OptionsParser.getCompilations(), sources[i]);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            clang::Rewriter rewriter(AST-&gt;getSourceManager(), AST-&gt;getLangOpts());</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <a class="code hl_class" href="classDeleteInstantiations.html">DeleteInstantiations</a> Deleter;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            Deleter.<a class="code hl_variable" href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">rewriter</a> = &amp;rewriter;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            clang::ast_matchers::MatchFinder Inst_Finder;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            Inst_Finder.addMatcher(<span class="comment">/*Matcher*/</span> <a class="code hl_function" href="Matcher_8hpp.html#a7352bbb3f846f2c2db222f66d9fd6997">TemplInst</a>(nameMatcher), <span class="comment">/*Callback*/</span> &amp;Deleter);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            Inst_Finder.matchAST(AST-&gt;getASTContext());</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            rewriter.overwriteChangedFiles();</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            deletion_bar.tick();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        indicators::show_console_cursor(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <a class="code hl_class" href="classGetNeededInstantiations.html">GetNeededInstantiations</a> Getter;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    std::vector&lt;Injection&gt; toDoList;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    Getter.<a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a> = &amp;toDoList;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    clang::ast_matchers::MatchFinder Finder;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    Finder.addMatcher(<span class="comment">/*Matcher*/</span> TemplateInstantiationMatcher, <span class="comment">/*Callback*/</span> &amp;Getter);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="comment">// match in current main file.</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    std::unordered_set&lt;std::string&gt; workList;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// workList.insert(main_and_injection_files[0]);</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    workList.insert(OptionsParser.getSourcePathList()[0]);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    indicators::IndeterminateProgressBar outer_bar{</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        indicators::option::BarWidth{40},</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        indicators::option::Fill{<span class="stringliteral">&quot;·&quot;</span>},</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        indicators::option::Lead{<span class="stringliteral">&quot;&lt;==&gt;&quot;</span>},</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        indicators::option::End{<span class="stringliteral">&quot;]&quot;</span>},</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        indicators::option::PrefixText{<span class="stringliteral">&quot;Main loop&quot;</span>},</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        indicators::option::ForegroundColor{indicators::Color::yellow},</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        indicators::option::FontStyles{</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    };</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">while</span>(workList.size() &gt; 0) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keyword">auto</span> copyOf_workList = workList;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : copyOf_workList) {</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="comment">// std::cout &lt;&lt; &quot;Processing file &quot; &lt;&lt; item &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            outer_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Scanning: &quot;</span>+item});</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            workList.erase(item);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            std::unique_ptr&lt;clang::ASTUnit&gt; source_AST;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a30eaf21aa749b0e6f017ced369ac2e2a">parseOrLoadAST</a>(source_AST, OptionsParser.getCompilations(), item);</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="comment">// std::cout &lt;&lt; &quot;Got AST&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            Finder.matchAST(source_AST-&gt;getASTContext());</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="comment">// std::cout &lt;&lt; termcolor::bold &lt;&lt; &quot;Run on file &quot; &lt;&lt; item &lt;&lt; &quot; produced &quot; &lt;&lt; toDoList.size() &lt;&lt; &quot; ToDos&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="comment">// for(const auto&amp; toDo : toDoList) { std::cout &lt;&lt; &#39;\t&#39; &lt;&lt; toDo &lt;&lt; std::endl; }</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                                              indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                                              indicators::option::Fill{<span class="stringliteral">&quot;■&quot;</span>},</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                                              indicators::option::Lead{<span class="stringliteral">&quot;■&quot;</span>},</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                                              indicators::option::Remainder{<span class="stringliteral">&quot;-&quot;</span>},</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                                              indicators::option::End{<span class="stringliteral">&quot; ]&quot;</span>},</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                                              indicators::option::PrefixText{<span class="stringliteral">&quot;Checking for places to inject: &quot;</span>},</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                                              indicators::option::ForegroundColor{indicators::Color::green},</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                                              indicators::option::ShowPercentage{<span class="keyword">true</span>},</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                                              indicators::option::MaxProgress{<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(main_and_injection_files.size())},</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                                              indicators::option::FontStyles{std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}};</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            indicators::show_console_cursor(<span class="keyword">false</span>);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; file_for_search : main_and_injection_files) {</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keywordflow">if</span>(toDoList.size() == 0) {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    inner_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;ToDoList became empty. &quot;</span>});</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                    <span class="keywordflow">while</span>(<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                        inner_bar.tick();</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                        <span class="keywordflow">if</span>(inner_bar.is_completed()) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    }</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                }</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                std::unique_ptr&lt;clang::ASTUnit&gt; target_AST;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a30eaf21aa749b0e6f017ced369ac2e2a">parseOrLoadAST</a>(target_AST, OptionsParser.getCompilations(), file_for_search);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                inner_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Processing: &quot;</span> + file_for_search});</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Search in AST of file &quot; &lt;&lt; file_for_search &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                clang::Rewriter rewriter(target_AST-&gt;getSourceManager(), target_AST-&gt;getLangOpts());</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                clang::ast_matchers::MatchFinder FuncFinder;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                <a class="code hl_class" href="classInjectInstantiation.html">InjectInstantiation</a> instantiator;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                instantiator.<a class="code hl_variable" href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">toDoList</a> = &amp;toDoList;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                instantiator.<a class="code hl_variable" href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">rewriter</a> = &amp;rewriter;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                FuncFinder.addMatcher(<span class="comment">/*Matcher*/</span> FunctionDefMatcher, <span class="comment">/*Callback*/</span> &amp;instantiator);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                FuncFinder.matchAST(target_AST-&gt;getASTContext());</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Called AST match function&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                rewriter.overwriteChangedFiles();</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Called rewriter&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                <span class="keywordtype">bool</span> HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                <span class="comment">// std::cout &lt;&lt; &quot;HAS_INJECTED=&quot; &lt;&lt; std::boolalpha &lt;&lt; HAS_INJECTED_INTANTIATION &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                <span class="keywordflow">if</span>(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                inner_bar.tick();</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                <span class="comment">// std::cout &lt;&lt; std::endl;</span></div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            indicators::show_console_cursor(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            <span class="comment">// outer_bar.tick();</span></div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    std::cout &lt;&lt; termcolor::bold &lt;&lt; termcolor::red &lt;&lt; <span class="stringliteral">&quot;#toDos that are left: &quot;</span> &lt;&lt; toDoList.size() &lt;&lt; termcolor::reset &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; toDo : toDoList) { std::cout &lt;&lt; <span class="charliteral">&#39;\t&#39;</span> &lt;&lt; termcolor::underline &lt;&lt; toDo &lt;&lt; termcolor::reset &lt;&lt; std::endl; }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>}</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;system_error&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;unordered_set&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;termcolor/termcolor.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;indicators/cursor_control.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;indicators/indeterminate_progress_bar.hpp&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;indicators/progress_bar.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;clang/Frontend/FrontendActions.h&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;clang/Tooling/CommonOptionsParser.h&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;clang/Tooling/Tooling.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Declares llvm::cl::extrahelp.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;llvm/Support/CommandLine.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;clang/AST/ASTImporter.h&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchFinder.h&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchers.h&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;clang/Rewrite/Core/Rewriter.h&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;clang/Rewrite/Frontend/Rewriters.h&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="ASTCreation_8hpp.html">ASTCreation.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="AllASTBuilderAction_8hpp.html">Actions/AllASTBuilderAction.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="DeleteInstantiations_8hpp.html">Callbacks/DeleteInstantiations.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="GetNeededInstantiations_8hpp.html">Callbacks/GetNeededInstantiations.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="InjectInstantiation_8hpp.html">Callbacks/InjectInstantiation.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="Matcher_8hpp.html">Matcher/Matcher.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">//</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// Command line options</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">//</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">// Apply a custom category to all command-line options so that they are the</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">// only ones displayed.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">   41</a></span><span class="keyword">static</span> llvm::cl::OptionCategory <a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>(<span class="stringliteral">&quot;Instantiator options&quot;</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">   43</a></span><span class="keyword">static</span> llvm::cl::opt&lt;bool&gt; <a class="code hl_function" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a>(<span class="stringliteral">&quot;clean&quot;</span>, llvm::cl::desc(<span class="stringliteral">&quot;Delete all explicit instantiations.&quot;</span>), llvm::cl::cat(<a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>));</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">static</span> llvm::cl::list&lt;std::string&gt;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">   45</a></span>    <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>(<span class="stringliteral">&quot;ignore&quot;</span>,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                   llvm::cl::desc(<span class="stringliteral">&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;</span>),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                   llvm::cl::value_desc(<span class="stringliteral">&quot;namespace&quot;</span>),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                   llvm::cl::cat(<a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>));</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c">   49</a></span><span class="keyword">static</span> llvm::cl::alias <a class="code hl_function" href="Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c">IgnorePatternsA</a>(<span class="stringliteral">&quot;i&quot;</span>, llvm::cl::desc(<span class="stringliteral">&quot;Alias for --ignore&quot;</span>), llvm::cl::aliasopt(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">// CommonOptionsParser declares HelpMessage with a description of the common</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// command-line options related to the compilation database and input files.</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">// It&#39;s nice to have this help message in all tools.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">   54</a></span><span class="keyword">static</span> llvm::cl::extrahelp <a class="code hl_function" href="Instantiator_8cpp.html#a59161941fab072bbb83f502fefd9d734">CommonHelp</a>(clang::tooling::CommonOptionsParser::HelpMessage);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// A help message for this specific tool can be added afterwards.</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">// static llvm::cl::extrahelp MoreHelp(&quot;\nMore help text...\n&quot;);</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">   59</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a>(<span class="keywordtype">int</span> argc, <span class="keyword">const</span> <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">auto</span> ExpectedParser = clang::tooling::CommonOptionsParser::create(argc, argv, <a class="code hl_function" href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>, llvm::cl::OneOrMore);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span>(!ExpectedParser) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">// Fail gracefully for unsupported options.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        llvm::errs() &lt;&lt; ExpectedParser.takeError();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    clang::tooling::CommonOptionsParser&amp; OptionsParser = ExpectedParser.get();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span>(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.size() == 0) { <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.push_back(<span class="stringliteral">&quot;std&quot;</span>); }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    clang::ast_matchers::internal::Matcher&lt;clang::NamedDecl&gt; nameMatcher = clang::ast_matchers::matchesName(<a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>[0] + <span class="stringliteral">&quot;::&quot;</span>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it = <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.begin() + 1; it != <a class="code hl_function" href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>.end(); it++) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + <span class="stringliteral">&quot;::&quot;</span>));</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = <a class="code hl_function" href="Matcher_8hpp.html#aa490284074dd793c672884a4cdce42a0">TemplInstWithoutDef</a>(nameMatcher);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = <a class="code hl_function" href="Matcher_8hpp.html#ac8e305e4e823da5613163fcb2ec96a73">FuncWithDef</a>(nameMatcher);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="comment">// clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind(&quot;func_definition&quot;);</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::error_code tmp_create_error;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">auto</span> tmpdir = std::filesystem::temp_directory_path(tmp_create_error);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span>(tmp_create_error) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;Error (&quot;</span> &lt;&lt; tmp_create_error.value() &lt;&lt; <span class="stringliteral">&quot;) while getting temporary directory:\n&quot;</span> &lt;&lt; tmp_create_error.message() &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::vector&lt;std::filesystem::path&gt; main_and_injection_files;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; file : OptionsParser.getCompilations().getAllFiles()) { main_and_injection_files.push_back(std::filesystem::path(file)); }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="comment">// std::cout &lt;&lt; &quot;source file from command line: &quot; &lt;&lt; OptionsParser.getSourcePathList()[0] &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="comment">// for(auto it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="comment">//     if(it-&gt;find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">// }</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// std::cout &lt;&lt; &quot;source files from json&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">// for(const auto&amp; source : main_and_injection_files) { std::cout &lt;&lt; &#39;\t&#39; &lt;&lt; &quot;-- &quot; &lt;&lt; source &lt;&lt; std::endl; }</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    llvm::ArrayRef&lt;std::filesystem::path&gt; sources(main_and_injection_files.data(), main_and_injection_files.size());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">if</span>(<a class="code hl_function" href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a>) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                                             indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                                             indicators::option::Fill{<span class="stringliteral">&quot;■&quot;</span>},</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                                             indicators::option::Lead{<span class="stringliteral">&quot;■&quot;</span>},</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                                             indicators::option::Remainder{<span class="stringliteral">&quot;-&quot;</span>},</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                             indicators::option::End{<span class="stringliteral">&quot; ]&quot;</span>},</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                                             indicators::option::PrefixText{<span class="stringliteral">&quot;Deleting instantiations: &quot;</span>},</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                                             indicators::option::ForegroundColor{indicators::Color::red},</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                                             indicators::option::ShowPercentage{<span class="keyword">true</span>},</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                                             indicators::option::MaxProgress{<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(sources.size())},</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                                             indicators::option::FontStyles{std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}};</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        indicators::show_console_cursor(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; sources.size(); i++) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            deletion_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Processing: &quot;</span> + sources[i].string()});</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            std::unique_ptr&lt;clang::ASTUnit&gt; AST;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a>(AST, OptionsParser.getCompilations(), sources[i], tmpdir);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            clang::Rewriter rewriter(AST-&gt;getSourceManager(), AST-&gt;getLangOpts());</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <a class="code hl_class" href="classDeleteInstantiations.html">DeleteInstantiations</a> Deleter;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            Deleter.<a class="code hl_variable" href="classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e">rewriter</a> = &amp;rewriter;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            clang::ast_matchers::MatchFinder Inst_Finder;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            Inst_Finder.addMatcher(<span class="comment">/*Matcher*/</span> <a class="code hl_function" href="Matcher_8hpp.html#a7352bbb3f846f2c2db222f66d9fd6997">TemplInst</a>(nameMatcher), <span class="comment">/*Callback*/</span> &amp;Deleter);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            Inst_Finder.matchAST(AST-&gt;getASTContext());</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            rewriter.overwriteChangedFiles();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            deletion_bar.tick();</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        indicators::show_console_cursor(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_class" href="classGetNeededInstantiations.html">GetNeededInstantiations</a> Getter;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    std::vector&lt;Injection&gt; toDoList;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    Getter.<a class="code hl_variable" href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">toDoList</a> = &amp;toDoList;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    clang::ast_matchers::MatchFinder Finder;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    Finder.addMatcher(<span class="comment">/*Matcher*/</span> TemplateInstantiationMatcher, <span class="comment">/*Callback*/</span> &amp;Getter);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="comment">// match in current main file.</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    std::unordered_set&lt;std::string&gt; workList;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="comment">// workList.insert(main_and_injection_files[0]);</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    workList.insert(OptionsParser.getSourcePathList()[0]);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    indicators::IndeterminateProgressBar outer_bar{indicators::option::BarWidth{40},</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                                                   indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                                                   indicators::option::Fill{<span class="stringliteral">&quot;·&quot;</span>},</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                                                   indicators::option::Lead{<span class="stringliteral">&quot;&lt;==&gt;&quot;</span>},</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                                                   indicators::option::End{<span class="stringliteral">&quot;]&quot;</span>},</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                                                   indicators::option::PrefixText{<span class="stringliteral">&quot;Main loop&quot;</span>},</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                                                   indicators::option::ForegroundColor{indicators::Color::yellow},</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                                                   indicators::option::FontStyles{std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}};</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">while</span>(workList.size() &gt; 0) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keyword">auto</span> copyOf_workList = workList;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; item : copyOf_workList) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="comment">// std::cout &lt;&lt; &quot;Processing file &quot; &lt;&lt; item &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            outer_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Scanning: &quot;</span> + item});</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            workList.erase(item);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            std::unique_ptr&lt;clang::ASTUnit&gt; source_AST;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a>(source_AST, OptionsParser.getCompilations(), item, tmpdir);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="comment">// std::cout &lt;&lt; &quot;Got AST&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            Finder.matchAST(source_AST-&gt;getASTContext());</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            <span class="comment">// std::cout &lt;&lt; termcolor::bold &lt;&lt; &quot;Run on file &quot; &lt;&lt; item &lt;&lt; &quot; produced &quot; &lt;&lt; toDoList.size() &lt;&lt; &quot; ToDos&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="comment">// for(const auto&amp; toDo : toDoList) { std::cout &lt;&lt; &#39;\t&#39; &lt;&lt; toDo &lt;&lt; std::endl; }</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                                              indicators::option::Start{<span class="stringliteral">&quot;[&quot;</span>},</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                                              indicators::option::Fill{<span class="stringliteral">&quot;■&quot;</span>},</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                                              indicators::option::Lead{<span class="stringliteral">&quot;■&quot;</span>},</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                                              indicators::option::Remainder{<span class="stringliteral">&quot;-&quot;</span>},</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                                              indicators::option::End{<span class="stringliteral">&quot; ]&quot;</span>},</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                                              indicators::option::PrefixText{<span class="stringliteral">&quot;Checking for places to inject: &quot;</span>},</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                                              indicators::option::ForegroundColor{indicators::Color::green},</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                                              indicators::option::ShowPercentage{<span class="keyword">true</span>},</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                                              indicators::option::MaxProgress{<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(main_and_injection_files.size())},</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                                              indicators::option::FontStyles{std::vector&lt;indicators::FontStyle&gt;{indicators::FontStyle::bold}}};</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            indicators::show_console_cursor(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; file_for_search : main_and_injection_files) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                <span class="keywordflow">if</span>(toDoList.size() == 0) {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                    inner_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;ToDoList became empty. &quot;</span>});</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                    <span class="keywordflow">while</span>(<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                        inner_bar.tick();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                        <span class="keywordflow">if</span>(inner_bar.is_completed()) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                    }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                }</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                std::unique_ptr&lt;clang::ASTUnit&gt; target_AST;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                <span class="keywordtype">int</span> success = <a class="code hl_function" href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a>(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                inner_bar.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Processing: &quot;</span> + file_for_search.string()});</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Search in AST of file &quot; &lt;&lt; file_for_search &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>                clang::Rewriter rewriter(target_AST-&gt;getSourceManager(), target_AST-&gt;getLangOpts());</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                clang::ast_matchers::MatchFinder FuncFinder;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                <a class="code hl_class" href="classInjectInstantiation.html">InjectInstantiation</a> instantiator;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                instantiator.<a class="code hl_variable" href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">toDoList</a> = &amp;toDoList;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                instantiator.<a class="code hl_variable" href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">rewriter</a> = &amp;rewriter;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                FuncFinder.addMatcher(<span class="comment">/*Matcher*/</span> FunctionDefMatcher, <span class="comment">/*Callback*/</span> &amp;instantiator);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>                FuncFinder.matchAST(target_AST-&gt;getASTContext());</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Called AST match function&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>                rewriter.overwriteChangedFiles();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                <span class="comment">// std::cout &lt;&lt; termcolor::green &lt;&lt; &quot;Called rewriter&quot; &lt;&lt; termcolor::reset &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>                <span class="keywordtype">bool</span> HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>                <span class="comment">// std::cout &lt;&lt; &quot;HAS_INJECTED=&quot; &lt;&lt; std::boolalpha &lt;&lt; HAS_INJECTED_INTANTIATION &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>                <span class="keywordflow">if</span>(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>                inner_bar.tick();</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                <span class="comment">// std::cout &lt;&lt; std::endl;</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            indicators::show_console_cursor(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="comment">// outer_bar.tick();</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    std::cout &lt;&lt; termcolor::bold &lt;&lt; termcolor::red &lt;&lt; <span class="stringliteral">&quot;#toDos that are left: &quot;</span> &lt;&lt; toDoList.size() &lt;&lt; termcolor::reset &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; toDo : toDoList) { std::cout &lt;&lt; <span class="charliteral">&#39;\t&#39;</span> &lt;&lt; termcolor::underline &lt;&lt; toDo &lt;&lt; termcolor::reset &lt;&lt; std::endl; }</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>}</div>
 </div>
 <div class="ttc" id="aASTCreation_8hpp_html"><div class="ttname"><a href="ASTCreation_8hpp.html">ASTCreation.hpp</a></div></div>
-<div class="ttc" id="aASTCreation_8hpp_html_a30eaf21aa749b0e6f017ced369ac2e2a"><div class="ttname"><a href="ASTCreation_8hpp.html#a30eaf21aa749b0e6f017ced369ac2e2a">parseOrLoadAST</a></div><div class="ttdeci">int parseOrLoadAST(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::string filename)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00012">ASTCreation.cpp:12</a></div></div>
+<div class="ttc" id="aASTCreation_8hpp_html_a3456b56ee8acb76270a30f78e01a3f36"><div class="ttname"><a href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a></div><div class="ttdeci">int parseOrLoadAST(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00012">ASTCreation.cpp:12</a></div></div>
 <div class="ttc" id="aAllASTBuilderAction_8hpp_html"><div class="ttname"><a href="AllASTBuilderAction_8hpp.html">AllASTBuilderAction.hpp</a></div></div>
 <div class="ttc" id="aDeleteInstantiations_8hpp_html"><div class="ttname"><a href="DeleteInstantiations_8hpp.html">DeleteInstantiations.hpp</a></div></div>
 <div class="ttc" id="aGetNeededInstantiations_8hpp_html"><div class="ttname"><a href="GetNeededInstantiations_8hpp.html">GetNeededInstantiations.hpp</a></div></div>
 <div class="ttc" id="aInjectInstantiation_8hpp_html"><div class="ttname"><a href="InjectInstantiation_8hpp.html">InjectInstantiation.hpp</a></div></div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
-<div class="ttc" id="aInstantiator_8cpp_html_a217dbf8b442f20279ea00b898af96f52"><div class="ttname"><a href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a></div><div class="ttdeci">int main(int argc, const char **argv)</div><div class="ttdef"><b>Definition</b> <a href="#l00058">Instantiator.cpp:58</a></div></div>
+<div class="ttc" id="aInstantiator_8cpp_html_a217dbf8b442f20279ea00b898af96f52"><div class="ttname"><a href="Instantiator_8cpp.html#a217dbf8b442f20279ea00b898af96f52">main</a></div><div class="ttdeci">int main(int argc, const char **argv)</div><div class="ttdef"><b>Definition</b> <a href="#l00059">Instantiator.cpp:59</a></div></div>
 <div class="ttc" id="aInstantiator_8cpp_html_a3c2627e92e042d2f85323b64d2405829"><div class="ttname"><a href="Instantiator_8cpp.html#a3c2627e92e042d2f85323b64d2405829">Clean</a></div><div class="ttdeci">static llvm::cl::opt&lt; bool &gt; Clean(&quot;clean&quot;, llvm::cl::desc(&quot;Delete all explicit instantiations.&quot;), llvm::cl::cat(InstantiatorOptions))</div></div>
 <div class="ttc" id="aInstantiator_8cpp_html_a463095459ca7eff2f7315fc955830f04"><div class="ttname"><a href="Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a></div><div class="ttdeci">static llvm::cl::OptionCategory InstantiatorOptions(&quot;Instantiator options&quot;)</div></div>
 <div class="ttc" id="aInstantiator_8cpp_html_a52ea5006fa1ab522ba020250d72e6a38"><div class="ttname"><a href="Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a></div><div class="ttdeci">static llvm::cl::list&lt; std::string &gt; IgnorePatterns(&quot;ignore&quot;, llvm::cl::desc(&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;), llvm::cl::value_desc(&quot;namespace&quot;), llvm::cl::cat(InstantiatorOptions))</div></div>
@@ -335,8 +341,8 @@ $(function(){initNavTree('Instantiator_8cpp_source.html',''); initResizable(); }
 <div class="ttc" id="aclassGetNeededInstantiations_html"><div class="ttname"><a href="classGetNeededInstantiations.html">GetNeededInstantiations</a></div><div class="ttdoc">MatchCallback for template instantiation detections.</div><div class="ttdef"><b>Definition</b> <a href="GetNeededInstantiations_8hpp_source.html#l00019">GetNeededInstantiations.hpp:20</a></div></div>
 <div class="ttc" id="aclassGetNeededInstantiations_html_a4923b133878af583b2c9fb02f228e093"><div class="ttname"><a href="classGetNeededInstantiations.html#a4923b133878af583b2c9fb02f228e093">GetNeededInstantiations::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition</b> <a href="GetNeededInstantiations_8hpp_source.html#l00026">GetNeededInstantiations.hpp:26</a></div></div>
 <div class="ttc" id="aclassInjectInstantiation_html"><div class="ttname"><a href="classInjectInstantiation.html">InjectInstantiation</a></div><div class="ttdoc">MatchCallback for injection of explicit instantiations into the source files at appropriate places.</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8hpp_source.html#l00030">InjectInstantiation.hpp:31</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a6bca19632e89c3ef6af45eec26028da3"><div class="ttname"><a href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">InjectInstantiation::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8hpp_source.html#l00039">InjectInstantiation.hpp:39</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a88350a93deb47e847541b5f243395ddb"><div class="ttname"><a href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">InjectInstantiation::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8hpp_source.html#l00037">InjectInstantiation.hpp:37</a></div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a6bca19632e89c3ef6af45eec26028da3"><div class="ttname"><a href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">InjectInstantiation::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8hpp_source.html#l00038">InjectInstantiation.hpp:38</a></div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a88350a93deb47e847541b5f243395ddb"><div class="ttname"><a href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">InjectInstantiation::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8hpp_source.html#l00036">InjectInstantiation.hpp:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -344,7 +350,7 @@ $(function(){initNavTree('Instantiator_8cpp_source.html',''); initResizable(); }
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Instantiator_8cpp.html">Instantiator.cpp</a></li>
-    <li class="footer">Generated on Sat Feb 24 2024 23:00:35 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

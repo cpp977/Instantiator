@@ -118,13 +118,13 @@ Inheritance diagram for ASTBuilderAction:</div>
 <div class="dynheader">
 Collaboration diagram for ASTBuilderAction:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classASTBuilderAction__coll__graph.svg" width="527" height="228"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classASTBuilderAction__coll__graph.svg" width="390" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8243ae69c947028e8086ec95d7b6b580" id="r_a8243ae69c947028e8086ec95d7b6b580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8243ae69c947028e8086ec95d7b6b580">ASTBuilderAction</a> (std::unique_ptr&lt; clang::ASTUnit &gt; &amp;<a class="el" href="#aab05402f683c34c46dbef8d3a183886f">AST</a>, const clang::tooling::CompilationDatabase &amp;<a class="el" href="#a15f0af3ef041bea0e43d44deba3ff89f">db</a>, const std::string <a class="el" href="#aaaf793a185b3ad1a2febd588a0712fad">filename</a>)</td></tr>
-<tr class="separator:a8243ae69c947028e8086ec95d7b6b580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a383dd2d132429fd2d70f76722a07f21d" id="r_a383dd2d132429fd2d70f76722a07f21d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a383dd2d132429fd2d70f76722a07f21d">ASTBuilderAction</a> (std::unique_ptr&lt; clang::ASTUnit &gt; &amp;<a class="el" href="#aab05402f683c34c46dbef8d3a183886f">AST</a>, const clang::tooling::CompilationDatabase &amp;<a class="el" href="#a15f0af3ef041bea0e43d44deba3ff89f">db</a>, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;<a class="el" href="#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a>)</td></tr>
+<tr class="separator:a383dd2d132429fd2d70f76722a07f21d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa74cfc4a7ef513bdc83185ca7f56543" id="r_afa74cfc4a7ef513bdc83185ca7f56543"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa74cfc4a7ef513bdc83185ca7f56543">runInvocation</a> (std::shared_ptr&lt; clang::CompilerInvocation &gt; Invocation, clang::FileManager *Files, std::shared_ptr&lt; clang::PCHContainerOperations &gt; PCHContainerOps, clang::DiagnosticConsumer *DiagConsumer) override</td></tr>
 <tr class="separator:afa74cfc4a7ef513bdc83185ca7f56543"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -134,17 +134,19 @@ Private Attributes</h2></td></tr>
 <tr class="separator:aab05402f683c34c46dbef8d3a183886f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15f0af3ef041bea0e43d44deba3ff89f" id="r_a15f0af3ef041bea0e43d44deba3ff89f"><td class="memItemLeft" align="right" valign="top">const clang::tooling::CompilationDatabase &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15f0af3ef041bea0e43d44deba3ff89f">db</a></td></tr>
 <tr class="separator:a15f0af3ef041bea0e43d44deba3ff89f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaf793a185b3ad1a2febd588a0712fad" id="r_aaaf793a185b3ad1a2febd588a0712fad"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaf793a185b3ad1a2febd588a0712fad">filename</a></td></tr>
-<tr class="separator:aaaf793a185b3ad1a2febd588a0712fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f1d6ea0132beb1a47c51fc8864ebd74" id="r_a2f1d6ea0132beb1a47c51fc8864ebd74"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f1d6ea0132beb1a47c51fc8864ebd74">file</a></td></tr>
+<tr class="separator:a2f1d6ea0132beb1a47c51fc8864ebd74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89f1415d18ad89d79fe183c0b0df843" id="r_aa89f1415d18ad89d79fe183c0b0df843"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a></td></tr>
+<tr class="separator:aa89f1415d18ad89d79fe183c0b0df843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Action to compute a single AST of file <code>filename</code>. </p>
 <p>The action first looks if the AST needs to be reparsed or if it can be deserialized from disk. </p>
 
-<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00026">26</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00027">27</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8243ae69c947028e8086ec95d7b6b580" name="a8243ae69c947028e8086ec95d7b6b580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8243ae69c947028e8086ec95d7b6b580">&#9670;&#160;</a></span>ASTBuilderAction()</h2>
+<a id="a383dd2d132429fd2d70f76722a07f21d" name="a383dd2d132429fd2d70f76722a07f21d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a383dd2d132429fd2d70f76722a07f21d">&#9670;&#160;</a></span>ASTBuilderAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +167,12 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>&#160;)</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>tmpdir</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -175,7 +182,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00033">33</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00035">35</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
 
 </div>
 </div>
@@ -242,7 +249,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00028">28</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00029">29</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
 
 </div>
 </div>
@@ -266,12 +273,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00029">29</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00030">30</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
 
 </div>
 </div>
-<a id="aaaf793a185b3ad1a2febd588a0712fad" name="aaaf793a185b3ad1a2febd588a0712fad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaf793a185b3ad1a2febd588a0712fad">&#9670;&#160;</a></span>filename</h2>
+<a id="a2f1d6ea0132beb1a47c51fc8864ebd74" name="a2f1d6ea0132beb1a47c51fc8864ebd74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f1d6ea0132beb1a47c51fc8864ebd74">&#9670;&#160;</a></span>file</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +287,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string ASTBuilderAction::filename</td>
+          <td class="memname">std::filesystem::path ASTBuilderAction::file</td>
         </tr>
       </table>
   </td>
@@ -290,7 +297,31 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00030">30</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00031">31</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa89f1415d18ad89d79fe183c0b0df843" name="aa89f1415d18ad89d79fe183c0b0df843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89f1415d18ad89d79fe183c0b0df843">&#9670;&#160;</a></span>tmpdir</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::filesystem::path ASTBuilderAction::tmpdir</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ASTBuilderAction_8hpp_source.html#l00032">32</a> of file <a class="el" href="ASTBuilderAction_8hpp_source.html">ASTBuilderAction.hpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +336,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classASTBuilderAction.html">ASTBuilderAction</a></li>
-    <li class="footer">Generated on Sat Feb 24 2024 23:00:35 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
