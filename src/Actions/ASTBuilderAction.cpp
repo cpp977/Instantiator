@@ -12,7 +12,7 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
                                      std::shared_ptr<clang::PCHContainerOperations> PCHContainerOps,
                                      clang::DiagnosticConsumer* DiagConsumer)
 {
-  bool is_cached_on_disk = internal::is_cached(db, file, tmpdir);
+    bool is_cached_on_disk = internal::is_cached(db, file, tmpdir);
     // std::cout << "Processing " << filename << std::endl;
     // std::cout << std::boolalpha << "cached=" << is_cached_on_disk << std::endl;
     if(is_cached_on_disk) {
@@ -24,7 +24,8 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
                                               CI.getPCHContainerReader(),
                                               clang::ASTUnit::WhatToLoad::LoadEverything,
                                               llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(DiagEngine),
-                                              CI.getFileSystemOpts());
+                                              CI.getFileSystemOpts(),
+                                              CI.getHeaderSearchOptsPtr());
     } else {
         AST = clang::ASTUnit::LoadFromCompilerInvocation(Invocation,
                                                          std::move(PCHContainerOps),
