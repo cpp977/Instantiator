@@ -98,21 +98,113 @@ $(function(){initNavTree('DeleteInstantiations_8cpp.html',''); initResizable(); 
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">DeleteInstantiations.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="DeleteInstantiations_8hpp_source.html">Callbacks/DeleteInstantiations.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;clang/Basic/SourceLocation.h&gt;</code><br />
+<code>#include &lt;clang/Basic/TokenKinds.h&gt;</code><br />
+<code>#include &lt;ios&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="DeleteInstantiations_8hpp_source.html">Callbacks/DeleteInstantiations.hpp</a>&quot;</code><br />
 <code>#include &quot;clang/AST/Decl.h&quot;</code><br />
 <code>#include &quot;clang/AST/DeclCXX.h&quot;</code><br />
 <code>#include &quot;clang/AST/DeclTemplate.h&quot;</code><br />
+<code>#include &quot;clang/Lex/Lexer.h&quot;</code><br />
 <code>#include &quot;clang/Rewrite/Core/Rewriter.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for DeleteInstantiations.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="DeleteInstantiations_8cpp__incl.svg" width="982" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="DeleteInstantiations_8cpp__incl.svg" width="1756" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="DeleteInstantiations_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a504b3600756d28de8d64b56250fa889d" id="r_a504b3600756d28de8d64b56250fa889d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a504b3600756d28de8d64b56250fa889d">findSemiAfterLocation</a> (clang::SourceLocation loc, clang::ASTContext &amp;Ctx, bool IsDecl=false)</td></tr>
+<tr class="separator:a504b3600756d28de8d64b56250fa889d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4411971ec4a1d2aa0dca968d2c20b43f" id="r_a4411971ec4a1d2aa0dca968d2c20b43f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4411971ec4a1d2aa0dca968d2c20b43f">getEndLoc</a> (clang::SourceLocation begin, clang::ASTContext &amp;Ctx)</td></tr>
+<tr class="separator:a4411971ec4a1d2aa0dca968d2c20b43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b08c717ca11d2d4fc870a4d415dbcc" id="r_a41b08c717ca11d2d4fc870a4d415dbcc"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41b08c717ca11d2d4fc870a4d415dbcc">getBeginLoc</a> (clang::SourceLocation begin, clang::ASTContext &amp;Ctx)</td></tr>
+<tr class="separator:a41b08c717ca11d2d4fc870a4d415dbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a504b3600756d28de8d64b56250fa889d" name="a504b3600756d28de8d64b56250fa889d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a504b3600756d28de8d64b56250fa889d">&#9670;&#160;</a></span>findSemiAfterLocation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto findSemiAfterLocation </td>
+          <td>(</td>
+          <td class="paramtype">clang::SourceLocation</td>          <td class="paramname"><span class="paramname"><em>loc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::ASTContext &amp;</td>          <td class="paramname"><span class="paramname"><em>Ctx</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>IsDecl</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8cpp_source.html#l00014">14</a> of file <a class="el" href="DeleteInstantiations_8cpp_source.html">DeleteInstantiations.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a41b08c717ca11d2d4fc870a4d415dbcc" name="a41b08c717ca11d2d4fc870a4d415dbcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41b08c717ca11d2d4fc870a4d415dbcc">&#9670;&#160;</a></span>getBeginLoc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto getBeginLoc </td>
+          <td>(</td>
+          <td class="paramtype">clang::SourceLocation</td>          <td class="paramname"><span class="paramname"><em>begin</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::ASTContext &amp;</td>          <td class="paramname"><span class="paramname"><em>Ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8cpp_source.html#l00061">61</a> of file <a class="el" href="DeleteInstantiations_8cpp_source.html">DeleteInstantiations.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4411971ec4a1d2aa0dca968d2c20b43f" name="a4411971ec4a1d2aa0dca968d2c20b43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4411971ec4a1d2aa0dca968d2c20b43f">&#9670;&#160;</a></span>getEndLoc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto getEndLoc </td>
+          <td>(</td>
+          <td class="paramtype">clang::SourceLocation</td>          <td class="paramname"><span class="paramname"><em>begin</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">clang::ASTContext &amp;</td>          <td class="paramname"><span class="paramname"><em>Ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DeleteInstantiations_8cpp_source.html#l00049">49</a> of file <a class="el" href="DeleteInstantiations_8cpp_source.html">DeleteInstantiations.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -120,7 +212,7 @@ Include dependency graph for DeleteInstantiations.cpp:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b13917f847da1f7b289bf78886ebc77.html">Callbacks</a></li><li class="navelem"><a class="el" href="DeleteInstantiations_8cpp.html">DeleteInstantiations.cpp</a></li>
-    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Thu Mar 28 2024 10:07:30 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

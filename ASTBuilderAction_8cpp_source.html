@@ -121,7 +121,7 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>                                     std::shared_ptr&lt;clang::PCHContainerOperations&gt; PCHContainerOps,</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>                                     clang::DiagnosticConsumer* DiagConsumer)</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">bool</span> is_cached_on_disk = <a class="code hl_function" href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">internal::is_cached</a>(<a class="code hl_variable" href="classASTBuilderAction.html#a15f0af3ef041bea0e43d44deba3ff89f">db</a>, <a class="code hl_variable" href="classASTBuilderAction.html#a2f1d6ea0132beb1a47c51fc8864ebd74">file</a>, <a class="code hl_variable" href="classASTBuilderAction.html#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a>);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> is_cached_on_disk = <a class="code hl_function" href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">internal::is_cached</a>(<a class="code hl_variable" href="classASTBuilderAction.html#a15f0af3ef041bea0e43d44deba3ff89f">db</a>, <a class="code hl_variable" href="classASTBuilderAction.html#a2f1d6ea0132beb1a47c51fc8864ebd74">file</a>, <a class="code hl_variable" href="classASTBuilderAction.html#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a>);</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="comment">// std::cout &lt;&lt; &quot;Processing &quot; &lt;&lt; filename &lt;&lt; std::endl;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">// std::cout &lt;&lt; std::boolalpha &lt;&lt; &quot;cached=&quot; &lt;&lt; is_cached_on_disk &lt;&lt; std::endl;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span>(is_cached_on_disk) {</div>
@@ -133,19 +133,20 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                                              CI.getPCHContainerReader(),</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                                              clang::ASTUnit::WhatToLoad::LoadEverything,</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                                              llvm::IntrusiveRefCntPtr&lt;clang::DiagnosticsEngine&gt;(DiagEngine),</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                                              CI.getFileSystemOpts());</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a> = clang::ASTUnit::LoadFromCompilerInvocation(Invocation,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                                                         std::move(PCHContainerOps),</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                                                         clang::CompilerInstance::createDiagnostics(&amp;Invocation-&gt;getDiagnosticOpts(),</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                                                                                                    DiagConsumer,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                                                                                                    <span class="comment">/*ShouldOwnClient=*/</span><span class="keyword">false</span>),</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                                                         Files);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a>-&gt;Save((<a class="code hl_variable" href="classASTBuilderAction.html#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a> / <a class="code hl_variable" href="classASTBuilderAction.html#a2f1d6ea0132beb1a47c51fc8864ebd74">file</a>.filename().replace_extension(<span class="stringliteral">&quot;ast&quot;</span>)).string());</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">if</span>(!<a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a> or <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a>-&gt;getDiagnostics().hasUncompilableErrorOccurred()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                                              CI.getFileSystemOpts(),</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                                              CI.getHeaderSearchOptsPtr());</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a> = clang::ASTUnit::LoadFromCompilerInvocation(Invocation,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                                                         std::move(PCHContainerOps),</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                                                         clang::CompilerInstance::createDiagnostics(&amp;Invocation-&gt;getDiagnosticOpts(),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                                                                                                    DiagConsumer,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                                                                                                    <span class="comment">/*ShouldOwnClient=*/</span><span class="keyword">false</span>),</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                                                         Files);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a>-&gt;Save((<a class="code hl_variable" href="classASTBuilderAction.html#aa89f1415d18ad89d79fe183c0b0df843">tmpdir</a> / <a class="code hl_variable" href="classASTBuilderAction.html#a2f1d6ea0132beb1a47c51fc8864ebd74">file</a>.filename().replace_extension(<span class="stringliteral">&quot;ast&quot;</span>)).string());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span>(!<a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a> or <a class="code hl_variable" href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">AST</a>-&gt;getDiagnostics().hasUncompilableErrorOccurred()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
 </div>
 <div class="ttc" id="aASTBuilderAction_8hpp_html"><div class="ttname"><a href="ASTBuilderAction_8hpp.html">ASTBuilderAction.hpp</a></div></div>
 <div class="ttc" id="aASTCreation_8hpp_html"><div class="ttname"><a href="ASTCreation_8hpp.html">ASTCreation.hpp</a></div></div>
@@ -162,7 +163,7 @@ $(function(){initNavTree('ASTBuilderAction_8cpp_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0f2339d204149e590ec376b2c2ae3818.html">Actions</a></li><li class="navelem"><a class="el" href="ASTBuilderAction_8cpp.html">ASTBuilderAction.cpp</a></li>
-    <li class="footer">Generated on Wed Feb 28 2024 08:21:33 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Thu Mar 28 2024 10:07:30 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
