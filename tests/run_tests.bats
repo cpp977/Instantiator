@@ -7,7 +7,7 @@ setup_file() {
     # Create build directory
     mkdir "$SCRIPT_DIR/build"
     export CXX=clang++
-    export CXXFLAGS="-isystem /usr/lib/clang/16/include/"
+    export CXXFLAGS="-isystem /usr/lib/clang/17/include/"
 }
 
 teardown_file() {
