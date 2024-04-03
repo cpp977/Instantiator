@@ -111,17 +111,21 @@ int main(int argc, const char** argv)
                                              indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
         indicators::show_console_cursor(false);
         for(std::size_t i = 0; i < sources.size(); i++) {
-            deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
-            std::unique_ptr<clang::ASTUnit> AST;
-            int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
-            clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
-            DeleteInstantiations Deleter;
-            Deleter.rewriter = &rewriter;
-            clang::ast_matchers::MatchFinder Inst_Finder;
-            Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
-            Inst_Finder.matchAST(AST->getASTContext());
-            rewriter.overwriteChangedFiles();
-            deletion_bar.tick();
+            bool HAS_INJECTED_INSTANTIATION = true;
+            while(HAS_INJECTED_INSTANTIATION) {
+                deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
+                std::unique_ptr<clang::ASTUnit> AST;
+                int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
+                clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
+                DeleteInstantiations Deleter;
+                Deleter.rewriter = &rewriter;
+                clang::ast_matchers::MatchFinder Inst_Finder;
+                Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
+                Inst_Finder.matchAST(AST->getASTContext());
+                rewriter.overwriteChangedFiles();
+                HAS_INJECTED_INSTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
+                deletion_bar.tick();
+            }
         }
         indicators::show_console_cursor(true);
         return 0;
