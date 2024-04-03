@@ -24,6 +24,11 @@ teardown_file() {
     [ "$status" -eq 0 ]
 }
 
+@test "Format the codebase with clang-format." {
+    run bash -c "find \"${SCRIPT_DIR}\" -iname \"*.hpp\" -o -iname \"*.cpp\" -print0 | xargs -0 clang-format -i --style=file:\"${SCRIPT_DIR}/Math/.clang-format\""
+    [ "$status" -eq 0 ]
+}
+
 @test "Build the executable." {
     run cmake --build "${SCRIPT_DIR}/build"
     [ "$status" -eq 0 ]
