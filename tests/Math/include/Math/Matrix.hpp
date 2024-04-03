@@ -38,6 +38,9 @@ public:
 
     void setIdentity();
 
+    void
+    setVeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeryLoooooooooooooooooooooooooooooooooooooooooooooooongIdentity();
+
 private:
     std::size_t index(std::size_t row, std::size_t col) const;
     std::array<Scalar, Rows * Cols> m_data{};

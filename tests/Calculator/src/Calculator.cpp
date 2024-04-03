@@ -10,7 +10,7 @@ int main()
     double t = m.trace();
     std::cout << "trace=" << t << std::endl;
     Math::Matrix<double, 10, 10> n;
-    n.setIdentity();
+    n.setVeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeryLoooooooooooooooooooooooooooooooooooooooooooooooongIdentity();
     double q = n.trace();
     std::cout << "trace=" << q << std::endl;
     const auto x = n.square();
