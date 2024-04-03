@@ -29,4 +29,11 @@ void Matrix<Scalar, Rows, Cols>::setIdentity()
     for(auto i = 0ul; i < Rows; ++i) { m_data[index(i, i)] = 1.; }
 }
 
+template <typename Scalar, std::size_t Rows, std::size_t Cols>
+void Matrix<Scalar, Rows, Cols>::
+    setVeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeryLoooooooooooooooooooooooooooooooooooooooooooooooongIdentity()
+{
+    for(auto i = 0ul; i < Rows; ++i) { m_data[index(i, i)] = 1.; }
+}
+
 } // namespace Math
