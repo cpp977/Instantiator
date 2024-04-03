@@ -34,10 +34,6 @@ Because of recent bufix in clang (https://reviews.llvm.org/D108794) version 14 o
 With an older version of LLVM/clang you might run into troubles with the correct formatting of `template template` parameters.
 To control which version of LLVM is used, you can set the cmake variable `LLVM_ROOT` to the root of the llvm installation.
 To control which version of clang is used, you can set the cmake variable `Clang_DIR` to the root of the directory where the file ClangConfig.cmake is located.
-  
-# Known issues
-  - The cleanup of explicit instantiations can mess up the files if the explicit instantiations spread over more than one line. 
-    Be sure to backup everything before running the cleanup.
 
 # Roadmap for version 1.0.0
   - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
