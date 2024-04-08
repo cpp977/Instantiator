@@ -20,12 +20,20 @@ bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> 
         CI.setInvocation(Invocation);
         CI.createDiagnostics(DiagConsumer, /*ShouldOwnClient=*/false);
         clang::DiagnosticsEngine* DiagEngine = &CI.getDiagnostics();
+#if INSTANTIATOR_LLVM_MAJOR > 16
         AST = clang::ASTUnit::LoadFromASTFile((tmpdir / file.filename().replace_extension("ast")).string(),
                                               CI.getPCHContainerReader(),
                                               clang::ASTUnit::WhatToLoad::LoadEverything,
                                               llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(DiagEngine),
                                               CI.getFileSystemOpts(),
                                               CI.getHeaderSearchOptsPtr());
+#else
+        AST = clang::ASTUnit::LoadFromASTFile((tmpdir / file.filename().replace_extension("ast")).string(),
+                                              CI.getPCHContainerReader(),
+                                              clang::ASTUnit::WhatToLoad::LoadEverything,
+                                              llvm::IntrusiveRefCntPtr<clang::DiagnosticsEngine>(DiagEngine),
+                                              CI.getFileSystemOpts());
+#endif
     } else {
         AST = clang::ASTUnit::LoadFromCompilerInvocation(Invocation,
                                                          std::move(PCHContainerOps),

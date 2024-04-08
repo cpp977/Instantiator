@@ -6,8 +6,10 @@ setup_file() {
     export SCRIPT_DIR
     # Create build directory
     mkdir "$SCRIPT_DIR/build"
+    clang_version=$(clang++ --version | grep "clang version" | cut -d' ' -f3 | cut -d'.' -f1)
+    clang_include=$(locate stddef.h | grep clang | grep "${clang_version}" | cut -d'/' -f7 --complement)
     export CXX=clang++
-    export CXXFLAGS="-isystem /usr/lib/clang/17/include/"
+    export CXXFLAGS="-isystem ${clang_include}"
 }
 
 teardown_file() {
