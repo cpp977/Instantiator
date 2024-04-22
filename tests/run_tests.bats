@@ -10,6 +10,7 @@ setup_file() {
     clang_include=$(locate stddef.h | grep clang | grep "${clang_version}" | cut -d'/' -f7 --complement)
     export CXX=clang++
     export CXXFLAGS="-isystem ${clang_include}"
+    echo "CXXFLAGS=${CXXFLAGS}"
 }
 
 teardown_file() {
