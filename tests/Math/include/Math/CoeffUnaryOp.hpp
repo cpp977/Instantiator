@@ -23,8 +23,8 @@ class CoeffUnaryOp : public MatrixBase<CoeffUnaryOp<XprType_, ReturnScalar>>
 public:
     using XprType = XprType_;
     using Scalar = ReturnScalar;
-    static constexpr std::size_t Rows = XprType::Rows_;
-    static constexpr std::size_t Cols = XprType::Cols_;
+    static constexpr std::size_t Rows = XprType::Rows;
+    static constexpr std::size_t Cols = XprType::Cols;
 
     CoeffUnaryOp(const XprType& xpr, const std::function<ReturnScalar(typename XprType::Scalar)>& coeff_func)
         : m_refexpr(xpr)
