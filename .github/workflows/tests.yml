@@ -61,4 +61,4 @@ jobs:
     - name: Test
       working-directory: ${{runner.workspace}}
       shell: bash
-      run: bats -r -T --print-output-on-failure --verbose-run --show-output-of-passing-tests .
+      run: bats -r -T --print-output-on-failure .
