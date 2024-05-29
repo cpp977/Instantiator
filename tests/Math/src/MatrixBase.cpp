@@ -74,4 +74,8 @@ const CoeffUnaryOp<Derived, OtherScalar> MatrixBase<Derived>::cast() const
     return unaryExpr([](Scalar s) { return static_cast<OtherScalar>(s); });
 }
 
+#if __has_include("MatrixBase.gen.cpp")
+#    include "MatrixBase.gen.cpp"
+#endif
+
 } // namespace Math

@@ -12,4 +12,7 @@ ReturnScalar CoeffUnaryOp<XprType, ReturnScalar>::operator()(std::size_t row, st
     return m_func(m_refexpr(row, col));
 }
 
+#if __has_include("CoeffUnaryOp.gen.cpp")
+#    include "CoeffUnaryOp.gen.cpp"
+#endif
 } // namespace Math

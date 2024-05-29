@@ -36,4 +36,8 @@ void Matrix<Scalar, Rows, Cols>::
     for(auto i = 0ul; i < Rows; ++i) { m_data[index(i, i)] = 1.; }
 }
 
+#if __has_include("Matrix.gen.cpp")
+#    include "Matrix.gen.cpp"
+#endif
+
 } // namespace Math
