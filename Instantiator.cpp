@@ -4,23 +4,20 @@
 #include <system_error>
 #include <unordered_set>
 
-#include "termcolor/termcolor.hpp"
+#include "clang/AST/ASTImporter.h"
+#include "clang/ASTMatchers/ASTMatchFinder.h"
+#include "clang/ASTMatchers/ASTMatchers.h"
+#include "clang/Rewrite/Core/Rewriter.h"
+#include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Tooling/Tooling.h"
 
 #include "indicators/cursor_control.hpp"
 #include "indicators/indeterminate_progress_bar.hpp"
 #include "indicators/progress_bar.hpp"
 
-#include "clang/Tooling/CommonOptionsParser.h"
-#include "clang/Tooling/Tooling.h"
-// Declares llvm::cl::extrahelp.
 #include "llvm/Support/CommandLine.h"
 
-#include "clang/AST/ASTImporter.h"
-
-#include "clang/ASTMatchers/ASTMatchFinder.h"
-#include "clang/ASTMatchers/ASTMatchers.h"
-
-#include "clang/Rewrite/Core/Rewriter.h"
+#include "termcolor/termcolor.hpp"
 
 #include "ASTCreation.hpp"
 #include "Callbacks/DeleteInstantiations.hpp"
@@ -32,8 +29,6 @@
 //
 // Command line options
 //
-// Apply a custom category to all command-line options so that they are the
-// only ones displayed.
 static llvm::cl::OptionCategory InstantiatorOptions("Instantiator options");
 
 static llvm::cl::opt<bool> Invasive("invasive",
@@ -48,13 +43,7 @@ static llvm::cl::list<std::string>
                    llvm::cl::cat(InstantiatorOptions));
 static llvm::cl::alias IgnorePatternsA("i", llvm::cl::desc("Alias for --ignore"), llvm::cl::aliasopt(IgnorePatterns));
 
-// CommonOptionsParser declares HelpMessage with a description of the common
-// command-line options related to the compilation database and input files.
-// It's nice to have this help message in all tools.
 static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpMessage);
-
-// A help message for this specific tool can be added afterwards.
-// static llvm::cl::extrahelp MoreHelp("\nMore help text...\n");
 
 int main(int argc, const char** argv)
 {
