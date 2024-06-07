@@ -1,8 +1,6 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <ranges>
-#include <sstream>
 #include <system_error>
 #include <unordered_set>
 
@@ -12,7 +10,6 @@
 #include "indicators/indeterminate_progress_bar.hpp"
 #include "indicators/progress_bar.hpp"
 
-#include "clang/Frontend/FrontendActions.h"
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
 // Declares llvm::cl::extrahelp.
@@ -24,10 +21,8 @@
 #include "clang/ASTMatchers/ASTMatchers.h"
 
 #include "clang/Rewrite/Core/Rewriter.h"
-#include "clang/Rewrite/Frontend/Rewriters.h"
 
 #include "ASTCreation.hpp"
-#include "Actions/AllASTBuilderAction.hpp"
 #include "Callbacks/DeleteInstantiations.hpp"
 #include "Callbacks/GetNeededInstantiations.hpp"
 #include "Callbacks/InjectInstantiation.hpp"
