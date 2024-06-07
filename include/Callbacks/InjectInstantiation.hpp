@@ -37,6 +37,8 @@ public:
     /**Pointer to an external [clang::Rewriter]((https://clang.llvm.org/doxygen/classclang_1_1Rewriter.html)) object.*/
     clang::Rewriter* rewriter;
 
+    bool invasive = false;
+
     virtual void run(const clang::ast_matchers::MatchFinder::MatchResult& Result) override;
 };
 

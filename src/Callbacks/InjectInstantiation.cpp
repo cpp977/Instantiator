@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <iostream>
 
 #include "termcolor/termcolor.hpp"
@@ -65,20 +66,26 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 Injection& toDo = *it;
                 // std::cout << "Checking toDo entry: " << toDo << std::endl;
                 if(candidate.isTemplateFor(toDo)) {
-                    // std::cout << "Match!!! Call the rewriter and delete entry from toDoList." << std::endl;
-                    auto sc = MFS->getBodyRBrace().getLocWithOffset(1);
-                    auto fid = rewriter->getSourceMgr().getFileID(sc);
-                    auto fileentry = rewriter->getSourceMgr().getFileEntryRefForID(fid);
-                    auto fname_ = rewriter->getSourceMgr().getFileManager().getCanonicalName(*fileentry);
-                    std::string fname(fname_.data(), fname_.size());
-                    auto new_name = fname + ".inst.cpp";
-                    std::cout << "Injecting in file " << new_name << std::endl;
-                    auto loc = rewriter->getSourceMgr().getLocForEndOfFile(fid);
-                    // get filename of sc
-                    // transform filename
-                    // scnew = get loc of end in transformed filenames
-                    // insert to scnew
-                    rewriter->InsertText(MFS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
+                    if(invasive) {
+                        rewriter->InsertText(MFS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
+                    } else {
+                        // std::cout << "Match!!! Call the rewriter and delete entry from toDoList." << std::endl;
+                        auto sc = MFS->getBodyRBrace().getLocWithOffset(1);
+                        auto fid = rewriter->getSourceMgr().getFileID(sc);
+                        auto fileentry = rewriter->getSourceMgr().getFileEntryRefForID(fid);
+                        auto fname_ = rewriter->getSourceMgr().getFileManager().getCanonicalName(*fileentry);
+                        std::string fname(fname_.data(), fname_.size());
+                        auto new_name = std::filesystem::path(fname);
+                        new_name.replace_extension("gen.cpp");
+                        auto& sm = rewriter->getSourceMgr();
+                        auto& fm = sm.getFileManager();
+                        auto new_name_str = new_name.string();
+                        llvm::StringRef gen_name(new_name_str);
+                        auto file_ref = fm.getFileRef(gen_name, true);
+                        auto new_fid = sm.getOrCreateFileID(*file_ref, clang::SrcMgr::C_User);
+                        auto new_loc = sm.getLocForEndOfFile(new_fid);
+                        rewriter->InsertText(new_loc, llvm::StringRef(it->getInstantiation()), true, true);
+                    }
                     it = toDoList->erase(it);
                 } else {
                     it++;
@@ -123,7 +130,26 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                     //     toDoList."
                     //     << std::endl;
                     // std::cout << "Injection: " << it->getInstantiation() << std::endl;
-                    rewriter->InsertText(FS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
+                    if(invasive) {
+                        rewriter->InsertText(FS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
+                    } else {
+                        auto sc = FS->getBodyRBrace().getLocWithOffset(1);
+                        auto fid = rewriter->getSourceMgr().getFileID(sc);
+                        auto fileentry = rewriter->getSourceMgr().getFileEntryRefForID(fid);
+                        auto fname_ = rewriter->getSourceMgr().getFileManager().getCanonicalName(*fileentry);
+                        std::string fname(fname_.data(), fname_.size());
+                        auto new_name = std::filesystem::path(fname);
+                        new_name.replace_extension("gen.cpp");
+                        std::cout << "Injecting in file " << new_name << std::endl;
+                        auto& sm = rewriter->getSourceMgr();
+                        auto& fm = sm.getFileManager();
+                        auto new_name_str = new_name.string();
+                        llvm::StringRef gen_name(new_name_str);
+                        auto file_ref = fm.getFileRef(gen_name, true);
+                        auto new_fid = sm.getOrCreateFileID(*file_ref, clang::SrcMgr::C_User);
+                        auto new_loc = sm.getLocForEndOfFile(new_fid);
+                        rewriter->InsertText(new_loc, llvm::StringRef(it->getInstantiation()), true, true);
+                    }
                     it = toDoList->erase(it);
                 } else {
                     it++;

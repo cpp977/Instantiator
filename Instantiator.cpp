@@ -1,4 +1,5 @@
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <ranges>
 #include <sstream>
@@ -40,6 +41,10 @@
 // only ones displayed.
 static llvm::cl::OptionCategory InstantiatorOptions("Instantiator options");
 
+static llvm::cl::opt<bool> Invasive("invasive",
+                                    llvm::cl::desc("Inject instantiations invasively. (Directly after function definition.)"),
+                                    llvm::cl::cat(InstantiatorOptions));
+
 static llvm::cl::opt<bool> Clean("clean", llvm::cl::desc("Delete all explicit instantiations."), llvm::cl::cat(InstantiatorOptions));
 static llvm::cl::list<std::string>
     IgnorePatterns("ignore",
@@ -65,7 +70,6 @@ int main(int argc, const char** argv)
         return 1;
     }
     clang::tooling::CommonOptionsParser& OptionsParser = ExpectedParser.get();
-
     if(IgnorePatterns.size() == 0) { IgnorePatterns.push_back("std"); }
 
     clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName(IgnorePatterns[0] + "::");
@@ -77,8 +81,6 @@ int main(int argc, const char** argv)
 
     clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = FuncWithDef(nameMatcher);
 
-    // clang::ast_matchers::functionDecl(clang::ast_matchers::isDefinition(), clang::ast_matchers::unless(nameMatcher)).bind("func_definition");
-
     std::error_code tmp_create_error;
     auto tmpdir = std::filesystem::temp_directory_path(tmp_create_error);
     if(tmp_create_error) {
@@ -89,10 +91,6 @@ int main(int argc, const char** argv)
     std::vector<std::filesystem::path> main_and_injection_files;
     for(const auto& file : OptionsParser.getCompilations().getAllFiles()) { main_and_injection_files.push_back(std::filesystem::path(file)); }
 
-    // std::cout << "source file from command line: " << OptionsParser.getSourcePathList()[0] << std::endl;
-    // for(auto it = main_and_injection_files.begin(); it != main_and_injection_files.end(); it++) {
-    //     if(it->find(OptionsParser.getSourcePathList()[0]) != std::string::npos) { std::iter_swap(main_and_injection_files.begin(), it); }
-    // }
     // std::cout << "source files from json" << std::endl;
     // for(const auto& source : main_and_injection_files) { std::cout << '\t' << "-- " << source << std::endl; }
     llvm::ArrayRef<std::filesystem::path> sources(main_and_injection_files.data(), main_and_injection_files.size());
@@ -114,16 +112,24 @@ int main(int argc, const char** argv)
             bool HAS_INJECTED_INSTANTIATION = true;
             while(HAS_INJECTED_INSTANTIATION) {
                 deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
-                std::unique_ptr<clang::ASTUnit> AST;
-                int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
-                clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
-                DeleteInstantiations Deleter;
-                Deleter.rewriter = &rewriter;
-                clang::ast_matchers::MatchFinder Inst_Finder;
-                Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
-                Inst_Finder.matchAST(AST->getASTContext());
-                rewriter.overwriteChangedFiles();
-                HAS_INJECTED_INSTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
+                if(not Invasive) {
+                    auto gen_file = sources[i];
+                    gen_file.replace_extension("gen.cpp");
+                    std::ofstream f(gen_file, std::ios::out | std::ios::trunc);
+                    f.close();
+                    HAS_INJECTED_INSTANTIATION = false;
+                } else {
+                    std::unique_ptr<clang::ASTUnit> AST;
+                    int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
+                    clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
+                    DeleteInstantiations Deleter;
+                    Deleter.rewriter = &rewriter;
+                    clang::ast_matchers::MatchFinder Inst_Finder;
+                    Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
+                    Inst_Finder.matchAST(AST->getASTContext());
+                    rewriter.overwriteChangedFiles();
+                    HAS_INJECTED_INSTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
+                }
                 deletion_bar.tick();
             }
         }
@@ -195,6 +201,7 @@ int main(int argc, const char** argv)
                 InjectInstantiation instantiator;
                 instantiator.toDoList = &toDoList;
                 instantiator.rewriter = &rewriter;
+                instantiator.invasive = Invasive;
                 FuncFinder.addMatcher(/*Matcher*/ FunctionDefMatcher, /*Callback*/ &instantiator);
                 FuncFinder.matchAST(target_AST->getASTContext());
                 // std::cout << termcolor::green << "Called AST match function" << termcolor::reset << std::endl;
