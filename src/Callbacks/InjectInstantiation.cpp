@@ -1,8 +1,6 @@
 #include <filesystem>
 #include <iostream>
 
-#include "termcolor/termcolor.hpp"
-
 #include "Callbacks/InjectInstantiation.hpp"
 
 #include "llvm/ADT/APInt.h"
@@ -31,7 +29,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
         // std::cout << std::boolalpha << "TI=" << MFS->isTemplateInstantiation()
         //           << ", CTI=" << (MFS->getParent()->getMemberSpecializationInfo() != nullptr) << std::endl;
         // std::cout << "Processing memfunc " << MFS->getNameAsString() << std::endl;
-        llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
+        // llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
         if(MFS->isTemplateInstantiation() or (MFS->getParent()->getMemberSpecializationInfo() != nullptr)) {
             if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
                 if(MSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }

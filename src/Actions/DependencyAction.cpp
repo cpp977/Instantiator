@@ -1,6 +1,6 @@
 #include "Actions/DependencyAction.hpp"
 
-bool myDependencyCollector::sawDependency(llvm::StringRef Filename, bool FromModule, bool IsSystem, bool IsModuleFile, bool IsMissing)
+bool myDependencyCollector::sawDependency(llvm::StringRef, bool, bool IsSystem, bool, bool)
 {
     if(IsSystem) {
         return false;

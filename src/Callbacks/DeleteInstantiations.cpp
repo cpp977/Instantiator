@@ -1,6 +1,5 @@
 #include <clang/Basic/SourceLocation.h>
 #include <clang/Basic/TokenKinds.h>
-#include <ios>
 #include <iostream>
 
 #include "Callbacks/DeleteInstantiations.hpp"
@@ -72,7 +71,7 @@ auto getBeginLoc(clang::SourceLocation begin, clang::ASTContext& Ctx)
         auto beginCurrToken = clang::Lexer::GetBeginningOfToken(curr_loc, sm, Ctx.getLangOpts());
         line = sm.getSpellingLineNumber(beginCurrToken);
         col = sm.getSpellingColumnNumber(beginCurrToken);
-        auto res = clang::Lexer::getRawToken(beginCurrToken, tok, sm, Ctx.getLangOpts());
+        [[maybe_unused]] auto res = clang::Lexer::getRawToken(beginCurrToken, tok, sm, Ctx.getLangOpts());
         // std::cout << "token kind=" << tok.getName() << " begin: line=" << line << " and col=" << col << std::endl;
         assert(col >= 1 and "Invalid column in getBeginLoc()");
         if(col > 1) {
@@ -99,7 +98,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
     pp.FullyQualifiedName = true;
     pp.SuppressScope = false;
 
-    clang::SourceManager& sm = Result.Context->getSourceManager();
+    // clang::SourceManager& sm = Result.Context->getSourceManager();
 
     clang::Rewriter::RewriteOptions opts;
     opts.IncludeInsertsAtBeginOfRange = true;
