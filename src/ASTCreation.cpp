@@ -26,15 +26,15 @@ namespace internal {
 
 bool is_cached(const clang::tooling::CompilationDatabase& db, const std::filesystem::path& file, const std::filesystem::path& tmpdir)
 {
-    auto to_time_t = [](auto tp) -> std::time_t {
-        auto sctp =
-            std::chrono::time_point_cast<std::chrono::system_clock::duration>(tp - decltype(tp)::clock::now() + std::chrono::system_clock::now());
-        return std::chrono::system_clock::to_time_t(sctp);
-    };
+    // auto to_time_t = [](auto tp) -> std::time_t {
+    //     auto sctp =
+    //         std::chrono::time_point_cast<std::chrono::system_clock::duration>(tp - decltype(tp)::clock::now() + std::chrono::system_clock::now());
+    //     return std::chrono::system_clock::to_time_t(sctp);
+    // };
 
-    auto print_last_write_time = [to_time_t](std::filesystem::file_time_type const& ftime, const std::string& text) {
-        std::cout << text << ": " << ftime.time_since_epoch().count() << std::endl;
-    };
+    // auto print_last_write_time = [](std::filesystem::file_time_type const& ftime, const std::string& text) {
+    //     std::cout << text << ": " << ftime.time_since_epoch().count() << std::endl;
+    // };
 
     clang::tooling::ClangTool Tool(db, file.string());
     std::vector<std::string> deps;
