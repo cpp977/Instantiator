@@ -1,11 +1,11 @@
 #include "Param.hpp"
 
-#include <regex>
-
 #include "termcolor/termcolor.hpp"
 
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
+
+#include <regex>
 
 Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::PrintingPolicy pp)
 {

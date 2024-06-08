@@ -1,9 +1,5 @@
 #ifndef ASTBUILDER_ACTION_HPP_
 #define ASTBUILDER_ACTION_HPP_
-#include <iostream>
-#include <memory>
-#include <vector>
-
 #include "indicators/progress_bar.hpp"
 
 #include "clang/Frontend/ASTUnit.h"
@@ -11,6 +7,10 @@
 #include "clang/Frontend/CompilerInvocation.h"
 #include "clang/Serialization/PCHContainerOperations.h"
 #include "clang/Tooling/Tooling.h"
+
+#include <iostream>
+#include <memory>
+#include <vector>
 
 // forward declaration
 namespace clang {

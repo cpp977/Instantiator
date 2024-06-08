@@ -1,7 +1,3 @@
-#include <clang/Basic/SourceLocation.h>
-#include <clang/Basic/TokenKinds.h>
-#include <iostream>
-
 #include "Callbacks/DeleteInstantiations.hpp"
 
 #include "clang/AST/Decl.h"
@@ -9,6 +5,10 @@
 #include "clang/AST/DeclTemplate.h"
 #include "clang/Lex/Lexer.h"
 #include "clang/Rewrite/Core/Rewriter.h"
+
+#include <clang/Basic/SourceLocation.h>
+#include <clang/Basic/TokenKinds.h>
+#include <iostream>
 
 auto findSemiAfterLocation(clang::SourceLocation loc, clang::ASTContext& Ctx, bool IsDecl = false)
 {

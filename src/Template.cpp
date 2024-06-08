@@ -1,9 +1,8 @@
 #include "Template.hpp"
 
-#include "termcolor/termcolor.hpp"
-
 #include "Injection.hpp"
 #include "Parsing.hpp"
+#include "termcolor/termcolor.hpp"
 
 namespace clang {
 class ParmVarDecl;

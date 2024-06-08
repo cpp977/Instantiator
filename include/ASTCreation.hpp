@@ -2,6 +2,7 @@
 #define AST_CREATION_H_
 
 #include "clang/Tooling/Tooling.h"
+
 #include <filesystem>
 
 void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,

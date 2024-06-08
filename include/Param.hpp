@@ -1,12 +1,12 @@
 #ifndef PARAM_H_
 #define PARAM_H_
 
-#include <ostream>
-#include <string>
-
 #include "clang/AST/Decl.h"
 #include "clang/AST/DependenceFlags.h"
 #include "clang/AST/PrettyPrinter.h"
+
+#include <ostream>
+#include <string>
 
 /**
  * \brief Struct for the collection of all relevant data for a function parameter.

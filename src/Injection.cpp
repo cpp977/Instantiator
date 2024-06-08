@@ -1,8 +1,6 @@
 #include "Injection.hpp"
 
-#include <ostream>
-#include <sstream>
-
+#include "Parsing.hpp"
 #include "termcolor/termcolor.hpp"
 
 #include "clang/AST/Decl.h"
@@ -10,7 +8,8 @@
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 
-#include "Parsing.hpp"
+#include <ostream>
+#include <sstream>
 
 bool Injection::match(const Injection& other) const
 {

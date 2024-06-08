@@ -1,16 +1,15 @@
 #ifndef INJECTION_HPP_
 #define INJECTION_HPP_
 
-#include <optional>
-#include <string>
-#include <vector>
-
-#include "llvm/ADT/StringRef.h"
+#include "Param.hpp"
 
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/Type.h"
+#include "llvm/ADT/StringRef.h"
 
-#include "Param.hpp"
+#include <optional>
+#include <string>
+#include <vector>
 
 /**
  * \brief Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere.

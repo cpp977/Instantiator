@@ -1,19 +1,18 @@
-#include <filesystem>
-#include <iostream>
-
 #include "Callbacks/InjectInstantiation.hpp"
 
-#include "llvm/ADT/APInt.h"
-#include "llvm/ADT/StringRef.h"
+#include "Injection.hpp"
+#include "Template.hpp"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 #include "clang/Rewrite/Core/Rewriter.h"
+#include "llvm/ADT/APInt.h"
+#include "llvm/ADT/StringRef.h"
 
-#include "Injection.hpp"
-#include "Template.hpp"
+#include <filesystem>
+#include <iostream>
 
 void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {

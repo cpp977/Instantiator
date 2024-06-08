@@ -1,12 +1,12 @@
-#include <chrono>
-#include <filesystem>
-#include <memory>
-#include <stdexcept>
-
 #include "ASTCreation.hpp"
 
 #include "Actions/ASTBuilderAction.hpp"
 #include "Actions/DependencyAction.hpp"
+
+#include <chrono>
+#include <filesystem>
+#include <memory>
+#include <stdexcept>
 
 void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
                     const clang::tooling::CompilationDatabase& db,

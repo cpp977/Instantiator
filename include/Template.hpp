@@ -1,13 +1,13 @@
 #ifndef TEMPLATE_HPP_
 #define TEMPLATE_HPP_
-#include <string>
-#include <vector>
+#include "Injection.hpp"
+#include "Param.hpp"
 
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/Type.h"
 
-#include "Injection.hpp"
-#include "Param.hpp"
+#include <string>
+#include <vector>
 
 /**
  * \brief Struct for the collection of all relevant data for a template function which can provide a definition for an explicit instantiation from a

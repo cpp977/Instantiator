@@ -123,7 +123,7 @@ SortIncludes: true
 # Comments are for developers, they should arrange them
 ReflowComments: true
 
-IncludeBlocks: Preserve
+IncludeBlocks: Regroup
 IndentPPDirectives: AfterHash
 
 

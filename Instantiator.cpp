@@ -1,8 +1,13 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <system_error>
-#include <unordered_set>
+#include "ASTCreation.hpp"
+#include "Callbacks/DeleteInstantiations.hpp"
+#include "Callbacks/GetNeededInstantiations.hpp"
+#include "Callbacks/InjectInstantiation.hpp"
+#include "Injection.hpp"
+#include "Matcher/Matcher.hpp"
+#include "indicators/cursor_control.hpp"
+#include "indicators/indeterminate_progress_bar.hpp"
+#include "indicators/progress_bar.hpp"
+#include "termcolor/termcolor.hpp"
 
 #include "clang/AST/ASTImporter.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
@@ -10,21 +15,13 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Tooling.h"
-
-#include "indicators/cursor_control.hpp"
-#include "indicators/indeterminate_progress_bar.hpp"
-#include "indicators/progress_bar.hpp"
-
 #include "llvm/Support/CommandLine.h"
 
-#include "termcolor/termcolor.hpp"
-
-#include "ASTCreation.hpp"
-#include "Callbacks/DeleteInstantiations.hpp"
-#include "Callbacks/GetNeededInstantiations.hpp"
-#include "Callbacks/InjectInstantiation.hpp"
-#include "Injection.hpp"
-#include "Matcher/Matcher.hpp"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <system_error>
+#include <unordered_set>
 
 //
 // Command line options

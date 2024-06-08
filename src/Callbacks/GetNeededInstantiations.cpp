@@ -1,15 +1,14 @@
-#include <optional>
-
 #include "Callbacks/GetNeededInstantiations.hpp"
 
-#include "llvm/ADT/APInt.h"
-#include "llvm/ADT/SmallString.h"
+#include "Injection.hpp"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
+#include "llvm/ADT/APInt.h"
+#include "llvm/ADT/SmallString.h"
 
-#include "Injection.hpp"
+#include <optional>
 
 void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
