@@ -60,6 +60,9 @@ target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_PATCH=${LLVM_V
 target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_SUFFIX=${LLVM_VERSION_SUFFIX})
 target_compile_features(Instantiator PRIVATE cxx_std_17)
 target_compile_options(Instantiator PRIVATE -fno-rtti)
+target_compile_options(Instantiator PRIVATE -Wall)
+target_compile_options(Instantiator PRIVATE -Wextra)
+target_compile_options(Instantiator PRIVATE -Wpedantic)
 
 llvm_map_components_to_libnames(llvm_libs support core frontendopenmp)
 
