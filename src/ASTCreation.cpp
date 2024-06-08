@@ -1,22 +1,25 @@
 #include <chrono>
 #include <filesystem>
-#include <iomanip>
 #include <memory>
-#include <regex>
+#include <stdexcept>
 
 #include "ASTCreation.hpp"
 
 #include "Actions/ASTBuilderAction.hpp"
 #include "Actions/DependencyAction.hpp"
 
-int parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
-                   const clang::tooling::CompilationDatabase& db,
-                   const std::filesystem::path& filename,
-                   const std::filesystem::path& tmpdir)
+void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
+                    const clang::tooling::CompilationDatabase& db,
+                    const std::filesystem::path& filename,
+                    const std::filesystem::path& tmpdir)
 {
     clang::tooling::ClangTool Tool(db, filename.string());
     ASTBuilderAction ast_build_action(AST, db, filename, tmpdir);
-    return Tool.run(&ast_build_action);
+    int success = Tool.run(&ast_build_action);
+    if(success == 1) {
+        throw std::runtime_error("Error while creating the AST for " + filename.string() +
+                                 ". Check for issing includes due to generated instantiations.");
+    }
 }
 
 namespace internal {

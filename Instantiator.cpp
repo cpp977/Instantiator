@@ -104,7 +104,7 @@ int main(int argc, const char** argv)
                     HAS_INJECTED_INSTANTIATION = false;
                 } else {
                     std::unique_ptr<clang::ASTUnit> AST;
-                    int success = parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
+                    parseOrLoadAST(AST, OptionsParser.getCompilations(), sources[i], tmpdir);
                     clang::Rewriter rewriter(AST->getSourceManager(), AST->getLangOpts());
                     DeleteInstantiations Deleter;
                     Deleter.rewriter = &rewriter;
@@ -148,7 +148,7 @@ int main(int argc, const char** argv)
             outer_bar.set_option(indicators::option::PostfixText{"Scanning: " + item});
             workList.erase(item);
             std::unique_ptr<clang::ASTUnit> source_AST;
-            int success = parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item, tmpdir);
+            parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item, tmpdir);
             // std::cout << "Got AST" << std::endl;
             Finder.matchAST(source_AST->getASTContext());
             // std::cout << termcolor::bold << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset << std::endl;
@@ -177,7 +177,7 @@ int main(int argc, const char** argv)
                     break;
                 }
                 std::unique_ptr<clang::ASTUnit> target_AST;
-                int success = parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);
+                parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);
                 inner_bar.set_option(indicators::option::PostfixText{"Processing: " + file_for_search.string()});
                 // std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
                 clang::Rewriter rewriter(target_AST->getSourceManager(), target_AST->getLangOpts());

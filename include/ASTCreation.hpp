@@ -4,10 +4,10 @@
 #include "clang/Tooling/Tooling.h"
 #include <filesystem>
 
-int parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
-                   const clang::tooling::CompilationDatabase& db,
-                   const std::filesystem::path& filename,
-                   const std::filesystem::path& tmpdir);
+void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
+                    const clang::tooling::CompilationDatabase& db,
+                    const std::filesystem::path& filename,
+                    const std::filesystem::path& tmpdir);
 
 namespace internal {
 /**
