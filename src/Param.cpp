@@ -1,8 +1,5 @@
 #include "Param.hpp"
 
-#include "termcolor/termcolor.hpp"
-
-#include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 
 #include <regex>
@@ -82,29 +79,4 @@ bool Param::compare(const Param& other) const
     auto name_corrected = std::regex_replace(name, r, "type-parameter-X-Y");
     auto other_name_corrected = std::regex_replace(other.name, r, "type-parameter-X-Y");
     return name_corrected == other_name_corrected;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Param& p)
-{
-    stream << termcolor::bold << "•" << termcolor::reset;
-    if(p.is_const) {
-        stream << termcolor::green << "const " << termcolor::reset;
-    } else {
-        stream << termcolor::red << "const " << termcolor::reset;
-    }
-    if(p.is_volatile) {
-        stream << termcolor::green << "volatile " << termcolor::reset;
-    } else {
-        stream << termcolor::red << "volatile " << termcolor::reset;
-    }
-    if(p.is_restrict) {
-        stream << termcolor::green << "restrict " << termcolor::reset;
-    } else {
-        stream << termcolor::red << "restrict " << termcolor::reset;
-    }
-    stream << termcolor::bold << p.name << termcolor::reset;
-    if(p.is_dependent) { stream << ", dependent"; }
-    if(p.is_template_param) { stream << termcolor::on_red << ", template" << termcolor::reset; }
-    stream << ", template_name=" << termcolor::magenta << p.template_name << termcolor::reset;
-    return stream;
 }

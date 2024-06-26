@@ -2,12 +2,11 @@
 #include "Callbacks/DeleteInstantiations.hpp"
 #include "Callbacks/GetNeededInstantiations.hpp"
 #include "Callbacks/InjectInstantiation.hpp"
+#include "IO/ProgressBar.hpp"
 #include "Injection.hpp"
 #include "Matcher/Matcher.hpp"
-#include "indicators/cursor_control.hpp"
-#include "indicators/indeterminate_progress_bar.hpp"
-#include "indicators/progress_bar.hpp"
-#include "termcolor/termcolor.hpp"
+#include "fmt/ranges.h"
+#include "spdlog/spdlog.h"
 
 #include "clang/AST/ASTImporter.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
@@ -77,22 +76,24 @@ int main(int argc, const char** argv)
     llvm::ArrayRef<std::filesystem::path> sources(main_and_injection_files.data(), main_and_injection_files.size());
 
     if(Clean) {
-        indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},
-                                             indicators::option::Start{"["},
-                                             indicators::option::Fill{"■"},
-                                             indicators::option::Lead{"■"},
-                                             indicators::option::Remainder{"-"},
-                                             indicators::option::End{" ]"},
-                                             indicators::option::PrefixText{"Deleting instantiations: "},
-                                             indicators::option::ForegroundColor{indicators::Color::red},
-                                             indicators::option::ShowPercentage{true},
-                                             indicators::option::MaxProgress{static_cast<int>(sources.size())},
-                                             indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
-        indicators::show_console_cursor(false);
+
+        ProgressBar deletion_bar(sources.size());
+        // indicators::ProgressBar deletion_bar{indicators::option::BarWidth{50},
+        //                                      indicators::option::Start{"["},
+        //                                      indicators::option::Fill{"■"},
+        //                                      indicators::option::Lead{"■"},
+        //                                      indicators::option::Remainder{"-"},
+        //                                      indicators::option::End{" ]"},
+        //                                      indicators::option::PrefixText{"Deleting instantiations: "},
+        //                                      indicators::option::ForegroundColor{indicators::Color::red},
+        //                                      indicators::option::ShowPercentage{true},
+        //                                      indicators::option::MaxProgress{static_cast<int>(sources.size())},
+        //                                      indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
         for(std::size_t i = 0; i < sources.size(); i++) {
+            // deletion_bar.message = sources[i].string();
             bool HAS_INJECTED_INSTANTIATION = true;
             while(HAS_INJECTED_INSTANTIATION) {
-                deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
+                // deletion_bar.set_option(indicators::option::PostfixText{"Processing: " + sources[i].string()});
                 if(not Invasive) {
                     auto gen_file = sources[i];
                     gen_file.replace_extension("gen.cpp");
@@ -111,10 +112,10 @@ int main(int argc, const char** argv)
                     rewriter.overwriteChangedFiles();
                     HAS_INJECTED_INSTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
                 }
-                deletion_bar.tick();
             }
+            deletion_bar.step();
         }
-        indicators::show_console_cursor(true);
+        fmt::print("\n");
         return 0;
     }
 
@@ -129,20 +130,21 @@ int main(int argc, const char** argv)
     std::unordered_set<std::string> workList;
     // workList.insert(main_and_injection_files[0]);
     workList.insert(OptionsParser.getSourcePathList()[0]);
-    indicators::IndeterminateProgressBar outer_bar{indicators::option::BarWidth{40},
-                                                   indicators::option::Start{"["},
-                                                   indicators::option::Fill{"·"},
-                                                   indicators::option::Lead{"<==>"},
-                                                   indicators::option::End{"]"},
-                                                   indicators::option::PrefixText{"Main loop"},
-                                                   indicators::option::ForegroundColor{indicators::Color::yellow},
-                                                   indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
+    // indicators::IndeterminateProgressBar outer_bar{indicators::option::BarWidth{40},
+    //                                                indicators::option::Start{"["},
+    //                                                indicators::option::Fill{"·"},
+    //                                                indicators::option::Lead{"<==>"},
+    //                                                indicators::option::End{"]"},
+    //                                                indicators::option::PrefixText{"Main loop"},
+    //                                                indicators::option::ForegroundColor{indicators::Color::yellow},
+    //                                                indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
 
     while(workList.size() > 0) {
         auto copyOf_workList = workList;
+        // ProgressBar outer_bar{copyOf_workList.size()};
         for(const auto& item : copyOf_workList) {
             // std::cout << "Processing file " << item << std::endl;
-            outer_bar.set_option(indicators::option::PostfixText{"Scanning: " + item});
+            // outer_bar.set_option(indicators::option::PostfixText{"Scanning: " + item});
             workList.erase(item);
             std::unique_ptr<clang::ASTUnit> source_AST;
             parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item, tmpdir);
@@ -150,32 +152,28 @@ int main(int argc, const char** argv)
             Finder.matchAST(source_AST->getASTContext());
             // std::cout << termcolor::bold << "Run on file " << item << " produced " << toDoList.size() << " ToDos" << termcolor::reset << std::endl;
             // for(const auto& toDo : toDoList) { std::cout << '\t' << toDo << std::endl; }
-
-            indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},
-                                              indicators::option::Start{"["},
-                                              indicators::option::Fill{"■"},
-                                              indicators::option::Lead{"■"},
-                                              indicators::option::Remainder{"-"},
-                                              indicators::option::End{" ]"},
-                                              indicators::option::PrefixText{"Checking for places to inject: "},
-                                              indicators::option::ForegroundColor{indicators::Color::green},
-                                              indicators::option::ShowPercentage{true},
-                                              indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
-                                              indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
-            indicators::show_console_cursor(false);
+            ProgressBar inner_bar(toDoList.size());
+            // indicators::ProgressBar inner_bar{indicators::option::BarWidth{50},
+            //                                   indicators::option::Start{"["},
+            //                                   indicators::option::Fill{"■"},
+            //                                   indicators::option::Lead{"■"},
+            //                                   indicators::option::Remainder{"-"},
+            //                                   indicators::option::End{" ]"},
+            //                                   indicators::option::PrefixText{"Checking for places to inject: "},
+            //                                   indicators::option::ForegroundColor{indicators::Color::green},
+            //                                   indicators::option::ShowPercentage{true},
+            //                                   indicators::option::MaxProgress{static_cast<int>(main_and_injection_files.size())},
+            //                                   indicators::option::FontStyles{std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
+            // indicators::show_console_cursor(false);
 
             for(const auto& file_for_search : main_and_injection_files) {
                 if(toDoList.size() == 0) {
-                    inner_bar.set_option(indicators::option::PostfixText{"ToDoList became empty. "});
-                    while(true) {
-                        inner_bar.tick();
-                        if(inner_bar.is_completed()) break;
-                    }
+                    // inner_bar.set_option(indicators::option::PostfixText{"ToDoList became empty. "});
+                    inner_bar.update(inner_bar.numTasks());
                     break;
                 }
                 std::unique_ptr<clang::ASTUnit> target_AST;
                 parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);
-                inner_bar.set_option(indicators::option::PostfixText{"Processing: " + file_for_search.string()});
                 // std::cout << termcolor::green << "Search in AST of file " << file_for_search << termcolor::reset << std::endl;
                 clang::Rewriter rewriter(target_AST->getSourceManager(), target_AST->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
@@ -191,13 +189,12 @@ int main(int argc, const char** argv)
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
                 // std::cout << "HAS_INJECTED=" << std::boolalpha << HAS_INJECTED_INTANTIATION << std::endl;
                 if(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }
-                inner_bar.tick();
+                inner_bar.step();
                 // std::cout << std::endl;
             }
-            indicators::show_console_cursor(true);
+            fmt::print("\n");
             // outer_bar.tick();
         }
     }
-    std::cout << termcolor::bold << termcolor::red << "#toDos that are left: " << toDoList.size() << termcolor::reset << std::endl;
-    for(const auto& toDo : toDoList) { std::cout << '\t' << termcolor::underline << toDo << termcolor::reset << std::endl; }
+    spdlog::info("#toDos that are left: {}", toDoList.size());
 }

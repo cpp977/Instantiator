@@ -1,8 +1,10 @@
 #ifndef PARAM_H_
 #define PARAM_H_
 
+#include "fmt/color.h"
+#include "fmt/core.h"
+
 #include "clang/AST/Decl.h"
-#include "clang/AST/DependenceFlags.h"
 #include "clang/AST/PrettyPrinter.h"
 
 #include <ostream>
@@ -48,6 +50,44 @@ struct Param
     inline bool operator==(const Param& other) const { return this->compare(other); }
 };
 
+template <>
+class fmt::formatter<Param>
+{
+public:
+    constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
+    template <typename Context>
+    constexpr auto format(Param const& p, Context& ctx) const
+    {
+      return fmt::format_to(ctx.out(), "{} {}", p.is_const ? "const":"", p.name);
+    }
+};
+
 /**Pretty print a \p Param*/
-std::ostream& operator<<(std::ostream& stream, const Param& p);
+// std::ostream& operator<<(std::ostream& stream, const Param& p);
+
+// std::ostream& operator<<(std::ostream& stream, const Param& p)
+// {
+//     stream << termcolor::bold << "•" << termcolor::reset;
+//     if(p.is_const) {
+//         stream << termcolor::green << "const " << termcolor::reset;
+//     } else {
+//         stream << termcolor::red << "const " << termcolor::reset;
+//     }
+//     if(p.is_volatile) {
+//         stream << termcolor::green << "volatile " << termcolor::reset;
+//     } else {
+//         stream << termcolor::red << "volatile " << termcolor::reset;
+//     }
+//     if(p.is_restrict) {
+//         stream << termcolor::green << "restrict " << termcolor::reset;
+//     } else {
+//         stream << termcolor::red << "restrict " << termcolor::reset;
+//     }
+//     stream << termcolor::bold << p.name << termcolor::reset;
+//     if(p.is_dependent) { stream << ", dependent"; }
+//     if(p.is_template_param) { stream << termcolor::on_red << ", template" << termcolor::reset; }
+//     stream << ", template_name=" << termcolor::magenta << p.template_name << termcolor::reset;
+//     return stream;
+// }
+
 #endif

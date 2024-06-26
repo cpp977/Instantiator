@@ -1,7 +1,6 @@
 #include "Injection.hpp"
 
 #include "Parsing.hpp"
-#include "termcolor/termcolor.hpp"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
@@ -118,39 +117,4 @@ std::string Injection::getInstantiation() const
     }
     res << ";";
     return res.str();
-}
-
-std::ostream& operator<<(std::ostream& stream, const Injection& toDo)
-{
-    stream << termcolor::bold << "•" << termcolor::reset;
-    if(toDo.is_member) {
-        if(toDo.is_const) {
-            stream << termcolor::bold << termcolor::blue << "Const" << termcolor::reset << " member ";
-        } else {
-            stream << "Member ";
-        }
-    } else {
-        stream << "Free ";
-    }
-    stream << "function: " << termcolor::bold << termcolor::red << toDo.func_name << termcolor::reset;
-    if(toDo.func_Ttypes.size() > 0) {
-        stream << " (with template params: ";
-        for(const auto& p : toDo.func_Ttypes) { stream << termcolor::magenta << p << " "; }
-        stream << termcolor::reset << ")";
-    }
-    if(toDo.is_member) {
-        stream << " of class " << termcolor::bold << termcolor::green << toDo.class_name << termcolor::reset;
-        if(toDo.class_Ttypes.size() > 0) {
-            stream << " (with template params: ";
-            for(const auto& p : toDo.class_Ttypes) { stream << termcolor::magenta << p << " "; }
-            stream << termcolor::reset << ")";
-        }
-    }
-    stream << " of namespace: " << toDo.nested_namespace;
-    stream << " with params: ";
-    for(const auto& p : toDo.params) { stream << termcolor::cyan << p.name << " "; }
-    stream << termcolor::reset << " with nonresolved params: ";
-    for(const auto& p : toDo.nonresolved_params) { stream << termcolor::cyan << p.name << " "; }
-    stream << termcolor::reset << " with return type " << termcolor::bold << termcolor::grey << toDo.return_type << termcolor::reset;
-    return stream;
 }

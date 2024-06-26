@@ -2,7 +2,6 @@
 
 #include "Injection.hpp"
 #include "Parsing.hpp"
-#include "termcolor/termcolor.hpp"
 
 namespace clang {
 class ParmVarDecl;
@@ -49,25 +48,4 @@ bool Template::isTemplateFor(const Injection& toDo) const
     if(is_const != toDo.is_const) { return false; }
     if(params != toDo.nonresolved_params) { return false; }
     return true;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Template& candidate)
-{
-    stream << termcolor::bold << "•" << termcolor::reset;
-    if(candidate.is_member) {
-        if(candidate.is_const) {
-            stream << termcolor::bold << termcolor::blue << "Const" << termcolor::reset << " member ";
-        } else {
-            stream << "Member ";
-        }
-    } else {
-        stream << "Free ";
-    }
-    stream << "function template: " << termcolor::bold << termcolor::red << candidate.func_name << termcolor::reset;
-    if(candidate.is_member) { stream << " of class " << termcolor::bold << termcolor::green << candidate.class_name << termcolor::reset; }
-    stream << " of namespace: " << candidate.nested_namespace;
-    stream << " with params: ";
-    for(const auto& p : candidate.params) { stream << termcolor::cyan << p.name << " "; }
-    stream << termcolor::reset;
-    return stream;
 }

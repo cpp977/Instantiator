@@ -15,8 +15,8 @@ bool AllASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocatio
                                                                                               /*ShouldOwnClient=*/false),
                                                    Files);
     if(!AST or AST->getDiagnostics().hasUncompilableErrorOccurred()) return false;
-    prog_bar.tick();
-    prog_bar.set_option(indicators::option::PostfixText{"Processing: " + AST->getOriginalSourceFileName().str()});
+    // prog_bar.tick();
+    // prog_bar.set_option(indicators::option::PostfixText{"Processing: " + AST->getOriginalSourceFileName().str()});
 
     // std::cout << "Parsed AST for: " << AST->getOriginalSourceFileName().str() << std::endl;
     ASTs.push_back(std::move(AST));

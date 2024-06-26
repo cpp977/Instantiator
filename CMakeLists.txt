@@ -1,21 +1,18 @@
 cmake_minimum_required(VERSION 3.13.4)
-project(Instantiator VERSION 0.3.0 LANGUAGES CXX)
+project(Instantiator VERSION 0.3.0 LANGUAGES C CXX)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/CPM.cmake)
-CPMAddPackage(
-  NAME termcolor
-  GIT_TAG master
-  # GIT_REPOSITORY https://github.com/ikalnytskyi/termcolor
-  GIT_REPOSITORY https://github.com/cpp977/termcolor
-  )
+
+CPMAddPackage("gh:fmtlib/fmt#10.2.1")
 
 CPMAddPackage(
-  NAME indicator
-  VERSION 2.2
-  GIT_REPOSITORY https://github.com/p-ranav/indicators
+  NAME spdlog
+  VERSION 1.14.1
+  OPTIONS "SPDLOG_FMT_EXTERNAL ON"
+  GIT_REPOSITORY https://github.com/gabime/spdlog
   )
 
 find_package(LLVM REQUIRED CONFIG)
@@ -45,7 +42,9 @@ add_executable(Instantiator Instantiator.cpp
   src/Actions/DependencyAction.cpp
   src/ASTCreation.cpp
   src/Parsing.cpp
-  src/Template.cpp)
+  src/Template.cpp
+  src/IO/ProgressBar.cpp
+)
 
 # set_target_properties(Instantiator PROPERTIES SUFFIX ${LLVM_VERSION_MAJOR})
 
@@ -68,8 +67,8 @@ llvm_map_components_to_libnames(llvm_libs support core frontendopenmp)
 
 target_link_libraries(Instantiator PRIVATE
   clang-cpp
-  termcolor::termcolor
-  indicators::indicators
+  spdlog::spdlog
+  fmt::fmt
   )
 
 if (${CLANG_LINK_CLANG_DYLIB})

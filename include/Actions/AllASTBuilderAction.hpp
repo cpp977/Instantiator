@@ -1,6 +1,5 @@
 #ifndef ASTBUILDER_ACTION_HPP_
 #define ASTBUILDER_ACTION_HPP_
-#include "indicators/progress_bar.hpp"
 
 #include "clang/Frontend/ASTUnit.h"
 #include "clang/Frontend/CompilerInstance.h"
@@ -8,7 +7,6 @@
 #include "clang/Serialization/PCHContainerOperations.h"
 #include "clang/Tooling/Tooling.h"
 
-#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -26,12 +24,10 @@ class DiagnosticConsumer;
 class AllASTBuilderAction : public clang::tooling::ToolAction
 {
     std::vector<std::unique_ptr<clang::ASTUnit>>& ASTs;
-    indicators::ProgressBar& prog_bar;
 
 public:
-    AllASTBuilderAction(std::vector<std::unique_ptr<clang::ASTUnit>>& ASTs, indicators::ProgressBar& bar)
+    AllASTBuilderAction(std::vector<std::unique_ptr<clang::ASTUnit>>& ASTs)
         : ASTs(ASTs)
-        , prog_bar(bar)
     {}
 
     bool runInvocation(std::shared_ptr<clang::CompilerInvocation> Invocation,
