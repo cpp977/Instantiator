@@ -108,14 +108,14 @@ $(function(){initNavTree('Template_8hpp_source.html',''); initResizable(); });
 <div class="contents">
 <a href="Template_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TEMPLATE_HPP_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TEMPLATE_HPP_</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Param_8hpp.html">Param.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;clang/AST/DeclCXX.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;clang/AST/Type.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="Param_8hpp.html">Param.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structTemplate.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structTemplate.html">Template</a></div>
@@ -143,24 +143,63 @@ $(function(){initNavTree('Template_8hpp_source.html',''); initResizable(); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>};</div>
 </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>std::ostream&amp; <a class="code hl_function" href="Template_8hpp.html#afd1d507e9e2001fd4f5b94e740deb3ba">operator&lt;&lt;</a>(std::ostream&amp; stream, <span class="keyword">const</span> <a class="code hl_struct" href="structTemplate.html">Template</a>&amp; toDo);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">template</span> &lt;&gt;</div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="};">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classfmt_1_1formatter_3_01Template_01_4.html">  100</a></span><span class="keyword">class </span>fmt::formatter&lt;<a class="code hl_struct" href="structTemplate.html">Template</a>&gt;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>{</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="classfmt_1_1formatter_3_01Template_01_4.html#a9a80439e61312f108d9ca9414c83a0a2">  103</a></span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classfmt_1_1formatter_3_01Template_01_4.html#a9a80439e61312f108d9ca9414c83a0a2">parse</a>(format_parse_context&amp; ctx) { <span class="keywordflow">return</span> ctx.begin(); }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Context&gt;</div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classfmt_1_1formatter_3_01Template_01_4.html#adbfd4045c2f0422fce40d048c419adbc">  105</a></span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classfmt_1_1formatter_3_01Template_01_4.html#adbfd4045c2f0422fce40d048c419adbc">format</a>(<a class="code hl_struct" href="structTemplate.html">Template</a> <span class="keyword">const</span>&amp; t, Context&amp; ctx)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span> fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{}::{}::{}({}) {}&quot;</span>, t.<a class="code hl_variable" href="structTemplate.html#a3443ea0ef761c6763fe55de65e181548">nested_namespace</a>, t.<a class="code hl_variable" href="structTemplate.html#a5b8c65818b80c591ea3eab7c53b6dfbd">class_name</a>, t.<a class="code hl_variable" href="structTemplate.html#a41a28f66b918f1973d8aab69f60f04f1">func_name</a>, t.<a class="code hl_variable" href="structTemplate.html#a9c3d6c1a11688af61e58ea56ba3ed505">params</a>, t.<a class="code hl_variable" href="structTemplate.html#a8d93c35654b7b98705ec5db58f39e284">is_const</a> ? <span class="stringliteral">&quot;const&quot;</span> : <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
+</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>};</div>
+</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">// std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Template&amp; toDo);</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">// std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Template&amp; candidate)</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">// {</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment">//     stream &lt;&lt; termcolor::bold &lt;&lt; &quot;•&quot; &lt;&lt; termcolor::reset;</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">//     if(candidate.is_member) {</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">//         if(candidate.is_const) {</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">//             stream &lt;&lt; termcolor::bold &lt;&lt; termcolor::blue &lt;&lt; &quot;Const&quot; &lt;&lt; termcolor::reset &lt;&lt; &quot; member &quot;;</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">//         } else {</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">//             stream &lt;&lt; &quot;Member &quot;;</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">//         }</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">//     } else {</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">//         stream &lt;&lt; &quot;Free &quot;;</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">//     }</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">//     stream &lt;&lt; &quot;function template: &quot; &lt;&lt; termcolor::bold &lt;&lt; termcolor::red &lt;&lt; candidate.func_name &lt;&lt; termcolor::reset;</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">//     if(candidate.is_member) { stream &lt;&lt; &quot; of class &quot; &lt;&lt; termcolor::bold &lt;&lt; termcolor::green &lt;&lt; candidate.class_name &lt;&lt; termcolor::reset; }</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">//     stream &lt;&lt; &quot; of namespace: &quot; &lt;&lt; candidate.nested_namespace;</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">//     stream &lt;&lt; &quot; with params: &quot;;</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">//     for(const auto&amp; p : candidate.params) { stream &lt;&lt; termcolor::cyan &lt;&lt; p.name &lt;&lt; &quot; &quot;; }</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">//     stream &lt;&lt; termcolor::reset;</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">//     return stream;</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">// }</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
 <div class="ttc" id="aParam_8hpp_html"><div class="ttname"><a href="Param_8hpp.html">Param.hpp</a></div></div>
-<div class="ttc" id="aTemplate_8hpp_html_afd1d507e9e2001fd4f5b94e740deb3ba"><div class="ttname"><a href="Template_8hpp.html#afd1d507e9e2001fd4f5b94e740deb3ba">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, const Template &amp;toDo)</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00055">Template.cpp:55</a></div></div>
-<div class="ttc" id="astructInjection_html"><div class="ttname"><a href="structInjection.html">Injection</a></div><div class="ttdoc">Struct for the collection of all relevant data for a template instantiation which needs to be inserte...</div><div class="ttdef"><b>Definition</b> <a href="Injection_8hpp_source.html#l00018">Injection.hpp:19</a></div></div>
+<div class="ttc" id="aclassfmt_1_1formatter_3_01Template_01_4_html_a9a80439e61312f108d9ca9414c83a0a2"><div class="ttname"><a href="classfmt_1_1formatter_3_01Template_01_4.html#a9a80439e61312f108d9ca9414c83a0a2">fmt::formatter&lt; Template &gt;::parse</a></div><div class="ttdeci">constexpr auto parse(format_parse_context &amp;ctx)</div><div class="ttdef"><b>Definition</b> <a href="#l00103">Template.hpp:103</a></div></div>
+<div class="ttc" id="aclassfmt_1_1formatter_3_01Template_01_4_html_adbfd4045c2f0422fce40d048c419adbc"><div class="ttname"><a href="classfmt_1_1formatter_3_01Template_01_4.html#adbfd4045c2f0422fce40d048c419adbc">fmt::formatter&lt; Template &gt;::format</a></div><div class="ttdeci">constexpr auto format(Template const &amp;t, Context &amp;ctx) const</div><div class="ttdef"><b>Definition</b> <a href="#l00105">Template.hpp:105</a></div></div>
+<div class="ttc" id="astructInjection_html"><div class="ttname"><a href="structInjection.html">Injection</a></div><div class="ttdoc">Struct for the collection of all relevant data for a template instantiation which needs to be inserte...</div><div class="ttdef"><b>Definition</b> <a href="Injection_8hpp_source.html#l00017">Injection.hpp:18</a></div></div>
 <div class="ttc" id="astructTemplate_html"><div class="ttname"><a href="structTemplate.html">Template</a></div><div class="ttdoc">Struct for the collection of all relevant data for a template function which can provide a definition...</div><div class="ttdef"><b>Definition</b> <a href="#l00016">Template.hpp:17</a></div></div>
 <div class="ttc" id="astructTemplate_html_a09054826ece2f489ad0b337c8850f8d2"><div class="ttname"><a href="structTemplate.html#a09054826ece2f489ad0b337c8850f8d2">Template::is_constructor</a></div><div class="ttdeci">bool is_constructor</div><div class="ttdef"><b>Definition</b> <a href="#l00056">Template.hpp:56</a></div></div>
 <div class="ttc" id="astructTemplate_html_a1439f8d4883fdc4806f5dfa8b371a85f"><div class="ttname"><a href="structTemplate.html#a1439f8d4883fdc4806f5dfa8b371a85f">Template::is_member</a></div><div class="ttdeci">bool is_member</div><div class="ttdef"><b>Definition</b> <a href="#l00050">Template.hpp:50</a></div></div>
-<div class="ttc" id="astructTemplate_html_a221fdb0bc644103eb174e6808edba7df"><div class="ttname"><a href="structTemplate.html#a221fdb0bc644103eb174e6808edba7df">Template::isTemplateFor</a></div><div class="ttdeci">bool isTemplateFor(const Injection &amp;candidate) const</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00043">Template.cpp:43</a></div></div>
+<div class="ttc" id="astructTemplate_html_a221fdb0bc644103eb174e6808edba7df"><div class="ttname"><a href="structTemplate.html#a221fdb0bc644103eb174e6808edba7df">Template::isTemplateFor</a></div><div class="ttdeci">bool isTemplateFor(const Injection &amp;candidate) const</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00041">Template.cpp:41</a></div></div>
 <div class="ttc" id="astructTemplate_html_a3443ea0ef761c6763fe55de65e181548"><div class="ttname"><a href="structTemplate.html#a3443ea0ef761c6763fe55de65e181548">Template::nested_namespace</a></div><div class="ttdeci">StringType nested_namespace</div><div class="ttdef"><b>Definition</b> <a href="#l00030">Template.hpp:30</a></div></div>
 <div class="ttc" id="astructTemplate_html_a41a28f66b918f1973d8aab69f60f04f1"><div class="ttname"><a href="structTemplate.html#a41a28f66b918f1973d8aab69f60f04f1">Template::func_name</a></div><div class="ttdeci">StringType func_name</div><div class="ttdef"><b>Definition</b> <a href="#l00023">Template.hpp:23</a></div></div>
 <div class="ttc" id="astructTemplate_html_a426aac71e50fa538d4747c0b70a91750"><div class="ttname"><a href="structTemplate.html#a426aac71e50fa538d4747c0b70a91750">Template::StringType</a></div><div class="ttdeci">std::string StringType</div><div class="ttdef"><b>Definition</b> <a href="#l00018">Template.hpp:18</a></div></div>
 <div class="ttc" id="astructTemplate_html_a5b8c65818b80c591ea3eab7c53b6dfbd"><div class="ttname"><a href="structTemplate.html#a5b8c65818b80c591ea3eab7c53b6dfbd">Template::class_name</a></div><div class="ttdeci">StringType class_name</div><div class="ttdef"><b>Definition</b> <a href="#l00036">Template.hpp:36</a></div></div>
-<div class="ttc" id="astructTemplate_html_a7f81678154c6da51728a2bfe7e628b4f"><div class="ttname"><a href="structTemplate.html#a7f81678154c6da51728a2bfe7e628b4f">Template::createFromFS</a></div><div class="ttdeci">static Template createFromFS(const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00012">Template.cpp:12</a></div></div>
+<div class="ttc" id="astructTemplate_html_a7f81678154c6da51728a2bfe7e628b4f"><div class="ttname"><a href="structTemplate.html#a7f81678154c6da51728a2bfe7e628b4f">Template::createFromFS</a></div><div class="ttdeci">static Template createFromFS(const clang::FunctionDecl *FS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00010">Template.cpp:10</a></div></div>
 <div class="ttc" id="astructTemplate_html_a8d93c35654b7b98705ec5db58f39e284"><div class="ttname"><a href="structTemplate.html#a8d93c35654b7b98705ec5db58f39e284">Template::is_const</a></div><div class="ttdeci">bool is_const</div><div class="ttdef"><b>Definition</b> <a href="#l00047">Template.hpp:47</a></div></div>
 <div class="ttc" id="astructTemplate_html_a9c3d6c1a11688af61e58ea56ba3ed505"><div class="ttname"><a href="structTemplate.html#a9c3d6c1a11688af61e58ea56ba3ed505">Template::params</a></div><div class="ttdeci">std::vector&lt; Param &gt; params</div><div class="ttdef"><b>Definition</b> <a href="#l00044">Template.hpp:44</a></div></div>
-<div class="ttc" id="astructTemplate_html_aa2092a98be7a2ed38213648298ffbd47"><div class="ttname"><a href="structTemplate.html#aa2092a98be7a2ed38213648298ffbd47">Template::createFromMFS</a></div><div class="ttdeci">static Template createFromMFS(const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00028">Template.cpp:28</a></div></div>
+<div class="ttc" id="astructTemplate_html_aa2092a98be7a2ed38213648298ffbd47"><div class="ttname"><a href="structTemplate.html#aa2092a98be7a2ed38213648298ffbd47">Template::createFromMFS</a></div><div class="ttdeci">static Template createFromMFS(const clang::CXXMethodDecl *MFS, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition</b> <a href="Template_8cpp_source.html#l00026">Template.cpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -168,7 +207,7 @@ $(function(){initNavTree('Template_8hpp_source.html',''); initResizable(); });
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Template_8hpp.html">Template.hpp</a></li>
-    <li class="footer">Generated on Mon Apr 22 2024 06:57:20 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Jun 26 2024 06:36:36 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

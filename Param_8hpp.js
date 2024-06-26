@@ -1,5 +1,5 @@
 var Param_8hpp =
 [
     [ "Param", "structParam.html", "structParam" ],
-    [ "operator<<", "Param_8hpp.html#a88603e4c989fb0f5ac701dea8e41af3e", null ]
+    [ "fmt::formatter< Param >", "classfmt_1_1formatter_3_01Param_01_4.html", "classfmt_1_1formatter_3_01Param_01_4" ]
 ];

@@ -1,5 +1,5 @@
 var Template_8hpp =
 [
     [ "Template", "structTemplate.html", "structTemplate" ],
-    [ "operator<<", "Template_8hpp.html#afd1d507e9e2001fd4f5b94e740deb3ba", null ]
+    [ "fmt::formatter< Template >", "classfmt_1_1formatter_3_01Template_01_4.html", "classfmt_1_1formatter_3_01Template_01_4" ]
 ];

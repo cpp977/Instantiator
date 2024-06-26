@@ -1,0 +1,9 @@
+<map id="ProgressBar" name="ProgressBar">
+<area shape="rect" id="Node000001" title=" " alt="" coords="103,197,203,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,95,118,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,131,110,172,137,195,133,199,106,175,82,134"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,144,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,59,77,94,72,94,72,59"/>
+<area shape="rect" id="Node000004" href="$structProgressStyle.html" title=" " alt="" coords="142,95,253,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="189,134,161,198,156,196,184,132"/>
+</map>

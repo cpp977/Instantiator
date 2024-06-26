@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['findsemiafterlocation_0',['findSemiAfterLocation',['../DeleteInstantiations_8cpp.html#a504b3600756d28de8d64b56250fa889d',1,'DeleteInstantiations.cpp']]],
-  ['funcwithdef_1',['FuncWithDef',['../Matcher_8hpp.html#ac8e305e4e823da5613163fcb2ec96a73',1,'FuncWithDef(const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names):&#160;Matcher.hpp'],['../Matcher_8cpp.html#a0675d325e9441bfbc74a310394541b73',1,'FuncWithDef(const internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names):&#160;Matcher.cpp']]]
+  ['endsourcefileaction_0',['EndSourceFileAction',['../classDependencyAction.html#a4cb484301bea30df010a7d9ceee7d987',1,'DependencyAction']]]
 ];

@@ -110,23 +110,24 @@ $(function(){initNavTree('ASTCreation_8hpp_source.html',''); initResizable(); })
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define AST_CREATION_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;clang/Tooling/Tooling.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keywordtype">int</span> <a class="code hl_function" href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a>(std::unique_ptr&lt;clang::ASTUnit&gt;&amp; AST,</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>                   <span class="keyword">const</span> clang::tooling::CompilationDatabase&amp; db,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                   <span class="keyword">const</span> std::filesystem::path&amp; filename,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>                   <span class="keyword">const</span> std::filesystem::path&amp; tmpdir);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespaceinternal.html">   12</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceinternal.html">internal</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">is_cached</a>(<span class="keyword">const</span> clang::tooling::CompilationDatabase&amp; db, <span class="keyword">const</span> std::filesystem::path&amp; filename, <span class="keyword">const</span> std::filesystem::path&amp; tmpdir);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <span class="comment">// namespace internal</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> <a class="code hl_function" href="ASTCreation_8hpp.html#ad16d071e5c157b05d77feeb434764f0a">parseOrLoadAST</a>(std::unique_ptr&lt;clang::ASTUnit&gt;&amp; AST,</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                    <span class="keyword">const</span> clang::tooling::CompilationDatabase&amp; db,</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>                    <span class="keyword">const</span> std::filesystem::path&amp; filename,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>                    <span class="keyword">const</span> std::filesystem::path&amp; tmpdir);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespaceinternal.html">   13</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceinternal.html">internal</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">is_cached</a>(<span class="keyword">const</span> clang::tooling::CompilationDatabase&amp; db, <span class="keyword">const</span> std::filesystem::path&amp; filename, <span class="keyword">const</span> std::filesystem::path&amp; tmpdir);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>} <span class="comment">// namespace internal</span></div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aASTCreation_8hpp_html_a3456b56ee8acb76270a30f78e01a3f36"><div class="ttname"><a href="ASTCreation_8hpp.html#a3456b56ee8acb76270a30f78e01a3f36">parseOrLoadAST</a></div><div class="ttdeci">int parseOrLoadAST(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00012">ASTCreation.cpp:12</a></div></div>
-<div class="ttc" id="anamespaceinternal_html"><div class="ttname"><a href="namespaceinternal.html">internal</a></div><div class="ttdef"><b>Definition</b> <a href="#l00012">ASTCreation.hpp:12</a></div></div>
-<div class="ttc" id="anamespaceinternal_html_adc4f9be6a7d53a04f4d28361bb4998c6"><div class="ttname"><a href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">internal::is_cached</a></div><div class="ttdeci">bool is_cached(const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00024">ASTCreation.cpp:24</a></div></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aASTCreation_8hpp_html_ad16d071e5c157b05d77feeb434764f0a"><div class="ttname"><a href="ASTCreation_8hpp.html#ad16d071e5c157b05d77feeb434764f0a">parseOrLoadAST</a></div><div class="ttdeci">void parseOrLoadAST(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00011">ASTCreation.cpp:11</a></div></div>
+<div class="ttc" id="anamespaceinternal_html"><div class="ttname"><a href="namespaceinternal.html">internal</a></div><div class="ttdef"><b>Definition</b> <a href="#l00013">ASTCreation.hpp:13</a></div></div>
+<div class="ttc" id="anamespaceinternal_html_adc4f9be6a7d53a04f4d28361bb4998c6"><div class="ttname"><a href="namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6">internal::is_cached</a></div><div class="ttdeci">bool is_cached(const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00027">ASTCreation.cpp:27</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.2-->
@@ -134,7 +135,7 @@ $(function(){initNavTree('ASTCreation_8hpp_source.html',''); initResizable(); })
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="ASTCreation_8hpp.html">ASTCreation.hpp</a></li>
-    <li class="footer">Generated on Mon Apr 22 2024 06:57:20 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Jun 26 2024 06:36:36 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

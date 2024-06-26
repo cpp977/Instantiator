@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['ignorepatterns_0',['IgnorePatterns',['../Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38',1,'Instantiator.cpp']]],
-  ['ignorepatternsa_1',['IgnorePatternsA',['../Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c',1,'Instantiator.cpp']]],
-  ['instantiatoroptions_2',['InstantiatorOptions',['../Instantiator_8cpp.html#a463095459ca7eff2f7315fc955830f04',1,'Instantiator.cpp']]],
-  ['is_5fcached_3',['is_cached',['../namespaceinternal.html#adc4f9be6a7d53a04f4d28361bb4998c6',1,'internal']]],
-  ['istemplatefor_4',['isTemplateFor',['../structTemplate.html#a221fdb0bc644103eb174e6808edba7df',1,'Template']]]
+  ['getbeginloc_0',['getBeginLoc',['../DeleteInstantiations_8cpp.html#a41b08c717ca11d2d4fc870a4d415dbcc',1,'DeleteInstantiations.cpp']]],
+  ['getendloc_1',['getEndLoc',['../DeleteInstantiations_8cpp.html#a4411971ec4a1d2aa0dca968d2c20b43f',1,'DeleteInstantiations.cpp']]],
+  ['getinstantiation_2',['getInstantiation',['../structInjection.html#a2a4faa27e69083c1334ee324240c0be2',1,'Injection']]]
 ];

@@ -11,5 +11,6 @@ var searchData=
   ['compare_5fcvr_8',['compare_cvr',['../structParam.html#a98ccfbcb7ec90e8b8d17871df90336a7',1,'Param']]],
   ['createfromfs_9',['createFromFS',['../structInjection.html#a26e85cb6e2fadf5441c7f03f6bb48245',1,'Injection::createFromFS()'],['../structTemplate.html#a7f81678154c6da51728a2bfe7e628b4f',1,'Template::createFromFS()']]],
   ['createfrommfs_10',['createFromMFS',['../structInjection.html#a5ba36f8d1f3d7524de69c736d2c82f3f',1,'Injection::createFromMFS()'],['../structTemplate.html#aa2092a98be7a2ed38213648298ffbd47',1,'Template::createFromMFS()']]],
-  ['createfromparmvardecl_11',['createFromParmVarDecl',['../structParam.html#aea6fc0c0047dba35dd1f56cf3f687209',1,'Param']]]
+  ['createfromparmvardecl_11',['createFromParmVarDecl',['../structParam.html#aea6fc0c0047dba35dd1f56cf3f687209',1,'Param']]],
+  ['curr_12',['curr',['../classProgressBar.html#a5a01fd3f48372a115fd91cd3e42e1bcb',1,'ProgressBar']]]
 ];

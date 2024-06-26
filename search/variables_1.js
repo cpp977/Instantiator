@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['class_5fname_0',['class_name',['../structInjection.html#abd99e58f14f98a61f345bd98129458b5',1,'Injection::class_name'],['../structTemplate.html#a5b8c65818b80c591ea3eab7c53b6dfbd',1,'Template::class_name']]],
-  ['class_5fttypes_1',['class_Ttypes',['../structInjection.html#a5b691e807d0004edc88722b7f7645c09',1,'Injection']]],
-  ['col_2',['col',['../classDependencyAction.html#a8355ca3070da120b495851b1a8982391',1,'DependencyAction']]]
+  ['bg_5fdo_0',['bg_do',['../structProgressStyle.html#a9a42d609b27835c5fbc786cb43074415',1,'ProgressStyle']]],
+  ['bg_5fdone_1',['bg_done',['../structProgressStyle.html#ad2096251d79b9d0919df070a3ce72971',1,'ProgressStyle']]],
+  ['bg_5fmessage_2',['bg_message',['../structProgressStyle.html#a3c7d7f66ad6fab8526b8c952a02d2386',1,'ProgressStyle']]],
+  ['bg_5fpercent_3',['bg_percent',['../structProgressStyle.html#af0a45a0d5d254cfb9e8edfdcf76eb065',1,'ProgressStyle']]]
 ];

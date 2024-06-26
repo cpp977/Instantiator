@@ -124,8 +124,8 @@ $(function(){initNavTree('AllASTBuilderAction_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>                                                                                              <span class="comment">/*ShouldOwnClient=*/</span><span class="keyword">false</span>),</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>                                                   Files);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span>(!AST or AST-&gt;getDiagnostics().hasUncompilableErrorOccurred()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_variable" href="classAllASTBuilderAction.html#a697549bed206fa241579f04373e2725b">prog_bar</a>.tick();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_variable" href="classAllASTBuilderAction.html#a697549bed206fa241579f04373e2725b">prog_bar</a>.set_option(indicators::option::PostfixText{<span class="stringliteral">&quot;Processing: &quot;</span> + AST-&gt;getOriginalSourceFileName().str()});</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">// prog_bar.tick();</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="comment">// prog_bar.set_option(indicators::option::PostfixText{&quot;Processing: &quot; + AST-&gt;getOriginalSourceFileName().str()});</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment">// std::cout &lt;&lt; &quot;Parsed AST for: &quot; &lt;&lt; AST-&gt;getOriginalSourceFileName().str() &lt;&lt; std::endl;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_variable" href="classAllASTBuilderAction.html#a366040faf917c38222ec277617c1800c">ASTs</a>.push_back(std::move(AST));</div>
@@ -133,8 +133,7 @@ $(function(){initNavTree('AllASTBuilderAction_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
 </div>
 <div class="ttc" id="aAllASTBuilderAction_8hpp_html"><div class="ttname"><a href="AllASTBuilderAction_8hpp.html">AllASTBuilderAction.hpp</a></div></div>
-<div class="ttc" id="aclassAllASTBuilderAction_html_a366040faf917c38222ec277617c1800c"><div class="ttname"><a href="classAllASTBuilderAction.html#a366040faf917c38222ec277617c1800c">AllASTBuilderAction::ASTs</a></div><div class="ttdeci">std::vector&lt; std::unique_ptr&lt; clang::ASTUnit &gt; &gt; &amp; ASTs</div><div class="ttdef"><b>Definition</b> <a href="AllASTBuilderAction_8hpp_source.html#l00028">AllASTBuilderAction.hpp:28</a></div></div>
-<div class="ttc" id="aclassAllASTBuilderAction_html_a697549bed206fa241579f04373e2725b"><div class="ttname"><a href="classAllASTBuilderAction.html#a697549bed206fa241579f04373e2725b">AllASTBuilderAction::prog_bar</a></div><div class="ttdeci">indicators::ProgressBar &amp; prog_bar</div><div class="ttdef"><b>Definition</b> <a href="AllASTBuilderAction_8hpp_source.html#l00029">AllASTBuilderAction.hpp:29</a></div></div>
+<div class="ttc" id="aclassAllASTBuilderAction_html_a366040faf917c38222ec277617c1800c"><div class="ttname"><a href="classAllASTBuilderAction.html#a366040faf917c38222ec277617c1800c">AllASTBuilderAction::ASTs</a></div><div class="ttdeci">std::vector&lt; std::unique_ptr&lt; clang::ASTUnit &gt; &gt; &amp; ASTs</div><div class="ttdef"><b>Definition</b> <a href="AllASTBuilderAction_8hpp_source.html#l00026">AllASTBuilderAction.hpp:26</a></div></div>
 <div class="ttc" id="aclassAllASTBuilderAction_html_ad24830b1106941545c08ce1e0fd09fde"><div class="ttname"><a href="classAllASTBuilderAction.html#ad24830b1106941545c08ce1e0fd09fde">AllASTBuilderAction::runInvocation</a></div><div class="ttdeci">bool runInvocation(std::shared_ptr&lt; clang::CompilerInvocation &gt; Invocation, clang::FileManager *Files, std::shared_ptr&lt; clang::PCHContainerOperations &gt; PCHContainerOps, clang::DiagnosticConsumer *DiagConsumer) override</div><div class="ttdef"><b>Definition</b> <a href="#l00005">AllASTBuilderAction.cpp:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -143,7 +142,7 @@ $(function(){initNavTree('AllASTBuilderAction_8cpp_source.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0f2339d204149e590ec376b2c2ae3818.html">Actions</a></li><li class="navelem"><a class="el" href="AllASTBuilderAction_8cpp.html">AllASTBuilderAction.cpp</a></li>
-    <li class="footer">Generated on Mon Apr 22 2024 06:57:20 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Jun 26 2024 06:36:36 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

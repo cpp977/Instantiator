@@ -1,5 +1,10 @@
 var annotated_dup =
 [
+    [ "fmt", null, [
+      [ "formatter< Injection >", "classfmt_1_1formatter_3_01Injection_01_4.html", "classfmt_1_1formatter_3_01Injection_01_4" ],
+      [ "formatter< Param >", "classfmt_1_1formatter_3_01Param_01_4.html", "classfmt_1_1formatter_3_01Param_01_4" ],
+      [ "formatter< Template >", "classfmt_1_1formatter_3_01Template_01_4.html", "classfmt_1_1formatter_3_01Template_01_4" ]
+    ] ],
     [ "AllASTBuilderAction", "classAllASTBuilderAction.html", "classAllASTBuilderAction" ],
     [ "ASTBuilderAction", "classASTBuilderAction.html", "classASTBuilderAction" ],
     [ "DeleteInstantiations", "classDeleteInstantiations.html", "classDeleteInstantiations" ],
@@ -9,5 +14,7 @@ var annotated_dup =
     [ "Injection", "structInjection.html", "structInjection" ],
     [ "myDependencyCollector", "classmyDependencyCollector.html", "classmyDependencyCollector" ],
     [ "Param", "structParam.html", "structParam" ],
+    [ "ProgressBar", "classProgressBar.html", "classProgressBar" ],
+    [ "ProgressStyle", "structProgressStyle.html", "structProgressStyle" ],
     [ "Template", "structTemplate.html", "structTemplate" ]
 ];
