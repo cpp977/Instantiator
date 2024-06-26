@@ -21,8 +21,8 @@ teardown_file() {
     [ "$status" -eq 0 ]
 }
 
-@test "Run Instantiator to generate template instantantions." {
-    run Instantiator -p "${SCRIPT_DIR}/build/compile_commands.json" "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
+@test "Run Instantiator to generate template instantantions in invasive mode." {
+    run Instantiator --invasive -p "${SCRIPT_DIR}/build/compile_commands.json" "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
     [ "$status" -eq 0 ]
 }
 
@@ -36,8 +36,8 @@ teardown_file() {
     [ "$status" -eq 0 ]
 }
 
-@test "Run Instantiator to remove template instantantions." {
-    run Instantiator -p "${SCRIPT_DIR}/build/compile_commands.json" --clean "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
+@test "Run Instantiator to remove template instantantions in invasive mode." {
+    run Instantiator --invasive -p "${SCRIPT_DIR}/build/compile_commands.json" --clean "${SCRIPT_DIR}/Calculator/src/Calculator.cpp"
     [ "$status" -eq 0 ]
 }
 
