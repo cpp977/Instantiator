@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -57,4 +57,4 @@ jobs:
     - name: Test
       working-directory: ${{runner.workspace}}
       shell: bash
-      run: bats -r -T --print-output-on-failure .
+      run: bats -T --print-output-on-failure .
