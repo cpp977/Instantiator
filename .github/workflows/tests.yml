@@ -13,16 +13,30 @@ jobs:
         clang_version: [13, 14, 15, 16, 17, 18]
     steps:
     - uses: actions/checkout@v3
-          
+
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    - run: sudo apt-get remove clang-${{ matrix.clang_version }}
-    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}
-    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-dev
-    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-runtime
-    - run: sudo apt-get remove libclang-${{ matrix.clang_version }}-dev
-    - run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}
-    - run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}-dev
+    - name: Remove clang
+      run: sudo apt-get remove clang-${{ matrix.clang_version }}
+      continue-on-error: true
+    - name: Remove llvm
+      run: sudo apt-get remove llvm-${{ matrix.clang_version }}
+      continue-on-error: true
+    - name: Remove llvm-dev
+      run: sudo apt-get remove llvm-${{ matrix.clang_version }}-dev
+      continue-on-error: true
+    - name: Remove llvm-runtime
+      run: sudo apt-get remove llvm-${{ matrix.clang_version }}-runtime
+      continue-on-error: true
+    - name: Remove libclang-dev
+      run: sudo apt-get remove libclang-${{ matrix.clang_version }}-dev
+      continue-on-error: true
+    - name: Remove libclang-cpp
+      run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}
+      continue-on-error: true
+    - name: Remove libclang-cpp-dev
+      run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}-dev
+      continue-on-error: true
 
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v2
