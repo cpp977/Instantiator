@@ -16,12 +16,22 @@ jobs:
           
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    - run: sudo apt-get install llvm-${{ matrix.clang_version }}
-    - run: sudo apt-get install llvm-${{ matrix.clang_version }}-dev
-    - run: sudo apt-get install llvm-${{ matrix.clang_version }}-runtime
-    - run: sudo apt-get install libclang-${{ matrix.clang_version }}-dev
-    - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
-    - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
+    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}
+    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}-dev
+    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}-runtime
+    # - run: sudo apt-get install libclang-${{ matrix.clang_version }}-dev
+    # - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
+    # - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
+
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v2
+      with:
+        version: ${{ matrix.clang_version }}
+
+    - name: Symlink libclang.so (Linux)
+      if: contains(matrix.os, 'ubuntu')
+      run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
+      working-directory: ${{ env.LLVM_PATH }}/lib
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
