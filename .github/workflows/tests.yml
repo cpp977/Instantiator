@@ -16,12 +16,12 @@ jobs:
           
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}
-    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}-dev
-    # - run: sudo apt-get install llvm-${{ matrix.clang_version }}-runtime
-    # - run: sudo apt-get install libclang-${{ matrix.clang_version }}-dev
-    # - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}
-    # - run: sudo apt-get install libclang-cpp${{ matrix.clang_version }}-dev
+    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}
+    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-dev
+    - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-runtime
+    - run: sudo apt-get remove libclang-${{ matrix.clang_version }}-dev
+    - run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}
+    - run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}-dev
 
     - name: Install LLVM and Clang
       uses: KyleMayes/install-llvm-action@v2
