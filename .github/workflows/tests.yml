@@ -29,9 +29,7 @@ jobs:
       with:
         version: ${{ matrix.clang_version }}
 
-    - name: Symlink libclang.so (Linux)
-      run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
-      working-directory: ${{ env.LLVM_PATH }}/lib
+    - run: sudo ln -s  ${{ env.LLVM_PATH }}/lib/libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
