@@ -28,6 +28,7 @@ jobs:
       uses: KyleMayes/install-llvm-action@v2
       with:
         version: ${{ matrix.clang_version }}
+        env: true
 
     - name: Symlink libclang.so (Linux)
       run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
@@ -38,7 +39,7 @@ jobs:
       with:
         bats-version: 1.10.0
 
-    - run: clang++-${{ matrix.clang_version }} --version
+    - run: clang++ --version
     - run: clang-format --version
     - run: cmake --version
     - run: bats --version
@@ -50,7 +51,7 @@ jobs:
       shell: bash
       working-directory: ${{runner.workspace}}/build
       env:
-        CXX: clang++-${{ matrix.clang_version }}
+        CXX: clang++
         CXX_FLAGS: /usr/lib/llvm-${{ matrix.clang_version }}/lib/clang/${{ matrix.clang_version }}.0.0/include
       run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=/usr/lib/llvm-${{ matrix.clang_version }}/cmake -DClang_DIR=/usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang
 
