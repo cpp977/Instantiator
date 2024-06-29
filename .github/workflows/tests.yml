@@ -10,14 +10,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        clang_version: [13, 14, 15, 16, 17, 18]
+        clang_version: [13, 14, 15, 16, 17]
     steps:
     - uses: actions/checkout@v3
 
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    - name: Remove clang
+    - name: Remove clang-version
       run: sudo apt-get remove clang-${{ matrix.clang_version }}
+      continue-on-error: true
+    - name: Remove clang
+      run: sudo apt-get remove clang
       continue-on-error: true
     - name: Remove llvm
       run: sudo apt-get remove llvm-${{ matrix.clang_version }}
