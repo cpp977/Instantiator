@@ -57,7 +57,7 @@ target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_MAJOR=${LLVM_V
 target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_MINOR=${LLVM_VERSION_MINOR})
 target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_PATCH=${LLVM_VERSION_PATCH})
 target_compile_definitions(Instantiator PRIVATE INSTANTIATOR_LLVM_SUFFIX=${LLVM_VERSION_SUFFIX})
-target_compile_features(Instantiator PRIVATE cxx_std_20)
+target_compile_features(Instantiator PRIVATE cxx_std_17)
 target_compile_options(Instantiator PRIVATE -fno-rtti)
 target_compile_options(Instantiator PRIVATE -Wall)
 target_compile_options(Instantiator PRIVATE -Wextra)

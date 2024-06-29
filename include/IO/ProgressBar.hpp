@@ -18,10 +18,14 @@ struct ProgressStyle
 };
 
 inline ProgressStyle DefaultStyle = ProgressStyle();
-inline ProgressStyle FancyStyle = ProgressStyle{.fg_done = fmt::color::pink,
-                                                .fg_do = fmt::color::alice_blue,
-                                                .fg_percent = fmt::color::dark_slate_blue,
-                                                .bg_percent = fmt::color::yellow_green};
+inline ProgressStyle FancyStyle = ProgressStyle{fmt::color::pink,
+                                                fmt::color::sea_green,
+                                                fmt::color::alice_blue,
+                                                fmt::color::black,
+                                                fmt::color::dark_slate_blue,
+                                                fmt::color::black,
+                                                fmt::color::white_smoke,
+                                                fmt::color::yellow_green};
 
 class ProgressBar
 {
