@@ -16,7 +16,7 @@ jobs:
           
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-      - run: sudo apt-get remove clang-${{ matrix.clang_version }}
+    - run: sudo apt-get remove clang-${{ matrix.clang_version }}
     - run: sudo apt-get remove llvm-${{ matrix.clang_version }}
     - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-dev
     - run: sudo apt-get remove llvm-${{ matrix.clang_version }}-runtime
@@ -29,7 +29,9 @@ jobs:
       with:
         version: ${{ matrix.clang_version }}
 
-    - run: sudo ln -s  ${{ env.LLVM_PATH }}/lib/libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
+    - name: Symlink libclang.so (Linux)
+      run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
+      working-directory: ${{ env.LLVM_PATH }}/lib
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
