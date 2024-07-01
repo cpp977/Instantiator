@@ -2,6 +2,7 @@
 
 #include "Injection.hpp"
 #include "Template.hpp"
+#include "spdlog/spdlog.h"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
@@ -11,6 +12,7 @@
 #include "llvm/ADT/APInt.h"
 #include "llvm/ADT/StringRef.h"
 
+#include <clang/ASTMatchers/ASTMatchers.h>
 #include <filesystem>
 #include <iostream>
 
@@ -25,10 +27,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
     // pp.UsePreferredNames = true;
 
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("func_definition")) {
-        // std::cout << std::boolalpha << "TI=" << MFS->isTemplateInstantiation()
-        //           << ", CTI=" << (MFS->getParent()->getMemberSpecializationInfo() != nullptr) << std::endl;
-        // std::cout << "Processing memfunc " << MFS->getNameAsString() << std::endl;
-        // llvm::ArrayRef<clang::ParmVarDecl*> params = MFS->parameters();
+        spdlog::debug("Processing memfunc {}", MFS->getNameAsString());
+        spdlog::debug("TI={}, CTI={}", MFS->isTemplateInstantiation(), (MFS->getParent()->getMemberSpecializationInfo() != nullptr));
         if(MFS->isTemplateInstantiation() or (MFS->getParent()->getMemberSpecializationInfo() != nullptr)) {
             if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
                 if(MSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }
@@ -39,15 +39,12 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
 
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
-            // std::cout << "Check if the instantiation is already present." << std::endl;
+            spdlog::debug("Check if the instantiation is already present.");
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
 
                 if(candidate.match(toDo)) {
-                    // std::cout << "Erasing element from toDolist: " << std::endl
-                    //           << toDo << std::endl
-                    //           << "because of:" << std::endl
-                    //           << candidate << std::endl;
+                    spdlog::debug("Erasing element from toDolist:\n {} because of: {}", toDo, candidate);
                     it = toDoList->erase(it);
                 } else {
                     it++;
@@ -56,17 +53,17 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
         } else {
             // search in toDoList if this instantation is needed. inject the
             // instantation in the Rewriter.
-            // std::cout << "Check for match." << std::endl;
+            spdlog::debug("Check for match.");
             auto candidate = Template::createFromMFS(MFS, pp);
-            // std::cout << "Processing candidate: " << candidate << std::endl;
+            spdlog::debug("Processing candidate: {}", candidate);
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                // std::cout << "Checking toDo entry: " << toDo << std::endl;
+                spdlog::debug("CHecking toDo entry: {}", toDo);
                 if(candidate.isTemplateFor(toDo)) {
                     if(invasive) {
                         rewriter->InsertText(MFS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
                     } else {
-                        // std::cout << "Match!!! Call the rewriter and delete entry from toDoList." << std::endl;
+                        spdlog::debug("Match!!! Call the rewriter and delete entry from toDoList.");
                         auto sc = MFS->getBodyRBrace().getLocWithOffset(1);
                         auto fid = rewriter->getSourceMgr().getFileID(sc);
                         auto fileentry = rewriter->getSourceMgr().getFileEntryRefForID(fid);
@@ -90,7 +87,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             }
         }
     } else if(const clang::FunctionDecl* FS = Result.Nodes.getNodeAs<clang::FunctionDecl>("func_definition")) {
-        // std::cout << "Processing func " << FS->getNameAsString() << std::endl;
+        spdlog::debug("Processing func {}", FS->getNameAsString());
         if(FS->isTemplateInstantiation()) {
             if(const clang::FunctionTemplateSpecializationInfo* TSI = FS->getTemplateSpecializationInfo()) {
                 if(TSI->getTemplateSpecializationKind() != clang::TSK_ExplicitInstantiationDefinition) { return; }
@@ -98,35 +95,26 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             auto candidate = Injection::createFromFS(FS, pp);
             // search in toDoList if this instantation is needed. if yes -> delete
             // it from list.
-            // std::cout << "Check if the instantiation is already present."
-            //           << std::endl;
+            spdlog::debug("Check if the instantiation is already present.");
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
                 if(candidate.match(toDo)) {
-                    // std::cout << "Erase from toDolist." << std::endl;
+                  spdlog::debug("Erase from toDolist.");
                     it = toDoList->erase(it);
                 } else {
-                    // std::cout << std::boolalpha << "FT=" << params_match
-                    //           << ", FTP=" << func_tparam_match << std::endl;
                     it++;
                 }
             }
         } else {
             // search in toDoList if this instantation is needed. inject the
             // instantation in the Rewriter.
-            // std::cout << "Check if the correct prototype is present for
-            // explicit "
-            //              "instantiation."
-            //           << std::endl;
+            spdlog::debug("Check if the correct prototype is present for explicit instantiation.");
             auto candidate = Template::createFromFS(FS, pp);
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
                 if(candidate.isTemplateFor(toDo)) {
-                    // std::cout
-                    //     << "Match!!! Call the rewriter and delete entry from
-                    //     toDoList."
-                    //     << std::endl;
-                    // std::cout << "Injection: " << it->getInstantiation() << std::endl;
+                  spdlog::debug("Match!!! Call the rewriter and delete entry from toDoList.");
+                  spdlog::debug("Injection: {}", it->getInstantiation());
                     if(invasive) {
                         rewriter->InsertText(FS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
                     } else {

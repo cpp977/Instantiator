@@ -1,5 +1,7 @@
 #include "Actions/AllASTBuilderAction.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include "clang/Basic/FileManager.h"
 
 bool AllASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> Invocation,
@@ -15,10 +17,8 @@ bool AllASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocatio
                                                                                               /*ShouldOwnClient=*/false),
                                                    Files);
     if(!AST or AST->getDiagnostics().hasUncompilableErrorOccurred()) return false;
-    // prog_bar.tick();
-    // prog_bar.set_option(indicators::option::PostfixText{"Processing: " + AST->getOriginalSourceFileName().str()});
 
-    // std::cout << "Parsed AST for: " << AST->getOriginalSourceFileName().str() << std::endl;
+    spdlog::debug("Parsed AST for {}", AST->getOriginalSourceFileName().str());
     ASTs.push_back(std::move(AST));
     return true;
 }

@@ -2,6 +2,7 @@
 
 #include "Actions/ASTBuilderAction.hpp"
 #include "Actions/DependencyAction.hpp"
+#include "spdlog/spdlog.h"
 
 #include <chrono>
 #include <filesystem>
@@ -26,16 +27,6 @@ namespace internal {
 
 bool is_cached(const clang::tooling::CompilationDatabase& db, const std::filesystem::path& file, const std::filesystem::path& tmpdir)
 {
-    // auto to_time_t = [](auto tp) -> std::time_t {
-    //     auto sctp =
-    //         std::chrono::time_point_cast<std::chrono::system_clock::duration>(tp - decltype(tp)::clock::now() + std::chrono::system_clock::now());
-    //     return std::chrono::system_clock::to_time_t(sctp);
-    // };
-
-    // auto print_last_write_time = [](std::filesystem::file_time_type const& ftime, const std::string& text) {
-    //     std::cout << text << ": " << ftime.time_since_epoch().count() << std::endl;
-    // };
-
     clang::tooling::ClangTool Tool(db, file.string());
     std::vector<std::string> deps;
     class SingleFrontendActionFactory : public clang::tooling::FrontendActionFactory
@@ -63,7 +54,6 @@ bool is_cached(const clang::tooling::CompilationDatabase& db, const std::filesys
     for(const auto& dep : deps) {
         std::filesystem::path p_dep(dep);
         auto time_point_cpp = std::filesystem::last_write_time(p_dep);
-        // print_last_write_time(time_point_cpp, trim(deps[i]) + " timepoint cpp");
         if(time_point_ast <= time_point_cpp) { return false; }
     }
     return true;

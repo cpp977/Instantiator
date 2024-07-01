@@ -1,20 +1,20 @@
 #include "Actions/ASTBuilderAction.hpp"
 
 #include "ASTCreation.hpp"
+#include "spdlog/spdlog.h"
 
 #include "clang/Basic/FileManager.h"
 
 #include <filesystem>
-#include <iostream>
 
 bool ASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocation> Invocation,
                                      clang::FileManager* Files,
                                      std::shared_ptr<clang::PCHContainerOperations> PCHContainerOps,
                                      clang::DiagnosticConsumer* DiagConsumer)
 {
+    spdlog::debug("Processing {}", file);
     bool is_cached_on_disk = internal::is_cached(db, file, tmpdir);
-    // std::cout << "Processing " << filename << std::endl;
-    // std::cout << std::boolalpha << "cached=" << is_cached_on_disk << std::endl;
+    spdlog::debug("cached={}", is_cached_on_disk);
     if(is_cached_on_disk) {
         clang::CompilerInstance CI;
         CI.setInvocation(Invocation);

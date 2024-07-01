@@ -2,6 +2,7 @@
 
 #include "Injection.hpp"
 #include "Parsing.hpp"
+#include "spdlog/spdlog.h"
 
 namespace clang {
 class ParmVarDecl;
@@ -17,8 +18,7 @@ Template Template::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPo
     FS->printNestedNameSpecifier(OS, pp);
     OS.str();
     std::vector<clang::ParmVarDecl*> parms(FS->parameters().begin(), FS->parameters().end());
-    // std::cout << "Loaded candidate (wo params): " << candidate << std::endl;
-    // std::cout << "With #" << parms.size() << " parameters." << std::endl;
+    spdlog::debug("Loaded candodate (wo params): {} with #{} parameters.", candidate, parms.size());
     candidate.params = internal::parseFunctionArgs(parms, pp);
     return candidate;
 }

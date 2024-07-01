@@ -1,5 +1,7 @@
 #include "Callbacks/DeleteInstantiations.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
@@ -72,7 +74,6 @@ auto getBeginLoc(clang::SourceLocation begin, clang::ASTContext& Ctx)
         line = sm.getSpellingLineNumber(beginCurrToken);
         col = sm.getSpellingColumnNumber(beginCurrToken);
         [[maybe_unused]] auto res = clang::Lexer::getRawToken(beginCurrToken, tok, sm, Ctx.getLangOpts());
-        // std::cout << "token kind=" << tok.getName() << " begin: line=" << line << " and col=" << col << std::endl;
         assert(col >= 1 and "Invalid column in getBeginLoc()");
         if(col > 1) {
             col = col - 1;
@@ -98,12 +99,12 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
     pp.FullyQualifiedName = true;
     pp.SuppressScope = false;
 
-    // clang::SourceManager& sm = Result.Context->getSourceManager();
-
     clang::Rewriter::RewriteOptions opts;
     opts.IncludeInsertsAtBeginOfRange = true;
     opts.IncludeInsertsAtEndOfRange = true;
     opts.RemoveLineIfEmpty = false;
+
+    clang::SourceManager& sm = Result.Context->getSourceManager();
 
     if(const clang::CXXMethodDecl* MFS = Result.Nodes.getNodeAs<clang::CXXMethodDecl>("explicit_instantiation")) {
         if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
@@ -111,8 +112,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
             if(template_kind == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = MSI->getPointOfInstantiation();
                 if(loc.isValid()) {
-                    // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(sm) << " (" << sm.getSpellingLineNumber(loc)
-                    //           << ")" << std::endl;
+                    spdlog::debug("Delete {} at: {} ({})", MFS->getNameAsString(), loc.printToString(sm), sm.getSpellingLineNumber(loc));
                     auto begin_loc = getBeginLoc(loc, *Result.Context);
                     auto end_loc = getEndLoc(begin_loc, *Result.Context);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);
@@ -122,8 +122,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
             if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = TSI->getPointOfInstantiation();
                 if(loc.isValid()) {
-                    // std::cout << "Delete " << MFS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
-                    // std::endl;
+                    spdlog::debug("Delete {} at: {} ({})", MFS->getNameAsString(), loc.printToString(sm), sm.getSpellingLineNumber(loc));
                     auto begin_loc = getBeginLoc(loc, *Result.Context);
                     auto end_loc = getEndLoc(begin_loc, *Result.Context);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);
@@ -135,8 +134,7 @@ void DeleteInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResu
             if(TSI->getTemplateSpecializationKind() == clang::TSK_ExplicitInstantiationDefinition) {
                 auto loc = TSI->getPointOfInstantiation();
                 if(loc.isValid()) {
-                    // std::cout << "Delete " << FS->getNameAsString() << " at: " << loc.printToString(Result.Context->getSourceManager()) <<
-                    // std::endl;
+                    spdlog::debug("Delete {} at: {} ({})", FS->getNameAsString(), loc.printToString(sm), sm.getSpellingLineNumber(loc));
                     auto begin_loc = getBeginLoc(loc, *Result.Context);
                     auto end_loc = getEndLoc(begin_loc, *Result.Context);
                     rewriter->RemoveText(clang::SourceRange(begin_loc, end_loc), opts);

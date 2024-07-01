@@ -1,6 +1,7 @@
 #include "Injection.hpp"
 
 #include "Parsing.hpp"
+#include "spdlog/spdlog.h"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
@@ -26,7 +27,7 @@ bool Injection::match(const Injection& other) const
 
 Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
 {
-    // std::cout << "Create Injection from member function " << FS->getNameAsString() << std::endl;
+    spdlog::debug("Create Inkejection from function {}.", FS->getNameAsString());
     Injection toDo;
     toDo.is_member = false;
     toDo.is_constructor = false;
@@ -48,7 +49,7 @@ Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::Printing
 
 Injection Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp)
 {
-    // std::cout << "Create Injection from member function " << MFS->getNameAsString() << std::endl;
+  spdlog::debug("Create Inkejection from member function {}.", MFS->getNameAsString());
     Injection toDo = createFromFS(MFS, pp);
     toDo.is_member = true;
     const clang::CXXConstructorDecl* ConstructorCheck = llvm::dyn_cast<clang::CXXConstructorDecl>(MFS);
