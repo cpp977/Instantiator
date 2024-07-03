@@ -2,6 +2,7 @@
 
 #include <filesystem>
 
+#include "fmt/std.h"
 #include "spdlog/spdlog.h"
 
 #include "clang/Basic/FileManager.h"

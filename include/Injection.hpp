@@ -6,6 +6,7 @@
 
 #include "fmt/color.h"
 #include "fmt/core.h"
+#include "fmt/ranges.h"
 
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/Type.h"
