@@ -30,26 +30,28 @@ cmake ..
 make && [sudo] make install
 ```
 For a successful build you need a c++-17 compiler and LLVM/clang libraries.
-Because of recent bufix in clang (https://reviews.llvm.org/D108794) version 14 of LLVM/clang is needed for full functionality.
+Because of a bufix in clang (https://reviews.llvm.org/D108794) version 14 of LLVM/clang is needed for full functionality.
 With an older version of LLVM/clang you might run into troubles with the correct formatting of `template template` parameters.
 To control which version of LLVM is used, you can set the cmake variable `LLVM_ROOT` to the root of the llvm installation.
 To control which version of clang is used, you can set the cmake variable `Clang_DIR` to the root of the directory where the file ClangConfig.cmake is located.
 
-# Roadmap for version 1.0.0
-  - Noninvasive mode: instantiations are not inserted directly to the source file but in extra files which can then be included in the source files.
-  
+# Roadmap for version 2.0.0
+  - Apply direct AST transformationen instead of injecting instantiations as source code and recompile afterwards.
+
 # How does it work?
 See the [documentation](https://cpp977.github.io/Instantiator/).
 
 # Contributions
 Contributions are very welcome!
 The following is only a part of things which needs to be done:
-  - Adapt llvm error handling (https://llvm.org/docs/ExceptionHandling.html).
+  - Inspect how libtooling can do AST transformations
+  - Clean up cmake build files.  - Adapt llvm error handling (https://llvm.org/docs/ExceptionHandling.html).
   - Clean up the `cmake` file.
-  - Add an example `c++` project which can also be used for tests.
+
 
 # Acknowledgments
 The tool is heavily based on clang and its [libtooling](https://clang.llvm.org/docs/LibTooling.html) library which is of course acknowledged.
 Beside that, the tool uses some small c++ utility libraries which are also acknowledged:
-  1. [termcolor](https://github.com/ikalnytskyi/termcolor) — for colored logging output
-  2. [doxygen layout](https://github.com/jothepro/doxygen-awesome-css) — for pretty online documentation
+  1. [libfmt](https://github.com/fmtlib/fmt) — for (colored) printing
+  2. [spdlog](https://github.com/gabime/spdlog) — for logging
+  3. [doxygen layout](https://github.com/jothepro/doxygen-awesome-css) — for pretty online documentation
