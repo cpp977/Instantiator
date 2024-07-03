@@ -1,8 +1,9 @@
 #include "Template.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include "Injection.hpp"
 #include "Parsing.hpp"
-#include "spdlog/spdlog.h"
 
 namespace clang {
 class ParmVarDecl;

@@ -1,6 +1,7 @@
+#include <string>
+
 #include <fmt/color.h>
 #include <fmt/core.h>
-#include <string>
 
 struct ProgressStyle
 {

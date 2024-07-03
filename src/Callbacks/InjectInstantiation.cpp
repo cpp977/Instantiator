@@ -1,7 +1,9 @@
 #include "Callbacks/InjectInstantiation.hpp"
 
-#include "Injection.hpp"
-#include "Template.hpp"
+#include <clang/ASTMatchers/ASTMatchers.h>
+#include <filesystem>
+#include <iostream>
+
 #include "spdlog/spdlog.h"
 
 #include "clang/AST/Decl.h"
@@ -12,9 +14,8 @@
 #include "llvm/ADT/APInt.h"
 #include "llvm/ADT/StringRef.h"
 
-#include <clang/ASTMatchers/ASTMatchers.h>
-#include <filesystem>
-#include <iostream>
+#include "Injection.hpp"
+#include "Template.hpp"
 
 void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {
@@ -99,7 +100,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
                 if(candidate.match(toDo)) {
-                  spdlog::debug("Erase from toDolist.");
+                    spdlog::debug("Erase from toDolist.");
                     it = toDoList->erase(it);
                 } else {
                     it++;
@@ -113,8 +114,8 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
                 if(candidate.isTemplateFor(toDo)) {
-                  spdlog::debug("Match!!! Call the rewriter and delete entry from toDoList.");
-                  spdlog::debug("Injection: {}", it->getInstantiation());
+                    spdlog::debug("Match!!! Call the rewriter and delete entry from toDoList.");
+                    spdlog::debug("Injection: {}", it->getInstantiation());
                     if(invasive) {
                         rewriter->InsertText(FS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
                     } else {

@@ -1,13 +1,14 @@
 #include "ASTCreation.hpp"
 
-#include "Actions/ASTBuilderAction.hpp"
-#include "Actions/DependencyAction.hpp"
-#include "spdlog/spdlog.h"
-
 #include <chrono>
 #include <filesystem>
 #include <memory>
 #include <stdexcept>
+
+#include "spdlog/spdlog.h"
+
+#include "Actions/ASTBuilderAction.hpp"
+#include "Actions/DependencyAction.hpp"
 
 void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
                     const clang::tooling::CompilationDatabase& db,

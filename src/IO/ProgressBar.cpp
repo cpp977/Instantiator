@@ -1,8 +1,9 @@
 #include "IO/ProgressBar.hpp"
 
+#include <string>
+
 #include <fmt/color.h>
 #include <fmt/core.h>
-#include <string>
 
 void ProgressBar::step(std::string message)
 {

@@ -1,11 +1,12 @@
 #include "Callbacks/GetNeededInstantiations.hpp"
 
-#include "Injection.hpp"
 #include "spdlog/spdlog.h"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
+
+#include "Injection.hpp"
 
 void GetNeededInstantiations::run(const clang::ast_matchers::MatchFinder::MatchResult& Result)
 {

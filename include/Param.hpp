@@ -1,13 +1,13 @@
 #ifndef PARAM_H_
 #define PARAM_H_
 
+#include <string>
+
 #include "fmt/color.h"
 #include "fmt/core.h"
 
 #include "clang/AST/Decl.h"
 #include "clang/AST/PrettyPrinter.h"
-
-#include <string>
 
 /**
  * \brief Struct for the collection of all relevant data for a function parameter.

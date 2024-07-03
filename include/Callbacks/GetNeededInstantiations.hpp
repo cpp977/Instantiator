@@ -1,11 +1,11 @@
 #ifndef GET_NEEDED_INSTANTIATIONS_H_
 #define GET_NEEDED_INSTANTIATIONS_H_
 
-#include "Injection.hpp"
+#include <vector>
 
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 
-#include <vector>
+#include "Injection.hpp"
 
 /**
  * \brief MatchCallback for template instantiation detections.

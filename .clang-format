@@ -124,6 +124,18 @@ SortIncludes: true
 ReflowComments: true
 
 IncludeBlocks: Regroup
+
+IncludeCategories:
+  - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
+    Priority:        3
+    CaseSensitive:   true
+  - Regex:            '^((<|")(spdlog|fmt)/)'
+    Priority:        2
+  - Regex:           '<.*>'
+    Priority:        1
+  - Regex:           '.*'
+    Priority:        4
+
 IndentPPDirectives: AfterHash
 
 

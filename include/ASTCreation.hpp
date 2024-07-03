@@ -1,9 +1,9 @@
 #ifndef AST_CREATION_H_
 #define AST_CREATION_H_
 
-#include "clang/Tooling/Tooling.h"
-
 #include <filesystem>
+
+#include "clang/Tooling/Tooling.h"
 
 void parseOrLoadAST(std::unique_ptr<clang::ASTUnit>& AST,
                     const clang::tooling::CompilationDatabase& db,

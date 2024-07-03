@@ -1,10 +1,9 @@
-#include "ASTCreation.hpp"
-#include "Callbacks/DeleteInstantiations.hpp"
-#include "Callbacks/GetNeededInstantiations.hpp"
-#include "Callbacks/InjectInstantiation.hpp"
-#include "IO/ProgressBar.hpp"
-#include "Injection.hpp"
-#include "Matcher/Matcher.hpp"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <system_error>
+#include <unordered_set>
+
 #include "fmt/ranges.h"
 #include "fmt/std.h"
 #include "spdlog/cfg/env.h"
@@ -18,11 +17,13 @@
 #include "clang/Tooling/Tooling.h"
 #include "llvm/Support/CommandLine.h"
 
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <system_error>
-#include <unordered_set>
+#include "ASTCreation.hpp"
+#include "Callbacks/DeleteInstantiations.hpp"
+#include "Callbacks/GetNeededInstantiations.hpp"
+#include "Callbacks/InjectInstantiation.hpp"
+#include "IO/ProgressBar.hpp"
+#include "Injection.hpp"
+#include "Matcher/Matcher.hpp"
 
 //
 // Command line options

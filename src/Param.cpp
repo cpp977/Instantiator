@@ -1,10 +1,10 @@
 #include "Param.hpp"
 
+#include <regex>
+
 #include "spdlog/spdlog.h"
 
 #include "clang/AST/TemplateName.h"
-
-#include <regex>
 
 Param Param::createFromParmVarDecl(const clang::ParmVarDecl* parm, const clang::PrintingPolicy pp)
 {

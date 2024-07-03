@@ -1,11 +1,11 @@
 #ifndef INJECT_INSTANTIATION_H_
 #define INJECT_INSTANTIATION_H_
 
-#include "Injection.hpp"
+#include <vector>
 
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 
-#include <vector>
+#include "Injection.hpp"
 
 // forward declaration
 namespace clang {

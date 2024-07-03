@@ -1,15 +1,16 @@
 #ifndef INJECTION_HPP_
 #define INJECTION_HPP_
 
-#include "Param.hpp"
+#include <string>
+#include <vector>
+
 #include "fmt/color.h"
 #include "fmt/core.h"
 
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/Type.h"
 
-#include <string>
-#include <vector>
+#include "Param.hpp"
 
 /**
  * \brief Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere.

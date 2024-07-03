@@ -1,12 +1,12 @@
 #ifndef PARSING_H_
 #define PARSING_H_
 
-#include "Param.hpp"
+#include <string>
+#include <vector>
 
 #include "clang/AST/PrettyPrinter.h"
 
-#include <string>
-#include <vector>
+#include "Param.hpp"
 
 namespace clang {
 class TemplateArgumentList;
