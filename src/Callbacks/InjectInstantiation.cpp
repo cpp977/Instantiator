@@ -1,6 +1,5 @@
 #include "Callbacks/InjectInstantiation.hpp"
 
-#include <clang/ASTMatchers/ASTMatchers.h>
 #include <filesystem>
 #include <iostream>
 
@@ -10,6 +9,7 @@
 #include "clang/AST/DeclCXX.h"
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
+#include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "llvm/ADT/APInt.h"
 #include "llvm/ADT/StringRef.h"
