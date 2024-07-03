@@ -109,11 +109,11 @@ $(function(){initNavTree('InjectInstantiation_8hpp_source.html',''); initResizab
 <a href="InjectInstantiation_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef INJECT_INSTANTIATION_H_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define INJECT_INSTANTIATION_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;clang/ASTMatchers/ASTMatchFinder.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Injection_8hpp.html">Injection.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// forward declaration</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceclang.html">clang</a> {</div>
@@ -137,7 +137,7 @@ $(function(){initNavTree('InjectInstantiation_8hpp_source.html',''); initResizab
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
 <div class="ttc" id="aclassInjectInstantiation_html"><div class="ttname"><a href="classInjectInstantiation.html">InjectInstantiation</a></div><div class="ttdoc">MatchCallback for injection of explicit instantiations into the source files at appropriate places.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">InjectInstantiation.hpp:31</a></div></div>
 <div class="ttc" id="aclassInjectInstantiation_html_a20b0753e11b3d5c248bbdf0db6a4d53b"><div class="ttname"><a href="classInjectInstantiation.html#a20b0753e11b3d5c248bbdf0db6a4d53b">InjectInstantiation::invasive</a></div><div class="ttdeci">bool invasive</div><div class="ttdef"><b>Definition</b> <a href="#l00040">InjectInstantiation.hpp:40</a></div></div>
-<div class="ttc" id="aclassInjectInstantiation_html_a6321e2edffd82f8a1789a03a79a2b43a"><div class="ttname"><a href="classInjectInstantiation.html#a6321e2edffd82f8a1789a03a79a2b43a">InjectInstantiation::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8cpp_source.html#l00017">InjectInstantiation.cpp:17</a></div></div>
+<div class="ttc" id="aclassInjectInstantiation_html_a6321e2edffd82f8a1789a03a79a2b43a"><div class="ttname"><a href="classInjectInstantiation.html#a6321e2edffd82f8a1789a03a79a2b43a">InjectInstantiation::run</a></div><div class="ttdeci">virtual void run(const clang::ast_matchers::MatchFinder::MatchResult &amp;Result) override</div><div class="ttdef"><b>Definition</b> <a href="InjectInstantiation_8cpp_source.html#l00020">InjectInstantiation.cpp:20</a></div></div>
 <div class="ttc" id="aclassInjectInstantiation_html_a6bca19632e89c3ef6af45eec26028da3"><div class="ttname"><a href="classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3">InjectInstantiation::rewriter</a></div><div class="ttdeci">clang::Rewriter * rewriter</div><div class="ttdef"><b>Definition</b> <a href="#l00038">InjectInstantiation.hpp:38</a></div></div>
 <div class="ttc" id="aclassInjectInstantiation_html_a88350a93deb47e847541b5f243395ddb"><div class="ttname"><a href="classInjectInstantiation.html#a88350a93deb47e847541b5f243395ddb">InjectInstantiation::toDoList</a></div><div class="ttdeci">std::vector&lt; Injection &gt; * toDoList</div><div class="ttdef"><b>Definition</b> <a href="#l00036">InjectInstantiation.hpp:36</a></div></div>
 <div class="ttc" id="anamespaceclang_html"><div class="ttname"><a href="namespaceclang.html">clang</a></div><div class="ttdef"><b>Definition</b> <a href="AllASTBuilderAction_8hpp_source.html#l00014">AllASTBuilderAction.hpp:14</a></div></div>
@@ -148,7 +148,7 @@ $(function(){initNavTree('InjectInstantiation_8hpp_source.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_dc3b1763f616f33684c71eaff7522e72.html">Callbacks</a></li><li class="navelem"><a class="el" href="InjectInstantiation_8hpp.html">InjectInstantiation.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 21:32:58 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Jul 3 2024 07:49:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

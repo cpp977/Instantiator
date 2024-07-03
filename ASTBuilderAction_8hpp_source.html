@@ -109,14 +109,14 @@ $(function(){initNavTree('ASTBuilderAction_8hpp_source.html',''); initResizable(
 <a href="ASTBuilderAction_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ASTBUILDER_ACTION_HPP_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ASTBUILDER_ACTION_HPP_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;clang/Frontend/ASTUnit.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;clang/Frontend/CompilerInstance.h&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;clang/Frontend/CompilerInvocation.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;clang/Serialization/PCHContainerOperations.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;clang/Tooling/Tooling.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;clang/Frontend/ASTUnit.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;clang/Frontend/CompilerInstance.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;clang/Frontend/CompilerInvocation.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;clang/Serialization/PCHContainerOperations.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;clang/Tooling/Tooling.h&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// forward declaration</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceclang.html">clang</a> {</div>
@@ -159,7 +159,7 @@ $(function(){initNavTree('ASTBuilderAction_8hpp_source.html',''); initResizable(
 <div class="ttc" id="aclassASTBuilderAction_html_a383dd2d132429fd2d70f76722a07f21d"><div class="ttname"><a href="classASTBuilderAction.html#a383dd2d132429fd2d70f76722a07f21d">ASTBuilderAction::ASTBuilderAction</a></div><div class="ttdeci">ASTBuilderAction(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="#l00032">ASTBuilderAction.hpp:32</a></div></div>
 <div class="ttc" id="aclassASTBuilderAction_html_aa89f1415d18ad89d79fe183c0b0df843"><div class="ttname"><a href="classASTBuilderAction.html#aa89f1415d18ad89d79fe183c0b0df843">ASTBuilderAction::tmpdir</a></div><div class="ttdeci">std::filesystem::path tmpdir</div><div class="ttdef"><b>Definition</b> <a href="#l00029">ASTBuilderAction.hpp:29</a></div></div>
 <div class="ttc" id="aclassASTBuilderAction_html_aab05402f683c34c46dbef8d3a183886f"><div class="ttname"><a href="classASTBuilderAction.html#aab05402f683c34c46dbef8d3a183886f">ASTBuilderAction::AST</a></div><div class="ttdeci">std::unique_ptr&lt; clang::ASTUnit &gt; &amp; AST</div><div class="ttdef"><b>Definition</b> <a href="#l00026">ASTBuilderAction.hpp:26</a></div></div>
-<div class="ttc" id="aclassASTBuilderAction_html_afa74cfc4a7ef513bdc83185ca7f56543"><div class="ttname"><a href="classASTBuilderAction.html#afa74cfc4a7ef513bdc83185ca7f56543">ASTBuilderAction::runInvocation</a></div><div class="ttdeci">bool runInvocation(std::shared_ptr&lt; clang::CompilerInvocation &gt; Invocation, clang::FileManager *Files, std::shared_ptr&lt; clang::PCHContainerOperations &gt; PCHContainerOps, clang::DiagnosticConsumer *DiagConsumer) override</div><div class="ttdef"><b>Definition</b> <a href="ASTBuilderAction_8cpp_source.html#l00010">ASTBuilderAction.cpp:10</a></div></div>
+<div class="ttc" id="aclassASTBuilderAction_html_afa74cfc4a7ef513bdc83185ca7f56543"><div class="ttname"><a href="classASTBuilderAction.html#afa74cfc4a7ef513bdc83185ca7f56543">ASTBuilderAction::runInvocation</a></div><div class="ttdeci">bool runInvocation(std::shared_ptr&lt; clang::CompilerInvocation &gt; Invocation, clang::FileManager *Files, std::shared_ptr&lt; clang::PCHContainerOperations &gt; PCHContainerOps, clang::DiagnosticConsumer *DiagConsumer) override</div><div class="ttdef"><b>Definition</b> <a href="ASTBuilderAction_8cpp_source.html#l00012">ASTBuilderAction.cpp:12</a></div></div>
 <div class="ttc" id="anamespaceclang_html"><div class="ttname"><a href="namespaceclang.html">clang</a></div><div class="ttdef"><b>Definition</b> <a href="AllASTBuilderAction_8hpp_source.html#l00014">AllASTBuilderAction.hpp:14</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -168,7 +168,7 @@ $(function(){initNavTree('ASTBuilderAction_8hpp_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_787487f7d02fdf694fb2dc9ce3b61b2b.html">Actions</a></li><li class="navelem"><a class="el" href="ASTBuilderAction_8hpp.html">ASTBuilderAction.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 21:32:58 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Jul 3 2024 07:49:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
