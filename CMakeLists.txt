@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13.4)
-project(Instantiator VERSION 0.3.0 LANGUAGES C CXX)
+project(Instantiator VERSION 1.0.0-rc1 LANGUAGES C CXX)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -75,7 +75,7 @@ if (${CLANG_LINK_CLANG_DYLIB})
   message(STATUS "Linking against dynamic llvm.")
   target_link_libraries(Instantiator PRIVATE LLVM)
 else()
-    message(STATUS "Linking against static llvm components.")
+  message(STATUS "Linking against static llvm components.")
   target_link_libraries(Instantiator PRIVATE ${llvm_libs})
 endif()
 
