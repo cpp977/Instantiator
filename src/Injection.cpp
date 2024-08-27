@@ -21,14 +21,15 @@ bool Injection::match(const Injection& other) const
     if(class_name != other.class_name) { return false; }
     if(is_const != other.is_const) { return false; }
     if(func_Ttypes != other.func_Ttypes) { return false; }
-    if(class_Ttypes != other.class_Ttypes) { return false; }
+    if(class_Targs != other.class_Targs) { return false; }
     if(params != other.params) { return false; }
+
     return true;
 }
 
 Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::PrintingPolicy pp)
 {
-    spdlog::debug("Create Inkejection from function {}.", FS->getNameAsString());
+    spdlog::debug("Create Injection from function {}.", FS->getNameAsString());
     Injection toDo;
     toDo.is_member = false;
     toDo.is_constructor = false;
@@ -50,7 +51,7 @@ Injection Injection::createFromFS(const clang::FunctionDecl* FS, clang::Printing
 
 Injection Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::PrintingPolicy pp)
 {
-    spdlog::debug("Create Inkejection from member function {}.", MFS->getNameAsString());
+    spdlog::debug("Create Injection from member function {}.", MFS->getNameAsString());
     Injection toDo = createFromFS(MFS, pp);
     toDo.is_member = true;
     const clang::CXXConstructorDecl* ConstructorCheck = llvm::dyn_cast<clang::CXXConstructorDecl>(MFS);
@@ -63,13 +64,29 @@ Injection Injection::createFromMFS(const clang::CXXMethodDecl* MFS, clang::Print
 
     toDo.class_name = MFS->getParent()->getNameAsString();
     if(const clang::ClassTemplateSpecializationDecl* CTS = llvm::dyn_cast<clang::ClassTemplateSpecializationDecl>(MFS->getParent())) {
-        toDo.class_Ttypes = internal::parseTemplateArgs(&CTS->getTemplateArgs(), pp);
+        auto targs = &CTS->getTemplateArgs();
+        toDo.class_Targs.reserve(targs->size());
+        for(std::size_t i = 0; i < targs->size(); ++i) {
+            toDo.class_Targs.push_back(Instantiator::TemplateArgument::createFromTemplateArgument(&targs->get(i), pp));
+        }
     }
 
-    if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
-        if(const clang::CXXMethodDecl* TMFS = llvm::dyn_cast<const clang::CXXMethodDecl>(MSI->getInstantiatedFrom())) {
-            std::vector<clang::ParmVarDecl*> nonresolved_parms(TMFS->parameters().begin(), TMFS->parameters().end());
-            toDo.nonresolved_params = internal::parseFunctionArgs(nonresolved_parms, pp);
+    if(const clang::FunctionTemplateSpecializationInfo* TSI = MFS->getTemplateSpecializationInfo()) {
+        auto* node = TSI->getTemplate()->getTemplatedDecl();
+        if(auto* DFT = node->getDescribedFunctionTemplate()) {
+            if(auto* MT = DFT->getInstantiatedFromMemberTemplate()) {
+                if(auto* TMFS = MT->getTemplatedDecl()) {
+                    std::vector<clang::ParmVarDecl*> nonresolved_parms(TMFS->parameters().begin(), TMFS->parameters().end());
+                    toDo.nonresolved_params = internal::parseFunctionArgs(nonresolved_parms, pp);
+                }
+            }
+        }
+    } else {
+        if(const clang::MemberSpecializationInfo* MSI = MFS->getMemberSpecializationInfo()) {
+            if(const clang::CXXMethodDecl* TMFS = llvm::dyn_cast<const clang::CXXMethodDecl>(MSI->getInstantiatedFrom())) {
+                std::vector<clang::ParmVarDecl*> nonresolved_parms(TMFS->parameters().begin(), TMFS->parameters().end());
+                toDo.nonresolved_params = internal::parseFunctionArgs(nonresolved_parms, pp);
+            }
         }
     }
     return toDo;
@@ -82,13 +99,13 @@ std::string Injection::getInstantiation() const
     if(not is_constructor) { res << return_type << " "; }
     if(is_member) {
         res << class_name;
-        if(class_Ttypes.size() > 0) {
+        if(class_Targs.size() > 0) {
             res << "<";
-            for(std::size_t i = 0; i < class_Ttypes.size(); i++) {
-                if(i + 1 < class_Ttypes.size()) {
-                    res << class_Ttypes[i] << ",";
+            for(std::size_t i = 0; i < class_Targs.size(); i++) {
+                if(i + 1 < class_Targs.size()) {
+                    res << class_Targs[i].name(",") << ",";
                 } else {
-                    res << class_Ttypes[i] << ">";
+                    res << class_Targs[i].name(",") << ">";
                 }
             }
         }

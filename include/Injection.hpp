@@ -12,6 +12,7 @@
 #include "clang/AST/Type.h"
 
 #include "Param.hpp"
+#include "TemplateArgument.hpp"
 
 /**
  * \brief Struct for the collection of all relevant data for a template instantiation which needs to be inserted somewhere.
@@ -53,7 +54,7 @@ struct Injection
      * The concrete types of the class template parameters (for class template member functions only).
      * E.g. \code{.cpp}void Bar<double, int>::Foo()\endcode it would be `{"double", "int"}`
      */
-    std::vector<std::string> class_Ttypes;
+    std::vector<Instantiator::TemplateArgument> class_Targs;
 
     /**
      * A vector of the function parameters where each parameter is fully resolved with the concrete types.
@@ -148,9 +149,11 @@ public:
     constexpr auto format(Injection const& toDo, Context& ctx) const
     {
         return fmt::format_to(ctx.out(),
-                              "{} {}::{}<{}>({}){}",
+                              "{} {}{}<{}>::{}<{}>({}){}",
                               toDo.return_type,
                               toDo.nested_namespace,
+                              toDo.class_name,
+                              toDo.class_Targs,
                               toDo.func_name,
                               toDo.func_Ttypes,
                               toDo.params,

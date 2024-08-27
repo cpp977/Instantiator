@@ -1,5 +1,7 @@
 #include "Parsing.hpp"
 
+#include "spdlog/spdlog.h"
+
 #include "clang/AST/DeclTemplate.h"
 #include "clang/AST/TemplateName.h"
 
@@ -10,15 +12,18 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
     if(TAL) {
         out.resize(TAL->size());
         for(std::size_t i = 0; i < TAL->size(); i++) {
+            if(TAL->get(i).isDependent()) { spdlog::info("Dependent template argument."); }
             switch(TAL->get(i).getKind()) {
             case clang::TemplateArgument::ArgKind::Type: {
                 out[i] = TAL->get(i).getAsType().getAsString(pp);
+                spdlog::info("type: {}", out[i]);
                 break;
             }
             case clang::TemplateArgument::ArgKind::Integral: {
                 llvm::SmallString<10> name;
                 TAL->get(i).getAsIntegral().toString(name);
                 out[i] = name.str().str();
+                spdlog::info("integral: {}", out[i]);
                 break;
             }
             case clang::TemplateArgument::ArgKind::Pack: {

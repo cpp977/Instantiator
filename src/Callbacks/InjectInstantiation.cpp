@@ -52,7 +52,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                 }
             }
         } else {
-            // search in toDoList if this instantation is needed. inject the
+            // search in toDoList if this instantiation is needed. inject the
             // instantation in the Rewriter.
             spdlog::debug("Check for match.");
             auto candidate = Template::createFromMFS(MFS, pp);

@@ -57,7 +57,7 @@ public:
     template <typename Context>
     constexpr auto format(Param const& p, Context& ctx) const
     {
-        return fmt::format_to(ctx.out(), "{} {}", p.is_const ? "const" : "", p.name);
+        return fmt::format_to(ctx.out(), "{}", p.name); //, p.is_const ? "const" : ""
     }
 };
 

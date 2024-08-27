@@ -8,6 +8,7 @@
 
 #include "Injection.hpp"
 #include "Param.hpp"
+#include "TemplateArgument.hpp"
 
 /**
  * \brief Struct for the collection of all relevant data for a template function which can provide a definition for an explicit instantiation from a
@@ -42,6 +43,14 @@ struct Template
      * The parameters are nonresolved because this is the signature of a function template.
      */
     std::vector<Param> params;
+
+    /**
+     * The class template parameters. These can either unresolved or concrete types/values.
+     * In case of unresolved parameters, just the kind is stored (type, nontype, pack, template).
+     * In case of a concrete type/value, the type/value is stored. This happens in case of partial specializations.
+     * E.g. \code{.cpp}template <typename T>  Bar<T, int>::Foo()\endcode it would be `{"unresolved__type", "int"}`
+     */
+    std::vector<Instantiator::TemplateArgument> class_Targs;
 
     /**Whether this member function is const qualified.*/
     bool is_const = false;
@@ -104,7 +113,8 @@ public:
     template <typename Context>
     constexpr auto format(Template const& t, Context& ctx) const
     {
-        return fmt::format_to(ctx.out(), "{}::{}::{}({}) {}", t.nested_namespace, t.class_name, t.func_name, t.params, t.is_const ? "const" : "");
+        return fmt::format_to(
+            ctx.out(), "{}{}<{}>::{}({}) {}", t.nested_namespace, t.class_name, t.class_Targs, t.func_name, t.params, t.is_const ? "const" : "");
     }
 };
 
