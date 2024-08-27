@@ -164,5 +164,8 @@ int main(int argc, const char** argv)
             }
         }
     }
-    spdlog::info("#toDos that are left: {}", toDoList.size());
+    spdlog::critical("#toDos that are left: {}", toDoList.size());
+    if(toDoList.size() > 0) { spdlog::critical("toDos left:"); }
+    std::size_t count = 0ul;
+    for(const auto& toDo : toDoList) { spdlog::critical("{}: {}", count++, toDo); }
 }
