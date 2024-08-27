@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['return_5ftype_0',['return_type',['../structInjection.html#aa501b0028575ce606488107734cf692c',1,'Injection']]],
-  ['rewriter_1',['rewriter',['../classDeleteInstantiations.html#a7689cb6f18585e780760bf80c0d8fc3e',1,'DeleteInstantiations::rewriter'],['../classInjectInstantiation.html#a6bca19632e89c3ef6af45eec26028da3',1,'InjectInstantiation::rewriter']]]
+  ['params_0',['params',['../structInjection.html#af49977234a145a55451d2c56fbc2b2fd',1,'Injection::params'],['../structTemplate.html#a9c3d6c1a11688af61e58ea56ba3ed505',1,'Template::params']]]
 ];

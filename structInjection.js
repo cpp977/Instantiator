@@ -6,7 +6,7 @@ var structInjection =
     [ "getInstantiation", "structInjection.html#a2a4faa27e69083c1334ee324240c0be2", null ],
     [ "match", "structInjection.html#a28840645014f686af288095dc29c7bd3", null ],
     [ "class_name", "structInjection.html#abd99e58f14f98a61f345bd98129458b5", null ],
-    [ "class_Ttypes", "structInjection.html#a5b691e807d0004edc88722b7f7645c09", null ],
+    [ "class_Targs", "structInjection.html#accb1b9aa5817defae595fd5725722e58", null ],
     [ "func_name", "structInjection.html#a6173d575985f16333eeeed8faef2f88a", null ],
     [ "func_Ttypes", "structInjection.html#a475150b470832b519c3992290430cc25", null ],
     [ "guess_injection_place", "structInjection.html#ac9466026f2d97b3f411c3cd74503a134", null ],

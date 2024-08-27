@@ -4,6 +4,7 @@ var hierarchy =
       [ "myDependencyCollector", "classmyDependencyCollector.html", null ]
     ] ],
     [ "fmt::formatter< Injection >", "classfmt_1_1formatter_3_01Injection_01_4.html", null ],
+    [ "fmt::formatter< Instantiator::TemplateArgument >", "classfmt_1_1formatter_3_01Instantiator_1_1TemplateArgument_01_4.html", null ],
     [ "fmt::formatter< Param >", "classfmt_1_1formatter_3_01Param_01_4.html", null ],
     [ "fmt::formatter< Template >", "classfmt_1_1formatter_3_01Template_01_4.html", null ],
     [ "Injection", "structInjection.html", null ],
@@ -19,6 +20,7 @@ var hierarchy =
     [ "ProgressBar", "classProgressBar.html", null ],
     [ "ProgressStyle", "structProgressStyle.html", null ],
     [ "Template", "structTemplate.html", null ],
+    [ "Instantiator::TemplateArgument", "structInstantiator_1_1TemplateArgument.html", null ],
     [ "clang::tooling::ToolAction", null, [
       [ "ASTBuilderAction", "classASTBuilderAction.html", null ],
       [ "AllASTBuilderAction", "classAllASTBuilderAction.html", null ]

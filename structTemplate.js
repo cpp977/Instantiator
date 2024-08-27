@@ -5,6 +5,7 @@ var structTemplate =
     [ "createFromMFS", "structTemplate.html#aa2092a98be7a2ed38213648298ffbd47", null ],
     [ "isTemplateFor", "structTemplate.html#a221fdb0bc644103eb174e6808edba7df", null ],
     [ "class_name", "structTemplate.html#a5b8c65818b80c591ea3eab7c53b6dfbd", null ],
+    [ "class_Targs", "structTemplate.html#aef98d8f80424d903a88be04318e75752", null ],
     [ "func_name", "structTemplate.html#a41a28f66b918f1973d8aab69f60f04f1", null ],
     [ "is_const", "structTemplate.html#a8d93c35654b7b98705ec5db58f39e284", null ],
     [ "is_constructor", "structTemplate.html#a09054826ece2f489ad0b337c8850f8d2", null ],

@@ -154,7 +154,7 @@ $(function(){initNavTree('Param_8hpp_source.html',''); initResizable(); });
 <div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classfmt_1_1formatter_3_01Param_01_4.html#a41a95bf46d3292ebbf42cb82ef9c2b08">   58</a></span>    <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="classfmt_1_1formatter_3_01Param_01_4.html#a41a95bf46d3292ebbf42cb82ef9c2b08">format</a>(<a class="code hl_struct" href="structParam.html">Param</a> <span class="keyword">const</span>&amp; p, Context&amp; ctx)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{} {}&quot;</span>, p.<a class="code hl_variable" href="structParam.html#a485f75a874e806bcc3c99e20354186ae">is_const</a> ? <span class="stringliteral">&quot;const&quot;</span> : <span class="stringliteral">&quot;&quot;</span>, p.<a class="code hl_variable" href="structParam.html#a872b203e1ebdf4e182bc77546e743afc">name</a>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{}&quot;</span>, p.<a class="code hl_variable" href="structParam.html#a872b203e1ebdf4e182bc77546e743afc">name</a>); <span class="comment">//, p.is_const ? &quot;const&quot; : &quot;&quot;</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
 </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>};</div>
@@ -186,7 +186,7 @@ $(function(){initNavTree('Param_8hpp_source.html',''); initResizable(); });
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Param_8hpp.html">Param.hpp</a></li>
-    <li class="footer">Generated on Wed Jul 3 2024 07:49:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Tue Aug 27 2024 07:34:41 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

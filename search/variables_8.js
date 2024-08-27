@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['params_0',['params',['../structInjection.html#af49977234a145a55451d2c56fbc2b2fd',1,'Injection::params'],['../structTemplate.html#a9c3d6c1a11688af61e58ea56ba3ed505',1,'Template::params']]]
+  ['name_0',['name',['../structParam.html#a872b203e1ebdf4e182bc77546e743afc',1,'Param']]],
+  ['names_1',['names',['../structInstantiator_1_1TemplateArgument.html#a368239c249267117cd169b39cb9ecbb9',1,'Instantiator::TemplateArgument']]],
+  ['nested_5fnamespace_2',['nested_namespace',['../structInjection.html#a4332cb0bc9a6abb251ce178af4905c0b',1,'Injection::nested_namespace'],['../structTemplate.html#a3443ea0ef761c6763fe55de65e181548',1,'Template::nested_namespace']]],
+  ['nonresolved_5fparams_3',['nonresolved_params',['../structInjection.html#ad53178c0a197c6ff14b5d3506133d163',1,'Injection']]]
 ];

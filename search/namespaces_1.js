@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['internal_0',['internal',['../namespaceinternal.html',1,'']]]
+  ['instantiator_0',['Instantiator',['../namespaceInstantiator.html',1,'']]],
+  ['internal_1',['internal',['../namespaceinternal.html',1,'']]]
 ];

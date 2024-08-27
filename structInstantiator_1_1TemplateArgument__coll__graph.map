@@ -1,0 +1,9 @@
+<map id="Instantiator::TemplateArgument" name="Instantiator::TemplateArgument">
+<area shape="rect" id="Node000001" title="Struct for the collection of all relevant data for a function parameter." alt="" coords="5,271,235,296"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="27,183,213,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,222,123,270,117,270,117,222"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="77,95,163,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,134,123,182,117,182,117,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="51,5,189,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="123,59,123,94,117,94,117,59"/>
+</map>

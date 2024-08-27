@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['list_0',['Todo List',['../todo.html',1,'']]],
-  ['lookup_20step_20ndash_20find_20template_20instantiations_20with_20missing_20definiton_1',['Lookup step &amp;ndash; find template instantiations with missing definiton',['../index.html#autotoc_md4',1,'']]]
+  ['kind_0',['kind',['../structInstantiator_1_1TemplateArgument.html#aa6a459e45f24d07092ed60a937a373b7',1,'Instantiator::TemplateArgument']]],
+  ['kind_1',['Kind',['../namespaceInstantiator.html#ae23a90b61c96d22e834f3e85684a1cda',1,'Instantiator']]]
 ];

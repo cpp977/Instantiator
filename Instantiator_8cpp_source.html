@@ -273,8 +273,11 @@ $(function(){initNavTree('Instantiator_8cpp_source.html',''); initResizable(); }
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            }</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        }</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    spdlog::info(<span class="stringliteral">&quot;#toDos that are left: {}&quot;</span>, toDoList.size());</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>}</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    spdlog::critical(<span class="stringliteral">&quot;#toDos that are left: {}&quot;</span>, toDoList.size());</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">if</span>(toDoList.size() &gt; 0) { spdlog::critical(<span class="stringliteral">&quot;toDos left:&quot;</span>); }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    std::size_t count = 0ul;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; toDo : toDoList) { spdlog::critical(<span class="stringliteral">&quot;{}: {}&quot;</span>, count++, toDo); }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
 </div>
 <div class="ttc" id="aASTCreation_8hpp_html"><div class="ttname"><a href="ASTCreation_8hpp.html">ASTCreation.hpp</a></div></div>
 <div class="ttc" id="aASTCreation_8hpp_html_ad16d071e5c157b05d77feeb434764f0a"><div class="ttname"><a href="ASTCreation_8hpp.html#ad16d071e5c157b05d77feeb434764f0a">parseOrLoadAST</a></div><div class="ttdeci">void parseOrLoadAST(std::unique_ptr&lt; clang::ASTUnit &gt; &amp;AST, const clang::tooling::CompilationDatabase &amp;db, const std::filesystem::path &amp;filename, const std::filesystem::path &amp;tmpdir)</div><div class="ttdef"><b>Definition</b> <a href="ASTCreation_8cpp_source.html#l00013">ASTCreation.cpp:13</a></div></div>
@@ -314,7 +317,7 @@ $(function(){initNavTree('Instantiator_8cpp_source.html',''); initResizable(); }
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Instantiator_8cpp.html">Instantiator.cpp</a></li>
-    <li class="footer">Generated on Wed Jul 3 2024 07:49:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Tue Aug 27 2024 07:34:41 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

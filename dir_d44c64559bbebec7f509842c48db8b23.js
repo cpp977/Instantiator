@@ -8,5 +8,6 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "Injection.hpp", "Injection_8hpp.html", "Injection_8hpp" ],
     [ "Param.hpp", "Param_8hpp.html", "Param_8hpp" ],
     [ "Parsing.hpp", "Parsing_8hpp.html", "Parsing_8hpp" ],
-    [ "Template.hpp", "Template_8hpp.html", "Template_8hpp" ]
+    [ "Template.hpp", "Template_8hpp.html", "Template_8hpp" ],
+    [ "TemplateArgument.hpp", "TemplateArgument_8hpp.html", "TemplateArgument_8hpp" ]
 ];
