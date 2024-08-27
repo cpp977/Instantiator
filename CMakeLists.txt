@@ -43,6 +43,7 @@ add_executable(Instantiator Instantiator.cpp
   src/ASTCreation.cpp
   src/Parsing.cpp
   src/Template.cpp
+  src/TemplateArgument.cpp
   src/IO/ProgressBar.cpp
 )
 
