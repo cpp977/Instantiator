@@ -1,11 +1,12 @@
 #include <iostream>
 
 #include "Math/CoeffUnaryOp.hpp"
+#include "Math/three_by_three.hpp"
 #include "Math/Matrix.hpp"
 
 int main()
 {
-    Math::Matrix<double, 3, 3> m;
+    Math::Matrix<double, 4, 4> m;
     m.setIdentity();
     double t = m.trace();
     std::cout << "trace=" << t << std::endl;

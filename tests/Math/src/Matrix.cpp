@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cstddef>
 
+#include "Math/three_by_three.hpp"
 #include "Math/Matrix.hpp"
 
 namespace Math {
