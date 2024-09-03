@@ -127,15 +127,15 @@ int main(int argc, const char** argv)
     while(workList.size() > 0) {
         auto copyOf_workList = workList;
         for(const auto& item : copyOf_workList) {
-            spdlog::debug("Processing file {}", item);
+            spdlog::info("Processing file {}", item);
             workList.erase(item);
             std::unique_ptr<clang::ASTUnit> source_AST;
             parseOrLoadAST(source_AST, OptionsParser.getCompilations(), item, tmpdir);
             spdlog::debug("Got AST for file {}", item);
             Finder.matchAST(source_AST->getASTContext());
-            spdlog::debug("Found {} todos for file {}", toDoList.size(), item);
+            spdlog::info("Found {} todos for file {}", toDoList.size(), item);
             for(const auto& toDo : toDoList) { spdlog::debug("\t{}", toDo); }
-            ProgressBar inner_bar(toDoList.size());
+            ProgressBar inner_bar(main_and_injection_files.size());
 
             for(const auto& file_for_search : main_and_injection_files) {
                 if(toDoList.size() == 0) {
@@ -145,7 +145,7 @@ int main(int argc, const char** argv)
                 }
                 std::unique_ptr<clang::ASTUnit> target_AST;
                 parseOrLoadAST(target_AST, OptionsParser.getCompilations(), file_for_search, tmpdir);
-                spdlog::debug("Search in AST of file {}", file_for_search);
+                spdlog::info("Search in AST of file {}", file_for_search);
                 clang::Rewriter rewriter(target_AST->getSourceManager(), target_AST->getLangOpts());
                 clang::ast_matchers::MatchFinder FuncFinder;
                 InjectInstantiation instantiator;
@@ -158,7 +158,7 @@ int main(int argc, const char** argv)
                 rewriter.overwriteChangedFiles();
                 spdlog::debug("Called rewriter");
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
-                spdlog::debug("HAS_INJECTED={}", HAS_INJECTED_INTANTIATION);
+                spdlog::info("HAS_INJECTED={}", HAS_INJECTED_INTANTIATION);
                 if(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }
                 if(Progress) { inner_bar.step(); }
             }
