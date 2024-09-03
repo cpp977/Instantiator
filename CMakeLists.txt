@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13.4)
-project(Instantiator VERSION 1.0.0-rc1 LANGUAGES C CXX)
+project(Instantiator VERSION 0.4.0 LANGUAGES C CXX)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
