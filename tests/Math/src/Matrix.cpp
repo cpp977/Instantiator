@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <cstddef>
 
-#include "Math/three_by_three.hpp"
 #include "Math/Matrix.hpp"
+#include "Math/three_by_three.hpp"
 
 namespace Math {
 

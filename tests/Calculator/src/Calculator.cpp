@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "Math/CoeffUnaryOp.hpp"
-#include "Math/three_by_three.hpp"
 #include "Math/Matrix.hpp"
+#include "Math/three_by_three.hpp"
 
 int main()
 {
