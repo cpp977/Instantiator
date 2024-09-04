@@ -121,18 +121,18 @@ $(function(){initNavTree('Parsing_8cpp_source.html',''); initResizable(); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">if</span>(TAL) {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        out.resize(TAL-&gt;size());</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; TAL-&gt;size(); i++) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <span class="keywordflow">if</span>(TAL-&gt;get(i).isDependent()) { spdlog::info(<span class="stringliteral">&quot;Dependent template argument.&quot;</span>); }</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <span class="keywordflow">if</span>(TAL-&gt;get(i).isDependent()) { spdlog::debug(<span class="stringliteral">&quot;Dependent template argument.&quot;</span>); }</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keywordflow">switch</span>(TAL-&gt;get(i).getKind()) {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::Type: {</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                out[i] = TAL-&gt;get(i).getAsType().getAsString(pp);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                spdlog::info(<span class="stringliteral">&quot;type: {}&quot;</span>, out[i]);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>                spdlog::debug(<span class="stringliteral">&quot;type: {}&quot;</span>, out[i]);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            }</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::Integral: {</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                llvm::SmallString&lt;10&gt; name;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                TAL-&gt;get(i).getAsIntegral().toString(name);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                out[i] = name.str().str();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                spdlog::info(<span class="stringliteral">&quot;integral: {}&quot;</span>, out[i]);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                spdlog::debug(<span class="stringliteral">&quot;integral: {}&quot;</span>, out[i]);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            }</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::Pack: {</div>
@@ -198,7 +198,7 @@ $(function(){initNavTree('Parsing_8cpp_source.html',''); initResizable(); });
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="Parsing_8cpp.html">Parsing.cpp</a></li>
-    <li class="footer">Generated on Tue Aug 27 2024 07:34:41 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Sep 4 2024 15:31:12 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

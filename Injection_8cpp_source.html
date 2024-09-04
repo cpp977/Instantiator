@@ -212,46 +212,47 @@ $(function(){initNavTree('Injection_8cpp_source.html',''); initResizable(); });
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    std::stringstream res;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    res &lt;&lt; <span class="stringliteral">&quot;\ntemplate &quot;</span>;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">if</span>(not <a class="code hl_variable" href="structInjection.html#acf183787d621eeb2d55525eb22405ea5">is_constructor</a>) { res &lt;&lt; <a class="code hl_variable" href="structInjection.html#aa501b0028575ce606488107734cf692c">return_type</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; }</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#af0a2d1eea58ecc66ffb3b2dce4c56def">is_member</a>) {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        res &lt;&lt; <a class="code hl_variable" href="structInjection.html#abd99e58f14f98a61f345bd98129458b5">class_name</a>;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size() &gt; 0) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            res &lt;&lt; <span class="stringliteral">&quot;&lt;&quot;</span>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size(); i++) {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size()) {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>[i].name(<span class="stringliteral">&quot;,&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>[i].name(<span class="stringliteral">&quot;,&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                }</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        }</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        res &lt;&lt; <span class="stringliteral">&quot;::&quot;</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a6173d575985f16333eeeed8faef2f88a">func_name</a>;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size() &gt; 0) {</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        res &lt;&lt; <span class="stringliteral">&quot;&lt;&quot;</span>;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size(); i++) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size()) {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>[i] &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>[i] &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        }</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    res &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>.size(); i++) {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>.size()) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            res &lt;&lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>[i].name &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            res &lt;&lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>[i].name;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    }</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    res &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#af0a2d1eea58ecc66ffb3b2dce4c56def">is_member</a>) {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#ac98187aeb311e39dd735e7bb40bfacfd">is_const</a>) { res &lt;&lt; <span class="stringliteral">&quot; const&quot;</span>; }</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    res &lt;&lt; <span class="stringliteral">&quot;;&quot;</span>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordflow">return</span> res.str();</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a4332cb0bc9a6abb251ce178af4905c0b">nested_namespace</a>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#af0a2d1eea58ecc66ffb3b2dce4c56def">is_member</a>) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        res &lt;&lt; <a class="code hl_variable" href="structInjection.html#abd99e58f14f98a61f345bd98129458b5">class_name</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size() &gt; 0) {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            res &lt;&lt; <span class="stringliteral">&quot;&lt;&quot;</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size(); i++) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>.size()) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>[i].name(<span class="stringliteral">&quot;,&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#accb1b9aa5817defae595fd5725722e58">class_Targs</a>[i].name(<span class="stringliteral">&quot;,&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        res &lt;&lt; <span class="stringliteral">&quot;::&quot;</span>;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a6173d575985f16333eeeed8faef2f88a">func_name</a>;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size() &gt; 0) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        res &lt;&lt; <span class="stringliteral">&quot;&lt;&quot;</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size(); i++) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>.size()) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>[i] &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                res &lt;&lt; <a class="code hl_variable" href="structInjection.html#a475150b470832b519c3992290430cc25">func_Ttypes</a>[i] &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    res &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">for</span>(std::size_t i = 0; i &lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>.size(); i++) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">if</span>(i + 1 &lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>.size()) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            res &lt;&lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>[i].name &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            res &lt;&lt; <a class="code hl_variable" href="structInjection.html#af49977234a145a55451d2c56fbc2b2fd">params</a>[i].name;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        }</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    res &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#af0a2d1eea58ecc66ffb3b2dce4c56def">is_member</a>) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInjection.html#ac98187aeb311e39dd735e7bb40bfacfd">is_const</a>) { res &lt;&lt; <span class="stringliteral">&quot; const&quot;</span>; }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    res &lt;&lt; <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">return</span> res.str();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>}</div>
 </div>
 <div class="ttc" id="aInjection_8hpp_html"><div class="ttname"><a href="Injection_8hpp.html">Injection.hpp</a></div></div>
 <div class="ttc" id="aParsing_8hpp_html"><div class="ttname"><a href="Parsing_8hpp.html">Parsing.hpp</a></div><div class="ttdoc">Helper functions for parsing information from AST nodes.</div></div>
@@ -281,7 +282,7 @@ $(function(){initNavTree('Injection_8cpp_source.html',''); initResizable(); });
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="Injection_8cpp.html">Injection.cpp</a></li>
-    <li class="footer">Generated on Tue Aug 27 2024 07:34:41 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Wed Sep 4 2024 15:31:12 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
