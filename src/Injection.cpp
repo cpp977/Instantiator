@@ -97,6 +97,7 @@ std::string Injection::getInstantiation() const
     std::stringstream res;
     res << "\ntemplate ";
     if(not is_constructor) { res << return_type << " "; }
+    res << nested_namespace;
     if(is_member) {
         res << class_name;
         if(class_Targs.size() > 0) {
