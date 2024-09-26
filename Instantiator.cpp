@@ -4,6 +4,7 @@
 #include <system_error>
 #include <unordered_set>
 
+#include "fmt/color.h"
 #include "fmt/ranges.h"
 #include "fmt/std.h"
 #include "spdlog/cfg/env.h"
@@ -158,8 +159,12 @@ int main(int argc, const char** argv)
                 rewriter.overwriteChangedFiles();
                 spdlog::debug("Called rewriter");
                 bool HAS_INJECTED_INTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();
-                spdlog::info("HAS_INJECTED={}", HAS_INJECTED_INTANTIATION);
-                if(HAS_INJECTED_INTANTIATION) { workList.insert(file_for_search); }
+                if(HAS_INJECTED_INTANTIATION) {
+                    spdlog::info("HAS_INJECTED={}", fmt::format(fg(fmt::color::green), "{}", HAS_INJECTED_INTANTIATION));
+                    workList.insert(file_for_search);
+                } else {
+                    spdlog::info("HAS_INJECTED={}", fmt::format(fg(fmt::color::red), "{}", HAS_INJECTED_INTANTIATION));
+                }
                 if(Progress) { inner_bar.step(); }
             }
         }
