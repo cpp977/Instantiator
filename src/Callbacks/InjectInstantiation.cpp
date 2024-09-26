@@ -59,7 +59,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
             spdlog::debug("Processing candidate: {}", candidate);
             for(auto it = toDoList->begin(); it != toDoList->end();) {
                 Injection& toDo = *it;
-                spdlog::debug("CHecking toDo entry: {}", toDo);
+                spdlog::debug("Checking toDo entry: {}", toDo);
                 if(candidate.isTemplateFor(toDo)) {
                     if(invasive) {
                         rewriter->InsertText(MFS->getBodyRBrace().getLocWithOffset(1), llvm::StringRef(it->getInstantiation()), true, true);
@@ -78,7 +78,7 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                         llvm::StringRef gen_name(new_name_str);
                         auto file_ref = fm.getFileRef(gen_name, true);
                         auto new_fid = sm.getOrCreateFileID(*file_ref, clang::SrcMgr::C_User);
-                        auto new_loc = sm.getLocForEndOfFile(new_fid);
+                        auto new_loc = sm.getLocForStartOfFile(new_fid);
                         rewriter->InsertText(new_loc, llvm::StringRef(it->getInstantiation()), true, true);
                     }
                     it = toDoList->erase(it);
@@ -126,14 +126,13 @@ void InjectInstantiation::run(const clang::ast_matchers::MatchFinder::MatchResul
                         std::string fname(fname_.data(), fname_.size());
                         auto new_name = std::filesystem::path(fname);
                         new_name.replace_extension("gen.cpp");
-                        std::cout << "Injecting in file " << new_name << std::endl;
                         auto& sm = rewriter->getSourceMgr();
                         auto& fm = sm.getFileManager();
                         auto new_name_str = new_name.string();
                         llvm::StringRef gen_name(new_name_str);
                         auto file_ref = fm.getFileRef(gen_name, true);
                         auto new_fid = sm.getOrCreateFileID(*file_ref, clang::SrcMgr::C_User);
-                        auto new_loc = sm.getLocForEndOfFile(new_fid);
+                        auto new_loc = sm.getLocForStartOfFile(new_fid);
                         rewriter->InsertText(new_loc, llvm::StringRef(it->getInstantiation()), true, true);
                     }
                     it = toDoList->erase(it);
