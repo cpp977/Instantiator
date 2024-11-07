@@ -60,9 +60,9 @@ int main(int argc, const char** argv)
     clang::tooling::CommonOptionsParser& OptionsParser = ExpectedParser.get();
     if(IgnorePatterns.size() == 0) { IgnorePatterns.push_back("std"); }
 
-    clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName(IgnorePatterns[0] + "::");
+    clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName("^::" + IgnorePatterns[0] + "::.*$");
     for(auto it = IgnorePatterns.begin() + 1; it != IgnorePatterns.end(); it++) {
-        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName(*it + "::"));
+        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName("^::" + *it + "::.*$"));
     }
 
     clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplInstWithoutDef(nameMatcher);
