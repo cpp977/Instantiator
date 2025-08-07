@@ -50,7 +50,7 @@ std::vector<std::string> parseTemplateArgs(const clang::TemplateArgumentList* TA
             case clang::TemplateArgument::ArgKind::Template: {
                 llvm::raw_string_ostream OS(out[i]);
 #if INSTANTIATOR_LLVM_MAJOR > 13
-                TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+                TAL->get(i).getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::AsWritten);
 #else
                 TAL->get(i).getAsTemplate().print(OS, pp, false);
 #endif

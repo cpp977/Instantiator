@@ -1,5 +1,8 @@
 #include "TemplateArgument.hpp"
 
+#include <clang/AST/APValue.h>
+#include <clang/AST/DeclCXX.h>
+#include <clang/AST/Expr.h>
 #include <clang/AST/TemplateBase.h>
 #include <cstddef>
 
@@ -69,7 +72,7 @@ TemplateArgument TemplateArgument::createFromTemplateArgument(const clang::Templ
     case clang::TemplateArgument::ArgKind::Template: {
         llvm::raw_string_ostream OS(out.names[0]);
 #if INSTANTIATOR_LLVM_MAJOR > 13
-        parm->getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::Fully);
+        parm->getAsTemplate().print(OS, pp, clang::TemplateName::Qualified::AsWritten);
 #else
         parm->getAsTemplate().print(OS, pp, false);
 #endif
@@ -77,7 +80,18 @@ TemplateArgument TemplateArgument::createFromTemplateArgument(const clang::Templ
         out.kind = Instantiator::Kind::Template;
         break;
     }
+    case clang::TemplateArgument::ArgKind::StructuralValue: {
+        spdlog::critical("NTTP are not implemented correctly. Param={}", parm->getAsStructuralValue().isStruct());
+        break;
+    }
+    case clang::TemplateArgument::ArgKind::Expression: {
+        spdlog::critical("Expression TA are not implemented correctly. Param={}", parm->getAsExpr()->getType().getAsString(pp));
+        break;
+    }
     default: {
+        spdlog::critical("Unhandled clang::TemplateArgument::ArgKind={}, isExpression={}",
+                         static_cast<int>(parm->getKind()),
+                         parm->getKind() == clang::TemplateArgument::ArgKind::Expression);
         break;
     }
     }
