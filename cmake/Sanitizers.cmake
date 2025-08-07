@@ -53,7 +53,6 @@ function(enable_sanitizers project_name)
 
   if(LIST_OF_SANITIZERS)
     if(NOT "${LIST_OF_SANITIZERS}" STREQUAL "")
-      message(WARNING "${LIST_OF_SANITIZERS}")
       target_compile_options(${project_name}
                              PRIVATE -fsanitize=${LIST_OF_SANITIZERS})
       target_link_libraries(${project_name}
