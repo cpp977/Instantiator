@@ -43,7 +43,7 @@ bool is_cached(const clang::tooling::CompilationDatabase& db, const std::filesys
         {
             auto dep_action = std::make_unique<DependencyAction>();
             dep_action->dependencies = deps;
-            return std::move(dep_action);
+            return dep_action;
         }
     };
 
