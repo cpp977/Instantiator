@@ -7,7 +7,8 @@ setup_file() {
     # Create build directory
     mkdir "$SCRIPT_DIR/build"
     clang_version=$(clang++ --version | grep "clang version" | cut -d' ' -f3 | cut -d'.' -f1)
-    clang_include=$(locate stddef.h | grep clang | grep "${clang_version}" | cut -d'/' -f7 --complement)
+    clang_include=$(locate stddef.h | grep clang | grep "/${clang_version}/" | cut -d'/' -f7 --complement)
+    echo "clang_include: $clang_include"
     export CXX=clang++
     export CXXFLAGS="-isystem ${clang_include}"
 }
