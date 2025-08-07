@@ -38,12 +38,19 @@ static llvm::cl::opt<bool> Invasive("invasive",
 static llvm::cl::opt<bool> Progress("progress", llvm::cl::desc("Print out a progress bar."), llvm::cl::cat(InstantiatorOptions));
 
 static llvm::cl::opt<bool> Clean("clean", llvm::cl::desc("Delete all explicit instantiations."), llvm::cl::cat(InstantiatorOptions));
-static llvm::cl::list<std::string>
-    IgnorePatterns("ignore",
-                   llvm::cl::desc("List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls."),
-                   llvm::cl::value_desc("namespace"),
-                   llvm::cl::cat(InstantiatorOptions));
-static llvm::cl::alias IgnorePatternsA("i", llvm::cl::desc("Alias for --ignore"), llvm::cl::aliasopt(IgnorePatterns));
+static llvm::cl::list<std::string> excludePatterns(
+    "exclude-namespace",
+    llvm::cl::desc("List of namespaces which should be excluded. Several namespaces can be added by multiple --exclude-namespace calls."),
+    llvm::cl::value_desc("namespace"),
+    llvm::cl::cat(InstantiatorOptions));
+static llvm::cl::alias excludePatternA("e", llvm::cl::desc("Alias for --exclude-namespace"), llvm::cl::aliasopt(excludePatterns));
+
+static llvm::cl::list<std::string> includePatterns(
+    "include-namespace",
+    llvm::cl::desc("List of namespaces which should be included. Several namespaces can be added by multiple --include-namespace calls."),
+    llvm::cl::value_desc("namespace"),
+    llvm::cl::cat(InstantiatorOptions));
+static llvm::cl::alias includePatternA("i", llvm::cl::desc("Alias for --include-namespace"), llvm::cl::aliasopt(includePatterns));
 
 static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpMessage);
 
@@ -58,16 +65,21 @@ int main(int argc, const char** argv)
         return 1;
     }
     clang::tooling::CommonOptionsParser& OptionsParser = ExpectedParser.get();
-    if(IgnorePatterns.size() == 0) { IgnorePatterns.push_back("std"); }
 
-    clang::ast_matchers::internal::Matcher<clang::NamedDecl> nameMatcher = clang::ast_matchers::matchesName("^::" + IgnorePatterns[0] + "::.*$");
-    for(auto it = IgnorePatterns.begin() + 1; it != IgnorePatterns.end(); it++) {
-        nameMatcher = clang::ast_matchers::anyOf(nameMatcher, clang::ast_matchers::matchesName("^::" + *it + "::.*$"));
+    if(excludePatterns.size() == 0) { excludePatterns.push_back("std"); }
+    if(includePatterns.size() == 0) { includePatterns.push_back(".*"); }
+    auto excludedNameMatcher = clang::ast_matchers::matchesName("^::" + excludePatterns[0] + "::.*$");
+    for(auto it = excludePatterns.begin() + 1; it != excludePatterns.end(); it++) {
+        excludedNameMatcher = clang::ast_matchers::anyOf(excludedNameMatcher, clang::ast_matchers::matchesName("^::" + *it + "::.*$"));
+    }
+    auto includedNameMatcher = clang::ast_matchers::matchesName("^::" + includePatterns[0] + "::.*$");
+    for(auto it = includePatterns.begin() + 1; it != includePatterns.end(); it++) {
+        includedNameMatcher = clang::ast_matchers::anyOf(includedNameMatcher, clang::ast_matchers::matchesName("^::" + *it + "::.*$"));
     }
 
-    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplInstWithoutDef(nameMatcher);
+    clang::ast_matchers::DeclarationMatcher TemplateInstantiationMatcher = TemplInstWithoutDef(excludedNameMatcher, includedNameMatcher);
 
-    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = FuncWithDef(nameMatcher);
+    clang::ast_matchers::DeclarationMatcher FunctionDefMatcher = FuncWithDef(excludedNameMatcher, includedNameMatcher);
 
     std::error_code tmp_create_error;
     auto tmpdir = std::filesystem::temp_directory_path(tmp_create_error);
@@ -102,7 +114,7 @@ int main(int argc, const char** argv)
                     DeleteInstantiations Deleter;
                     Deleter.rewriter = &rewriter;
                     clang::ast_matchers::MatchFinder Inst_Finder;
-                    Inst_Finder.addMatcher(/*Matcher*/ TemplInst(nameMatcher), /*Callback*/ &Deleter);
+                    Inst_Finder.addMatcher(/*Matcher*/ TemplInst(excludedNameMatcher, includedNameMatcher), /*Callback*/ &Deleter);
                     Inst_Finder.matchAST(AST->getASTContext());
                     rewriter.overwriteChangedFiles();
                     HAS_INJECTED_INSTANTIATION = rewriter.buffer_begin() != rewriter.buffer_end();

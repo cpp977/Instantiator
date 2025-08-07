@@ -13,7 +13,8 @@
  *
  * \param excluded_names NameMatcher with namespace specifiers which should be ignored. E.g. `"std::"`
  */
-clang::ast_matchers::DeclarationMatcher TemplInstWithoutDef(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names);
+clang::ast_matchers::DeclarationMatcher TemplInstWithoutDef(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names,
+                                                            const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& included_names);
 
 /**
  * \return Matcher expression:
@@ -23,7 +24,8 @@ clang::ast_matchers::DeclarationMatcher TemplInstWithoutDef(const clang::ast_mat
  *
  * \todo This matcher is not sharp enough. Only function *templates* or class *template* member functions are necessary or specializations of them.
  */
-clang::ast_matchers::DeclarationMatcher FuncWithDef(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names);
+clang::ast_matchers::DeclarationMatcher FuncWithDef(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names,
+                                                    const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& included_names);
 
 /**
  * \return Matcher expression:
@@ -31,6 +33,7 @@ clang::ast_matchers::DeclarationMatcher FuncWithDef(const clang::ast_matchers::i
  *
  * \param excluded_names NameMatcher with namespace specifiers which should be ignored. E.g. `"std::"`
  */
-clang::ast_matchers::DeclarationMatcher TemplInst(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names);
+clang::ast_matchers::DeclarationMatcher TemplInst(const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& excluded_names,
+                                                  const clang::ast_matchers::internal::Matcher<clang::NamedDecl>& included_names);
 
 #endif
