@@ -16,6 +16,7 @@ jobs:
 
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
+    - run: sudo apt-get install libncurses5 libncurses
     - name: Remove clang-version
       run: sudo apt-get remove clang-${{ matrix.clang_version }}
       continue-on-error: true
