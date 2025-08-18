@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        clang_version: [16, 17, 18]
+        clang_version: [18, 19, 20]
     steps:
     - uses: actions/checkout@v3
 
