@@ -12,6 +12,15 @@ bool AllASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocatio
                                         std::shared_ptr<clang::PCHContainerOperations> PCHContainerOps,
                                         clang::DiagnosticConsumer* DiagConsumer)
 {
+#if INSTANTIATOR_LLVM_MAJOR < 20
+    std::unique_ptr<clang::ASTUnit> AST =
+        clang::ASTUnit::LoadFromCompilerInvocation(Invocation,
+                                                   std::move(PCHContainerOps),
+                                                   clang::CompilerInstance::createDiagnostics(&Invocation->getDiagnosticOpts(),
+                                                                                              DiagConsumer,
+                                                                                              /*ShouldOwnClient=*/false),
+                                                   Files);
+#else
     auto diag_ids = llvm::makeIntrusiveRefCnt<clang::DiagnosticIDs>();
     auto diag_engine = clang::DiagnosticsEngine(diag_ids, Invocation->DiagnosticOpts);
     std::unique_ptr<clang::ASTUnit> AST = clang::ASTUnit::LoadFromCompilerInvocation(
@@ -22,6 +31,7 @@ bool AllASTBuilderAction::runInvocation(std::shared_ptr<clang::CompilerInvocatio
                                                    DiagConsumer,
                                                    /*ShouldOwnClient=*/false),
         Files);
+#endif
     if(!AST or AST->getDiagnostics().hasUncompilableErrorOccurred()) return false;
 
     spdlog::debug("Parsed AST for {}", AST->getOriginalSourceFileName().str());
