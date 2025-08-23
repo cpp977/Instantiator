@@ -16,8 +16,8 @@ jobs:
 
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    - run: wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
-    - run: sudo apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
+    # - run: wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
+    # - run: sudo apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
     - name: Remove clang-version
       run: sudo apt-get remove clang-${{ matrix.clang_version }}
       continue-on-error: true
