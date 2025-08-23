@@ -49,9 +49,9 @@ jobs:
         version: ${{ matrix.clang_version }}
         env: true
 
-    - name: Symlink libclang.so (Linux)
-      run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
-      working-directory: ${{ env.LLVM_PATH }}/lib
+    # - name: Symlink libclang.so (Linux)
+    #   run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
+    #   working-directory: ${{ env.LLVM_PATH }}/lib
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
@@ -75,8 +75,8 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++
-        CXX_FLAGS: /usr/lib/llvm-${{ matrix.clang_version }}/lib/clang/${{ matrix.clang_version }}.0.0/include
-      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{runner.workspace}}/Instantiator/llvm/lib/llvm-${{ matrix.clang_version }}/cmake -DClang_DIR=${{runner.workspace}}/Instantiator/llvm/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang
+        CXX_FLAGS: ${{runner.workspace}}/Instantiator/llvm/lib/clang/${{ matrix.clang_version }}.0.0/include
+      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{runner.workspace}}/Instantiator/llvm/lib/cmake -DClang_DIR=${{runner.workspace}}/Instantiator/llvm/lib/cmake/clang
 
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build
