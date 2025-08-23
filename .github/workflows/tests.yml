@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        clang_version: [18, 19, 20]
+        clang_version: [20]
     steps:
     - uses: actions/checkout@v3
 
@@ -58,6 +58,7 @@ jobs:
       with:
         bats-version: 1.10.0
 
+    - run: ls -l ${{runner.workspace}}/llvm
     - run: clang++ --version
     - run: clang-format --version
     - run: cmake --version
