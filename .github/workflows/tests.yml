@@ -58,6 +58,7 @@ jobs:
       with:
         bats-version: 1.10.0
 
+    - run: nm -gCD ${{ env.LLVM_PATH }}/lib/libclang-cpp.so.20.1 | grep "clang::QualType::getAsString"
     - run: which clang++
     - run: clang++ --version
     - run: clang-format --version
