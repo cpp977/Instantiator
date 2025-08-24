@@ -58,11 +58,6 @@ jobs:
       with:
         bats-version: 1.10.0
 
-    - run: ls -l ${{runner.workspace}}/Instantiator/llvm
-    - run: ls -l ${{runner.workspace}}/Instantiator/llvm/lib
-    - run: ls -l ${{runner.workspace}}/Instantiator/llvm/include
-    - run: ls -l ${{ env.LLVM_PATH }}
-    - run: ls -l ${{ env.LLVM_PATH }}/lib
     - run: which clang++
     - run: clang++ --version
     - run: clang-format --version
@@ -77,8 +72,9 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++
-        CXX_FLAGS: ${{runner.workspace}}/Instantiator/llvm/lib/clang/${{ matrix.clang_version }}.0.0/include
-      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{runner.workspace}}/Instantiator/llvm/lib/cmake -DClang_DIR=${{runner.workspace}}/Instantiator/llvm/lib/cmake/clang
+        CXXFLAGS: ${{ env.LLVM_PATH }}/lib/clang/${{ matrix.clang_version }}.0.0/include
+        LDFFLAGS: ${{ env.LLVM_PATH }}/lib
+      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{ env.LLVM_PATH }}/lib/cmake -DClang_DIR=${{ env.LLVM_PATH }}/lib/cmake/clang
 
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build
