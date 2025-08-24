@@ -72,7 +72,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++
-        CXXFLAGS: ${{ env.LLVM_PATH }}/lib/clang/${{ matrix.clang_version }}.0.0/include
+        CXX_FLAGS: ${{ env.LLVM_PATH }}/lib/clang/${{ matrix.clang_version }}.0.0/include
         LDFFLAGS: ${{ env.LLVM_PATH }}/lib
       run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{ env.LLVM_PATH }}/lib/cmake -DClang_DIR=${{ env.LLVM_PATH }}/lib/cmake/clang
 
