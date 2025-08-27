@@ -10,14 +10,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        clang_version: [19]
+        clang_version: [17, 18, 19]
     steps:
     - uses: actions/checkout@v3
 
     - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
     - run: sudo apt-get update
-    # - run: wget http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
-    # - run: sudo apt install ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
     - name: Remove clang-version
       run: sudo apt-get remove clang-${{ matrix.clang_version }}
       continue-on-error: true
@@ -49,16 +47,11 @@ jobs:
         version: ${{ matrix.clang_version }}
         env: true
 
-    # - name: Symlink libclang.so (Linux)
-    #   run: sudo ln -s libclang-${{ matrix.clang_version }}.so.1 /lib/x86_64-linux-gnu/libclang.so
-    #   working-directory: ${{ env.LLVM_PATH }}/lib
-
     - name: Setup BATS
       uses: mig4/setup-bats@v1
       with:
         bats-version: 1.10.0
 
-    - run: nm -gCD ${{ env.LLVM_PATH }}/lib/libclang-cpp.so.20.1 | grep "clang::QualType::getAsString"
     - run: which clang++
     - run: clang++ --version
     - run: clang-format --version
@@ -73,8 +66,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       env:
         CXX: clang++
-        CXX_FLAGS: ${{ env.LLVM_PATH }}/lib/clang/${{ matrix.clang_version }}.0.0/include
-        LDFFLAGS: -L${{ env.LLVM_PATH }}/lib
+        CC: clang
       run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{ env.LLVM_PATH }}/lib/cmake -DClang_DIR=${{ env.LLVM_PATH }}/lib/cmake/clang
 
     - name: Build Instantiator
