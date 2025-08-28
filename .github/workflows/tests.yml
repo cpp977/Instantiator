@@ -40,7 +40,9 @@ jobs:
     - name: Remove libclang-cpp-dev
       run: sudo apt-get remove libclang-cpp${{ matrix.clang_version }}-dev
       continue-on-error: true
-
+    - name: Remove python3-lldb
+      run: sudo apt-get remove '^python3-lldb.*'
+      continue-on-error: true
     - name: Install LLVM and Clang
       run: wget https://apt.llvm.org/llvm.sh && sudo bash llvm.sh ${{ matrix.clang_version }} all
 
