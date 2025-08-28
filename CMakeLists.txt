@@ -10,13 +10,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/CPM.cmake)
 include(cmake/Sanitizers.cmake)
 
-cpmaddpackage("gh:fmtlib/fmt#10.2.1")
+cpmaddpackage("gh:fmtlib/fmt#11.1.4")
 
 cpmaddpackage(
   NAME
   spdlog
   VERSION
-  1.14.1
+  1.15.3
   OPTIONS
   "SPDLOG_FMT_EXTERNAL ON"
   GIT_REPOSITORY
@@ -65,9 +65,18 @@ add_executable(
 # set_target_properties(Instantiator PROPERTIES SUFFIX ${LLVM_VERSION_MAJOR})
 
 message(STATUS ${CMAKE_SOURCE_DIR})
-target_include_directories(
-  Instantiator PRIVATE ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS}
-                       ${CMAKE_SOURCE_DIR}/include)
+
+execute_process(
+    COMMAND gcc -dumpfullversion -dumpversion
+    OUTPUT_VARIABLE GCC_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+string(REGEX MATCH "^[0-9]+" GCC_VERSION_MAJOR "${GCC_VERSION}")
+
+target_include_directories(Instantiator SYSTEM BEFORE PRIVATE /usr/include/c++/${GCC_VERSION_MAJOR} ${LLVM_INCLUDE_DIRS} ${CLANG_INCLUDE_DIRS})
+target_include_directories(Instantiator PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
 separate_arguments(LLVM_DEFINITIONS_LIST NATIVE_COMMAND ${LLVM_DEFINITIONS})
 
 target_compile_definitions(Instantiator PRIVATE ${LLVM_DEFINITIONS_LIST})
