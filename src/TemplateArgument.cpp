@@ -80,10 +80,12 @@ TemplateArgument TemplateArgument::createFromTemplateArgument(const clang::Templ
         out.kind = Instantiator::Kind::Template;
         break;
     }
+#if INSTANTIATOR_LLVM_MAJOR > 17
     case clang::TemplateArgument::ArgKind::StructuralValue: {
         spdlog::critical("NTTP are not implemented correctly. Param={}", parm->getAsStructuralValue().isStruct());
         break;
     }
+#endif
     case clang::TemplateArgument::ArgKind::Expression: {
         spdlog::critical("Expression TA are not implemented correctly. Param={}", parm->getAsExpr()->getType().getAsString(pp));
         break;
