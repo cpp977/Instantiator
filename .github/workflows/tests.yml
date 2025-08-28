@@ -71,7 +71,7 @@ jobs:
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build
       shell: bash
-      run: cmake --build . -- -j2 VERBOSE=1
+      run: cmake --build . -- -j2
 
     - name: Install Instantiator
       working-directory: ${{runner.workspace}}/build
