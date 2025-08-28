@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        clang_version: [17, 18, 19]
+        clang_version: [17, 18, 19, 20]
     steps:
     - uses: actions/checkout@v3
 
@@ -42,19 +42,16 @@ jobs:
       continue-on-error: true
 
     - name: Install LLVM and Clang
-      uses: KyleMayes/install-llvm-action@v2
-      with:
-        version: ${{ matrix.clang_version }}
-        env: true
+      run: wget https://apt.llvm.org/llvm.sh && sudo bash llvm.sh ${{ matrix.clang_version }} all
 
     - name: Setup BATS
       uses: mig4/setup-bats@v1
       with:
         bats-version: 1.10.0
 
-    - run: which clang++
-    - run: clang++ --version
-    - run: clang-format --version
+    - run: which clang++-${{ matrix.clang_version }}
+    - run: clang++-${{ matrix.clang_version }} --version
+    - run: clang-format-${{ matrix.clang_version }} --version
     - run: cmake --version
     - run: bats --version
 
@@ -65,9 +62,9 @@ jobs:
       shell: bash
       working-directory: ${{runner.workspace}}/build
       env:
-        CXX: clang++
-        CC: clang
-      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=${{ env.LLVM_PATH }}/lib/cmake -DClang_DIR=${{ env.LLVM_PATH }}/lib/cmake/clang
+        CXX: clang++-${{ matrix.clang_version }}
+        CC: clang-${{ matrix.clang_version }}
+      run: cmake $GITHUB_WORKSPACE -DLLVM_ROOT=/usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake -DClang_DIR=/usr/lib/llvm-${{ matrix.clang_version }}/lib/cmake/clang
 
     - name: Build Instantiator
       working-directory: ${{runner.workspace}}/build

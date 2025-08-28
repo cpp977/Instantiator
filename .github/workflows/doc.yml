@@ -29,7 +29,7 @@ jobs:
       - name: install Doxygen 1.10.0
         run: |
           sudo apt-get update
-          sudo apt-get install -y graphviz libclang-cpp11 libclang1-11
+          sudo apt-get install -y graphviz libclang-cpp-dev libclang1
           wget https://github.com/doxygen/doxygen/releases/download/Release_1_10_0/doxygen-1.10.0.linux.bin.tar.gz
           tar -xvzf doxygen-1.10.0.linux.bin.tar.gz
           ln -s doxygen-1.10.0/bin/doxygen doxygen
