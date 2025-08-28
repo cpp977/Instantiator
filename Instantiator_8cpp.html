@@ -108,6 +108,7 @@ $(function(){initNavTree('Instantiator_8cpp.html',''); initResizable(); });
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;system_error&gt;</code><br />
 <code>#include &lt;unordered_set&gt;</code><br />
+<code>#include &quot;fmt/color.h&quot;</code><br />
 <code>#include &quot;fmt/ranges.h&quot;</code><br />
 <code>#include &quot;fmt/std.h&quot;</code><br />
 <code>#include &quot;spdlog/cfg/env.h&quot;</code><br />
@@ -129,7 +130,7 @@ $(function(){initNavTree('Instantiator_8cpp.html',''); initResizable(); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Instantiator.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="3275" height="359"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Instantiator_8cpp__incl.svg" width="3326" height="359"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="Instantiator_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -144,10 +145,14 @@ Functions</h2></td></tr>
 <tr class="separator:a709f0a5af98607a02f2423e39290d3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c2627e92e042d2f85323b64d2405829" id="r_a3c2627e92e042d2f85323b64d2405829"><td class="memItemLeft" align="right" valign="top">static llvm::cl::opt&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c2627e92e042d2f85323b64d2405829">Clean</a> (&quot;clean&quot;, llvm::cl::desc(&quot;Delete all explicit instantiations.&quot;), llvm::cl::cat(<a class="el" href="#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
 <tr class="separator:a3c2627e92e042d2f85323b64d2405829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ea5006fa1ab522ba020250d72e6a38" id="r_a52ea5006fa1ab522ba020250d72e6a38"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a> (&quot;ignore&quot;, llvm::cl::desc(&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;), llvm::cl::value_desc(&quot;namespace&quot;), llvm::cl::cat(<a class="el" href="#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
-<tr class="separator:a52ea5006fa1ab522ba020250d72e6a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59cec56489db6cf41ede7a2e67c8f64c" id="r_a59cec56489db6cf41ede7a2e67c8f64c"><td class="memItemLeft" align="right" valign="top">static llvm::cl::alias&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59cec56489db6cf41ede7a2e67c8f64c">IgnorePatternsA</a> (&quot;i&quot;, llvm::cl::desc(&quot;Alias for --ignore&quot;), llvm::cl::aliasopt(<a class="el" href="#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>))</td></tr>
-<tr class="separator:a59cec56489db6cf41ede7a2e67c8f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd307cf46d50f8af38e6b48919f41e1" id="r_a6dd307cf46d50f8af38e6b48919f41e1"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6dd307cf46d50f8af38e6b48919f41e1">excludePatterns</a> (&quot;exclude-namespace&quot;, llvm::cl::desc(&quot;List of namespaces which should be excluded. Several namespaces can be added by multiple --exclude-namespace calls.&quot;), llvm::cl::value_desc(&quot;namespace&quot;), llvm::cl::cat(<a class="el" href="#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
+<tr class="separator:a6dd307cf46d50f8af38e6b48919f41e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31008baeb5b71728e043eeb621cbf415" id="r_a31008baeb5b71728e043eeb621cbf415"><td class="memItemLeft" align="right" valign="top">static llvm::cl::alias&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31008baeb5b71728e043eeb621cbf415">excludePatternA</a> (&quot;e&quot;, llvm::cl::desc(&quot;Alias for --exclude-namespace&quot;), llvm::cl::aliasopt(<a class="el" href="#a6dd307cf46d50f8af38e6b48919f41e1">excludePatterns</a>))</td></tr>
+<tr class="separator:a31008baeb5b71728e043eeb621cbf415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba4dda5ba05c2da1d0b5d1c921cf6bd" id="r_adba4dda5ba05c2da1d0b5d1c921cf6bd"><td class="memItemLeft" align="right" valign="top">static llvm::cl::list&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adba4dda5ba05c2da1d0b5d1c921cf6bd">includePatterns</a> (&quot;include-namespace&quot;, llvm::cl::desc(&quot;List of namespaces which should be included. Several namespaces can be added by multiple --include-namespace calls.&quot;), llvm::cl::value_desc(&quot;namespace&quot;), llvm::cl::cat(<a class="el" href="#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>))</td></tr>
+<tr class="separator:adba4dda5ba05c2da1d0b5d1c921cf6bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af435e9ffb53fc09948fabdc6cefa4895" id="r_af435e9ffb53fc09948fabdc6cefa4895"><td class="memItemLeft" align="right" valign="top">static llvm::cl::alias&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af435e9ffb53fc09948fabdc6cefa4895">includePatternA</a> (&quot;i&quot;, llvm::cl::desc(&quot;Alias for --include-namespace&quot;), llvm::cl::aliasopt(<a class="el" href="#adba4dda5ba05c2da1d0b5d1c921cf6bd">includePatterns</a>))</td></tr>
+<tr class="separator:af435e9ffb53fc09948fabdc6cefa4895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59161941fab072bbb83f502fefd9d734" id="r_a59161941fab072bbb83f502fefd9d734"><td class="memItemLeft" align="right" valign="top">static llvm::cl::extrahelp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59161941fab072bbb83f502fefd9d734">CommonHelp</a> (clang::tooling::CommonOptionsParser::HelpMessage)</td></tr>
 <tr class="separator:a59161941fab072bbb83f502fefd9d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217dbf8b442f20279ea00b898af96f52" id="r_a217dbf8b442f20279ea00b898af96f52"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a217dbf8b442f20279ea00b898af96f52">main</a> (int argc, const char **argv)</td></tr>
@@ -213,8 +218,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a52ea5006fa1ab522ba020250d72e6a38" name="a52ea5006fa1ab522ba020250d72e6a38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ea5006fa1ab522ba020250d72e6a38">&#9670;&#160;</a></span>IgnorePatterns()</h2>
+<a id="a31008baeb5b71728e043eeb621cbf415" name="a31008baeb5b71728e043eeb621cbf415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31008baeb5b71728e043eeb621cbf415">&#9670;&#160;</a></span>excludePatternA()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,14 +228,48 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static llvm::cl::list&lt; std::string &gt; IgnorePatterns </td>
+          <td class="memname">static llvm::cl::alias excludePatternA </td>
           <td>(</td>
-          <td class="paramtype">&quot;ignore&quot;</td>          <td class="paramname"><span class="paramname">, </span></td>
+          <td class="paramtype">&quot;e&quot;</td>          <td class="paramname"><span class="paramname">, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be ignored. Several namespaces can be added by multiple --ignore calls.&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
+          <td class="paramtype">llvm::cl::desc(&quot;Alias for --exclude-namespace&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::aliasopt(<a class="el" href="#a6dd307cf46d50f8af38e6b48919f41e1">excludePatterns</a>)</td>          <td class="paramname"><span class="paramname"></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dd307cf46d50f8af38e6b48919f41e1" name="a6dd307cf46d50f8af38e6b48919f41e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dd307cf46d50f8af38e6b48919f41e1">&#9670;&#160;</a></span>excludePatterns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::list&lt; std::string &gt; excludePatterns </td>
+          <td>(</td>
+          <td class="paramtype">&quot;exclude-namespace&quot;</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be excluded. Several namespaces can be added by multiple --exclude-namespace calls.&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -252,8 +291,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a59cec56489db6cf41ede7a2e67c8f64c" name="a59cec56489db6cf41ede7a2e67c8f64c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59cec56489db6cf41ede7a2e67c8f64c">&#9670;&#160;</a></span>IgnorePatternsA()</h2>
+<a id="af435e9ffb53fc09948fabdc6cefa4895" name="af435e9ffb53fc09948fabdc6cefa4895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af435e9ffb53fc09948fabdc6cefa4895">&#9670;&#160;</a></span>includePatternA()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,19 +301,58 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static llvm::cl::alias IgnorePatternsA </td>
+          <td class="memname">static llvm::cl::alias includePatternA </td>
           <td>(</td>
           <td class="paramtype">&quot;i&quot;</td>          <td class="paramname"><span class="paramname">, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">llvm::cl::desc(&quot;Alias for --ignore&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
+          <td class="paramtype">llvm::cl::desc(&quot;Alias for --include-namespace&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">llvm::cl::aliasopt(<a class="el" href="#a52ea5006fa1ab522ba020250d72e6a38">IgnorePatterns</a>)</td>          <td class="paramname"><span class="paramname"></span>&#160;)</td>
+          <td class="paramtype">llvm::cl::aliasopt(<a class="el" href="#adba4dda5ba05c2da1d0b5d1c921cf6bd">includePatterns</a>)</td>          <td class="paramname"><span class="paramname"></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adba4dda5ba05c2da1d0b5d1c921cf6bd" name="adba4dda5ba05c2da1d0b5d1c921cf6bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba4dda5ba05c2da1d0b5d1c921cf6bd">&#9670;&#160;</a></span>includePatterns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static llvm::cl::list&lt; std::string &gt; includePatterns </td>
+          <td>(</td>
+          <td class="paramtype">&quot;include-namespace&quot;</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::desc(&quot;List of namespaces which should be included. Several namespaces can be added by multiple --include-namespace calls.&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::value_desc(&quot;namespace&quot;)</td>          <td class="paramname"><span class="paramname">, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">llvm::cl::cat(<a class="el" href="#a463095459ca7eff2f7315fc955830f04">InstantiatorOptions</a>)</td>          <td class="paramname"><span class="paramname"></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -364,7 +442,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Instantiator_8cpp_source.html#l00049">49</a> of file <a class="el" href="Instantiator_8cpp_source.html">Instantiator.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Instantiator_8cpp_source.html#l00057">57</a> of file <a class="el" href="Instantiator_8cpp_source.html">Instantiator.cpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +487,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="Instantiator_8cpp.html">Instantiator.cpp</a></li>
-    <li class="footer">Generated on Wed Sep 4 2024 15:31:12 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Thu Aug 28 2025 10:58:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

@@ -122,20 +122,20 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa490284074dd793c672884a4cdce42a0" id="r_aa490284074dd793c672884a4cdce42a0"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa490284074dd793c672884a4cdce42a0">TemplInstWithoutDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:aa490284074dd793c672884a4cdce42a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e305e4e823da5613163fcb2ec96a73" id="r_ac8e305e4e823da5613163fcb2ec96a73"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8e305e4e823da5613163fcb2ec96a73">FuncWithDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:ac8e305e4e823da5613163fcb2ec96a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7352bbb3f846f2c2db222f66d9fd6997" id="r_a7352bbb3f846f2c2db222f66d9fd6997"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7352bbb3f846f2c2db222f66d9fd6997">TemplInst</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names)</td></tr>
-<tr class="separator:a7352bbb3f846f2c2db222f66d9fd6997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9f92a7a7b92adbdc035ed2e0bd161eb" id="r_ab9f92a7a7b92adbdc035ed2e0bd161eb"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9f92a7a7b92adbdc035ed2e0bd161eb">TemplInstWithoutDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names, const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;included_names)</td></tr>
+<tr class="separator:ab9f92a7a7b92adbdc035ed2e0bd161eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c955aa910d126c2d135eb6348a12cf" id="r_a07c955aa910d126c2d135eb6348a12cf"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a07c955aa910d126c2d135eb6348a12cf">FuncWithDef</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names, const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;included_names)</td></tr>
+<tr class="separator:a07c955aa910d126c2d135eb6348a12cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe965ee72c6006f2ecddaec3b788917a" id="r_abe965ee72c6006f2ecddaec3b788917a"><td class="memItemLeft" align="right" valign="top">clang::ast_matchers::DeclarationMatcher&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe965ee72c6006f2ecddaec3b788917a">TemplInst</a> (const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;excluded_names, const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;included_names)</td></tr>
+<tr class="separator:abe965ee72c6006f2ecddaec3b788917a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a href="https://clang.llvm.org/docs/LibASTMatchersReference.html">AST matcher</a> expressions to filter the relevant nodes for template instantiations. </p>
 
 <p class="definition">Definition in file <a class="el" href="Matcher_8hpp_source.html">Matcher.hpp</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ac8e305e4e823da5613163fcb2ec96a73" name="ac8e305e4e823da5613163fcb2ec96a73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8e305e4e823da5613163fcb2ec96a73">&#9670;&#160;</a></span>FuncWithDef()</h2>
+<a id="a07c955aa910d126c2d135eb6348a12cf" name="a07c955aa910d126c2d135eb6348a12cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07c955aa910d126c2d135eb6348a12cf">&#9670;&#160;</a></span>FuncWithDef()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,8 +143,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">clang::ast_matchers::DeclarationMatcher FuncWithDef </td>
           <td>(</td>
-          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em></span></td><td>)</td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>included_names</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -159,8 +163,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7352bbb3f846f2c2db222f66d9fd6997" name="a7352bbb3f846f2c2db222f66d9fd6997"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7352bbb3f846f2c2db222f66d9fd6997">&#9670;&#160;</a></span>TemplInst()</h2>
+<a id="abe965ee72c6006f2ecddaec3b788917a" name="abe965ee72c6006f2ecddaec3b788917a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe965ee72c6006f2ecddaec3b788917a">&#9670;&#160;</a></span>TemplInst()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,8 +172,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">clang::ast_matchers::DeclarationMatcher TemplInst </td>
           <td>(</td>
-          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em></span></td><td>)</td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>included_names</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -183,8 +191,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa490284074dd793c672884a4cdce42a0" name="aa490284074dd793c672884a4cdce42a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa490284074dd793c672884a4cdce42a0">&#9670;&#160;</a></span>TemplInstWithoutDef()</h2>
+<a id="ab9f92a7a7b92adbdc035ed2e0bd161eb" name="ab9f92a7a7b92adbdc035ed2e0bd161eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9f92a7a7b92adbdc035ed2e0bd161eb">&#9670;&#160;</a></span>TemplInstWithoutDef()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,8 +200,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">clang::ast_matchers::DeclarationMatcher TemplInstWithoutDef </td>
           <td>(</td>
-          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em></span></td><td>)</td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>excluded_names</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const clang::ast_matchers::internal::Matcher&lt; clang::NamedDecl &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>included_names</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -214,7 +226,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_2e7bc315ac635c331cd07eec05ee834f.html">Matcher</a></li><li class="navelem"><a class="el" href="Matcher_8hpp.html">Matcher.hpp</a></li>
-    <li class="footer">Generated on Wed Sep 4 2024 15:31:12 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Thu Aug 28 2025 10:58:10 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">

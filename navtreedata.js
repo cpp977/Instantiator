@@ -65,7 +65,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "ASTBuilderAction_8cpp.html",
-"structTemplate.html#a09054826ece2f489ad0b337c8850f8d2"
+"structProgressStyle.html#afc6d0c461efd0a22bffa187e8e8a5740"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

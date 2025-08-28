@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['ignorepatterns_0',['IgnorePatterns',['../Instantiator_8cpp.html#a52ea5006fa1ab522ba020250d72e6a38',1,'Instantiator.cpp']]],
-  ['ignorepatternsa_1',['IgnorePatternsA',['../Instantiator_8cpp.html#a59cec56489db6cf41ede7a2e67c8f64c',1,'Instantiator.cpp']]],
+  ['includepatterna_0',['includePatternA',['../Instantiator_8cpp.html#af435e9ffb53fc09948fabdc6cefa4895',1,'Instantiator.cpp']]],
+  ['includepatterns_1',['includePatterns',['../Instantiator_8cpp.html#adba4dda5ba05c2da1d0b5d1c921cf6bd',1,'Instantiator.cpp']]],
   ['inject_20the_20instantations_20where_20the_20definitons_20are_20present_2',['Insertion step &amp;ndash; inject the instantations where the definitons are present',['../index.html#autotoc_md5',1,'']]],
   ['injectinstantiation_3',['InjectInstantiation',['../classInjectInstantiation.html',1,'']]],
   ['injectinstantiation_2ecpp_4',['InjectInstantiation.cpp',['../InjectInstantiation_8cpp.html',1,'']]],
