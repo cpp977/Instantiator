@@ -191,36 +191,38 @@ $(function(){initNavTree('TemplateArgument_8cpp_source.html',''); initResizable(
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        out.<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#aa6a459e45f24d07092ed60a937a373b7">kind</a> = <a class="code hl_enumvalue" href="namespaceInstantiator.html#ae23a90b61c96d22e834f3e85684a1cdaa278c491bdd8a53618c149c4ac790da34">Instantiator::Kind::Template</a>;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::StructuralValue: {</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        spdlog::critical(<span class="stringliteral">&quot;NTTP are not implemented correctly. Param={}&quot;</span>, parm-&gt;getAsStructuralValue().isStruct());</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::Expression: {</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        spdlog::critical(<span class="stringliteral">&quot;Expression TA are not implemented correctly. Param={}&quot;</span>, parm-&gt;getAsExpr()-&gt;getType().getAsString(pp));</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">default</span>: {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        spdlog::critical(<span class="stringliteral">&quot;Unhandled clang::TemplateArgument::ArgKind={}, isExpression={}&quot;</span>,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                         <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(parm-&gt;getKind()),</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                         parm-&gt;getKind() == clang::TemplateArgument::ArgKind::Expression);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> out;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#if INSTANTIATOR_LLVM_MAJOR &gt; 17</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::StructuralValue: {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        spdlog::critical(<span class="stringliteral">&quot;NTTP are not implemented correctly. Param={}&quot;</span>, parm-&gt;getAsStructuralValue().isStruct());</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">case</span> clang::TemplateArgument::ArgKind::Expression: {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        spdlog::critical(<span class="stringliteral">&quot;Expression TA are not implemented correctly. Param={}&quot;</span>, parm-&gt;getAsExpr()-&gt;getType().getAsString(pp));</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">default</span>: {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        spdlog::critical(<span class="stringliteral">&quot;Unhandled clang::TemplateArgument::ArgKind={}, isExpression={}&quot;</span>,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                         <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(parm-&gt;getKind()),</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                         parm-&gt;getKind() == clang::TemplateArgument::ArgKind::Expression);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">return</span> out;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
 </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">  101</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">TemplateArgument::compare</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structInstantiator_1_1TemplateArgument.html">TemplateArgument</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    spdlog::debug(<span class="stringliteral">&quot;name dependent={}, other.name dependent={}&quot;</span>, <a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>, other.<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a> or other.<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>) { <span class="keywordflow">return</span> <span class="keyword">true</span> <span class="comment">/*kind == other.kind*/</span>; }</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    spdlog::debug(<span class="stringliteral">&quot;Compare of {} and {}&quot;</span>, <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>(), other.<a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>());</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>() == other.<a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="foldopen" id="foldopen00103" data-start="{" data-end="}">
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">  103</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">TemplateArgument::compare</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structInstantiator_1_1TemplateArgument.html">TemplateArgument</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    spdlog::debug(<span class="stringliteral">&quot;name dependent={}, other.name dependent={}&quot;</span>, <a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>, other.<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a> or other.<a class="code hl_variable" href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">is_dependent</a>) { <span class="keywordflow">return</span> <span class="keyword">true</span> <span class="comment">/*kind == other.kind*/</span>; }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    spdlog::debug(<span class="stringliteral">&quot;Compare of {} and {}&quot;</span>, <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>(), other.<a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>());</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>() == other.<a class="code hl_function" href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">name</a>();</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
 </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>} <span class="comment">// namespace Instantiator</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>} <span class="comment">// namespace Instantiator</span></div>
 <div class="ttc" id="aTemplateArgument_8hpp_html"><div class="ttname"><a href="TemplateArgument_8hpp.html">TemplateArgument.hpp</a></div></div>
 <div class="ttc" id="anamespaceInstantiator_html"><div class="ttname"><a href="namespaceInstantiator.html">Instantiator</a></div><div class="ttdef"><b>Definition</b> <a href="TemplateArgument_8hpp_source.html#l00012">TemplateArgument.hpp:12</a></div></div>
 <div class="ttc" id="anamespaceInstantiator_html_ae23a90b61c96d22e834f3e85684a1cdaa278c491bdd8a53618c149c4ac790da34"><div class="ttname"><a href="namespaceInstantiator.html#ae23a90b61c96d22e834f3e85684a1cdaa278c491bdd8a53618c149c4ac790da34">Instantiator::Kind::Template</a></div><div class="ttdeci">@ Template</div></div>
@@ -232,7 +234,7 @@ $(function(){initNavTree('TemplateArgument_8cpp_source.html',''); initResizable(
 <div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_aa6a459e45f24d07092ed60a937a373b7"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#aa6a459e45f24d07092ed60a937a373b7">Instantiator::TemplateArgument::kind</a></div><div class="ttdeci">Kind kind</div><div class="ttdef"><b>Definition</b> <a href="TemplateArgument_8hpp_source.html#l00028">TemplateArgument.hpp:28</a></div></div>
 <div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_abacd57241d2994e448416f8119b99e94"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#abacd57241d2994e448416f8119b99e94">Instantiator::TemplateArgument::createFromTemplateArgument</a></div><div class="ttdeci">static TemplateArgument createFromTemplateArgument(const clang::TemplateArgument *parm, clang::PrintingPolicy pp)</div><div class="ttdef"><b>Definition</b> <a href="#l00029">TemplateArgument.cpp:29</a></div></div>
 <div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_ad5392858b90a4d98d4863ae7edb16dd1"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#ad5392858b90a4d98d4863ae7edb16dd1">Instantiator::TemplateArgument::name</a></div><div class="ttdeci">std::string name(const std::string &amp;sep=&quot; &quot;) const</div><div class="ttdef"><b>Definition</b> <a href="#l00016">TemplateArgument.cpp:16</a></div></div>
-<div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_adfb5c224df77c9bd69c4f9878a9b9cf7"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">Instantiator::TemplateArgument::compare</a></div><div class="ttdeci">bool compare(const TemplateArgument &amp;other) const</div><div class="ttdef"><b>Definition</b> <a href="#l00101">TemplateArgument.cpp:101</a></div></div>
+<div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_adfb5c224df77c9bd69c4f9878a9b9cf7"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#adfb5c224df77c9bd69c4f9878a9b9cf7">Instantiator::TemplateArgument::compare</a></div><div class="ttdeci">bool compare(const TemplateArgument &amp;other) const</div><div class="ttdef"><b>Definition</b> <a href="#l00103">TemplateArgument.cpp:103</a></div></div>
 <div class="ttc" id="astructInstantiator_1_1TemplateArgument_html_ae4fecf46385851dc5d38556c645a3da3"><div class="ttname"><a href="structInstantiator_1_1TemplateArgument.html#ae4fecf46385851dc5d38556c645a3da3">Instantiator::TemplateArgument::is_dependent</a></div><div class="ttdeci">bool is_dependent</div><div class="ttdef"><b>Definition</b> <a href="TemplateArgument_8hpp_source.html#l00036">TemplateArgument.hpp:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -241,7 +243,7 @@ $(function(){initNavTree('TemplateArgument_8cpp_source.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="TemplateArgument_8cpp.html">TemplateArgument.cpp</a></li>
-    <li class="footer">Generated on Thu Aug 28 2025 15:36:19 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+    <li class="footer">Generated on Thu Aug 28 2025 17:22:05 for Instantiator by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
   </ul>
 </div>
 <script type="text/javascript">
