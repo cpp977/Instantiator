@@ -26,12 +26,12 @@ The compilation step involves exactly the same effort as if you had everything i
 ```
 git clone https://github.com/cpp977/Instantiator
 mkdir build && cd build
-cmake .. 
+CXX=clang++ CC=clang cmake ..
 make && [sudo] make install
 ```
 For a successful build you need a c++-17 compiler and LLVM/clang libraries.
-Because of a bufix in clang (https://reviews.llvm.org/D108794) version 14 of LLVM/clang is needed for full functionality.
-With an older version of LLVM/clang you might run into troubles with the correct formatting of `template template` parameters.
+The CI tests the most recent llvm versions (currently 17, 18, 19 and 20) and uses clang itself to build the tool.
+In general, gcc should work equally well.
 To control which version of LLVM is used, you can set the cmake variable `LLVM_ROOT` to the root of the llvm installation.
 To control which version of clang is used, you can set the cmake variable `Clang_DIR` to the root of the directory where the file ClangConfig.cmake is located.
 
